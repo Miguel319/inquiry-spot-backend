@@ -1,1 +1,1 @@
-export { Presenter } from "./base-presenters";
+export { Presenter } from "./base-presenter";
