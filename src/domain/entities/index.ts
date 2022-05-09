@@ -1,1 +1,2 @@
-export { User, UserDocument, UserSchema } from "./user.entity";
+export * from "./user.entity";
+export * from "./email.entity";
