@@ -32,6 +32,11 @@ export class User {
   })
   resetPasswordToken?: string;
 
+  @Prop({
+    type: Number,
+  })
+  resetPasswordExpire?: number;
+
   @Prop({ data: Buffer, contentType: String })
   photo: string;
 
