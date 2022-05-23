@@ -4,3 +4,4 @@ export { JwtService } from "./jwt-service";
 export { mockResObj } from "./res-obj";
 export { AuthService, FAKE_TOKEN } from "../mocks/auth.service";
 export { EmailsRepository } from "./email.repository";
+export { VehiclePostsRepository } from "./vehicle-post.repository";
