@@ -35,4 +35,8 @@ export class VehiclePostsService implements IVehiclePostsService {
   async delete(_id: string): Promise<boolean> {
     return await this._vehiclePostRepo.deleteOne({ _id });
   }
+
+  async findFromSeller(id: string): Promise<VehiclePost> {
+    throw new Error(`${id} Method not implemented.`);
+  }
 }

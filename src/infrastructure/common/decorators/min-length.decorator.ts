@@ -1,10 +1,11 @@
+import { VoidDecorator } from "@/domain/types";
 import { registerDecorator, ValidationOptions } from "class-validator";
 
 export function MinLength(
   length: number,
   validationOptions?: ValidationOptions,
-): Function {
-  return function (object: Object, propertyName: string): void {
+): VoidDecorator {
+  return function (object: object, propertyName: string): void {
     registerDecorator({
       name: "MinLength",
       target: object.constructor,

@@ -20,7 +20,7 @@ import { EmailsRepository } from "../../../../infrastructure/repositories";
 
 @Injectable()
 export class EmailsService implements IEmailsService {
-  private readonly sendGrid: any;
+  private readonly sendGrid;
 
   constructor(
     @Inject("IUsersService") private readonly _usersService: IUsersService,
@@ -36,7 +36,7 @@ export class EmailsService implements IEmailsService {
     subject,
     to,
   }: SendgridEmailParams): SendgridEmail {
-    const senderEmail: string = String(process.env["SENDER_EMAIL"]);
+    const senderEmail = String(process.env["SENDER_EMAIL"]);
 
     return {
       from: {
@@ -72,11 +72,11 @@ export class EmailsService implements IEmailsService {
   ): Promise<string> {
     const resetToken: string = await this.getResetPasswordToken(user);
 
-    const resetUrl: string = `${req.protocol}://${req.get(
+    const resetUrl = `${req.protocol}://${req.get(
       "host",
     )}/auth/reset-password/${resetToken}`;
 
-    const message: string = `
+    const message = `
         <h1>Reset Password</h1>
     
         <p>Hi, ${user.name}!</p>
@@ -124,7 +124,7 @@ export class EmailsService implements IEmailsService {
     this.sendGrid
       .send(emailBody)
       .then(() => console.log("Email sent"))
-      .catch((error: any) => console.log("error", error));
+      .catch((error: unknown) => console.log("error", error));
 
     await this._emailRepo.create({
       ...emailBody,

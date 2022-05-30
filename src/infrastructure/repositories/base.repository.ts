@@ -1,4 +1,5 @@
 import { IRepository } from "@/application/repositories";
+import { PipelineStage } from "mongoose";
 import {
   AnyKeys,
   AnyObject,
@@ -46,7 +47,7 @@ export abstract class BaseRepository<T extends Document>
   }
 
   async aggregate(
-    pipeline?: any[] | undefined,
+    pipeline?: PipelineStage[] | undefined,
     options?: Record<string, unknown> | undefined,
   ) {
     return await this.entityModel.aggregate(pipeline, options);
@@ -69,7 +70,11 @@ export abstract class BaseRepository<T extends Document>
   async create(
     createEntityData: (AnyKeys<T> & AnyObject) | undefined,
   ): Promise<T> {
-    const entity: Document<T, {}, {}> = new this.entityModel(createEntityData);
+    const entity: Document<
+      T,
+      Record<string, unknown>,
+      Record<string, unknown>
+    > = new this.entityModel(createEntityData);
 
     return (await entity.save()) as T;
   }
@@ -77,7 +82,11 @@ export abstract class BaseRepository<T extends Document>
   async findOneAndUpdate(
     entityFilterQuery: FilterQuery<T>,
     updateEntityData: UpdateQuery<unknown>,
-  ): Promise<HydratedDocument<T, {}, {}> | null> {
+  ): Promise<HydratedDocument<
+    T,
+    Record<string, unknown>,
+    Record<string, unknown>
+  > | null> {
     return await this.entityModel.findOneAndUpdate(
       entityFilterQuery,
       updateEntityData,

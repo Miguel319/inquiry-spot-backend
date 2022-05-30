@@ -13,7 +13,7 @@ export class LoggerService extends Logger implements ILogger {
     super.log(`[INFO] ${message}`, context);
   }
 
-  override error(context: string, message: string, trace: string = "") {
+  override error(context: string, message: string, trace = "") {
     super.error(`[ERROR] ${message}`, trace, context);
   }
 

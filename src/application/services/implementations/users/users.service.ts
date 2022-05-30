@@ -17,7 +17,7 @@ export class UsersService implements IUsersService {
     @Inject(REQUEST) private readonly request: Request,
   ) {}
 
-  async findByEmail(email: string, signIn: boolean = false): Promise<User> {
+  async findByEmail(email: string, signIn = false): Promise<User> {
     let user: User;
 
     if (signIn) {
@@ -61,7 +61,7 @@ export class UsersService implements IUsersService {
   }
 
   async findCurrent(): Promise<User | null> {
-    const userId = (this.request as any)?.user?._id;
+    const userId = (this.request as { user?: { _id: string } })?.user?._id;
 
     if (!userId) return null;
 

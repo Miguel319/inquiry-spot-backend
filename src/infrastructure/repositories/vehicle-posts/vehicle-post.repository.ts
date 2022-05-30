@@ -6,7 +6,10 @@ import { VehiclePostDocument } from "@/domain/entities";
 
 @Injectable()
 export class VehiclePostsRepository extends BaseRepository<VehiclePostDocument> {
-  constructor(@InjectModel("VehiclePost") readonly vehiclePostModel: Model<VehiclePostDocument>) {
+  constructor(
+    @InjectModel("VehiclePost")
+    readonly vehiclePostModel: Model<VehiclePostDocument>,
+  ) {
     super(vehiclePostModel);
   }
 }

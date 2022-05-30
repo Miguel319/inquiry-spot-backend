@@ -17,7 +17,7 @@ describe("AuthService", () => {
   let authService: AuthService;
   let bcryptCompare: jest.Mock;
 
-  let emailsService = {
+  const emailsService = {
     sendResetPasswordEmail: jest.fn(),
     send: jest.fn(),
   };

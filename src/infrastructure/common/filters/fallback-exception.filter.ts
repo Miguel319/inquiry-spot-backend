@@ -8,7 +8,7 @@ import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 
 @Catch()
 export class FallbackExpectionFilter implements ExceptionFilter {
-  catch(exception: any, host: ArgumentsHost) {
+  catch(exception: { message: string }, host: ArgumentsHost) {
     console.log(
       "fallback exception handler triggered",
       JSON.stringify(exception),
