@@ -19,7 +19,7 @@ import { Response } from "express";
 @Controller("vehicle-posts")
 export class VehiclePostsController {
   constructor(
-    @Inject("IVehiclePostService")
+    @Inject("IVehiclePostsService")
     private readonly _vehiclePostsService: IVehiclePostsService,
   ) {}
 
