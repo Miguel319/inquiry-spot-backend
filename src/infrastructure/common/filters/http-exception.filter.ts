@@ -5,7 +5,7 @@ import {
   HttpException,
 } from "@nestjs/common";
 
-import e, { Response } from "express";
+import e, { Request, Response } from "express";
 import { HttpStatus } from "@nestjs/common";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 import { LoggerService } from "@/infrastructure/logger";
@@ -20,9 +20,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
   constructor(private readonly logger: LoggerService) {}
 
   private uniqueException(exception: HttpException): IError {
-    const uniqueField: string = Object.keys((exception as any).keyPattern).join(
-      "",
-    );
+    const uniqueField: string = Object.keys(
+      (exception as unknown as { keyPattern: string[] }).keyPattern,
+    ).join("");
 
     return {
       message: `The '${uniqueField}' field is unique. There's already a record with the provided value.`,
@@ -79,7 +79,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
   }
 
   private sendResponse(
-    response: any,
+    response: Response,
+    request: Request,
     { message, status }: IError,
     exception: HttpException,
   ): void {
@@ -89,17 +90,17 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message,
     });
 
-    this.logMessage(response, { message, status }, exception);
+    this.logMessage(request, { message, status }, exception);
   }
 
   private logMessage(
-    request: any,
+    request: Request,
     { message, status }: IError,
-    exception: any,
+    exception: HttpException,
   ) {
     if (status === 500) {
       this.logger.error(
-        `End Request for ${request.path}`,
+        `End Request for ${request}.`,
         `method=${request.method} status=${status} code_error=${
           message ? message : null
         } message=${message ? message : null}`,
@@ -119,9 +120,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx: HttpArgumentsHost = host.switchToHttp();
 
     const response: e.Response<
-      any,
-      Record<string, any>
+      unknown,
+      Record<string, unknown>
     > = ctx.getResponse<Response>();
+
+    const request = ctx.getRequest<Request>();
 
     let status: HttpStatus;
 
@@ -131,7 +134,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       status = HttpStatus.INTERNAL_SERVER_ERROR; // 500
     }
 
-    let error: IError = {
+    const error: IError = {
       status,
       message:
         status === HttpStatus.INTERNAL_SERVER_ERROR // 500
@@ -146,7 +149,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
       status === HttpStatus.BAD_REQUEST &&
       exception.message === "Unexpected field"
     ) {
-      this.sendResponse(response, this.requiredPhotoException(), exception);
+      this.sendResponse(
+        response,
+        request,
+        this.requiredPhotoException(),
+        exception,
+      );
 
       return;
     }
@@ -157,14 +165,24 @@ export class HttpExceptionFilter implements ExceptionFilter {
       (!exception.message.includes("Cannot read") &&
         exception.message.includes("Cannot"))
     ) {
-      this.sendResponse(response, this.notFoundException(exception), exception);
+      this.sendResponse(
+        response,
+        request,
+        this.notFoundException(exception),
+        exception,
+      );
 
       return;
     }
 
     // Mongoose duplicate key
-    if ((exception as any).code === 11000) {
-      this.sendResponse(response, this.uniqueException(exception), exception);
+    if ((exception as unknown as { code: number }).code === 11000) {
+      this.sendResponse(
+        response,
+        request,
+        this.uniqueException(exception),
+        exception,
+      );
 
       return;
     }
@@ -173,6 +191,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (exception.name === "ValidationError") {
       this.sendResponse(
         response,
+        request,
         this.validationException(exception),
         exception,
       );
@@ -185,18 +204,23 @@ export class HttpExceptionFilter implements ExceptionFilter {
       status === HttpStatus.UNAUTHORIZED &&
       exception?.message?.includes("Unauthorized")
     ) {
-      this.sendResponse(response, this.authorization(), exception);
+      this.sendResponse(response, request, this.authorization(), exception);
 
       return;
     }
 
     // JWT Error
     if (exception.name === "JsonWebTokenError") {
-      this.sendResponse(response, this.jwtException(exception), exception);
+      this.sendResponse(
+        response,
+        request,
+        this.jwtException(exception),
+        exception,
+      );
 
       return;
     }
 
-    this.sendResponse(response, error, exception);
+    this.sendResponse(response, request, error, exception);
   }
 }

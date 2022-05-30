@@ -31,7 +31,7 @@ export class ResponseInterceptor<T>
     next: CallHandler,
   ): Observable<ResponseFormat<T>> {
     const httpContext: HttpArgumentsHost = context.switchToHttp();
-    const request: any = httpContext.getRequest();
+    const request = httpContext.getRequest();
 
     return next.handle().pipe(
       map((data) => ({

@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo 'Checking code standards before commiting...';
+
+echo 'Formatting code...';
+npx prettier --write .;
+
+echo 'Checking code format...';
+npm run check-format || (
+    echo '❌👷🔨❌ There are some formatting issues. Please, solve them, and try again.'
+);
+
+echo 'Fixing linting issues...';
+
+npm run lint;
+
+# Staging changes
+git add .;
+
+echo 'Checking linting issues...';
+npm run check-lint ||
+(
+        echo '❌👷🔨❌ Linting issues found. Please, solve them, and try again.';
+        false; 
+);
+
+echo 'Running tests...';
+npm run test || (
+    echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.'
+);
+
+
+npm run check-types || (
+    echo '❌👷🔨❌ There are some type issues. Please, solve them, and try again.'
+);
+
+echo '✅ Looks good to me. ✅';

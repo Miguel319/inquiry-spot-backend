@@ -1,7 +1,10 @@
+import { VoidDecorator } from "@/domain/types";
 import { registerDecorator, ValidationOptions } from "class-validator";
 
-export function IsNotEmpty(validationOptions?: ValidationOptions): Function {
-  return function (object: Object, propertyName: string): void {
+export function IsNotEmpty(
+  validationOptions?: ValidationOptions,
+): VoidDecorator {
+  return (object: object, propertyName: string) => {
     registerDecorator({
       name: "IsNotEmpty",
       target: object.constructor,
@@ -12,7 +15,7 @@ export function IsNotEmpty(validationOptions?: ValidationOptions): Function {
         ...validationOptions,
       },
       validator: {
-        validate(value: any): boolean {
+        validate(value: unknown): boolean {
           if (!value) return false;
 
           if (typeof value === "string") return value.length > 0;

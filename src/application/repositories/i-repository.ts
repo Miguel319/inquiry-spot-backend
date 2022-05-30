@@ -16,21 +16,25 @@ export interface IRepository<T> {
   ): Promise<T | null>;
 
   aggregate(
-    pipeline?: any[] | undefined,
+    pipeline?: unknown[] | undefined,
     options?: Record<string, unknown> | undefined,
-  ): Promise<any>;
+  ): Promise<unknown>;
 
   find(
     entityFilterQuery: FilterQuery<T>,
     select?: string,
-  ): Promise<Document<T, {}, {}>[]>;
+  ): Promise<Document<T, Record<string, unknown>, Record<string, unknown>>[]>;
 
   create(createEntityData: (AnyKeys<T> & AnyObject) | undefined): Promise<T>;
 
   findOneAndUpdate(
     entityFilterQuery: FilterQuery<T>,
     updateEntityData: UpdateQuery<unknown>,
-  ): Promise<HydratedDocument<T, {}, {}> | null>;
+  ): Promise<HydratedDocument<
+    T,
+    Record<string, unknown>,
+    Record<string, unknown>
+  > | null>;
 
   deleteOne(entityFilterQuery: FilterQuery<T>): Promise<boolean>;
 

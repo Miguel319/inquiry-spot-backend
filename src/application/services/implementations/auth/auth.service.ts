@@ -4,6 +4,7 @@ import {
   ForbiddenException,
   Inject,
   Injectable,
+  InternalServerErrorException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Response } from "express";
@@ -21,9 +22,12 @@ export class AuthService implements IAuthService {
   async signUp(user: User): Promise<IAuthResult> {
     await this.validateSignUpEmail(user.email);
 
-    const newUser: User = await this._usersService.create!(
+    const newUser = await this._usersService.create?.(
       await this.handleUserSignUp(user),
     );
+
+    if (!newUser)
+      throw new InternalServerErrorException("Could not create user");
 
     const authResult: IAuthResult = {
       user: newUser,
@@ -77,7 +81,7 @@ export class AuthService implements IAuthService {
     return authResult;
   }
 
-  signOut(res: Response<any, Record<string, any>>): void {
+  signOut(res: Response<unknown, Record<string, unknown>>): void {
     res.clearCookie("token");
   }
 
@@ -104,7 +108,7 @@ export class AuthService implements IAuthService {
   }
 
   private async hashPassword(password: string): Promise<string> {
-    const salt: any = await bcrypt.genSalt(12);
+    const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     return hashedPassword;

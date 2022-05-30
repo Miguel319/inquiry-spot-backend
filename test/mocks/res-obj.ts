@@ -2,7 +2,7 @@ import { Response } from "express";
 import { createMock, DeepMocked } from "@golevelup/ts-jest";
 
 export const mockResObj = (): DeepMocked<
-  Response<any, Record<string, any>>
+  Response<unknown, Record<string, unknown>>
 > => {
   return createMock<Response>({
     json: jest.fn().mockReturnThis(),

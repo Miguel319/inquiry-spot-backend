@@ -5,7 +5,10 @@ export abstract class BaseRepoMock<T> {
     this.constructorSpy(createEntityData);
   }
 
-  constructorSpy(_createEntityData: T): void {}
+  constructorSpy(_createEntityData: T): void {
+    _createEntityData;
+    return;
+  }
 
   findOne(): { exec: () => T } {
     return {

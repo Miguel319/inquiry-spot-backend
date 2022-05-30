@@ -25,8 +25,12 @@ describe("VehiclePostsRepository", () => {
         ],
       }).compile();
 
-      vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(VehiclePostsRepository);
-      vehiclePostModel = moduleRef.get<VehiclePostModel>(getModelToken(VehiclePost.name));
+      vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(
+        VehiclePostsRepository,
+      );
+      vehiclePostModel = moduleRef.get<VehiclePostModel>(
+        getModelToken(VehiclePost.name),
+      );
 
       vehiclePostFilterQuery = {
         _id: getVehiclePostStub()._id,
@@ -42,13 +46,18 @@ describe("VehiclePostsRepository", () => {
         beforeEach(async () => {
           jest.spyOn(vehiclePostModel, "findOne");
 
-          vehiclePost = await vehiclePostsRepository.findOne(vehiclePostFilterQuery);
+          vehiclePost = await vehiclePostsRepository.findOne(
+            vehiclePostFilterQuery,
+          );
         });
 
         test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.findOne).toHaveBeenCalledWith(vehiclePostFilterQuery, {
-            __v: 0,
-          });
+          expect(vehiclePostModel.findOne).toHaveBeenCalledWith(
+            vehiclePostFilterQuery,
+            {
+              __v: 0,
+            },
+          );
         });
 
         test("then it should return a vehiclePost", () => {
@@ -72,7 +81,10 @@ describe("VehiclePostsRepository", () => {
         });
 
         test("then it should return a vehiclePost", () => {
-          expect(vehiclePosts).toEqual([getVehiclePostStub(), getVehiclePostStub()]);
+          expect(vehiclePosts).toEqual([
+            getVehiclePostStub(),
+            getVehiclePostStub(),
+          ]);
         });
       });
     });
@@ -106,16 +118,20 @@ describe("VehiclePostsRepository", () => {
 
     describe("deleteOne", () => {
       describe("when deleteOne is called", () => {
-        let result: boolean = true;
+        let result = true;
 
         beforeEach(async () => {
           jest.spyOn(vehiclePostModel, "deleteOne");
 
-          result = await vehiclePostsRepository.deleteOne(vehiclePostFilterQuery);
+          result = await vehiclePostsRepository.deleteOne(
+            vehiclePostFilterQuery,
+          );
         });
 
         test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.deleteOne).toHaveBeenCalledWith(vehiclePostFilterQuery);
+          expect(vehiclePostModel.deleteOne).toHaveBeenCalledWith(
+            vehiclePostFilterQuery,
+          );
         });
 
         test("then it should return false", () => {
@@ -126,16 +142,20 @@ describe("VehiclePostsRepository", () => {
 
     describe("deleteMany", () => {
       describe("when deleteMany is called", () => {
-        let result: boolean = true;
+        let result = true;
 
         beforeEach(async () => {
           jest.spyOn(vehiclePostModel, "deleteMany");
 
-          result = await vehiclePostsRepository.deleteMany(vehiclePostFilterQuery);
+          result = await vehiclePostsRepository.deleteMany(
+            vehiclePostFilterQuery,
+          );
         });
 
         test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.deleteMany).toHaveBeenCalledWith(vehiclePostFilterQuery);
+          expect(vehiclePostModel.deleteMany).toHaveBeenCalledWith(
+            vehiclePostFilterQuery,
+          );
         });
 
         test("then it should return false", () => {
@@ -157,7 +177,9 @@ describe("VehiclePostsRepository", () => {
         ],
       }).compile();
 
-      vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(VehiclePostsRepository);
+      vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(
+        VehiclePostsRepository,
+      );
     });
 
     describe("create", () => {
@@ -168,8 +190,13 @@ describe("VehiclePostsRepository", () => {
 
         beforeEach(async () => {
           saveSpy = jest.spyOn(VehiclePostModel.prototype, "save");
-          constructorSpy = jest.spyOn(VehiclePostModel.prototype, "constructorSpy");
-          vehiclePost = await vehiclePostsRepository.create(getVehiclePostStub());
+          constructorSpy = jest.spyOn(
+            VehiclePostModel.prototype,
+            "constructorSpy",
+          );
+          vehiclePost = await vehiclePostsRepository.create(
+            getVehiclePostStub(),
+          );
         });
 
         test("then it should call the vehiclePostModel", () => {

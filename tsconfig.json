@@ -19,9 +19,10 @@
     "noImplicitThis": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
+    "allowUnusedLabels": false,
     "noImplicitOverride": true,
+    "pretty": true,
     "noUnusedLocals": true,
-    "noPropertyAccessFromIndexSignature": true,
     "esModuleInterop": true,
     "paths": {
       "@/*": ["src/*"]

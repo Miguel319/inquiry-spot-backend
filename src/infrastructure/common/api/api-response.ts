@@ -5,7 +5,7 @@ import { Response } from "express";
 export interface IApiResponse {
   message?: string;
   res: Response;
-  data?: any;
+  data?: unknown;
 }
 
 export interface IApiAuthResponse {

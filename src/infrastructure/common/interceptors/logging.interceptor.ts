@@ -11,7 +11,7 @@ import { tap } from "rxjs/operators";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const parentType = chalk
       .hex("#87e8de")
       .bold(`${context.getArgs()[0].route.path}`);

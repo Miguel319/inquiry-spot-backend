@@ -1,3 +1,3 @@
-async function bootstrap() {}
+import { AppSetup } from "./application/app-setup";
 
-bootstrap();
+(async (): Promise<void> => await AppSetup.create().run())();

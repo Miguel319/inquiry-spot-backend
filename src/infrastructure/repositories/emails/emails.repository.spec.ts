@@ -106,7 +106,7 @@ describe("EmailsRepository", () => {
 
     describe("deleteOne", () => {
       describe("when deleteOne is called", () => {
-        let result: boolean = true;
+        let result = true;
 
         beforeEach(async () => {
           jest.spyOn(emailModel, "deleteOne");
@@ -126,7 +126,7 @@ describe("EmailsRepository", () => {
 
     describe("deleteMany", () => {
       describe("when deleteMany is called", () => {
-        let result: boolean = true;
+        let result = true;
 
         beforeEach(async () => {
           jest.spyOn(emailModel, "deleteMany");

@@ -1,6 +1,7 @@
 import { IUsersService } from "@/application/services/contracts";
 import { User } from "@/domain/entities";
-import { Controller, Get, Inject, Param } from "@nestjs/common";
+import { JwtAuthGuard } from "../../guards";
+import { Controller, Get, Inject, Param, UseGuards } from "@nestjs/common";
 
 @Controller("users")
 export class UsersController {
@@ -9,6 +10,7 @@ export class UsersController {
   ) {}
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async findAll(): Promise<Array<User>> {
     return await this.usersService.findAll();
   }
