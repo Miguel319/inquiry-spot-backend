@@ -6,7 +6,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { VehiclePostsService } from "../services/implementations/vehicle-posts/vehicle-posts.service";
 
 const VehiclePostProvider: Provider = {
-  provide: "IVehicleService",
+  provide: "IVehiclePostsService",
   useValue: VehiclePostsService,
 };
 

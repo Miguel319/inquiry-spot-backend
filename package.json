@@ -22,8 +22,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
-    "check-lint": "eslint . --ext ts",
-    "prepare": "husky install"
+    "check-lint": "eslint \"src/**/*.ts\" --ext ts",
+    "prepare": "husky install && chmod ug+x .husky/*"
   },
   "dependencies": {
     "@golevelup/ts-jest": "^0.3.3",
