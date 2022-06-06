@@ -1,73 +1,73 @@
+# Inquiry Spot
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+<img src="https://res.cloudinary.com/dvoo3wu0v/image/upload/v1654549684/Screen_Shot_2022-06-06_at_5.04.51_PM_gh58n8.png" width="320" alt="Inquiry Spot">
 </p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Inquiry Spot is an application that allows multiple users to view and publish real estate ads (apartments, houses, condominiums, farms, lots, premises, etc.) and vehicles. The app implements QR codes for users to scan the posts they see on the streets. Additionally, the application has a blog dedicated exclusively to real estate and vehicle publications.
+
+**Build and install prerequisites**
+
+- It is essential to have the place permissions to be able to access the repository. If you do not have these permissions, please contact the support department: support@abc.com.
+
+- It is recommended to access the repository through SSH. For that, follow these steps:
+  - Open terminal or command line interface.
+  - Type `ssh-keygen` and press enter repeatedly until there are no more questions.
+  - Go to the path where the generated ssh resides: `cd "ssh path"`.
+  - Press `open .` if you are on Mac or `start .` if you are on Windows.
+  - Open the .pub file, copying its content.
+  - Open Azure Devops, press the "User Settings" button, located at the top right of the navigation bar (it is the penultimate button) and then press SSH public "keys".
+  - Press "New Key". In the _Name_ part, assign any value, while in the _Public Key Data_ part, paste the value copied from the .pub.
+
+## Step by step compilation and installation
+
+- Go to the repository in Azure DevOps.
+- Select the ssh box and copy the given value to do the cloning.
+- Open terminal or command line interface.
+- Write `git clone {previously_copied_value}`.
+- Open preferred text editor or preferred integrated development environment. In case of, for example, having Visual Studio Code, run `code .`.
+- Type `yarn` either in the previously opened terminal or in the text editor or IDE.
+- Type `yarn dev` either in the previously opened terminal or in the text editor or IDE.
+
+## Branching strategy
+
+The project uses **Trunk-based development** as a branching strategy. This is a version control management practice where developers combine small, frequent updates into a central "trunk" or main branch. It is a common practice among DevOps teams and part of the DevOps lifecycle as it streamlines the merge and integration phases.
+
+- **Branches to use:** `master`, `feature` and `fix`.
+- **Permissions required by branches:**: `master` is prohibited from direct commits.
+- **Workflow**: When pushing the feature or fix, a pull request must be made, specifying the potential reviewers. It is recommended to set autocomplete on the pull request so that, once approved, it will automatically run on the `master` branch without the need for an external entity.
+- **Tagging process (semantic versioning):** Semantic versioning is a way of providing context to the user about the scope of a given change. This is divided into X,Y and Z. X is a major version, which can alter the correct functioning of components belonging to previous versions. And it is a minor version, which is used to add functionalities compatible with the existing ones. Finally, Z refers to a patch version, where defects reported internally or externally are corrected. The current version is 1.0.0, where the 1 represents X, the first 0 represents Y, and the last 0 represents Z.
 
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn dev
 
-# watch mode
-$ npm run start:dev
+# build
+$ yarn build
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

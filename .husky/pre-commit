@@ -8,7 +8,8 @@ npx prettier --write .;
 
 echo 'Checking code format...';
 npm run check-format || (
-    echo '❌👷🔨❌ There are some formatting issues. Please, solve them, and try again.'
+    echo '❌👷🔨❌ There are some formatting issues. Please, solve them, and try again.';
+    false;
 );
 
 echo 'Fixing linting issues...';
@@ -27,12 +28,14 @@ npm run check-lint ||
 
 echo 'Running tests...';
 npm run test || (
-    echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.'
+    echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.';
+    false;
 );
 
-
+echo 'Checking type issues...';
 npm run check-types || (
     echo '❌👷🔨❌ There are some type issues. Please, solve them, and try again.'
+    false;
 );
 
 echo '✅ Looks good to me. ✅';
