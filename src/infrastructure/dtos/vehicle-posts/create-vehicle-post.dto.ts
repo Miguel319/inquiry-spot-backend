@@ -2,10 +2,6 @@ import { IsDefined, IsNotEmpty } from "class-validator";
 
 export class CreateVehiclePostDto {
   @IsNotEmpty()
-  @IsDefined({ message: "The title is required." })
-  readonly title: string;
-
-  @IsNotEmpty()
   @IsDefined({ message: "The description is required." })
   readonly description: string;
 

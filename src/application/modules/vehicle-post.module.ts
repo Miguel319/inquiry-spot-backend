@@ -7,7 +7,7 @@ import { VehiclePostsService } from "../services/implementations/vehicle-posts/v
 
 const VehiclePostProvider: Provider = {
   provide: "IVehiclePostsService",
-  useValue: VehiclePostsService,
+  useClass: VehiclePostsService,
 };
 
 @Module({
