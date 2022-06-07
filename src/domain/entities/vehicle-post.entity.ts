@@ -37,9 +37,15 @@ export class VehiclePost {
   })
   exteriorColor: Colors;
 
+  @Prop({ enum: Colors, type: String })
+  primaryImage: string;
+
+  @Prop([{ type: String }])
+  secondaryImages: string[];
+
   @Prop({
     required: [true, "The interior color is mandatory."],
-    enum: Colors,
+    enum: [Colors],
     type: String,
   })
   interiorColor: Colors;
