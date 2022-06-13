@@ -1,8 +1,8 @@
-import { IVehiclePostsService } from "@/application/services/contracts/i-vehicle-post.service";
+import { IVehiclePostsService } from "@/application/services/contracts";
 import { VehiclePost } from "@/domain/entities";
 import { ApiResponse } from "@/infrastructure/common/api";
 import { UpdateVehiclePostDto } from "@/infrastructure/dtos";
-import { CreateVehiclePostDto } from "@/infrastructure/dtos/vehicle-posts/create-vehicle-post.dto";
+import { CreateVehiclePostDto } from "@/infrastructure/dtos";
 import {
   Body,
   Controller,

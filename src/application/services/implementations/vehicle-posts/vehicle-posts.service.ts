@@ -1,7 +1,7 @@
 import { VehiclePost } from "@/domain/entities";
-import { VehiclePostsRepository } from "../../../../infrastructure/repositories/vehicle-posts/vehicle-post.repository";
+import { VehiclePostsRepository } from "../../../../infrastructure/repositories";
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { IVehiclePostsService } from "../../contracts/i-vehicle-post.service";
+import { IVehiclePostsService } from "../../contracts";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {

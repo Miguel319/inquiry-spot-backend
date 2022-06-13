@@ -7,7 +7,7 @@ import { User } from "@/domain/entities";
 import { ApiResponse } from "../../../infrastructure/common/api/api-response";
 import { SignInDto, SignUpDto } from "../../../infrastructure/dtos";
 import { PresenterFactory } from "../../../infrastructure/presenters";
-import { UserPresenter } from "../../../infrastructure/presenters/users.presenter";
+import { UserPresenter } from "../../../infrastructure/presenters";
 import {
   Body,
   Controller,
