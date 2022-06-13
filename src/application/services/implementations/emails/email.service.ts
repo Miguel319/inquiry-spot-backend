@@ -27,7 +27,6 @@ export class EmailsService implements IEmailsService {
     private readonly _emailRepo: EmailsRepository,
   ) {
     this.sendGrid = require("@sendgrid/mail");
-
     this.sendGrid.setApiKey(process.env["SENDGRID_API_KEY"]);
   }
 
@@ -41,7 +40,7 @@ export class EmailsService implements IEmailsService {
     return {
       from: {
         email: senderEmail,
-        name: "Supernatural Software",
+        name: "Inquiry Spot",
       },
       to,
       subject,

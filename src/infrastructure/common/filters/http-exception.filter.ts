@@ -9,6 +9,7 @@ import e, { Request, Response } from "express";
 import { HttpStatus } from "@nestjs/common";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 import { LoggerService } from "@/infrastructure/logger";
+import { getI18nContextFromArgumentsHost, I18nContext } from "nestjs-i18n";
 
 interface IError {
   message: string;
@@ -17,6 +18,8 @@ interface IError {
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
+  private static i18n: I18nContext;
+
   constructor(private readonly logger: LoggerService) {}
 
   private uniqueException(exception: HttpException): IError {
@@ -25,7 +28,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
     ).join("");
 
     return {
-      message: `The '${uniqueField}' field is unique. There's already a record with the provided value.`,
+      message: HttpExceptionFilter.i18n.t("exceptions.http.unique", {
+        args: { uniqueField },
+      }),
       status: HttpStatus.BAD_REQUEST, // 400
     };
   }
@@ -42,8 +47,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     return {
       message:
         entity.includes("api/v1") || entity.includes("/")
-          ? `Could not find ${entity}.`
-          : `Could not find any ${entity} with the provided _id.`,
+          ? HttpExceptionFilter.i18n.t("exceptions.http.notFoundNoId", {
+              args: { entity },
+            })
+          : HttpExceptionFilter.i18n.t("exceptions.http.notFoundId", {
+              args: { entity },
+            }),
       status: HttpStatus.NOT_FOUND,
     };
   }
@@ -66,15 +75,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
   private authorization(): IError {
     return {
-      message: "Unauthorized to access this resource.",
+      message: HttpExceptionFilter.i18n.t("exceptions.http.unauthorized"),
       status: HttpStatus.UNAUTHORIZED, // 401
     };
   }
 
   private requiredPhotoException(): IError {
     return {
-      message: "The photo field is required.",
-      status: HttpStatus.BAD_REQUEST,
+      message: HttpExceptionFilter.i18n.t("exception.http.requiredPhoto"),
+      status: HttpStatus.BAD_REQUEST, // 500
     };
   }
 
@@ -118,6 +127,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx: HttpArgumentsHost = host.switchToHttp();
+    HttpExceptionFilter.i18n = getI18nContextFromArgumentsHost(host);
 
     const response: e.Response<
       unknown,

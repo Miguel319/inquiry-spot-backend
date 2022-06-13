@@ -9,12 +9,12 @@ import rateLimit from "express-rate-limit";
 import { RootModule } from "./modules";
 import { ConfigService } from "@nestjs/config";
 import { LoggingInterceptor } from "@/infrastructure/common/interceptors";
-import { ValidationException } from "@/domain/exceptions";
 import {
   ValidationFilter,
   FallbackExpectionFilter,
   HttpExceptionFilter,
 } from "@/infrastructure/common/filters";
+import { i18nValidationErrorFactory } from "nestjs-i18n";
 
 export class AppSetup {
   async run(): Promise<void> {
@@ -26,8 +26,8 @@ export class AppSetup {
         app.get(ConfigService);
 
       this.setBasicConfig(app);
-      this.setupGlobalFilters(app);
       this.setupGlobalPipes(app);
+      this.setupGlobalFilters(app);
       this.setupMainMiddlewares(app);
       this.setupGlobalInterceptors(app);
       this.buildAPIDocumentation(app);
@@ -54,8 +54,8 @@ export class AppSetup {
   }
 
   private buildAPIDocumentation(app: NestExpressApplication): void {
-    const title = "Supernatural Software";
-    const description = "Supernatural Software documentation";
+    const title = "Inquiry Spot";
+    const description = "Inquiry Spot documentation";
     const version = "1.0.0";
 
     const options: Omit<OpenAPIObject, "paths"> = new DocumentBuilder()
@@ -108,16 +108,7 @@ export class AppSetup {
     app.useGlobalPipes(
       new ValidationPipe({
         skipMissingProperties: true,
-        exceptionFactory: (errors: unknown[]) => {
-          const messages = errors.map(
-            (err) =>
-              `${Object.values(
-                (err as { constraints: string[] })?.constraints,
-              ).join(". ")}`,
-          );
-
-          return new ValidationException(messages);
-        },
+        exceptionFactory: i18nValidationErrorFactory,
       }),
     );
   }

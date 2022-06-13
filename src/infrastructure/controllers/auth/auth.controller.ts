@@ -18,8 +18,10 @@ import {
   Put,
   Req,
   Res,
+  UseFilters,
 } from "@nestjs/common";
 import { Response, Request } from "express";
+import { I18nValidationExceptionFilter } from "nestjs-i18n";
 
 @Controller("auth")
 export class AuthController {
@@ -29,6 +31,7 @@ export class AuthController {
   ) {}
 
   @Post("sign-up")
+  @UseFilters(new I18nValidationExceptionFilter())
   async signUp(
     @Body() signupDto: SignUpDto,
     @Res() res: Response,

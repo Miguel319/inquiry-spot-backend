@@ -3,6 +3,7 @@ import { AuthModule } from "./auth.module";
 import { DBModule } from "./db.module";
 import { EmailsModule } from "./email.module";
 import { EnvModule } from "./env.module";
+import { InternationalizationModule } from "./internationalization.module";
 import { LoggerModule } from "./logger.module";
 import { UsersModule } from "./users.module";
 import { VehiclePostModule } from "./vehicle-post.module";
@@ -12,6 +13,7 @@ import { VehiclePostModule } from "./vehicle-post.module";
     EnvModule,
     UsersModule,
     LoggerModule,
+    InternationalizationModule,
     AuthModule,
     EmailsModule,
     VehiclePostModule,
