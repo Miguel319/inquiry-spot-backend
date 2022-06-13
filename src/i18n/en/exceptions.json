@@ -1,0 +1,10 @@
+{
+  "http": {
+    "unique": "The {uniqueField} field is unique. There's already a record with the provided value.",
+    "notFoundNoId": "Could not find {entity}.",
+    "notFoundId": "Could not find {entity} with the provided id.",
+    "unexpectedField": "Unexpected field.",
+    "unauthorized": "Unauthorized to access this resource.",
+    "requiredPhoto": "The photo field is required."
+  }
+}

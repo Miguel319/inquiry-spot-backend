@@ -1,0 +1,10 @@
+{
+  "http": {
+    "unique": "El campo {uniqueField} es único. Ya hay un registro con el valor provisto.",
+    "notFoundNoId": "No se pudo encontrar {entity}.",
+    "notFoundId": "No se pudo encontrar {entity} con el id provisto.",
+    "unexpectedField": "Campo inesperado.",
+    "unauthorized": "No está autorizado(a) a acceder a este recurso.",
+    "requiredPhoto": "El campo imagen (photo) es obligatorio."
+  }
+}
