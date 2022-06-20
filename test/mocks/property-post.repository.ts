@@ -1,6 +1,6 @@
 import { getPropertyPostStub } from "../stubs";
 
-export const PropertyRepository = jest.fn().mockReturnValue({
+export const PropertyPostsRepository = jest.fn().mockReturnValue({
   find: jest
     .fn()
     .mockResolvedValue([getPropertyPostStub(), getPropertyPostStub()]),

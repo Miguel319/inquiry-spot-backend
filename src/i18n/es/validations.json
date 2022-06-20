@@ -35,7 +35,7 @@
     "primaryImage": "La imagen principal es obligatoria.",
     "secondaryImages": "Las imágenes secundarias son obligatorias.",
     "invalidTransmission": "La transmisión provista es inválida.",
-    "notFound": "No se encontró la publicación que busca."
+    "notFound": "No se encontró la publicación de vehículo que busca."
   },
   "propertyPost": {
     "bathroomCount": "El número baños es obligatorio.",
@@ -45,7 +45,9 @@
     "seller": "El vendedor es obligatorio.",
     "territory": "El territorio (mt²) es obligatorio.",
     "buyingOption": "La opción de compra (compra o renta) es obligatoria.",
+    "invalidBuyingOption": "La opción de compra provista es inválida.",
     "propertyType": "El tipo de propiedad es obligatorio.",
+    "invalidPropertyType": "El tipo de propiedad provisto es inválido.",
     "propertyStatus": "El estatus de la propiedad es obligatorio.",
     "primaryImage": "La imagen principal es obligatoria.",
     "secondaryImages": "Las imágenes secundarias son obligatorias.",
@@ -54,7 +56,8 @@
       "addressLine1": "La dirección (calle y número) es obligatoria .",
       "city": "La ciudad es obligatoria.",
       "province": "La provincia es obligatoria."
-    }
+    },
+    "notFound": "No se encontró la publicación de propiedad que busca."
   },
   "email": {
     "subject": "El asunto es obligatorio.",

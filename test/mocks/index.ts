@@ -5,4 +5,5 @@ export { mockResObj } from "./res-obj";
 export { AuthService, FAKE_TOKEN } from "../mocks/auth.service";
 export { EmailsRepository } from "./email.repository";
 export { VehiclePostsRepository } from "./vehicle-post.repository";
-export { PropertyRepository } from "./property-post.repository";
+export { PropertyPostsRepository } from "./property-post.repository";
+export { PropertyPostsService } from "./property-post.service";
