@@ -5,7 +5,6 @@ import {
   HeaderResolver,
   AcceptLanguageResolver,
   I18nContext,
-  I18nService,
 } from "nestjs-i18n";
 import path from "path";
 
@@ -24,7 +23,7 @@ import path from "path";
       ],
     }),
   ],
-  providers: [I18nService, I18nContext],
-  exports: [I18nService, I18nContext],
+  providers: [I18nContext],
+  exports: [I18nContext],
 })
 export class InternationalizationModule {}
