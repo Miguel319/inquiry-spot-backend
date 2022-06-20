@@ -46,7 +46,9 @@
     "seller": "The seller is mandatory.",
     "territory": "The territory (m²) is mandatory.",
     "buyingOption": "The buying option (buy or rent) is mandatory.",
+    "invalidBuyingOption": "The provided buying option is invalid.",
     "propertyType": "The property type is mandatory.",
+    "invalidPropertyType": "provided property type is invalid.",
     "propertyStatus": "The property status is mandatory.",
     "primaryImage": "The primary image is mandatory.",
     "secondaryImages": "The secondary image are mandatory.",
@@ -55,7 +57,8 @@
       "addressLine1": "The address line 1 is mandatory.",
       "city": "The city is mandatory.",
       "province": "The province is mandatory."
-    }
+    },
+    "notFound": "Property post not found."
   },
   "email": {
     "subject": "The subject is mandatory.",

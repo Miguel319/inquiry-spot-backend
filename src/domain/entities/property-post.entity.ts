@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
-import { Address, BuyingOption, PropertyStatus } from "../types";
+import { Address, BuyingOption, PropertyStatus, PropertyType } from "../types";
 
 export type PropertyPostDocument = PropertyPost & Document;
 
@@ -52,10 +52,10 @@ export class PropertyPost {
 
   @Prop({
     required: [true, "validations.propertyPost.propertyType"],
-    enum: PropertyPost,
+    enum: PropertyType,
     type: String,
   })
-  propertyType: PropertyPost;
+  propertyType: PropertyType;
 
   @Prop({
     required: [true, "validations.propertyPost.propertyStatus"],

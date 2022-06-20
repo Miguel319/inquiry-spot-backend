@@ -48,7 +48,17 @@ export class VehiclePostsService implements IVehiclePostsService {
     return await this._vehiclePostRepo.deleteOne({ _id });
   }
 
-  async findFromSeller(id: string): Promise<VehiclePost> {
-    throw new Error(`${id} Method not implemented.`);
+  async findFromSeller(_id: string, i18n?: I18nContext): Promise<VehiclePost> {
+    const propertyPost: VehiclePost | null =
+      await this._vehiclePostRepo.findOne({ seller: _id });
+
+    if (!propertyPost)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t("validations.vehiclePost.notFound")
+          : this._i18n.t("validations.vehiclePost.notFound"),
+      );
+
+    return propertyPost;
   }
 }
