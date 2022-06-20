@@ -5,6 +5,7 @@ import {
   HttpStatus,
 } from "@nestjs/common";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
+import { getI18nContextFromArgumentsHost } from "nestjs-i18n";
 
 @Catch()
 export class FallbackExpectionFilter implements ExceptionFilter {
@@ -19,12 +20,14 @@ export class FallbackExpectionFilter implements ExceptionFilter {
 
     const BAD_REQUEST: HttpStatus = HttpStatus.BAD_REQUEST;
 
+    const i18n = getI18nContextFromArgumentsHost(host);
+
     return response.status(BAD_REQUEST).json({
       success: false,
       statusCode: BAD_REQUEST,
       message: exception.message
         ? exception.message
-        : "Unexpected error ocurred.",
+        : i18n.t("http.unexpectedError"),
     });
   }
 }

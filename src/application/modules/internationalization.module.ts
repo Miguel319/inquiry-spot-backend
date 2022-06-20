@@ -4,13 +4,15 @@ import {
   QueryResolver,
   HeaderResolver,
   AcceptLanguageResolver,
+  I18nContext,
+  I18nService,
 } from "nestjs-i18n";
 import path from "path";
 
 @Module({
   imports: [
     I18nModule.forRoot({
-      fallbackLanguage: "en",
+      fallbackLanguage: "es",
       loaderOptions: {
         path: path.join(__dirname, "/../../i18n/"),
         watch: true,
@@ -22,5 +24,7 @@ import path from "path";
       ],
     }),
   ],
+  providers: [I18nService, I18nContext],
+  exports: [I18nService, I18nContext],
 })
 export class InternationalizationModule {}

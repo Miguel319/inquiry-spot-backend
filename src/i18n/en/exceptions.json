@@ -5,6 +5,7 @@
     "notFoundId": "Could not find {entity} with the provided id.",
     "unexpectedField": "Unexpected field.",
     "unauthorized": "Unauthorized to access this resource.",
-    "requiredPhoto": "The photo field is required."
+    "requiredPhoto": "The photo field is required.",
+    "unexpectedError": "Unexpected error occurred."
   }
 }

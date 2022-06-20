@@ -11,19 +11,16 @@ export interface IApiResponse {
 export interface IApiAuthResponse {
   token: string;
   user: User;
+  message: string;
   res: Response;
 }
 
 export class ApiResponse {
-  public static getSuccessfully({ res, data }: IApiResponse) {
+  public static get({ res, data }: IApiResponse) {
     return res.status(HttpStatus.OK).json(data);
   }
 
-  public static createSuccessfully({
-    message,
-    data,
-    res,
-  }: IApiResponse): Response {
+  public static create({ message, data, res }: IApiResponse): Response {
     return res.status(HttpStatus.CREATED).json({
       success: true,
       message: message || `Entity created successfully!`,
@@ -31,11 +28,7 @@ export class ApiResponse {
     });
   }
 
-  public static updateSuccessfully({
-    message,
-    data,
-    res,
-  }: IApiResponse): Response {
+  public static update({ message, data, res }: IApiResponse): Response {
     return res.status(HttpStatus.OK).json({
       success: true,
       message: message || "Entity updated successfully!",
@@ -43,11 +36,7 @@ export class ApiResponse {
     });
   }
 
-  public static deleteSuccessfully({
-    message,
-    data,
-    res,
-  }: IApiResponse): Response {
+  public static delete({ message, data, res }: IApiResponse): Response {
     return res.status(HttpStatus.OK).json({
       success: true,
       message: message || "Entity deleted successfully!",
@@ -55,10 +44,11 @@ export class ApiResponse {
     });
   }
 
-  public static signInSuccessfully({
+  public static signIn({
     res,
     user,
     token,
+    message,
   }: IApiAuthResponse): Response {
     return res
       .status(HttpStatus.OK)
@@ -69,15 +59,16 @@ export class ApiResponse {
       .json({
         success: true,
         token,
-        message: "Signed in successfully!",
+        message,
         user,
       });
   }
 
-  public static signUpSuccessfully({
+  public static signUp({
     res,
     user,
     token,
+    message,
   }: IApiAuthResponse): Response {
     return res
       .status(HttpStatus.CREATED)
@@ -88,7 +79,7 @@ export class ApiResponse {
       .json({
         success: true,
         token,
-        message: "Signed up successfully!",
+        message,
         user,
       });
   }

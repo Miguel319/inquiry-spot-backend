@@ -5,6 +5,7 @@ import { EmailsService } from "./email.service";
 import { UsersService } from "../users/users.service";
 import { EmailsRepository as EmailsRepositoryType } from "../../../../infrastructure/repositories";
 import { EmailsRepository } from "../../../../../test/mocks";
+import { I18nService } from "nestjs-i18n";
 
 describe("EmailsService", () => {
   let service: EmailsService;
@@ -29,6 +30,11 @@ describe("EmailsService", () => {
     create: jest.fn(),
   };
 
+  const I18nServiceProvider: Provider = {
+    provide: I18nService,
+    useValue: jest.fn(),
+  };
+
   const UserUseCaseProvider: Provider = {
     provide: "IUsersService",
     useValue: usersService,
@@ -43,6 +49,7 @@ describe("EmailsService", () => {
         LoggerService,
         EmailsRepository,
         EmailsRepositoryProvider,
+        I18nServiceProvider,
       ],
     }).compile();
 

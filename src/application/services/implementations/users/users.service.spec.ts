@@ -6,6 +6,7 @@ import { UsersRepository } from "../../../../../test/mocks";
 import { User } from "@/domain/entities";
 import { getUserStub } from "../../../../../test/stubs";
 import { REQUEST } from "@nestjs/core";
+import { I18nService } from "nestjs-i18n";
 
 describe("UsersService", () => {
   let service: UserServiceType;
@@ -26,6 +27,11 @@ describe("UsersService", () => {
     useValue: jest.fn().mockReturnValue(() => null),
   };
 
+  const I18nServiceProvider: Provider = {
+    provide: I18nService,
+    useValue: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -34,6 +40,7 @@ describe("UsersService", () => {
         UsersRepository,
         UsersRepositoryProvider,
         RequestProvider,
+        I18nServiceProvider,
       ],
     }).compile();
 

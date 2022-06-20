@@ -1,4 +1,48 @@
 {
-  "invalidEmail": "Invalid email.",
-  "requiredEmail": "The email is mandatory."
+  "shared": {
+    "isArray": "The field '{field}' must be an array."
+  },
+  "user": {
+    "name": "The name is mandatory.",
+    "passwordName": "Password",
+    "password": "The password is mandatory.",
+    "invalidEmail": "Invalid email.",
+    "requiredEmail": "The email is mandatory.",
+    "minLength": "The '{field}' field must have at least {min} characters.",
+    "passwordMinLength": "The password must have at least 6 characters.",
+    "userCreationError": "Could not create user.",
+    "notFound": "User not found.",
+    "invalidToken": "Invalid token."
+  },
+  "vehiclePost": {
+    "description": "The description is mandatory.",
+    "make": "The make is mandatory.",
+    "invalidMake": "The provided make is invalid.",
+    "model": "The model is mandatory.",
+    "type": "The vehicle type is mandatory.",
+    "invalidType": "The vehicle type provided is invalid.",
+    "price": "The price is mandatory.",
+    "exteriorColor": "The exterior color is mandatory.",
+    "invalidExteriorColor": "The exterior color provided is invalid.",
+    "interiorColor": "The interior color mandatory.",
+    "invalidInteriorColor": "The interior color provided is invalid.",
+    "fuelType": "The fuel type is mandatory.",
+    "invalidFuelType": "The provided fuel type  is invalid.",
+    "status": "The status (New o Used) is mandatory.",
+    "accessories": "The accessories are mandatory.",
+    "invalidTransmission": "The provided transmission is invalid.",
+    "transmission": "The transmission is mandatory.",
+    "primaryImage": "The primary image is mandatory.",
+    "secondaryImages": "The secondary image is mandatory.",
+    "notFound": "Vehicle post not found."
+  },
+  "email": {
+    "subject": "The subject is mandatory.",
+    "body": "The message is mandatory.",
+    "fromName": "The sender's name is required.",
+    "fromEmail": "The sender's email is required.",
+    "invalidFromEmail": "The provided sender's email is invalid.",
+    "recipientEmailAddress": "The recipient email is required.",
+    "invalidRecipientEmailAddress": "The provided recipient email is invalid."
+  }
 }

@@ -10,6 +10,7 @@ import { HttpStatus } from "@nestjs/common";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 import { LoggerService } from "@/infrastructure/logger";
 import { getI18nContextFromArgumentsHost, I18nContext } from "nestjs-i18n";
+import { StringFormatter } from "../util";
 
 interface IError {
   message: string;
@@ -67,8 +68,18 @@ export class HttpExceptionFilter implements ExceptionFilter {
   private validationException(exception: HttpException): IError {
     const cutFrom: number = exception.message.indexOf(":") + 2;
 
+    const i18n: I18nContext = HttpExceptionFilter.i18n;
+
+    const errorMessage: string = exception.message.slice(cutFrom);
+
+    const isArrayOfErrors: boolean = errorMessage.includes(",");
+
+    const formattedErrorMessage: string = isArrayOfErrors
+      ? StringFormatter.formatMongooseErrors(errorMessage, i18n)
+      : StringFormatter.formatSingleMongooseError(errorMessage, i18n);
+
     return {
-      message: exception.message.slice(cutFrom),
+      message: formattedErrorMessage,
       status: HttpStatus.BAD_REQUEST, // 400
     };
   }

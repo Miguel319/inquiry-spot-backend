@@ -8,6 +8,7 @@ import { VehiclePostsRepository as VehiclePostsRepositoryType } from "../../../.
 import { VehiclePostsRepository } from "../../../../../test/mocks";
 import { VehiclePost } from "@/domain/entities";
 import { getVehiclePostStub } from "../../../../../test/stubs";
+import { I18nService } from "nestjs-i18n";
 
 describe("VehiclePostsService", () => {
   let service: VehiclePostServiceType;
@@ -23,6 +24,11 @@ describe("VehiclePostsService", () => {
     useClass: VehiclePostsService,
   };
 
+  const I18nServiceProvider: Provider = {
+    provide: I18nService,
+    useValue: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -30,6 +36,7 @@ describe("VehiclePostsService", () => {
         VehiclePostsService,
         VehiclePostsRepository,
         VehiclePostsRepositoryProvider,
+        I18nServiceProvider,
       ],
     }).compile();
 

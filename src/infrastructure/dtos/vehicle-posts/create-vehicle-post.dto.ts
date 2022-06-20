@@ -1,46 +1,153 @@
-import { IsDefined, IsNotEmpty } from "class-validator";
+import {
+  // Color,
+  // ElectricValues,
+  // Fuel,
+  // Transmission,
+  VehicleType,
+} from "@/domain/types";
+import {
+  // IsArray,
+
+  IsDefined,
+  IsEnum,
+  IsNotEmpty,
+} from "class-validator";
+import { i18nValidationMessage } from "nestjs-i18n";
 
 export class CreateVehiclePostDto {
-  @IsNotEmpty()
-  @IsDefined({ message: "The description is required." })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.description"),
+  })
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.description"),
+  })
   readonly description: string;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The make is required." })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.make"),
+  })
+  @IsEnum(VehicleType, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidMake"),
+  })
+  @IsDefined({ message: i18nValidationMessage("validations.vehiclePost.make") })
   readonly make: string;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The type is required." })
-  readonly type: string;
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.model"),
+  })
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.model"),
+  })
+  readonly model: string;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The price is required." })
-  readonly price: number;
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.type"),
+  })
+  @IsEnum(VehicleType, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidType"),
+  })
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.type"),
+  })
+  readonly type: VehicleType;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The exterior color is required." })
-  readonly exteriorColor: string;
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.transmission"),
+  // })
+  // @IsEnum(VehicleType, {
+  //   message: i18nValidationMessage(
+  //     "validations.vehiclePost.invalidTransmission",
+  //   ),
+  // })
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.transmission"),
+  // })
+  // readonly transmission: Transmission;
 
-  readonly interiorColor: string;
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.price"),
+  // })
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.price"),
+  // })
+  // readonly price: string;
 
-  readonly traction: string;
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.exteriorColor"),
+  // })
+  // @IsEnum(Color, {
+  //   message: i18nValidationMessage(
+  //     "validations.vehiclePost.invalidExteriorColor",
+  //   ),
+  // })
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.exteriorColor"),
+  // })
+  // readonly exteriorColor: Color;
 
-  readonly motor: string;
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.interiorColor"),
+  // })
+  // @IsEnum(Color, {
+  //   message: i18nValidationMessage(
+  //     "validations.vehiclePost.invalidInteriorColor",
+  //   ),
+  // })
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.interiorColor"),
+  // })
+  // readonly interiorColor: Color;
 
-  readonly speed: string;
+  // readonly traction: string;
 
-  readonly fuelType: string;
+  // readonly topSpeed: string;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The is new field is required." })
-  readonly isNew: boolean;
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.fuelType"),
+  // })
+  // @IsEnum(Fuel, {
+  //   message: i18nValidationMessage("validations.vehiclePost.invalidFuelType"),
+  // })
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.fuelType"),
+  // })
+  // readonly fuelType: string;
 
-  @IsDefined({ message: "The use is required." })
-  readonly use: string;
+  // readonly electric: ElectricValues;
 
-  readonly accessories: string[];
+  // readonly use: string;
 
-  readonly address: string;
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.accessories"),
+  // })
+  // @IsArray({
+  //   message: i18nValidationMessage("validations.shared.isArray", {
+  //     field: i18nValidationMessage("general.accessories"),
+  //   }),
+  // })
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.accessories"),
+  // })
+  // readonly accessories: string[];
 
-  readonly photos: string[];
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.primaryImage"),
+  // })
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.primaryImage"),
+  // })
+  // readonly primaryImage: string;
+
+  // @IsDefined({
+  //   message: i18nValidationMessage("validations.vehiclePost.secondaryImages"),
+  // })
+  // @IsArray({
+  //   message: i18nValidationMessage("validations.shared.isArray", {
+  //     field: i18nValidationMessage("general.accessories"),
+  //   }),
+  // })
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage("validations.vehiclePost.secondaryImages"),
+  // })
+  // readonly secondaryImages: string[];
 }
