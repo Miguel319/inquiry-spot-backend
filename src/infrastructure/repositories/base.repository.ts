@@ -5,7 +5,6 @@ import {
   AnyObject,
   Document,
   FilterQuery,
-  HydratedDocument,
   Model,
   QueryOptions,
   UpdateQuery,
@@ -82,11 +81,7 @@ export abstract class BaseRepository<T extends Document>
   async findOneAndUpdate(
     entityFilterQuery: FilterQuery<T>,
     updateEntityData: UpdateQuery<unknown>,
-  ): Promise<HydratedDocument<
-    T,
-    Record<string, unknown>,
-    Record<string, unknown>
-  > | null> {
+  ) {
     return await this.entityModel.findOneAndUpdate(
       entityFilterQuery,
       updateEntityData,
