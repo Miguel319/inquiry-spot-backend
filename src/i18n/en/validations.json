@@ -22,7 +22,9 @@
     "type": "The vehicle type is mandatory.",
     "invalidType": "The vehicle type provided is invalid.",
     "price": "The price is mandatory.",
+    "doorCount": "The door count is mandatory.",
     "exteriorColor": "The exterior color is mandatory.",
+    "seller": "The seller is mandatory.",
     "invalidExteriorColor": "The exterior color provided is invalid.",
     "interiorColor": "The interior color mandatory.",
     "invalidInteriorColor": "The interior color provided is invalid.",
@@ -33,8 +35,27 @@
     "invalidTransmission": "The provided transmission is invalid.",
     "transmission": "The transmission is mandatory.",
     "primaryImage": "The primary image is mandatory.",
-    "secondaryImages": "The secondary image is mandatory.",
+    "secondaryImages": "The secondary images are mandatory.",
     "notFound": "Vehicle post not found."
+  },
+  "propertyPost": {
+    "bathroomCount": "The bathroom count is mandatory.",
+    "bedroomCount": "The bedroom count is mandatory.",
+    "parkingLotCount": "The parking lot count is mandatory.",
+    "price": "The price is mandatory.",
+    "seller": "The seller is mandatory.",
+    "territory": "The territory (m²) is mandatory.",
+    "buyingOption": "The buying option (buy or rent) is mandatory.",
+    "propertyType": "The property type is mandatory.",
+    "propertyStatus": "The property status is mandatory.",
+    "primaryImage": "The primary image is mandatory.",
+    "secondaryImages": "The secondary image are mandatory.",
+    "additionalInfo": "The additional info is mandatory.",
+    "address": {
+      "addressLine1": "The address line 1 is mandatory.",
+      "city": "The city is mandatory.",
+      "province": "The province is mandatory."
+    }
   },
   "email": {
     "subject": "The subject is mandatory.",

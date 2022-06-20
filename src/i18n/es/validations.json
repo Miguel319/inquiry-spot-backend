@@ -22,6 +22,7 @@
     "type": "El tipo de vehículo es obligatorio.",
     "invalidType": "El tipo de vehículo provisto es inválido.",
     "price": "El precio es obligatorio.",
+    "doorCount": "El número de puertas es obligatorio.",
     "exteriorColor": "El color exterior es obligatorio.",
     "invalidExteriorColor": "El color exterior provisto es inválido.",
     "interiorColor": "El color interior es obligatorio.",
@@ -35,6 +36,25 @@
     "secondaryImages": "Las imágenes secundarias son obligatorias.",
     "invalidTransmission": "La transmisión provista es inválida.",
     "notFound": "No se encontró la publicación que busca."
+  },
+  "propertyPost": {
+    "bathroomCount": "El número baños es obligatorio.",
+    "bedroomCount": "El número de habitaciones es obligatorio.",
+    "parkingLotCount": "El número de parqueos es obligatorio.",
+    "price": "El precio es obligatorio.",
+    "seller": "El vendedor es obligatorio.",
+    "territory": "El territorio (mt²) es obligatorio.",
+    "buyingOption": "La opción de compra (compra o renta) es obligatoria.",
+    "propertyType": "El tipo de propiedad es obligatorio.",
+    "propertyStatus": "El estatus de la propiedad es obligatorio.",
+    "primaryImage": "La imagen principal es obligatoria.",
+    "secondaryImages": "Las imágenes secundarias son obligatorias.",
+    "additionalInfo": "La información adicional es obligatoria.",
+    "address": {
+      "addressLine1": "La dirección (calle y número) es obligatoria .",
+      "city": "La ciudad es obligatoria.",
+      "province": "La provincia es obligatoria."
+    }
   },
   "email": {
     "subject": "El asunto es obligatorio.",
