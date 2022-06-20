@@ -4,6 +4,7 @@ import {
   Color,
   VehicleType,
   ElectricValues,
+  VehicleMake,
   Fuel,
   Transmission,
   VehicleStatus,
@@ -22,8 +23,8 @@ export class VehiclePost {
   @Prop({ required: [true, "validations.vehiclePost.description"] })
   description: string;
 
-  @Prop({ required: [true, "validations.vehiclePost.make"] })
-  make: string;
+  @Prop({ required: [true, "validations.vehiclePost.make"], enum: VehicleMake })
+  make: VehicleMake;
 
   @Prop({
     required: [true, "validations.vehiclePost.model"],
@@ -46,6 +47,9 @@ export class VehiclePost {
 
   @Prop({ required: [true, "validations.vehiclePost.price"] })
   price: string;
+
+  @Prop({ required: [true, "validations.vehiclePost.doorCount"] })
+  doorCount: number;
 
   @Prop({
     required: [true, "validations.vehiclePost.exteriorColor"],
@@ -88,10 +92,9 @@ export class VehiclePost {
   accessories: string[];
 
   @Prop({
-    _id: {
-      type: ObjectId,
-      ref: "User",
-    },
+    type: ObjectId,
+    ref: "User",
+    required: [true, "validations.vehiclePost.seller"],
   })
   seller: string;
 
