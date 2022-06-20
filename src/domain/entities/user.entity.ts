@@ -7,21 +7,21 @@ export type UserDocument = User & Document;
 export class User {
   _id: string;
 
-  @Prop({ required: [true, "The name is mandatory."] })
+  @Prop({ required: [true, "validations.user.name"] })
   name: string;
 
   @Prop({
-    required: [true, "The email is mandatory."],
+    required: [true, "validations.user.requiredEmail"],
     unique: true,
     lowercase: true,
-    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "The provided email is invalid."],
+    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "validations.user.invalidEmail"],
     trim: true,
   })
   email: string;
 
   @Prop({
-    required: [true, "The password is mandatory."],
-    minlength: [6, "The password must have at least 6 characters."],
+    required: [true, "validations.user.password"],
+    minlength: [6, "validations.user.passwordMinLength"],
     trim: true,
     select: false,
   })

@@ -23,23 +23,26 @@ export type EmailDocument = Email & Document;
 export class Email {
   _id: string;
 
-  @Prop({ required: [true, "The subject is mandatory."] })
+  @Prop({ required: [true, "validations.email.subject"] })
   subject: string;
 
-  @Prop({ required: [true, "The body is mandatory."], type: String })
+  @Prop({ required: [true, "validations.email.body"] })
   body: string;
 
   @Prop({
     type: {
       name: {
-        required: [true, "The name is mandatory."],
+        required: [true, "validations.email.fromName"],
         type: String,
       },
       email: {
         type: String,
-        required: [true, "The sender name is mandatory."],
+        required: [true, "validations.email.fromEmail"],
         lowercase: true,
-        match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "The provided email is invalid."],
+        match: [
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          "validations.email.invalidFromEmail",
+        ],
         trim: true,
       },
     },
@@ -50,9 +53,12 @@ export class Email {
   };
 
   @Prop({
-    required: [true, "The sender address is mandatory."],
+    required: [true, "validations.email.recipientEmailAddress"],
     lowercase: true,
-    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "The provided email is invalid."],
+    match: [
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      "validations.email.invalidRecipientEmailAddress",
+    ],
     trim: true,
   })
   recipientEmailAddress: string;

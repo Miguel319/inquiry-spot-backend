@@ -1,0 +1,10 @@
+{
+  "accessories": "accesorios",
+  "secondaryImages": "imágenes secundarias",
+  "auth": {
+    "signUp": "¡Sesión creada satisfactoriamente!",
+    "signIn": "¡Sesión iniciada satisfactoriamente!",
+    "signOut": "¡Sesión cerrada satisfactoriamente!",
+    "passwordReset": "¡Contraseña reestablecida satisfactoriamente!"
+  }
+}

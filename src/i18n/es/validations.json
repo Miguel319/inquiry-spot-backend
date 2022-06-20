@@ -1,4 +1,48 @@
 {
-  "invalidEmail": "Email inválido.",
-  "requiredEmail": "El correo electrónico es obligatorio."
+  "shared": {
+    "isArray": "El campo '{field}' debe ser un arreglo."
+  },
+  "user": {
+    "name": "El nombre es obligatorio.",
+    "passwordName": "Contraseña",
+    "password": "La contraseña es obligatoria.",
+    "invalidEmail": "Email inválido.",
+    "requiredEmail": "El correo electrónico es obligatorio.",
+    "minLength": "El campo {field} debe tener un mínimo de {min} caracteres.",
+    "passwordMinLength": "La contraseña debe tener un mínimo de 6 caracteres.",
+    "userCreationError": "No se pudo crear el usuario.",
+    "notFound": "Usuario no encontrado.",
+    "invalidToken": "Token inválido."
+  },
+  "vehiclePost": {
+    "description": "La descripción es obligatoria.",
+    "make": "La marca es obligatoria.",
+    "invalidMake": "La marca provista es inválida.",
+    "model": "El modelo es obligatorio.",
+    "type": "El tipo de vehículo es obligatorio.",
+    "invalidType": "El tipo de vehículo provisto es inválido.",
+    "price": "El precio es obligatorio.",
+    "exteriorColor": "El color exterior es obligatorio.",
+    "invalidExteriorColor": "El color exterior provisto es inválido.",
+    "interiorColor": "El color interior es obligatorio.",
+    "invalidInteriorColor": "El color interior provisto es inválido.",
+    "fuelType": "El tipo de combustible es obligatorio.",
+    "invalidFuelType": "El tipo de combustile provisto es inválido.",
+    "status": "El estatus (nuevo o usado) es obligatorio.",
+    "accessories": "Los accesorios son obligatorios.",
+    "transmission": "La transmisión es obligatoria.",
+    "primaryImage": "La imagen principal es obligatoria.",
+    "secondaryImages": "Las imágenes secundarias son obligatorias.",
+    "invalidTransmission": "La transmisión provista es inválida.",
+    "notFound": "No se encontró la publicación que busca."
+  },
+  "email": {
+    "subject": "El asunto es obligatorio.",
+    "body": "El mensaje es obligatorio.",
+    "fromName": "El nombre del remitente es obligatorio.",
+    "fromEmail": "El correo electrónico del remitente es obligatorio.",
+    "invalidFromEmail": "El correo electrónico del remitente provisto es inválido.",
+    "recipientEmailAddress": "El correo electrónico del destinatario es obligatorio.",
+    "invalidRecipientEmailAddress": "El correo electrónico del destinatario provisto es inválido."
+  }
 }

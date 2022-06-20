@@ -1,8 +1,10 @@
 import { IVehiclePostsService } from "@/application/services/contracts";
 import { VehiclePost } from "@/domain/entities";
 import { ApiResponse } from "@/infrastructure/common/api";
-import { UpdateVehiclePostDto } from "@/infrastructure/dtos";
-import { CreateVehiclePostDto } from "@/infrastructure/dtos";
+import {
+  UpdateVehiclePostDto,
+  CreateVehiclePostDto,
+} from "@/infrastructure/dtos";
 import {
   Body,
   Controller,
@@ -15,6 +17,7 @@ import {
   Res,
 } from "@nestjs/common";
 import { Response } from "express";
+import { I18n, I18nContext } from "nestjs-i18n";
 
 @Controller("vehicle-posts")
 export class VehiclePostsController {
@@ -29,8 +32,8 @@ export class VehiclePostsController {
   }
 
   @Get(":id")
-  async findById(_id: string): Promise<VehiclePost> {
-    return await this._vehiclePostsService.findById(_id);
+  async findById(_id: string, @I18n() i18n: I18nContext): Promise<VehiclePost> {
+    return await this._vehiclePostsService.findById(_id, i18n);
   }
 
   @Post()
@@ -42,7 +45,7 @@ export class VehiclePostsController {
       vehiclePostDto as unknown as VehiclePost,
     );
 
-    return ApiResponse.createSuccessfully({ res, data: vehiclePost });
+    return ApiResponse.create({ res, data: vehiclePost });
   }
 
   @Put(":_id")
@@ -56,13 +59,13 @@ export class VehiclePostsController {
       vehiclePostDto as unknown as VehiclePost,
     );
 
-    return ApiResponse.updateSuccessfully({ res, data: vehiclePost });
+    return ApiResponse.update({ res, data: vehiclePost });
   }
 
   @Delete(":_id")
   async delete(@Param("_id") _id: string, @Res() res: Response) {
     const postDeleted = await this._vehiclePostsService.delete?.(_id);
 
-    return ApiResponse.deleteSuccessfully({ res, data: postDeleted });
+    return ApiResponse.delete({ res, data: postDeleted });
   }
 }

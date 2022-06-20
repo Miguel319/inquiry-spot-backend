@@ -1,0 +1,10 @@
+{
+  "accessories": "accessories",
+  "secondaryImages": "secondary images",
+  "auth": {
+    "signUp": "Signed up successfully!",
+    "signIn": "Signed in successfully!",
+    "signOut": "Signed out successfully!",
+    "passwordReset": "Password reseted successfully!"
+  }
+}

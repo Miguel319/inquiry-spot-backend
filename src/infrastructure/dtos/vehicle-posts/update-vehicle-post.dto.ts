@@ -1,31 +1,77 @@
+import {
+  Color,
+  ElectricValues,
+  Fuel,
+  Transmission,
+  VehicleType,
+} from "@/domain/types";
+import { IsArray, IsEnum } from "class-validator";
+import { i18nValidationMessage } from "nestjs-i18n";
+
 export class UpdateVehiclePostDto {
   readonly description: string;
 
+  @IsEnum(VehicleType, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidMake"),
+  })
   readonly make: string;
 
-  readonly type: string;
+  readonly model: string;
 
-  readonly price: number;
+  @IsEnum(VehicleType, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidType"),
+  })
+  readonly type: VehicleType;
 
-  readonly exteriorColor: string;
+  @IsEnum(VehicleType, {
+    message: i18nValidationMessage(
+      "validations.vehiclePost.invalidTransmission",
+    ),
+  })
+  readonly transmission: Transmission;
 
-  readonly interiorColor: string;
+  readonly price: string;
+
+  @IsEnum(Color, {
+    message: i18nValidationMessage(
+      "validations.vehiclePost.invalidExteriorColor",
+    ),
+  })
+  readonly exteriorColor: Color;
+
+  @IsEnum(Color, {
+    message: i18nValidationMessage(
+      "validations.vehiclePost.invalidInteriorColor",
+    ),
+  })
+  readonly interiorColor: Color;
 
   readonly traction: string;
 
-  readonly motor: string;
+  readonly topSpeed: string;
 
-  readonly speed: string;
+  @IsEnum(Fuel, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidFuelType"),
+  })
+  readonly fuelType: Fuel;
 
-  readonly fuelType: string;
-
-  readonly isNew: boolean;
+  readonly electric: ElectricValues;
 
   readonly use: string;
 
+  @IsArray({
+    message: i18nValidationMessage("validations.shared.isArray", {
+      field: i18nValidationMessage("general.accessories"),
+    }),
+  })
   readonly accessories: string[];
 
-  readonly address: string;
+  readonly primaryImage: string;
 
-  readonly photos: string[];
+  @IsArray({
+    message: i18nValidationMessage("validations.shared.isArray", {
+      field: i18nValidationMessage("general.accessories"),
+    }),
+  })
+  readonly secondaryImages: string[];
 }

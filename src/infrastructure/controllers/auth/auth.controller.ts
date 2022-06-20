@@ -5,9 +5,8 @@ import {
 } from "@/application/services/contracts";
 import { User } from "@/domain/entities";
 import { ApiResponse } from "../../../infrastructure/common/api/api-response";
-import { SignInDto, SignUpDto } from "../../../infrastructure/dtos";
-import { PresenterFactory } from "../../../infrastructure/presenters";
-import { UserPresenter } from "../../../infrastructure/presenters";
+import { SignInDto, SignUpDto } from "@/infrastructure/dtos";
+import { PresenterFactory, UserPresenter } from "@/infrastructure/presenters";
 import {
   Body,
   Controller,
@@ -20,8 +19,8 @@ import {
   Res,
   UseFilters,
 } from "@nestjs/common";
+import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { Response, Request } from "express";
-import { I18nValidationExceptionFilter } from "nestjs-i18n";
 
 @Controller("auth")
 export class AuthController {
@@ -35,6 +34,7 @@ export class AuthController {
   async signUp(
     @Body() signupDto: SignUpDto,
     @Res() res: Response,
+    @I18n() i18n: I18nContext,
   ): Promise<Response> {
     const authResult: IAuthResult = (await this._authService.signUp(
       signupDto as unknown as User,
@@ -45,17 +45,20 @@ export class AuthController {
       "user",
     ) as UserPresenter;
 
-    return ApiResponse.signUpSuccessfully({
+    return ApiResponse.signUp({
       user: user as User,
       token: authResult.token,
+      message: i18n.t("general.auth.signUp"),
       res,
     });
   }
 
   @Post("sign-in")
+  @UseFilters(new I18nValidationExceptionFilter())
   async signIn(
     @Body() { email, password }: SignInDto,
     @Res() res: Response,
+    @I18n() i18n: I18nContext,
   ): Promise<Response> {
     const authResult = (await this._authService.signIn(
       email,
@@ -67,8 +70,9 @@ export class AuthController {
       "user",
     ) as UserPresenter;
 
-    return ApiResponse.signInSuccessfully({
+    return ApiResponse.signIn({
       user: user as User,
+      message: i18n.t("general.auth.signIn"),
       token: authResult.token,
       res,
     });
@@ -83,7 +87,11 @@ export class AuthController {
   }
 
   @Put("reset-password/:token")
-  async resetPassword(@Param("token") token: string, @Res() res: Response) {
+  async resetPassword(
+    @Param("token") token: string,
+    @Res() res: Response,
+    @I18n() i18n: I18nContext,
+  ) {
     const authResult: IAuthResult = await this._authService.resetPassword(
       token,
     );
@@ -93,19 +101,20 @@ export class AuthController {
       "user",
     ) as UserPresenter;
 
-    return ApiResponse.signInSuccessfully({
+    return ApiResponse.signIn({
       user: user as User,
       token: authResult.token,
+      message: i18n.t("general.auth.passwordReset"),
       res,
     });
   }
 
   @Delete("sign-out")
-  async signOut(@Res() res: Response) {
+  signOut(@Res() res: Response, @I18n() i18n: I18nContext) {
     this._authService.signOut(res);
 
-    return ApiResponse.createSuccessfully({
-      message: "Sign out successfully!",
+    return ApiResponse.delete({
+      message: i18n.t("general.auth.signOut"),
       res,
     });
   }
