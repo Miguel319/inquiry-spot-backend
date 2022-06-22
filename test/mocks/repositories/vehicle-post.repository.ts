@@ -1,4 +1,4 @@
-import { getVehiclePostStub } from "../stubs";
+import { getVehiclePostStub } from "../../stubs";
 
 export const VehiclePostsRepository = jest.fn().mockReturnValue({
   find: jest

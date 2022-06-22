@@ -1,11 +1,11 @@
 import { IVehiclePostsService } from "@/application/services/contracts";
 import { VehiclePost } from "@/domain/entities";
-import { PaginationQuery } from "@/domain/types";
-import { ApiResponse } from "@/infrastructure/common/api";
+import { PaginationQuery } from "@/domain/types/common/pagination-query";
+import { ApiResponse } from "../../../infrastructure/common/api";
 import {
   UpdateVehiclePostDto,
   CreateVehiclePostDto,
-} from "@/infrastructure/dtos";
+} from "../../../infrastructure/dtos";
 import {
   Body,
   Controller,
@@ -29,12 +29,15 @@ export class VehiclePostsController {
   ) {}
 
   @Get()
-  async getAll(@Query() paginationQuery: PaginationQuery) {
+  async findAll(@Query() paginationQuery: PaginationQuery) {
     return await this._vehiclePostsService.findAll(paginationQuery);
   }
 
   @Get(":id")
-  async findById(_id: string, @I18n() i18n: I18nContext): Promise<VehiclePost> {
+  async findById(
+    _id: string,
+    @I18n() i18n?: I18nContext,
+  ): Promise<VehiclePost> {
     return await this._vehiclePostsService.findById(_id, i18n);
   }
 
