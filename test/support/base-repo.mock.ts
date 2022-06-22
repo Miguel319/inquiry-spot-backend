@@ -20,6 +20,10 @@ export abstract class BaseRepoMock<T> {
     return [this.entityStub, this.entityStub];
   }
 
+  async paginate(): Promise<T[]> {
+    return [this.entityStub, this.entityStub];
+  }
+
   async save(): Promise<T> {
     return this.entityStub;
   }

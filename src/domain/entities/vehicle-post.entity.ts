@@ -10,6 +10,8 @@ import {
   VehicleStatus,
 } from "../types";
 
+import paginate from "mongoose-paginate-v2";
+
 const {
   Types: { ObjectId },
 } = SchemaAlt;
@@ -126,3 +128,5 @@ export class VehiclePost {
 }
 
 export const VehiclePostSchema = SchemaFactory.createForClass(VehiclePost);
+
+VehiclePostSchema.plugin(paginate);

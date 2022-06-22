@@ -50,7 +50,7 @@ export class CreateVehiclePostDto {
   @IsNotEmpty({
     message: i18nValidationMessage("validations.vehiclePost.transmission"),
   })
-  @IsEnum(VehicleType, {
+  @IsEnum(Transmission, {
     message: i18nValidationMessage(
       "validations.vehiclePost.invalidTransmission",
     ),
