@@ -1,4 +1,4 @@
-import { getUserStub } from "../stubs";
+import { getUserStub } from "../../stubs";
 
 export const UsersRepository = jest.fn().mockReturnValue({
   find: jest.fn().mockResolvedValue([getUserStub(), getUserStub()]),

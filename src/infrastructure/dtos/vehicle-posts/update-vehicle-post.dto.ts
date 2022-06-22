@@ -4,7 +4,7 @@ import {
   Fuel,
   Transmission,
   VehicleType,
-} from "@/domain/types";
+} from "../../../domain/types";
 import { IsArray, IsEnum } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 

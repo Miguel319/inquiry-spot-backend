@@ -5,8 +5,8 @@ import {
   Transmission,
   VehicleMake,
   VehicleType,
-} from "@/domain/types";
-import { IsNotEmpty } from "@/infrastructure/common/decorators";
+} from "../../../domain/types";
+import { IsNotEmpty } from "../../../infrastructure/common/decorators";
 import { IsArray, IsDefined, IsEnum } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 

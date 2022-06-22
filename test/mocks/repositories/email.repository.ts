@@ -1,4 +1,4 @@
-import { getEmailStub } from "../stubs";
+import { getEmailStub } from "../../stubs";
 
 export const EmailsRepository = jest.fn().mockReturnValue({
   find: jest.fn().mockResolvedValue([getEmailStub(), getEmailStub()]),
