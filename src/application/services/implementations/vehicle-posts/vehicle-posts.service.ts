@@ -3,6 +3,12 @@ import { VehiclePostsRepository } from "../../../../infrastructure/repositories"
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { IVehiclePostsService } from "../../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
+import { PaginationQuery } from "@/domain/types";
+
+import {
+  getPaginationOptions,
+  PaginationOptions,
+} from "../../../../infrastructure/common/util";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {
@@ -11,8 +17,22 @@ export class VehiclePostsService implements IVehiclePostsService {
     private readonly _i18n: I18nService,
   ) {}
 
-  async findAll(): Promise<VehiclePost[]> {
-    return await this._vehiclePostRepo.find({});
+  private getPaginationOptions(
+    paginationQuery: PaginationQuery,
+  ): PaginationOptions {
+    return {
+      ...getPaginationOptions({ ...paginationQuery }),
+      select:
+        "_id description make model type price status seller primaryImage createdAt",
+      sort: "-createdAt",
+    };
+  }
+
+  async findAll(paginationQuery: PaginationQuery): Promise<VehiclePost[]> {
+    const options: PaginationOptions =
+      this.getPaginationOptions(paginationQuery);
+
+    return await this._vehiclePostRepo.paginate({}, options);
   }
 
   async findById(_id: string, i18n?: I18nContext): Promise<VehiclePost> {
@@ -48,9 +68,13 @@ export class VehiclePostsService implements IVehiclePostsService {
     return await this._vehiclePostRepo.deleteOne({ _id });
   }
 
-  async findFromSeller(_id: string, i18n?: I18nContext): Promise<VehiclePost> {
+  async findFromSeller(
+    _id: string,
+    seller: string,
+    i18n?: I18nContext,
+  ): Promise<VehiclePost> {
     const propertyPost: VehiclePost | null =
-      await this._vehiclePostRepo.findOne({ seller: _id });
+      await this._vehiclePostRepo.findOne({ seller, _id });
 
     if (!propertyPost)
       throw new NotFoundException(
@@ -60,5 +84,15 @@ export class VehiclePostsService implements IVehiclePostsService {
       );
 
     return propertyPost;
+  }
+
+  async findAllFromSeller(
+    seller: string,
+    paginationQuery: PaginationQuery,
+  ): Promise<VehiclePost[]> {
+    const options: PaginationOptions =
+      this.getPaginationOptions(paginationQuery);
+
+    return await this._vehiclePostRepo.paginate({ seller }, options);
   }
 }

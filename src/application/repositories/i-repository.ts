@@ -1,3 +1,4 @@
+import { PaginationOptions } from "@/infrastructure/common/util/pagination.util";
 import {
   AnyKeys,
   AnyObject,
@@ -23,6 +24,11 @@ export interface IRepository<T> {
   find(
     entityFilterQuery: FilterQuery<T>,
     select?: string,
+  ): Promise<Document<T, Record<string, unknown>, Record<string, unknown>>[]>;
+
+  paginate(
+    entityFilterQuery: FilterQuery<T>,
+    options?: PaginationOptions,
   ): Promise<Document<T, Record<string, unknown>, Record<string, unknown>>[]>;
 
   create(createEntityData: (AnyKeys<T> & AnyObject) | undefined): Promise<T>;

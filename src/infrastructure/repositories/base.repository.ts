@@ -9,6 +9,7 @@ import {
   QueryOptions,
   UpdateQuery,
 } from "mongoose";
+import { PaginationOptions } from "../common/util";
 
 export abstract class BaseRepository<T extends Document>
   implements IRepository<T>
@@ -64,6 +65,17 @@ export abstract class BaseRepository<T extends Document>
     return await this.entityModel.find(entityFilterQuery, {
       __v: 0,
     });
+  }
+
+  async paginate(
+    entityFilterQuery: FilterQuery<T>,
+    options: PaginationOptions,
+  ): Promise<T[]> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return await (this.entityModel as any).paginate(
+      { entityFilterQuery },
+      { options },
+    );
   }
 
   async create(
