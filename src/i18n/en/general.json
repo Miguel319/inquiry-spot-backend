@@ -3,6 +3,7 @@
   "secondaryImages": "secondary images",
   "bedroomCount": "bedroom count",
   "bathroomCount": "bathroom count",
+  "seller": "seller",
   "auth": {
     "signUp": "Signed up successfully!",
     "signIn": "Signed in successfully!",

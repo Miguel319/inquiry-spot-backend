@@ -4,11 +4,41 @@ import {
   Fuel,
   Transmission,
   VehicleMake,
+  VehicleStatus,
   VehicleType,
 } from "../../../domain/types";
 import { IsNotEmpty } from "../../../infrastructure/common/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { IsArray, IsDefined, IsEnum } from "class-validator";
+import {
+  IsArray,
+  IsDefined,
+  IsEnum,
+  IsMongoId,
+  ValidateIf,
+  ValidateNested,
+} from "class-validator";
+
+class ElectricValuesValidation implements ElectricValues {
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.electric.range"),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.electric.range"),
+  })
+  range: string;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(
+      "validations.vehiclePost.electric.chargingTime",
+    ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(
+      "validations.vehiclePost.electric.chargingTime",
+    ),
+  })
+  chargingTime: string;
+}
 
 export class CreateVehiclePostDto {
   @IsNotEmpty({
@@ -109,9 +139,38 @@ export class CreateVehiclePostDto {
   })
   readonly fuelType: Fuel;
 
-  readonly electric: ElectricValues;
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.status"),
+  })
+  @IsEnum(Fuel, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidStatus"),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.status"),
+  })
+  readonly status: VehicleStatus;
 
+  @ValidateNested()
+  @ValidateIf((prop) => prop.fuelType === Fuel.ELECTRIC)
+  readonly electric: ElectricValuesValidation;
+
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.use"),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.invalidUse"),
+  })
+  @ValidateIf((prop) => prop.status === VehicleStatus.USED)
   readonly use: string;
+
+  @IsMongoId({ message: i18nValidationMessage("validations.shared.mongoId") })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.propertyPost.seller"),
+  })
+  @IsDefined({
+    message: i18nValidationMessage("validations.propertyPost.seller"),
+  })
+  readonly seller: string;
 
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.accessories"),

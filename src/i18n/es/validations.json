@@ -1,6 +1,8 @@
 {
   "shared": {
-    "isArray": "El campo '{field}' debe ser un arreglo."
+    "array": "El campo '{field}' debe ser un arreglo.",
+    "number": "El campo '{field}' debe ser un número.",
+    "mongoId": "El valor provisto para '{field}' es inválido."
   },
   "user": {
     "name": "El nombre es obligatorio.",
@@ -23,6 +25,7 @@
     "invalidType": "El tipo de vehículo provisto es inválido.",
     "price": "El precio es obligatorio.",
     "doorCount": "El número de puertas es obligatorio.",
+    "seller": "El vendedor es obligatorio.",
     "exteriorColor": "El color exterior es obligatorio.",
     "invalidExteriorColor": "El color exterior provisto es inválido.",
     "interiorColor": "El color interior es obligatorio.",
@@ -38,6 +41,7 @@
     "notFound": "No se encontró la publicación de vehículo que busca."
   },
   "propertyPost": {
+    "description": "La descripción es obligatoria.",
     "bathroomCount": "El número baños es obligatorio.",
     "bedroomCount": "El número de habitaciones es obligatorio.",
     "parkingLotCount": "El número de parqueos es obligatorio.",
@@ -49,11 +53,12 @@
     "propertyType": "El tipo de propiedad es obligatorio.",
     "invalidPropertyType": "El tipo de propiedad provisto es inválido.",
     "propertyStatus": "El estatus de la propiedad es obligatorio.",
+    "invalidPropertyStatus": "El estatus de la propiedad provisto es inválido.",
     "primaryImage": "La imagen principal es obligatoria.",
     "secondaryImages": "Las imágenes secundarias son obligatorias.",
     "additionalInfo": "La información adicional es obligatoria.",
     "address": {
-      "addressLine1": "La dirección (calle y número) es obligatoria .",
+      "addressLine1": "La dirección (calle y número) es obligatoria.",
       "city": "La ciudad es obligatoria.",
       "province": "La provincia es obligatoria."
     },
