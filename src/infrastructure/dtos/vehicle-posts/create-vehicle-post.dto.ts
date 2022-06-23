@@ -7,8 +7,8 @@ import {
   VehicleType,
 } from "../../../domain/types";
 import { IsNotEmpty } from "../../../infrastructure/common/decorators";
-import { IsArray, IsDefined, IsEnum } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
+import { IsArray, IsDefined, IsEnum } from "class-validator";
 
 export class CreateVehiclePostDto {
   @IsNotEmpty({
@@ -117,7 +117,7 @@ export class CreateVehiclePostDto {
     message: i18nValidationMessage("validations.vehiclePost.accessories"),
   })
   @IsArray({
-    message: i18nValidationMessage("validations.shared.isArray", {
+    message: i18nValidationMessage("validations.shared.array", {
       args: {
         field: i18nValidationMessage("general.accessories"),
       },
@@ -140,7 +140,7 @@ export class CreateVehiclePostDto {
     message: i18nValidationMessage("validations.vehiclePost.secondaryImages"),
   })
   @IsArray({
-    message: i18nValidationMessage("validations.shared.isArray", {
+    message: i18nValidationMessage("validations.shared.array", {
       args: {
         field: i18nValidationMessage("general.accessories"),
       },

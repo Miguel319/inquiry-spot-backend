@@ -60,7 +60,7 @@ export class UpdateVehiclePostDto {
   readonly use: string;
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.isArray", {
+    message: i18nValidationMessage("validations.shared.array", {
       field: i18nValidationMessage("general.accessories"),
     }),
   })
@@ -69,7 +69,7 @@ export class UpdateVehiclePostDto {
   readonly primaryImage: string;
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.isArray", {
+    message: i18nValidationMessage("validations.shared.array", {
       field: i18nValidationMessage("general.accessories"),
     }),
   })

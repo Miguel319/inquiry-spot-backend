@@ -17,9 +17,10 @@ import {
   Put,
   Query,
   Res,
+  UseFilters,
 } from "@nestjs/common";
 import { Response } from "express";
-import { I18n, I18nContext } from "nestjs-i18n";
+import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 
 @Controller("vehicle-posts")
 export class VehiclePostsController {
@@ -33,45 +34,64 @@ export class VehiclePostsController {
     return await this._vehiclePostsService.findAll(paginationQuery);
   }
 
-  @Get(":id")
+  @Get(":_id")
   async findById(
-    _id: string,
+    @Param("_id") _id: string,
     @I18n() i18n?: I18nContext,
   ): Promise<VehiclePost> {
     return await this._vehiclePostsService.findById(_id, i18n);
   }
 
   @Post()
+  @UseFilters(new I18nValidationExceptionFilter())
   async create(
     @Body() vehiclePostDto: CreateVehiclePostDto,
     @Res() res: Response,
+    @I18n() i18n?: I18nContext,
   ): Promise<Response> {
     const vehiclePost = await this._vehiclePostsService.create?.(
       vehiclePostDto as unknown as VehiclePost,
     );
 
-    return ApiResponse.create({ res, data: vehiclePost });
+    return ApiResponse.create({
+      res,
+      data: vehiclePost,
+      message: i18n ? i18n.t("general.vehiclePost.create") : "",
+    });
   }
 
   @Put(":_id")
+  @UseFilters(new I18nValidationExceptionFilter())
   async update(
     @Param("_id") _id: string,
     @Body() vehiclePostDto: UpdateVehiclePostDto,
     @Res() res: Response,
+    @I18n() i18n?: I18nContext,
   ) {
     const vehiclePost = await this._vehiclePostsService.update?.(
       _id,
       vehiclePostDto as unknown as VehiclePost,
     );
 
-    return ApiResponse.update({ res, data: vehiclePost });
+    return ApiResponse.update({
+      res,
+      data: vehiclePost,
+      message: i18n ? i18n.t("general.vehiclePost.update") : "",
+    });
   }
 
   @Delete(":_id")
-  async delete(@Param("_id") _id: string, @Res() res: Response) {
-    const postDeleted = await this._vehiclePostsService.delete?.(_id);
+  async delete(
+    @Param("_id") _id: string,
+    @Res() res: Response,
+    @I18n() i18n?: I18nContext,
+  ) {
+    await this._vehiclePostsService.delete?.(_id);
 
-    return ApiResponse.delete({ res, data: postDeleted });
+    return ApiResponse.delete({
+      res,
+      message: i18n ? i18n.t("general.vehiclePost.create") : "",
+    });
   }
 
   @Get(":_id/:seller")

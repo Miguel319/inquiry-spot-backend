@@ -170,8 +170,6 @@ describe("VehicleController", () => {
       });
 
       test("then it should call delete from VehiclePostsService", () => {
-        console.log(service);
-
         expect(service.delete).toHaveBeenCalledWith(getVehiclePostStub()._id);
       });
 

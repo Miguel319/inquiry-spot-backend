@@ -1,10 +1,22 @@
 {
   "accessories": "accesorios",
   "secondaryImages": "imágenes secundarias",
+  "bedroomCount": "número de habitaciones",
+  "bathroomCount": "número de baños",
   "auth": {
     "signUp": "¡Usuario creado satisfactoriamente!",
     "signIn": "¡Sesión iniciada satisfactoriamente!",
     "signOut": "¡Sesión cerrada satisfactoriamente!",
     "passwordReset": "¡Contraseña reestablecida satisfactoriamente!"
+  },
+  "vehiclePost": {
+    "create": "¡Vehículo creado satisfactoriamente!",
+    "update": "¡Vehículo actualizado satisfactoriamente!",
+    "delete": "¡Vehículo eliminado satisfactoriamente!"
+  },
+  "propertyPost": {
+    "create": "¡Publicación creada satisfactoriamente!",
+    "update": "¡Publicación actualizada satisfactoriamente!",
+    "delete": "¡Publicación eliminada satisfactoriamente!"
   }
 }

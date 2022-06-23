@@ -1,4 +1,5 @@
 import { PropertyPostSchema } from "@/domain/entities";
+import { PropertyPostsController } from "@/infrastructure/controllers";
 import { PropertyPostsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -18,7 +19,7 @@ const PropertyPostProvider: Provider = {
       },
     ]),
   ],
-  controllers: [],
+  controllers: [PropertyPostsController],
   providers: [PropertyPostsRepository, PropertyPostProvider],
   exports: [PropertyPostsRepository, PropertyPostProvider],
 })

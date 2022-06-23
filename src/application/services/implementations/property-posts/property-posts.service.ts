@@ -3,6 +3,11 @@ import { PropertyPostsRepository } from "../../../../infrastructure/repositories
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { IPropertyPostsService } from "../../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
+import { PaginationQuery } from "../../../../domain/types";
+import {
+  getPaginationOptions,
+  PaginationOptions,
+} from "../../../../infrastructure/common/util";
 
 @Injectable()
 export class PropertyPostsService implements IPropertyPostsService {
@@ -11,8 +16,22 @@ export class PropertyPostsService implements IPropertyPostsService {
     private readonly _i18n: I18nService,
   ) {}
 
-  async findAll(): Promise<PropertyPost[]> {
-    return await this._propertyPostRepo.find({});
+  private getPaginationOptions(
+    paginationQuery: PaginationQuery,
+  ): PaginationOptions {
+    return {
+      ...getPaginationOptions({ ...paginationQuery }),
+      select:
+        "_id description model fuelType type bedroomCount bathroomCount seller primaryImage createdAt",
+      sort: "-createdAt",
+    };
+  }
+
+  async findAll(paginationQuery: PaginationQuery): Promise<PropertyPost[]> {
+    const options: PaginationOptions =
+      this.getPaginationOptions(paginationQuery);
+
+    return await this._propertyPostRepo.paginate({}, options);
   }
 
   async findById(_id: string, i18n?: I18nContext): Promise<PropertyPost> {
@@ -47,17 +66,13 @@ export class PropertyPostsService implements IPropertyPostsService {
     return await this._propertyPostRepo.deleteOne({ _id });
   }
 
-  async findFromSeller(_id: string, i18n?: I18nContext): Promise<PropertyPost> {
-    const propertyPost: PropertyPost | null =
-      await this._propertyPostRepo.findOne({ seller: _id });
+  async findAllFromSeller(
+    seller: string,
+    paginationQuery: PaginationQuery,
+  ): Promise<PropertyPost[]> {
+    const options: PaginationOptions =
+      this.getPaginationOptions(paginationQuery);
 
-    if (!propertyPost)
-      throw new NotFoundException(
-        i18n
-          ? i18n.t("validations.propertyPost.notFound")
-          : this._i18n.t("validations.propertyPost.notFound"),
-      );
-
-    return propertyPost;
+    return await this._propertyPostRepo.paginate({ seller }, options);
   }
 }

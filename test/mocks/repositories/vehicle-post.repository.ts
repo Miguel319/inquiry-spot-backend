@@ -5,6 +5,9 @@ export const VehiclePostsRepository = jest.fn().mockReturnValue({
     .fn()
     .mockResolvedValue([getVehiclePostStub(), getVehiclePostStub()]),
   findOne: jest.fn().mockResolvedValue(getVehiclePostStub()),
+  paginate: jest
+    .fn()
+    .mockResolvedValue([getVehiclePostStub(), getVehiclePostStub()]),
   findOneAndUpdate: jest.fn().mockResolvedValue(getVehiclePostStub()),
   create: jest.fn().mockResolvedValue(getVehiclePostStub()),
   deleteOne: jest.fn().mockResolvedValue(false),

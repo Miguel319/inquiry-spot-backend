@@ -72,7 +72,7 @@ describe("UsersService", () => {
     });
 
     describe("find by id", () => {
-      describe("without erros", () => {
+      describe("without errors", () => {
         let user: User;
 
         beforeEach(async () => {

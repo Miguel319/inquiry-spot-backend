@@ -71,7 +71,7 @@ describe("VehiclePostsService", () => {
     });
 
     describe("find by id", () => {
-      describe("without erros", () => {
+      describe("without errors", () => {
         let vehiclePost: VehiclePost;
 
         beforeEach(async () => {
