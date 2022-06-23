@@ -1,7 +1,8 @@
 {
   "shared": {
     "array": "The field '{field}' must be an array.",
-    "number": "The field '{field}' must be a number."
+    "number": "The field '{field}' must be a number.",
+    "mongoId": "The provided value for '{field}' is invalid."
   },
   "user": {
     "name": "The name is mandatory.",
