@@ -118,22 +118,21 @@ export class HttpExceptionFilter implements ExceptionFilter {
     { message, status }: IError,
     exception: HttpException,
   ) {
-    if (status === 500) {
+    if (status === HttpStatus.INTERNAL_SERVER_ERROR)
       this.logger.error(
         `End Request for ${request}.`,
         `method=${request.method} status=${status} code_error=${
           message ? message : null
         } message=${message ? message : null}`,
-        status >= 500 ? exception?.stack : "",
+        status >= HttpStatus.INTERNAL_SERVER_ERROR ? exception?.stack : "",
       );
-    } else {
+    else
       this.logger.warn(
         `End Request for ${request.path}`,
         `method=${request.method} status=${status} code_error=${
           message ? status : null
         } message=${message ? message : null}`,
       );
-    }
   }
 
   catch(exception: HttpException, host: ArgumentsHost) {

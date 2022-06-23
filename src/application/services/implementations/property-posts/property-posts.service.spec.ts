@@ -57,11 +57,11 @@ describe("PropertyPostsService", () => {
       let propertyPosts: Array<PropertyPost>;
 
       beforeEach(async () => {
-        propertyPosts = await service.findAll();
+        propertyPosts = await service.findAll({ page: 1, perPage: 10 });
       });
 
       test("then it should call find on the repository", () => {
-        expect(repository.find).toHaveBeenCalledWith({});
+        expect(repository.paginate).toHaveBeenCalled();
       });
 
       test("then it should return two propertyPosts", () => {
@@ -73,7 +73,7 @@ describe("PropertyPostsService", () => {
     });
 
     describe("find by id", () => {
-      describe("without erros", () => {
+      describe("without errors", () => {
         let propertyPost: PropertyPost;
 
         beforeEach(async () => {

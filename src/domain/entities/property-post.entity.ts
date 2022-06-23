@@ -12,6 +12,9 @@ const {
 export class PropertyPost {
   _id: string;
 
+  @Prop({ required: [true, "validations.propertyPost.description"] })
+  description: string;
+
   @Prop({
     type: Number,
     required: [true, "validations.propertyPost.bathroomCount"],

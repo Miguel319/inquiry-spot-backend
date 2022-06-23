@@ -1,6 +1,7 @@
 {
   "shared": {
-    "isArray": "The field '{field}' must be an array."
+    "array": "The field '{field}' must be an array.",
+    "number": "The field '{field}' must be a number."
   },
   "user": {
     "name": "The name is mandatory.",
@@ -39,6 +40,7 @@
     "notFound": "Vehicle post not found."
   },
   "propertyPost": {
+    "description": "The description is mandatory.",
     "bathroomCount": "The bathroom count is mandatory.",
     "bedroomCount": "The bedroom count is mandatory.",
     "parkingLotCount": "The parking lot count is mandatory.",
@@ -48,8 +50,9 @@
     "buyingOption": "The buying option (buy or rent) is mandatory.",
     "invalidBuyingOption": "The provided buying option is invalid.",
     "propertyType": "The property type is mandatory.",
-    "invalidPropertyType": "provided property type is invalid.",
+    "invalidPropertyType": "The provided property type is invalid.",
     "propertyStatus": "The property status is mandatory.",
+    "invalidPropertyStatus": "The provided property status is invalid.",
     "primaryImage": "The primary image is mandatory.",
     "secondaryImages": "The secondary image are mandatory.",
     "additionalInfo": "The additional info is mandatory.",

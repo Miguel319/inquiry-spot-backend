@@ -3,7 +3,7 @@ import { HttpStatus } from "@nestjs/common";
 import { Response } from "express";
 
 export interface IApiResponse {
-  message?: string;
+  message: string;
   res: Response;
   data?: unknown;
 }
@@ -23,7 +23,7 @@ export class ApiResponse {
   public static create({ message, data, res }: IApiResponse): Response {
     return res.status(HttpStatus.CREATED).json({
       success: true,
-      message: message || `Entity created successfully!`,
+      message,
       data: data || null,
     });
   }
@@ -31,7 +31,7 @@ export class ApiResponse {
   public static update({ message, data, res }: IApiResponse): Response {
     return res.status(HttpStatus.OK).json({
       success: true,
-      message: message || "Entity updated successfully!",
+      message,
       data: data || null,
     });
   }
@@ -39,7 +39,7 @@ export class ApiResponse {
   public static delete({ message, data, res }: IApiResponse): Response {
     return res.status(HttpStatus.OK).json({
       success: true,
-      message: message || "Entity deleted successfully!",
+      message,
       data: data || null,
     });
   }

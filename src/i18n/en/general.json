@@ -1,10 +1,22 @@
 {
   "accessories": "accessories",
   "secondaryImages": "secondary images",
+  "bedroomCount": "bedroom count",
+  "bathroomCount": "bathroom count",
   "auth": {
     "signUp": "Signed up successfully!",
     "signIn": "Signed in successfully!",
     "signOut": "Signed out successfully!",
     "passwordReset": "Password reseted successfully!"
+  },
+  "vehiclePost": {
+    "create": "Vehicle post created successfully!",
+    "update": "Vehicle post updated successfully!",
+    "delete": "Vehicle post deleted successfully!"
+  },
+  "propertyPost": {
+    "create": "Property post created successfully!",
+    "update": "Property post updated successfully!",
+    "delete": "Property post deleted successfully!"
   }
 }
