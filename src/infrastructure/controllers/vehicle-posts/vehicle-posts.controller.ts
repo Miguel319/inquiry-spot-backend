@@ -75,16 +75,16 @@ export class VehiclePostsController {
   }
 
   @Get(":_id/:seller")
-  async getFromSeller(
+  async findFromSeller(
     @Param("_id") _id: string,
     @Param("seller") seller: string,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ): Promise<VehiclePost> {
     return await this._vehiclePostsService.findFromSeller(_id, seller, i18n);
   }
 
   @Get(":seller")
-  async getAllFromSeller(
+  async findAllFromSeller(
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,
   ): Promise<VehiclePost[]> {
