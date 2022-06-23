@@ -9,4 +9,9 @@ export const VehiclePostsService = jest.fn().mockReturnValue({
   findById: jest.fn().mockResolvedValue(getVehiclePostStub()),
   create: jest.fn().mockResolvedValue(getVehiclePostStub()),
   update: jest.fn().mockResolvedValue(getVehiclePostStub()),
+  delete: jest.fn().mockResolvedValue(true),
+  findFromSeller: jest.fn().mockResolvedValue(getVehiclePostStub()),
+  findAllFromSeller: jest
+    .fn()
+    .mockResolvedValue([getVehiclePostStub(), getVehiclePostStub()]),
 });
