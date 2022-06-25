@@ -3,49 +3,45 @@ import {
   PropertyStatus,
   PropertyType,
 } from "../../../domain/types";
-import { IsArray, IsEnum, IsMongoId, IsNumber } from "class-validator";
+import { IsArray, IsEnum, IsInt, IsMongoId, IsNumber } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { AddresValidation } from "../common";
 
 export class UpdatePropertyPostDto {
   readonly description: string;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage("validations.shared.number", {
-        args: { field: i18nValidationMessage("general.bathroomCount") },
-      }),
-    },
-  )
+  @IsInt({
+    message: i18nValidationMessage("validations.propertyPost.bathroomCountInt"),
+  })
   readonly bathroomCount: number;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage("validations.shared.number", {
-        args: { field: i18nValidationMessage("general.bedroomCount") },
-      }),
-    },
-  )
+  @IsInt({
+    message: i18nValidationMessage("validations.propertyPost.bedroomCountInt"),
+  })
   readonly bedroomCount: number;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage("validations.shared.number", {
-        args: { field: i18nValidationMessage("general.parkingLotCount") },
-      }),
-    },
-  )
+  @IsInt({
+    message: i18nValidationMessage(
+      "validations.propertyPost.parkingLotCountInt",
+    ),
+  })
   readonly parkingLotCount: number;
 
   readonly price: number;
 
-  @IsMongoId({ message: i18nValidationMessage("validations.shared.mongoId") })
+  @IsMongoId({
+    message: i18nValidationMessage("validations.propertyPost.sellerMongoId"),
+  })
   readonly seller: string;
 
-  @IsNumber({}, { message: i18nValidationMessage("validations.shared.number") })
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage(
+        "validations.propertyPost.territoryNumber",
+      ),
+    },
+  )
   readonly territory: number;
 
   @IsEnum(BuyingOption, {
@@ -53,7 +49,7 @@ export class UpdatePropertyPostDto {
       "validations.propertyPost.invalidBuyingOption",
     ),
   })
-  readonly buyingOptions: BuyingOption;
+  readonly buyingOption: BuyingOption;
 
   @IsEnum(PropertyType, {
     message: i18nValidationMessage(
@@ -72,20 +68,16 @@ export class UpdatePropertyPostDto {
   readonly primaryImage: string;
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      args: {
-        field: i18nValidationMessage("general.secondaryImages"),
-      },
-    }),
+    message: i18nValidationMessage(
+      "validations.propertyPost.secondaryImagesArray",
+    ),
   })
   readonly secondaryImages: string[];
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      args: {
-        field: i18nValidationMessage("general.additionalInfo"),
-      },
-    }),
+    message: i18nValidationMessage(
+      "validations.propertyPost.additionalInfoArray",
+    ),
   })
   readonly additionalInfo: string[];
 

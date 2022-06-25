@@ -8,6 +8,7 @@ import {
   IsArray,
   IsDefined,
   IsEnum,
+  IsInt,
   IsMongoId,
   IsNumber,
   ValidateNested,
@@ -24,14 +25,9 @@ export class CreatePropertyPostDto {
   })
   readonly description: string;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage("validations.shared.number", {
-        args: { field: i18nValidationMessage("general.bathroomCount") },
-      }),
-    },
-  )
+  @IsInt({
+    message: i18nValidationMessage("validations.propertyPost.bathroomCountInt"),
+  })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.bathroomCount"),
   })
@@ -40,14 +36,9 @@ export class CreatePropertyPostDto {
   })
   readonly bathroomCount: number;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage("validations.shared.number", {
-        args: { field: i18nValidationMessage("general.bedroomCount") },
-      }),
-    },
-  )
+  @IsInt({
+    message: i18nValidationMessage("validations.propertyPost.bedroomCountInt"),
+  })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.bedroomCount"),
   })
@@ -56,14 +47,11 @@ export class CreatePropertyPostDto {
   })
   readonly bedroomCount: number;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage("validations.shared.number", {
-        args: { field: i18nValidationMessage("general.parkingLotCount") },
-      }),
-    },
-  )
+  @IsInt({
+    message: i18nValidationMessage(
+      "validations.propertyPost.parkingLotCountInt",
+    ),
+  })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.parkingLotCount"),
   })
@@ -80,7 +68,9 @@ export class CreatePropertyPostDto {
   })
   readonly price: number;
 
-  @IsMongoId({ message: i18nValidationMessage("validations.shared.mongoId") })
+  @IsMongoId({
+    message: i18nValidationMessage("validations.propertyPost.sellerMongoId"),
+  })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.seller"),
   })
@@ -89,7 +79,14 @@ export class CreatePropertyPostDto {
   })
   readonly seller: string;
 
-  @IsNumber({}, { message: i18nValidationMessage("validations.shared.number") })
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage(
+        "validations.propertyPost.territoryNumber",
+      ),
+    },
+  )
   readonly territory: number;
 
   @IsEnum(BuyingOption, {
@@ -140,11 +137,9 @@ export class CreatePropertyPostDto {
   readonly primaryImage: string;
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      args: {
-        field: i18nValidationMessage("general.secondaryImages"),
-      },
-    }),
+    message: i18nValidationMessage(
+      "validations.propertyPost.secondaryImagesArray",
+    ),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.secondaryImages"),
@@ -155,11 +150,9 @@ export class CreatePropertyPostDto {
   readonly secondaryImages: string[];
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      args: {
-        field: i18nValidationMessage("general.additionalInfo"),
-      },
-    }),
+    message: i18nValidationMessage(
+      "validations.propertyPost.additionalInfoArray",
+    ),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.additionalInfo"),

@@ -2,14 +2,24 @@
   "shared": {
     "array": "The field '{field}' must be an array.",
     "number": "The field '{field}' must be a number.",
-    "mongoId": "The provided value for '{field}' is invalid."
+    "mongoId": "The provided value for '{field}' is invalid.",
+    "address": {
+      "addressLine1": "The address line 1 is mandatory.",
+      "city": "The city is mandatory.",
+      "province": "The province is mandatory."
+    }
   },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",
     "password": "The password is mandatory.",
+    "role": "The role is mandatory.",
+    "invalidRole": "The provided role is invalid.",
     "invalidEmail": "Invalid email.",
     "requiredEmail": "The email is mandatory.",
+    "identificationNumber": "The identification number is required.",
+    "minLengthIdentificationNumber": "The identification number must have 11 characters.",
+    "maxLengthIdentificationNumber": "The identification number must have 11 characters.",
     "minLength": "The '{field}' field must have at least {min} characters.",
     "passwordMinLength": "The password must have at least 6 characters.",
     "userCreationError": "Could not create user.",
@@ -27,6 +37,7 @@
     "doorCount": "The door count is mandatory.",
     "exteriorColor": "The exterior color is mandatory.",
     "seller": "The seller is mandatory.",
+    "sellerMongoId": "The provided seller is invalid.",
     "invalidExteriorColor": "The exterior color provided is invalid.",
     "interiorColor": "The interior color mandatory.",
     "invalidInteriorColor": "The interior color provided is invalid.",
@@ -34,20 +45,30 @@
     "invalidFuelType": "The provided fuel type  is invalid.",
     "status": "The status (New o Used) is mandatory.",
     "accessories": "The accessories are mandatory.",
-    "invalidTransmission": "The provided transmission is invalid.",
+    "accessoriesArray": "The accessories must be an array.",
     "transmission": "The transmission is mandatory.",
+    "invalidTransmission": "The provided transmission is invalid.",
     "primaryImage": "The primary image is mandatory.",
     "secondaryImages": "The secondary images are mandatory.",
-    "notFound": "Vehicle post not found."
+    "secondaryImagesArray": "The secondary images must be an array.",
+    "notFound": "Vehicle post not found.",
+    "electric": {
+      "range": "The range of the electric vehicle is mandatory.",
+      "chargingTime": "The charging time of the electric vehicle is mandatory."
+    }
   },
   "propertyPost": {
     "description": "The description is mandatory.",
     "bathroomCount": "The bathroom count is mandatory.",
+    "bathroomCountInt": "The bathroom count must be an integer.",
     "bedroomCount": "The bedroom count is mandatory.",
+    "bedroomCountInt": "The bedroom count must be an integer.",
     "parkingLotCount": "The parking lot count is mandatory.",
     "price": "The price is mandatory.",
     "seller": "The seller is mandatory.",
+    "sellerMongoId": "The provided seller is invalid.",
     "territory": "The territory (m²) is mandatory.",
+    "territoryNumber": "The territory (m²) provided is invalid.",
     "buyingOption": "The buying option (buy or rent) is mandatory.",
     "invalidBuyingOption": "The provided buying option is invalid.",
     "propertyType": "The property type is mandatory.",
@@ -56,12 +77,9 @@
     "invalidPropertyStatus": "The provided property status is invalid.",
     "primaryImage": "The primary image is mandatory.",
     "secondaryImages": "The secondary image are mandatory.",
+    "secondaryImagesArray": "The secondary images must be an array.",
     "additionalInfo": "The additional info is mandatory.",
-    "address": {
-      "addressLine1": "The address line 1 is mandatory.",
-      "city": "The city is mandatory.",
-      "province": "The province is mandatory."
-    },
+    "additionalInfoArray": "The aditional info must be an array.",
     "notFound": "Property post not found."
   },
   "email": {

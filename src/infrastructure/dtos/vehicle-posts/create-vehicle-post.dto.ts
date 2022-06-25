@@ -1,6 +1,5 @@
 import {
   Color,
-  ElectricValues,
   Fuel,
   Transmission,
   VehicleMake,
@@ -17,28 +16,7 @@ import {
   ValidateIf,
   ValidateNested,
 } from "class-validator";
-
-class ElectricValuesValidation implements ElectricValues {
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.vehiclePost.electric.range"),
-  })
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.vehiclePost.electric.range"),
-  })
-  range: string;
-
-  @IsNotEmpty({
-    message: i18nValidationMessage(
-      "validations.vehiclePost.electric.chargingTime",
-    ),
-  })
-  @IsNotEmpty({
-    message: i18nValidationMessage(
-      "validations.vehiclePost.electric.chargingTime",
-    ),
-  })
-  chargingTime: string;
-}
+import { ElectricVehicleDto } from "./electric-vehicle.dto";
 
 export class CreateVehiclePostDto {
   @IsNotEmpty({
@@ -49,11 +27,11 @@ export class CreateVehiclePostDto {
   })
   readonly description: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.vehiclePost.make"),
-  })
   @IsEnum(VehicleMake, {
     message: i18nValidationMessage("validations.vehiclePost.invalidMake"),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.make"),
   })
   @IsDefined({ message: i18nValidationMessage("validations.vehiclePost.make") })
   readonly make: VehicleMake;
@@ -66,24 +44,24 @@ export class CreateVehiclePostDto {
   })
   readonly model: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.vehiclePost.type"),
-  })
   @IsEnum(VehicleType, {
     message: i18nValidationMessage("validations.vehiclePost.invalidType"),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.type"),
   })
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.type"),
   })
   readonly type: VehicleType;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.vehiclePost.transmission"),
-  })
   @IsEnum(Transmission, {
     message: i18nValidationMessage(
       "validations.vehiclePost.invalidTransmission",
     ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.transmission"),
   })
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.transmission"),
@@ -98,26 +76,26 @@ export class CreateVehiclePostDto {
   })
   readonly price: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.vehiclePost.exteriorColor"),
-  })
   @IsEnum(Color, {
     message: i18nValidationMessage(
       "validations.vehiclePost.invalidExteriorColor",
     ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage("validations.vehiclePost.exteriorColor"),
   })
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.exteriorColor"),
   })
   readonly exteriorColor: Color;
 
-  @IsDefined({
-    message: i18nValidationMessage("validations.vehiclePost.interiorColor"),
-  })
   @IsEnum(Color, {
     message: i18nValidationMessage(
       "validations.vehiclePost.invalidInteriorColor",
     ),
+  })
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.interiorColor"),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.vehiclePost.interiorColor"),
@@ -128,22 +106,22 @@ export class CreateVehiclePostDto {
 
   readonly topSpeed: string;
 
-  @IsDefined({
-    message: i18nValidationMessage("validations.vehiclePost.fuelType"),
-  })
   @IsEnum(Fuel, {
     message: i18nValidationMessage("validations.vehiclePost.invalidFuelType"),
+  })
+  @IsDefined({
+    message: i18nValidationMessage("validations.vehiclePost.fuelType"),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.vehiclePost.fuelType"),
   })
   readonly fuelType: Fuel;
 
+  @IsEnum(VehicleStatus, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidStatus"),
+  })
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.status"),
-  })
-  @IsEnum(Fuel, {
-    message: i18nValidationMessage("validations.vehiclePost.invalidStatus"),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.vehiclePost.status"),
@@ -152,7 +130,7 @@ export class CreateVehiclePostDto {
 
   @ValidateNested()
   @ValidateIf((prop) => prop.fuelType === Fuel.ELECTRIC)
-  readonly electric: ElectricValuesValidation;
+  readonly electric: ElectricVehicleDto;
 
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.use"),
@@ -163,7 +141,9 @@ export class CreateVehiclePostDto {
   @ValidateIf((prop) => prop.status === VehicleStatus.USED)
   readonly use: string;
 
-  @IsMongoId({ message: i18nValidationMessage("validations.shared.mongoId") })
+  @IsMongoId({
+    message: i18nValidationMessage("validations.propertyPost.sellerMongoId"),
+  })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.propertyPost.seller"),
   })
@@ -172,15 +152,11 @@ export class CreateVehiclePostDto {
   })
   readonly seller: string;
 
+  @IsArray({
+    message: i18nValidationMessage("validations.vehiclePost.accessoriesArray"),
+  })
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.accessories"),
-  })
-  @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      args: {
-        field: i18nValidationMessage("general.accessories"),
-      },
-    }),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.vehiclePost.accessories"),
@@ -195,15 +171,13 @@ export class CreateVehiclePostDto {
   })
   readonly primaryImage: string;
 
+  @IsArray({
+    message: i18nValidationMessage(
+      "validations.vehiclePost.secondaryImagesArray",
+    ),
+  })
   @IsDefined({
     message: i18nValidationMessage("validations.vehiclePost.secondaryImages"),
-  })
-  @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      args: {
-        field: i18nValidationMessage("general.accessories"),
-      },
-    }),
   })
   @IsNotEmpty({
     message: i18nValidationMessage("validations.vehiclePost.secondaryImages"),
