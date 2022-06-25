@@ -1,20 +1,28 @@
 import {
   Color,
-  ElectricValues,
   Fuel,
   Transmission,
+  VehicleMake,
+  VehicleStatus,
   VehicleType,
 } from "../../../domain/types";
-import { IsArray, IsEnum } from "class-validator";
+import {
+  IsArray,
+  IsEnum,
+  IsMongoId,
+  ValidateIf,
+  ValidateNested,
+} from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
+import { ElectricVehicleDto } from "./electric-vehicle.dto";
 
 export class UpdateVehiclePostDto {
   readonly description: string;
 
-  @IsEnum(VehicleType, {
+  @IsEnum(VehicleMake, {
     message: i18nValidationMessage("validations.vehiclePost.invalidMake"),
   })
-  readonly make: string;
+  readonly make: VehicleMake;
 
   readonly model: string;
 
@@ -23,7 +31,7 @@ export class UpdateVehiclePostDto {
   })
   readonly type: VehicleType;
 
-  @IsEnum(VehicleType, {
+  @IsEnum(Transmission, {
     message: i18nValidationMessage(
       "validations.vehiclePost.invalidTransmission",
     ),
@@ -55,23 +63,34 @@ export class UpdateVehiclePostDto {
   })
   readonly fuelType: Fuel;
 
-  readonly electric: ElectricValues;
+  @IsEnum(Fuel, {
+    message: i18nValidationMessage("validations.vehiclePost.invalidStatus"),
+  })
+  readonly status: VehicleStatus;
 
+  @ValidateNested()
+  @ValidateIf((prop) => prop.fuelType === Fuel.ELECTRIC)
+  readonly electric: ElectricVehicleDto;
+
+  @ValidateIf((prop) => prop.status === VehicleStatus.USED)
   readonly use: string;
 
+  @IsMongoId({
+    message: i18nValidationMessage("validations.propertyPost.sellerMongoId"),
+  })
+  readonly seller: string;
+
   @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      field: i18nValidationMessage("general.accessories"),
-    }),
+    message: i18nValidationMessage("validations.vehiclePost.accessoriesArray"),
   })
   readonly accessories: string[];
 
   readonly primaryImage: string;
 
   @IsArray({
-    message: i18nValidationMessage("validations.shared.array", {
-      field: i18nValidationMessage("general.accessories"),
-    }),
+    message: i18nValidationMessage(
+      "validations.vehiclePost.secondaryImagesArray",
+    ),
   })
   readonly secondaryImages: string[];
 }

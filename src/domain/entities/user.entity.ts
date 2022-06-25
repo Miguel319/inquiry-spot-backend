@@ -1,7 +1,17 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Schema as SchemaAlt } from "mongoose";
 
 export type UserDocument = User & Document;
+
+export enum Role {
+  CLIENT = "Client",
+  SELLER = "Seller",
+  MIXED = "Mixed",
+}
+
+const {
+  Types: { ObjectId },
+} = SchemaAlt;
 
 @Schema({ timestamps: true })
 export class User {
@@ -12,7 +22,6 @@ export class User {
 
   @Prop({
     required: [true, "validations.user.requiredEmail"],
-    unique: true,
     lowercase: true,
     match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "validations.user.invalidEmail"],
     trim: true,
@@ -26,6 +35,55 @@ export class User {
     select: false,
   })
   password: string;
+
+  @Prop({
+    minlength: [11, "validations.user.minLengthIdentificationNumber"],
+    maxlength: [11, "validations.user.maxLengthIdentificationNumber"],
+  })
+  identificationNumber: string;
+
+  @Prop({
+    enum: [Role, "validations.user.invalidRole"],
+    type: String,
+    required: [true, "validations.user.role"],
+  })
+  role: Role;
+
+  @Prop([
+    {
+      type: ObjectId,
+      ref: "VehiclePost",
+      select: false,
+    },
+  ])
+  vehiclePostsPublished?: string[];
+
+  @Prop([
+    {
+      type: ObjectId,
+      ref: "PropertyPost",
+      select: false,
+    },
+  ])
+  propertyPostsPublished?: string[];
+
+  @Prop([
+    {
+      type: ObjectId,
+      ref: "VehiclePost",
+      select: false,
+    },
+  ])
+  vehiclePostsInterests?: string[];
+
+  @Prop([
+    {
+      type: ObjectId,
+      ref: "PropertyPost",
+      select: false,
+    },
+  ])
+  propertyPostsInterests?: string[];
 
   @Prop({
     type: String,

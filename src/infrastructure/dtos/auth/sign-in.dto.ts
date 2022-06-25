@@ -1,5 +1,4 @@
-import { IsNotEmpty } from "../../../infrastructure/common/decorators";
-import { IsValidEmail } from "../../../infrastructure/common/decorators";
+import { IsNotEmpty, IsValidEmail } from "../../common/decorators";
 
 import { IsDefined } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
