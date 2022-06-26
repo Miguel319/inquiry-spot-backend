@@ -20,7 +20,7 @@ const UserUseCaseProvider: Provider = {
     ]),
   ],
   controllers: [UsersController],
-  providers: [UsersRepository, UserUseCaseProvider],
-  exports: [UsersRepository, UserUseCaseProvider],
+  providers: [UsersRepository, UserUseCaseProvider, UsersService],
+  exports: [UsersRepository, UserUseCaseProvider, UsersService],
 })
 export class UsersModule {}

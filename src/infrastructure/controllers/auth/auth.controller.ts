@@ -21,6 +21,7 @@ import {
 } from "@nestjs/common";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { Response, Request } from "express";
+import { AuthTranslations } from "@/domain/types";
 
 @Controller("auth")
 export class AuthController {
@@ -34,7 +35,7 @@ export class AuthController {
   async signUp(
     @Body() signupDto: SignUpDto,
     @Res() res: Response,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ): Promise<Response> {
     const authResult: IAuthResult = (await this._authService.signUp(
       signupDto as unknown as User,
@@ -48,7 +49,7 @@ export class AuthController {
     return ApiResponse.signUp({
       user: user as User,
       token: authResult.token,
-      message: i18n.t("general.auth.signUp"),
+      message: i18n ? i18n.t(AuthTranslations.SIGN_UP) : "",
       res,
     });
   }
@@ -72,7 +73,7 @@ export class AuthController {
 
     return ApiResponse.signIn({
       user: user as User,
-      message: i18n.t("general.auth.signIn"),
+      message: i18n ? i18n.t(AuthTranslations.SIGN_IN) : "",
       token: authResult.token,
       res,
     });
@@ -90,7 +91,7 @@ export class AuthController {
   async resetPassword(
     @Param("token") token: string,
     @Res() res: Response,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ) {
     const authResult: IAuthResult = await this._authService.resetPassword(
       token,
@@ -104,7 +105,7 @@ export class AuthController {
     return ApiResponse.signIn({
       user: user as User,
       token: authResult.token,
-      message: i18n.t("general.auth.passwordReset"),
+      message: i18n ? i18n.t(AuthTranslations.PASSWORD_RESET) : "",
       res,
     });
   }
@@ -114,7 +115,7 @@ export class AuthController {
     this._authService.signOut(res);
 
     return ApiResponse.delete({
-      message: i18n.t("general.auth.signOut"),
+      message: i18n ? i18n.t(AuthTranslations.SIGN_OUT) : "",
       res,
     });
   }

@@ -2,9 +2,9 @@ import { PaginationQuery } from "@/domain/types";
 import { I18nContext } from "nestjs-i18n";
 
 export interface IBaseService<T> {
-  findAll(paginationQuery?: PaginationQuery): Promise<T[]>;
+  findAll(paginationQuery?: PaginationQuery, i18n?: I18nContext): Promise<T[]>;
   findById(_id: string, i18n?: I18nContext): Promise<T>;
-  create?(entity: T): Promise<T>;
+  create?(entity: T, i18n?: I18nContext): Promise<T>;
   update?(_id: string, entity: T, i18n?: I18nContext): Promise<T | null>;
-  delete?(_id: string): Promise<boolean>;
+  delete?(_id: string, i18n?: I18nContext): Promise<boolean>;
 }

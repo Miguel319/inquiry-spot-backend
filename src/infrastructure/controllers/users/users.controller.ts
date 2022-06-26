@@ -30,4 +30,12 @@ export class UsersController {
 
     return user;
   }
+
+  @Get("current/user")
+  @UseGuards(JwtAuthGuard)
+  async helloWorld(): Promise<User | null> {
+    const user: User | null = await this.usersService.findCurrent();
+
+    return user;
+  }
 }

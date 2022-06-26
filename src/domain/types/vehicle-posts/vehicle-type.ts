@@ -1,0 +1,15 @@
+export enum VehicleType {
+  SEDAN = "Sedan",
+  COUPE = "Coupe",
+  SPORT_CAR = "Sport Car",
+  STATION_WAGON = "Station Wagon",
+  HATCHBACK = "Hatchback",
+  CONVERTIBLE = "Convertible",
+  SUV = "SUV",
+  LIMOUSINE = "Limousine",
+  MINIVAN = "Minivan",
+  PICKUP_TRUCK = "Pickup Truck",
+  MINIBUS = "Minibus",
+  VAN = "VAN",
+  CAMPERVAN = "CAMPERVAN",
+}

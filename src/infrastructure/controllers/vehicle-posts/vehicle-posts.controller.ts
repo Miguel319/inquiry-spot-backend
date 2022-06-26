@@ -1,6 +1,6 @@
-import { IVehiclePostsService } from "@/application/services/contracts";
-import { VehiclePost } from "@/domain/entities";
-import { PaginationQuery } from "@/domain/types/common/pagination-query";
+import { IVehiclePostsService } from "../../../application/services/contracts";
+import { VehiclePost } from "../../../domain/entities";
+import { PaginationQuery } from "../../../domain/types/common/pagination-query";
 import { ApiResponse } from "../../../infrastructure/common/api";
 import {
   UpdateVehiclePostDto,
@@ -18,9 +18,12 @@ import {
   Query,
   Res,
   UseFilters,
+  UseGuards,
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
+import { VehiclePostTranslations } from "../../../domain/types";
+import { JwtAuthGuard } from "../../../infrastructure/guards";
 
 @Controller("vehicle-posts")
 export class VehiclePostsController {
@@ -30,8 +33,11 @@ export class VehiclePostsController {
   ) {}
 
   @Get()
-  async findAll(@Query() paginationQuery: PaginationQuery) {
-    return await this._vehiclePostsService.findAll(paginationQuery);
+  async findAll(
+    @Query() paginationQuery: PaginationQuery,
+    @I18n() i18n?: I18nContext,
+  ) {
+    return await this._vehiclePostsService.findAll(paginationQuery, i18n);
   }
 
   @Get(":_id")
@@ -44,6 +50,7 @@ export class VehiclePostsController {
 
   @Post()
   @UseFilters(new I18nValidationExceptionFilter())
+  @UseGuards(JwtAuthGuard)
   async create(
     @Body() vehiclePostDto: CreateVehiclePostDto,
     @Res() res: Response,
@@ -56,12 +63,13 @@ export class VehiclePostsController {
     return ApiResponse.create({
       res,
       data: vehiclePost,
-      message: i18n ? i18n.t("general.vehiclePost.create") : "",
+      message: i18n ? i18n.t(VehiclePostTranslations.CREATE) : "",
     });
   }
 
   @Put(":_id")
   @UseFilters(new I18nValidationExceptionFilter())
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param("_id") _id: string,
     @Body() vehiclePostDto: UpdateVehiclePostDto,
@@ -76,11 +84,12 @@ export class VehiclePostsController {
     return ApiResponse.update({
       res,
       data: vehiclePost,
-      message: i18n ? i18n.t("general.vehiclePost.update") : "",
+      message: i18n ? i18n.t(VehiclePostTranslations.UPDATE) : "",
     });
   }
 
   @Delete(":_id")
+  @UseGuards(JwtAuthGuard)
   async delete(
     @Param("_id") _id: string,
     @Res() res: Response,
@@ -90,7 +99,7 @@ export class VehiclePostsController {
 
     return ApiResponse.delete({
       res,
-      message: i18n ? i18n.t("general.vehiclePost.create") : "",
+      message: i18n ? i18n.t(VehiclePostTranslations.DELETE) : "",
     });
   }
 

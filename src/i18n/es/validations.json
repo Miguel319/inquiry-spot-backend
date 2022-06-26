@@ -2,7 +2,14 @@
   "shared": {
     "array": "El campo '{field}' debe ser un arreglo.",
     "number": "El campo '{field}' debe ser un número.",
-    "mongoId": "El valor provisto para '{field}' es inválido."
+    "mongoId": "El valor provisto para '{field}' es inválido.",
+    "address": {
+      "addressLine1": "La línea 1 (calle y número) es obligatoria.",
+      "city": "La ciudad es obligatoria.",
+      "province": "La provincia es obligatoria."
+    },
+    "unauthorized": "No está autorizado(a) a realizar esta operación.",
+    "paginationLimit": "No puede filtrar más de 50 elementos a la vez (por página)."
   },
   "user": {
     "name": "El nombre es obligatorio.",
@@ -19,7 +26,9 @@
     "passwordMinLength": "La contraseña debe tener un mínimo de 6 caracteres.",
     "userCreationError": "No se pudo crear el usuario.",
     "notFound": "Usuario no encontrado.",
-    "invalidToken": "Token inválido."
+    "invalidToken": "Token inválido.",
+    "invalidCredentials": "Credenciales inválidas.",
+    "duplicateEmail": "El correo electrónico provisto ya está tomado."
   },
   "vehiclePost": {
     "description": "La descripción es obligatoria.",
@@ -38,7 +47,9 @@
     "invalidInteriorColor": "El color interior provisto es inválido.",
     "fuelType": "El tipo de combustible es obligatorio.",
     "invalidFuelType": "El tipo de combustile provisto es inválido.",
+    "use": "El uso (km) es obligatorio.",
     "status": "El estatus (nuevo o usado) es obligatorio.",
+    "invalidStatus": "El estatus provisto es inválidlo.",
     "accessories": "Los accesorios son obligatorios.",
     "accessoriesArray": "Los accesorios deben ser un arreglo.",
     "transmission": "La transmisión es obligatoria.",
@@ -76,11 +87,6 @@
     "secondaryImagesArray": "Las imágenes secundarias deben ser un arrego.",
     "additionalInfo": "La información adicional es obligatoria.",
     "additionalInfoArray": "La información adicional debe ser un arreglo.",
-    "address": {
-      "addressLine1": "La dirección (calle y número) es obligatoria.",
-      "city": "La ciudad es obligatoria.",
-      "province": "La provincia es obligatoria."
-    },
     "notFound": "No se encontró la publicación de la propiedad que busca."
   },
   "email": {

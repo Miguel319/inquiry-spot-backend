@@ -1,4 +1,4 @@
-import { IsDefined, IsEnum, MaxLength, ValidateIf } from "class-validator";
+import { IsDefined, IsEnum, Length, ValidateIf } from "class-validator";
 import { IsNotEmpty, IsValidEmail, MinLength } from "../../common/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { Role } from "../../../domain/entities";
@@ -41,12 +41,7 @@ export class SignUpDto {
   })
   readonly role: Role;
 
-  @MinLength(11, {
-    message: i18nValidationMessage(
-      "validations.user.minLengthIdentificationNumber",
-    ),
-  })
-  @MaxLength(11, {
+  @Length(11, 11, {
     message: i18nValidationMessage(
       "validations.user.maxLengthIdentificationNumber",
     ),

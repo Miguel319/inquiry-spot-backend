@@ -1,9 +1,20 @@
-import { PropertyPost } from "@/domain/entities";
+import { PropertyPost, UserDocument } from "@/domain/entities";
 import { PropertyPostsRepository } from "../../../../infrastructure/repositories";
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { IPropertyPostsService } from "../../contracts";
+import {
+  Inject,
+  // Inject,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
+import { IPropertyPostsService, IUsersService } from "../../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { PaginationQuery } from "../../../../domain/types";
+import {
+  PaginationQuery,
+  PropertyPostsTranslations,
+  SharedTranslations,
+  UserTranslations,
+} from "../../../../domain/types";
 import {
   getPaginationOptions,
   PaginationOptions,
@@ -14,22 +25,29 @@ export class PropertyPostsService implements IPropertyPostsService {
   constructor(
     private readonly _propertyPostRepo: PropertyPostsRepository,
     private readonly _i18n: I18nService,
+    @Inject("IUsersService") private readonly _usersService: IUsersService,
   ) {}
 
   private getPaginationOptions(
     paginationQuery: PaginationQuery,
+    i18n: I18nContext,
   ): PaginationOptions {
     return {
-      ...getPaginationOptions({ ...paginationQuery }),
+      ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
       select:
         "_id description model fuelType type bedroomCount bathroomCount seller primaryImage createdAt",
       sort: "-createdAt",
     };
   }
 
-  async findAll(paginationQuery: PaginationQuery): Promise<PropertyPost[]> {
-    const options: PaginationOptions =
-      this.getPaginationOptions(paginationQuery);
+  async findAll(
+    paginationQuery: PaginationQuery,
+    i18n?: I18nContext,
+  ): Promise<PropertyPost[]> {
+    const options: PaginationOptions = this.getPaginationOptions(
+      paginationQuery,
+      i18n as I18nContext,
+    );
 
     return await this._propertyPostRepo.paginate({}, options);
   }
@@ -38,18 +56,48 @@ export class PropertyPostsService implements IPropertyPostsService {
     const propertyPost: PropertyPost | null =
       await this._propertyPostRepo.findOne({ _id });
 
-    if (!propertyPost)
+    if (!propertyPost) {
       throw new NotFoundException(
         i18n
-          ? i18n.t("validations.propertyPost.notFound")
-          : this._i18n.t("validations.propertyPost.notFound"),
+          ? i18n.t(PropertyPostsTranslations.NOT_FOUND)
+          : this._i18n.t(PropertyPostsTranslations.NOT_FOUND),
       );
+    }
 
     return propertyPost;
   }
 
-  async create(propertyPost: PropertyPost): Promise<PropertyPost> {
-    return await this._propertyPostRepo.create(propertyPost);
+  private async findCurrentUser(i18n: I18nContext): Promise<UserDocument> {
+    const user = (await this._usersService.findCurrent(i18n)) as UserDocument;
+
+    if (!user)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(UserTranslations.NOT_FOUND)
+          : this._i18n.t(UserTranslations.NOT_FOUND),
+      );
+
+    return user;
+  }
+
+  async create(
+    propertyPost: PropertyPost,
+    i18n?: I18nContext,
+  ): Promise<PropertyPost> {
+    const user = await this.findCurrentUser(i18n as I18nContext);
+
+    if (!user.propertyPostsPublished) user.propertyPostsPublished = [];
+
+    const newPropertyPost = await this._propertyPostRepo.create({
+      ...propertyPost,
+      seller: user._id,
+    });
+
+    user.propertyPostsPublished.push(newPropertyPost._id);
+
+    await user.save();
+
+    return newPropertyPost;
   }
 
   async update(
@@ -57,21 +105,44 @@ export class PropertyPostsService implements IPropertyPostsService {
     propertyPost: PropertyPost,
     i18n?: I18nContext,
   ): Promise<PropertyPost | null> {
-    await this.findById(_id, i18n); // Throws error if not found
+    const user = await this.findCurrentUser(i18n as I18nContext);
+
+    const propertyPostFound = await this.findById(_id, i18n);
+
+    if (propertyPostFound.seller !== user._id)
+      throw new UnauthorizedException(
+        i18n
+          ? i18n.t(SharedTranslations.UNAUTHORIZED)
+          : this._i18n.t(SharedTranslations.UNAUTHORIZED),
+      );
 
     return await this._propertyPostRepo.findOneAndUpdate({ _id }, propertyPost);
   }
 
-  async delete(_id: string): Promise<boolean> {
+  async delete(_id: string, i18n?: I18nContext): Promise<boolean> {
+    const user = await this.findCurrentUser(i18n as I18nContext);
+
+    const propertyPost = await this.findById(_id);
+
+    if (propertyPost.seller !== user._id)
+      throw new UnauthorizedException(
+        i18n
+          ? i18n.t(SharedTranslations.UNAUTHORIZED)
+          : this._i18n.t(SharedTranslations.UNAUTHORIZED),
+      );
+
     return await this._propertyPostRepo.deleteOne({ _id });
   }
 
   async findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,
+    i18n?: I18nContext,
   ): Promise<PropertyPost[]> {
-    const options: PaginationOptions =
-      this.getPaginationOptions(paginationQuery);
+    const options: PaginationOptions = this.getPaginationOptions(
+      paginationQuery,
+      i18n as I18nContext,
+    );
 
     return await this._propertyPostRepo.paginate({ seller }, options);
   }

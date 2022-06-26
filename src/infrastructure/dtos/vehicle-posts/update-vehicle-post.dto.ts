@@ -3,16 +3,11 @@ import {
   Fuel,
   Transmission,
   VehicleMake,
+  VehiclePostTranslations,
   VehicleStatus,
   VehicleType,
 } from "../../../domain/types";
-import {
-  IsArray,
-  IsEnum,
-  IsMongoId,
-  ValidateIf,
-  ValidateNested,
-} from "class-validator";
+import { IsArray, IsEnum, ValidateIf, ValidateNested } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { ElectricVehicleDto } from "./electric-vehicle.dto";
 
@@ -20,20 +15,20 @@ export class UpdateVehiclePostDto {
   readonly description: string;
 
   @IsEnum(VehicleMake, {
-    message: i18nValidationMessage("validations.vehiclePost.invalidMake"),
+    message: i18nValidationMessage(VehiclePostTranslations.INVALID_MAKE),
   })
   readonly make: VehicleMake;
 
   readonly model: string;
 
   @IsEnum(VehicleType, {
-    message: i18nValidationMessage("validations.vehiclePost.invalidType"),
+    message: i18nValidationMessage(VehiclePostTranslations.INVALID_TYPE),
   })
   readonly type: VehicleType;
 
   @IsEnum(Transmission, {
     message: i18nValidationMessage(
-      "validations.vehiclePost.invalidTransmission",
+      VehiclePostTranslations.INVALID_TRANSMISSION,
     ),
   })
   readonly transmission: Transmission;
@@ -42,14 +37,14 @@ export class UpdateVehiclePostDto {
 
   @IsEnum(Color, {
     message: i18nValidationMessage(
-      "validations.vehiclePost.invalidExteriorColor",
+      VehiclePostTranslations.INVALID_EXTERIOR_COLOR,
     ),
   })
   readonly exteriorColor: Color;
 
   @IsEnum(Color, {
     message: i18nValidationMessage(
-      "validations.vehiclePost.invalidInteriorColor",
+      VehiclePostTranslations.INVALID_INTERIOR_COLOR,
     ),
   })
   readonly interiorColor: Color;
@@ -59,12 +54,12 @@ export class UpdateVehiclePostDto {
   readonly topSpeed: string;
 
   @IsEnum(Fuel, {
-    message: i18nValidationMessage("validations.vehiclePost.invalidFuelType"),
+    message: i18nValidationMessage(VehiclePostTranslations.INVALID_FUEL_TYPE),
   })
   readonly fuelType: Fuel;
 
-  @IsEnum(Fuel, {
-    message: i18nValidationMessage("validations.vehiclePost.invalidStatus"),
+  @IsEnum(VehicleStatus, {
+    message: i18nValidationMessage(VehiclePostTranslations.INVALID_STATUS),
   })
   readonly status: VehicleStatus;
 
@@ -75,13 +70,8 @@ export class UpdateVehiclePostDto {
   @ValidateIf((prop) => prop.status === VehicleStatus.USED)
   readonly use: string;
 
-  @IsMongoId({
-    message: i18nValidationMessage("validations.propertyPost.sellerMongoId"),
-  })
-  readonly seller: string;
-
   @IsArray({
-    message: i18nValidationMessage("validations.vehiclePost.accessoriesArray"),
+    message: i18nValidationMessage(VehiclePostTranslations.ACCESSORIES_ARRAY),
   })
   readonly accessories: string[];
 
@@ -89,7 +79,7 @@ export class UpdateVehiclePostDto {
 
   @IsArray({
     message: i18nValidationMessage(
-      "validations.vehiclePost.secondaryImagesArray",
+      VehiclePostTranslations.SECONDARY_IMAGES_ARRAY,
     ),
   })
   readonly secondaryImages: string[];

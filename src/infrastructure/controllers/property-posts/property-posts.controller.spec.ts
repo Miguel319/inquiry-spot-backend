@@ -66,7 +66,7 @@ describe("PropertyController", () => {
   });
 
   describe("findAllFromSeller", () => {
-    describe("when findAll is called", () => {
+    describe("when paginate is called", () => {
       let propertyPosts: PropertyPost[];
       const seller = "abc12345678910abc";
       const paginationQuery = {
@@ -81,10 +81,11 @@ describe("PropertyController", () => {
         );
       });
 
-      test("then it should callfindAllFromSeller  from PropertyPostsService", () => {
+      test("then it should call findAllFromSeller from PropertyPostsService", () => {
         expect(service.findAllFromSeller).toHaveBeenCalledWith(
           seller,
           paginationQuery,
+          undefined,
         );
       });
 

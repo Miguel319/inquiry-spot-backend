@@ -59,7 +59,7 @@ describe("UsersController", () => {
         user = await controller.findById(getUserStub()._id);
       });
 
-      test("then it should call findById from Use rsService", () => {
+      test("then it should call findById from UseService", () => {
         expect(service.findById).toBeCalledWith(getUserStub()._id);
       });
 
