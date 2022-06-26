@@ -13,8 +13,6 @@ import { IAuthResult, IAuthService, IUsersService } from "../../contracts";
 import crypto from "crypto";
 import { UserTranslations } from "../../../../domain/types";
 import { I18nContext, I18nService } from "nestjs-i18n";
-// import { REQUEST } from "@nestjs/core";
-import { Request } from "express";
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -24,8 +22,8 @@ export class AuthService implements IAuthService {
     private readonly _jwtService: JwtService,
   ) {}
 
-  async signUp(user: User): Promise<IAuthResult> {
-    await this.validateSignUpEmail(user.email);
+  async signUp(user: User, i18n?: I18nContext): Promise<IAuthResult> {
+    await this.validateSignUpEmail(user.email, i18n as I18nContext);
 
     const newUser = await this._usersService.create?.(
       await this.handleUserSignUp(user),
@@ -33,7 +31,9 @@ export class AuthService implements IAuthService {
 
     if (!newUser)
       throw new InternalServerErrorException(
-        UserTranslations.USER_CREATION_ERROR,
+        i18n
+          ? i18n.t(UserTranslations.USER_CREATION_ERROR)
+          : this._i18n.t(UserTranslations.USER_CREATION_ERROR),
       );
 
     const authResult: IAuthResult = {
@@ -44,13 +44,17 @@ export class AuthService implements IAuthService {
     return authResult;
   }
 
-  async signIn(email: string, password: string): Promise<IAuthResult> {
+  async signIn(
+    email: string,
+    password: string,
+    i18n?: I18nContext,
+  ): Promise<IAuthResult> {
     const user: Partial<User> = await this._usersService.findByEmail(
       email,
       true,
     );
 
-    await this.validatePassword(user as User, password);
+    await this.validatePassword(user as User, password, i18n);
 
     delete user.password;
 
@@ -62,19 +66,6 @@ export class AuthService implements IAuthService {
     };
 
     return authResult;
-  }
-
-  async findCurrent(
-    request: Request,
-    i18n?: I18nContext,
-  ): Promise<User | null> {
-    const userId = (request as { user?: { _id: string } })?.user?._id;
-
-    if (!userId) return null;
-
-    const user: User = await this._usersService.findById(userId, i18n);
-
-    return user;
   }
 
   async resetPassword(token: string): Promise<IAuthResult> {
@@ -125,7 +116,7 @@ export class AuthService implements IAuthService {
 
   private async validateSignUpEmail(
     email: string,
-    i18n?: I18nContext,
+    i18n: I18nContext,
   ): Promise<void> {
     const user: User | null = await this._usersService.findByEmail(email);
 

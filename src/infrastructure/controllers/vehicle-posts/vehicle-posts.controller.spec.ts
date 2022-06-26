@@ -72,6 +72,7 @@ describe("VehicleController", () => {
       beforeEach(async () => {
         vehiclePost = await controller.findById(
           "sajdnasj32324e.3443sdfapSSL.d",
+          undefined,
         );
       });
 
@@ -102,7 +103,10 @@ describe("VehicleController", () => {
       });
 
       test("then it should call create from VehiclePostsService", () => {
-        expect(service.create).toHaveBeenCalledWith(createVehiclePostDto);
+        expect(service.create).toHaveBeenCalledWith(
+          createVehiclePostDto,
+          undefined,
+        );
       });
 
       test("then it should return a vehicle post", async () => {
@@ -138,6 +142,7 @@ describe("VehicleController", () => {
         expect(service.update).toHaveBeenCalledWith(
           getVehiclePostStub()._id,
           updateVehiclePostDto,
+          undefined,
         );
       });
 
@@ -170,7 +175,10 @@ describe("VehicleController", () => {
       });
 
       test("then it should call delete from VehiclePostsService", () => {
-        expect(service.delete).toHaveBeenCalledWith(getVehiclePostStub()._id);
+        expect(service.delete).toHaveBeenCalledWith(
+          getVehiclePostStub()._id,
+          undefined,
+        );
       });
 
       test("then it should return a vehicle post", async () => {

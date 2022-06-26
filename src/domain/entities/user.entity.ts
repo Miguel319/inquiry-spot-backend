@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
+import { UserTranslations } from "../types";
 
 export type UserDocument = User & Document;
 
@@ -17,35 +18,35 @@ const {
 export class User {
   _id: string;
 
-  @Prop({ required: [true, "validations.user.name"] })
+  @Prop({ required: [true, UserTranslations.NAME] })
   name: string;
 
   @Prop({
-    required: [true, "validations.user.requiredEmail"],
+    required: [true, UserTranslations.REQUIRED_EMAIL],
     lowercase: true,
-    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "validations.user.invalidEmail"],
+    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, UserTranslations.INVALID_EMAIL],
     trim: true,
   })
   email: string;
 
   @Prop({
-    required: [true, "validations.user.password"],
-    minlength: [6, "validations.user.passwordMinLength"],
+    required: [true, UserTranslations.PASSWORD],
+    minlength: [6, UserTranslations.PASSWORD_MIN_LENGTH],
     trim: true,
     select: false,
   })
   password: string;
 
   @Prop({
-    minlength: [11, "validations.user.minLengthIdentificationNumber"],
-    maxlength: [11, "validations.user.maxLengthIdentificationNumber"],
+    minlength: [11, UserTranslations.MIN_LENGTH_IDENTIFICATION_NUMBER],
+    maxlength: [11, UserTranslations.MAX_LENGTH_IDENTIFICATION_NUMBER],
   })
   identificationNumber: string;
 
   @Prop({
-    enum: [Role, "validations.user.invalidRole"],
+    enum: [Role, UserTranslations.INVALID_ROLE],
     type: String,
-    required: [true, "validations.user.role"],
+    required: [true, UserTranslations.ROLE],
   })
   role: Role;
 

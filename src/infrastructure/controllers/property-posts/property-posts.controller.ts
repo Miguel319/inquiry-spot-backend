@@ -42,8 +42,11 @@ export class PropertyPostsController {
   }
 
   @Get(":_id")
-  async findById(@Param("_id") _id: string) {
-    return await this._propertyPostsService.findById(_id);
+  async findById(
+    @Param("_id") _id: string,
+    @I18n() i18n?: I18nContext,
+  ): Promise<PropertyPost> {
+    return await this._propertyPostsService.findById(_id, i18n);
   }
 
   @Post()
@@ -56,6 +59,7 @@ export class PropertyPostsController {
   ): Promise<Response> {
     const propertyPost = await this._propertyPostsService.create?.(
       propertyPostDto as unknown as PropertyPost,
+      i18n,
     );
 
     return ApiResponse.create({
@@ -77,6 +81,7 @@ export class PropertyPostsController {
     const propertyPost = await this._propertyPostsService.update?.(
       _id,
       propertyPostDto as unknown as PropertyPost,
+      i18n,
     );
 
     return ApiResponse.create({
@@ -93,7 +98,7 @@ export class PropertyPostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
-    await this._propertyPostsService.delete?.(_id);
+    await this._propertyPostsService.delete?.(_id, i18n);
 
     return ApiResponse.delete({
       res,

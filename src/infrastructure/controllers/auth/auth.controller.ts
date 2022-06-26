@@ -35,10 +35,11 @@ export class AuthController {
   async signUp(
     @Body() signupDto: SignUpDto,
     @Res() res: Response,
-    @I18n() i18n?: I18nContext,
+    @I18n() i18n: I18nContext,
   ): Promise<Response> {
     const authResult: IAuthResult = (await this._authService.signUp(
       signupDto as unknown as User,
+      i18n,
     )) as IAuthResult;
 
     const user: UserPresenter = PresenterFactory.getInstance(
@@ -64,6 +65,7 @@ export class AuthController {
     const authResult = (await this._authService.signIn(
       email,
       password,
+      i18n,
     )) as IAuthResult;
 
     const user: UserPresenter = PresenterFactory.getInstance(

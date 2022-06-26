@@ -1,6 +1,13 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
-import { Address, BuyingOption, PropertyStatus, PropertyType } from "../types";
+import {
+  Address,
+  BuyingOption,
+  PropertyPostsTranslations,
+  PropertyStatus,
+  PropertyType,
+  SharedTranslations,
+} from "../types";
 
 export type PropertyPostDocument = PropertyPost & Document;
 
@@ -12,34 +19,37 @@ const {
 export class PropertyPost {
   _id: string;
 
-  @Prop({ required: [true, "validations.propertyPost.description"] })
+  @Prop({ required: [true, PropertyPostsTranslations.DESCRIPTION] })
   description: string;
 
   @Prop({
     type: Number,
-    required: [true, "validations.propertyPost.bathroomCount"],
+    required: [true, PropertyPostsTranslations.BATHROOM_COUNT],
+    isInteger: [true, PropertyPostsTranslations.BATHROOM_COUNT_INT],
   })
   bathroomCount: number;
 
   @Prop({
     type: Number,
-    required: [true, "validations.propertyPost.bedroomCount"],
+    required: [true, PropertyPostsTranslations.BEDROOM_COUNT],
+    isInteger: [true, PropertyPostsTranslations.BEDROOM_COUNT_INT],
   })
   bedroomCount: number;
 
   @Prop({
     type: Number,
-    required: [true, "validations.propertyPost.parkingLotCount"],
+    required: [true, PropertyPostsTranslations.PARKING_LOT_COUNT],
+    isInteger: [true, PropertyPostsTranslations.PARKING_LOT_COUNT_INT],
   })
   parkingLotCount: number;
 
-  @Prop({ required: [true, "validations.propertyPost.price"] })
+  @Prop({ required: [true, PropertyPostsTranslations.PRICE] })
   price: string;
 
   @Prop({
     type: ObjectId,
     ref: "User",
-    required: [true, "validations.propertyPost.seller"],
+    required: [true, PropertyPostsTranslations.SELLER],
   })
   seller: string;
 
@@ -47,21 +57,21 @@ export class PropertyPost {
   territory: number;
 
   @Prop({
-    required: [true, "validations.propertyPost.buyingOption"],
+    required: [true, PropertyPostsTranslations.BUYING_OPTION],
     enum: BuyingOption,
     type: String,
   })
   buyingOption: BuyingOption;
 
   @Prop({
-    required: [true, "validations.propertyPost.propertyType"],
+    required: [true, PropertyPostsTranslations.PROPERTY_TYPE],
     enum: PropertyType,
     type: String,
   })
   propertyType: PropertyType;
 
   @Prop({
-    required: [true, "validations.propertyPost.propertyStatus"],
+    required: [true, PropertyPostsTranslations.PROPERTY_STATUS],
     type: String,
     enum: PropertyStatus,
   })
@@ -69,14 +79,14 @@ export class PropertyPost {
 
   @Prop({
     type: String,
-    required: [true, "validations.propertyPost.primaryImage"],
+    required: [true, PropertyPostsTranslations.PRIMARY_IMAGE],
   })
   primaryImage: string;
 
   @Prop([
     {
       type: String,
-      required: [true, "validations.propertyPost.secondaryImages"],
+      required: [true, PropertyPostsTranslations.SECONDARY_IMAGES],
     },
   ])
   secondaryImages: string[];
@@ -84,7 +94,7 @@ export class PropertyPost {
   @Prop([
     {
       type: String,
-      required: [true, "validations.propertyPost.additionalInfo"],
+      required: [true, PropertyPostsTranslations.ADDITIONAL_INFO],
     },
   ])
   additionalInfo: string[];
@@ -93,15 +103,15 @@ export class PropertyPost {
     type: {
       addressLine1: {
         type: String,
-        required: [true, "validations.vehiclePost.address.addressLine1"],
+        required: [true, SharedTranslations.ADDRESS__ADDRESS_LINE_1],
       },
       city: {
         type: String,
-        required: [true, "validations.vehiclePost.address.city"],
+        required: [true, SharedTranslations.ADDRESS__CITY],
       },
       province: {
         type: String,
-        required: [true, "validations.vehiclePost.address.province"],
+        required: [true, SharedTranslations.ADDRESS__PROVINCE],
       },
     },
   })

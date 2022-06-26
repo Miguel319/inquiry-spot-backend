@@ -135,7 +135,10 @@ describe("PropertyController", () => {
       });
 
       test("then it should call create from PropertyPostsService", () => {
-        expect(service.create).toHaveBeenCalledWith(createPropertyPostDto);
+        expect(service.create).toHaveBeenCalledWith(
+          createPropertyPostDto,
+          undefined,
+        );
       });
 
       test("then it should return a property post", async () => {
@@ -173,6 +176,7 @@ describe("PropertyController", () => {
         expect(service.update).toHaveBeenCalledWith(
           getPropertyPostStub()._id,
           updatePropertyPostDto,
+          undefined,
         );
       });
 
@@ -205,7 +209,10 @@ describe("PropertyController", () => {
       });
 
       test("then it should call delete from PropertyPostsService", () => {
-        expect(service.delete).toHaveBeenCalledWith(getPropertyPostStub()._id);
+        expect(service.delete).toHaveBeenCalledWith(
+          getPropertyPostStub()._id,
+          undefined,
+        );
       });
 
       test("then it should return a property post", async () => {

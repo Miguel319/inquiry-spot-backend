@@ -39,6 +39,7 @@
     "invalidType": "The vehicle type provided is invalid.",
     "price": "The price is mandatory.",
     "doorCount": "The door count is mandatory.",
+    "doorCountInt": "the door count must be an integer.",
     "exteriorColor": "The exterior color is mandatory.",
     "seller": "The seller is mandatory.",
     "sellerMongoId": "The provided seller is invalid.",

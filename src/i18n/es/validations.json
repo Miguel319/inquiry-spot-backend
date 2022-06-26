@@ -39,6 +39,7 @@
     "invalidType": "El tipo de vehículo provisto es inválido.",
     "price": "El precio es obligatorio.",
     "doorCount": "El número de puertas es obligatorio.",
+    "doorCountInt": "El número de puertas debe ser un valor numérico.",
     "exteriorColor": "El color exterior es obligatorio.",
     "seller": "El vendedor es obligatorio.",
     "sellerMongoId": "El vendedor provisto es inválido.",

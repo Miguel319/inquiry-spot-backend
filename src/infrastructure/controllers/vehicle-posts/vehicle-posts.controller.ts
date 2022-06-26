@@ -58,6 +58,7 @@ export class VehiclePostsController {
   ): Promise<Response> {
     const vehiclePost = await this._vehiclePostsService.create?.(
       vehiclePostDto as unknown as VehiclePost,
+      i18n,
     );
 
     return ApiResponse.create({
@@ -79,6 +80,7 @@ export class VehiclePostsController {
     const vehiclePost = await this._vehiclePostsService.update?.(
       _id,
       vehiclePostDto as unknown as VehiclePost,
+      i18n,
     );
 
     return ApiResponse.update({
@@ -95,7 +97,7 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
-    await this._vehiclePostsService.delete?.(_id);
+    await this._vehiclePostsService.delete?.(_id, i18n);
 
     return ApiResponse.delete({
       res,

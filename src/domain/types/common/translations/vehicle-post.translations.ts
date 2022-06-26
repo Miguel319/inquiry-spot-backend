@@ -12,6 +12,7 @@ export enum VehiclePostTranslations {
   INVALID_TYPE = "validations.vehiclePost.invalidType",
   PRICE = "validations.vehiclePost.price",
   DOOR_COUNT = "validations.vehiclePost.doorCount",
+  DOOR_COUNT_INT = "validations.vehiclePost.doorCountInt",
   EXTERIOR_COLOR = "validations.vehiclePost.exteriorColor",
   INVALID_EXTERIOR_COLOR = "validations.vehiclePost.invalidExteriorColor",
   SELLER = "validations.vehiclePost.seller",
