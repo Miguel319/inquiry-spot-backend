@@ -66,7 +66,7 @@ describe("PropertyController", () => {
   });
 
   describe("findAllFromSeller", () => {
-    describe("when findAll is called", () => {
+    describe("when paginate is called", () => {
       let propertyPosts: PropertyPost[];
       const seller = "abc12345678910abc";
       const paginationQuery = {
@@ -81,10 +81,11 @@ describe("PropertyController", () => {
         );
       });
 
-      test("then it should callfindAllFromSeller  from PropertyPostsService", () => {
+      test("then it should call findAllFromSeller from PropertyPostsService", () => {
         expect(service.findAllFromSeller).toHaveBeenCalledWith(
           seller,
           paginationQuery,
+          undefined,
         );
       });
 
@@ -134,7 +135,10 @@ describe("PropertyController", () => {
       });
 
       test("then it should call create from PropertyPostsService", () => {
-        expect(service.create).toHaveBeenCalledWith(createPropertyPostDto);
+        expect(service.create).toHaveBeenCalledWith(
+          createPropertyPostDto,
+          undefined,
+        );
       });
 
       test("then it should return a property post", async () => {
@@ -172,6 +176,7 @@ describe("PropertyController", () => {
         expect(service.update).toHaveBeenCalledWith(
           getPropertyPostStub()._id,
           updatePropertyPostDto,
+          undefined,
         );
       });
 
@@ -204,7 +209,10 @@ describe("PropertyController", () => {
       });
 
       test("then it should call delete from PropertyPostsService", () => {
-        expect(service.delete).toHaveBeenCalledWith(getPropertyPostStub()._id);
+        expect(service.delete).toHaveBeenCalledWith(
+          getPropertyPostStub()._id,
+          undefined,
+        );
       });
 
       test("then it should return a property post", async () => {

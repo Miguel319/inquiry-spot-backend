@@ -13,5 +13,6 @@ export interface IVehiclePostsService extends IBaseService<VehiclePost> {
   findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,
+    i18n?: I18nContext,
   ): Promise<VehiclePost[]>;
 }

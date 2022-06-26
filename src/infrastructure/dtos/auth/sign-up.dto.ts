@@ -1,61 +1,55 @@
-import { IsDefined, IsEnum, MaxLength, ValidateIf } from "class-validator";
+import { IsDefined, IsEnum, Length, ValidateIf } from "class-validator";
 import { IsNotEmpty, IsValidEmail, MinLength } from "../../common/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { Role } from "../../../domain/entities";
+import { UserTranslations } from "../../../domain/types";
 
 export class SignUpDto {
-  @IsNotEmpty({ message: i18nValidationMessage("validations.user.name") })
-  @IsDefined({ message: i18nValidationMessage("validations.user.name") })
+  @IsNotEmpty({ message: i18nValidationMessage(UserTranslations.NAME) })
+  @IsDefined({ message: i18nValidationMessage(UserTranslations.NAME) })
   readonly name: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage("validations.user.requiredEmail"),
-  })
   @IsValidEmail({
-    message: i18nValidationMessage("validations.user.invalidEmail"),
+    message: i18nValidationMessage(UserTranslations.INVALID_EMAIL),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(UserTranslations.REQUIRED_EMAIL),
   })
   @IsDefined({
-    message: i18nValidationMessage("validations.user.requiredEmail"),
+    message: i18nValidationMessage(UserTranslations.REQUIRED_EMAIL),
   })
   readonly email: string;
 
   @MinLength(6, {
-    message: i18nValidationMessage("validations.user.passwordMinLength"),
+    message: i18nValidationMessage(UserTranslations.PASSWORD_MIN_LENGTH),
   })
   @IsNotEmpty({
-    message: i18nValidationMessage("validations.user.password"),
+    message: i18nValidationMessage(UserTranslations.PASSWORD),
   })
   @IsDefined({
-    message: i18nValidationMessage("validations.user.password"),
+    message: i18nValidationMessage(UserTranslations.PASSWORD),
   })
   password: string;
 
   @IsEnum(Role, {
-    message: i18nValidationMessage("validations.user.invalidRole"),
+    message: i18nValidationMessage(UserTranslations.INVALID_ROLE),
   })
   @IsNotEmpty({
-    message: i18nValidationMessage("validations.user.role"),
+    message: i18nValidationMessage(UserTranslations.ROLE),
   })
   @IsDefined({
-    message: i18nValidationMessage("validations.user.role"),
+    message: i18nValidationMessage(UserTranslations.ROLE),
   })
   readonly role: Role;
 
-  @MinLength(11, {
-    message: i18nValidationMessage(
-      "validations.user.minLengthIdentificationNumber",
-    ),
-  })
-  @MaxLength(11, {
-    message: i18nValidationMessage(
-      "validations.user.maxLengthIdentificationNumber",
-    ),
+  @Length(11, 11, {
+    message: i18nValidationMessage(UserTranslations.PASSWORD_MIN_LENGTH),
   })
   @IsNotEmpty({
-    message: i18nValidationMessage("validations.user.identificationNumber"),
+    message: i18nValidationMessage(UserTranslations.IDENTIFICATION_NUMBER),
   })
   @IsDefined({
-    message: i18nValidationMessage("validations.user.identificationNumber"),
+    message: i18nValidationMessage(UserTranslations.IDENTIFICATION_NUMBER),
   })
   @ValidateIf((user) => user.role === Role.SELLER || user.role === Role.MIXED)
   readonly identificationNumber: string;

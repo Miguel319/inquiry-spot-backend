@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
+import { EmailTranslations } from "../types";
 
 export interface SendgridEmailParams {
   to: string; // Recipient email address
@@ -23,25 +24,25 @@ export type EmailDocument = Email & Document;
 export class Email {
   _id: string;
 
-  @Prop({ required: [true, "validations.email.subject"] })
+  @Prop({ required: [true, EmailTranslations.SUBJECT] })
   subject: string;
 
-  @Prop({ required: [true, "validations.email.body"] })
+  @Prop({ required: [true, EmailTranslations.BODY] })
   body: string;
 
   @Prop({
     type: {
       name: {
-        required: [true, "validations.email.fromName"],
+        required: [true, EmailTranslations.FROM_NAME],
         type: String,
       },
       email: {
         type: String,
-        required: [true, "validations.email.fromEmail"],
+        required: [true, EmailTranslations.FROM_EMAIL],
         lowercase: true,
         match: [
           /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-          "validations.email.invalidFromEmail",
+          EmailTranslations.INVALID_FROM_EMAIL,
         ],
         trim: true,
       },
@@ -53,11 +54,11 @@ export class Email {
   };
 
   @Prop({
-    required: [true, "validations.email.recipientEmailAddress"],
+    required: [true, EmailTranslations.RECIPIENT_EMAIL_ADDRESS],
     lowercase: true,
     match: [
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      "validations.email.invalidRecipientEmailAddress",
+      EmailTranslations.INVALID_RECIPIENT_EMAIL_ADDRESS,
     ],
     trim: true,
   })

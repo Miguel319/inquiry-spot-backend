@@ -7,7 +7,9 @@
       "addressLine1": "The address line 1 is mandatory.",
       "city": "The city is mandatory.",
       "province": "The province is mandatory."
-    }
+    },
+    "unauthorized": "You are not authorized to perform this operation.",
+    "paginationLimit": "You cannot filter more than 50 items per page."
   },
   "user": {
     "name": "The name is mandatory.",
@@ -24,7 +26,9 @@
     "passwordMinLength": "The password must have at least 6 characters.",
     "userCreationError": "Could not create user.",
     "notFound": "User not found.",
-    "invalidToken": "Invalid token."
+    "invalidToken": "Invalid token.",
+    "invalidCredentials": "Invalid credentials.",
+    "duplicateEmail": "The provided email is already taken."
   },
   "vehiclePost": {
     "description": "The description is mandatory.",
@@ -35,6 +39,7 @@
     "invalidType": "The vehicle type provided is invalid.",
     "price": "The price is mandatory.",
     "doorCount": "The door count is mandatory.",
+    "doorCountInt": "the door count must be an integer.",
     "exteriorColor": "The exterior color is mandatory.",
     "seller": "The seller is mandatory.",
     "sellerMongoId": "The provided seller is invalid.",
@@ -44,6 +49,8 @@
     "fuelType": "The fuel type is mandatory.",
     "invalidFuelType": "The provided fuel type  is invalid.",
     "status": "The status (New o Used) is mandatory.",
+    "use": "The use is mandatory.",
+    "invalidStatus": "The vehicle status provided is invalid.",
     "accessories": "The accessories are mandatory.",
     "accessoriesArray": "The accessories must be an array.",
     "transmission": "The transmission is mandatory.",

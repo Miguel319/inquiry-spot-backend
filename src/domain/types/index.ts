@@ -1,4 +1,4 @@
 export { VoidDecorator } from "./any-function";
-export * from "./vehicle-post.type";
+export * from "./vehicle-posts";
 export * from "./common";
-export * from "./property-post.type";
+export * from "./property-posts";

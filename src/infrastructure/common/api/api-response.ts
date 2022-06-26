@@ -64,6 +64,26 @@ export class ApiResponse {
       });
   }
 
+  public static resetPassword({
+    res,
+    user,
+    token,
+    message,
+  }: IApiAuthResponse): Response {
+    return res
+      .status(HttpStatus.OK)
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env["NODE_ENV"] === "production",
+      })
+      .json({
+        success: true,
+        token,
+        message,
+        user,
+      });
+  }
+
   public static signUp({
     res,
     user,

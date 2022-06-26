@@ -1,9 +1,16 @@
 import {
   BuyingOption,
+  PropertyPostsTranslations,
   PropertyStatus,
   PropertyType,
 } from "../../../domain/types";
-import { IsArray, IsEnum, IsInt, IsMongoId, IsNumber } from "class-validator";
+import {
+  IsArray,
+  IsEnum,
+  IsInt,
+  IsNumber,
+  ValidateNested,
+} from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { AddresValidation } from "../common";
 
@@ -11,34 +18,31 @@ export class UpdatePropertyPostDto {
   readonly description: string;
 
   @IsInt({
-    message: i18nValidationMessage("validations.propertyPost.bathroomCountInt"),
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.BATHROOM_COUNT_INT,
+    ),
   })
   readonly bathroomCount: number;
 
   @IsInt({
-    message: i18nValidationMessage("validations.propertyPost.bedroomCountInt"),
+    message: i18nValidationMessage(PropertyPostsTranslations.BEDROOM_COUNT_INT),
   })
   readonly bedroomCount: number;
 
   @IsInt({
     message: i18nValidationMessage(
-      "validations.propertyPost.parkingLotCountInt",
+      PropertyPostsTranslations.PARKING_LOT_COUNT_INT,
     ),
   })
   readonly parkingLotCount: number;
 
   readonly price: number;
 
-  @IsMongoId({
-    message: i18nValidationMessage("validations.propertyPost.sellerMongoId"),
-  })
-  readonly seller: string;
-
   @IsNumber(
     {},
     {
       message: i18nValidationMessage(
-        "validations.propertyPost.territoryNumber",
+        PropertyPostsTranslations.TERRITORY_NUMBER,
       ),
     },
   )
@@ -46,21 +50,21 @@ export class UpdatePropertyPostDto {
 
   @IsEnum(BuyingOption, {
     message: i18nValidationMessage(
-      "validations.propertyPost.invalidBuyingOption",
+      PropertyPostsTranslations.INVALID_BUYING_OPTION,
     ),
   })
   readonly buyingOption: BuyingOption;
 
   @IsEnum(PropertyType, {
     message: i18nValidationMessage(
-      "validations.propertyPost.invalidPropertyType",
+      PropertyPostsTranslations.INVALID_PROPERTY_TYPE,
     ),
   })
   readonly propertyType: PropertyType;
 
   @IsEnum(PropertyStatus, {
     message: i18nValidationMessage(
-      "validations.propertyPost.invalidPropertyStatus",
+      PropertyPostsTranslations.INVALID_PROPERTY_STATUS,
     ),
   })
   readonly propertyStatus: PropertyStatus;
@@ -69,17 +73,18 @@ export class UpdatePropertyPostDto {
 
   @IsArray({
     message: i18nValidationMessage(
-      "validations.propertyPost.secondaryImagesArray",
+      PropertyPostsTranslations.SECONDARY_IMAGES_ARRAY,
     ),
   })
   readonly secondaryImages: string[];
 
   @IsArray({
     message: i18nValidationMessage(
-      "validations.propertyPost.additionalInfoArray",
+      PropertyPostsTranslations.ADDITIONAL_INFO_ARRAY,
     ),
   })
   readonly additionalInfo: string[];
 
+  @ValidateNested()
   readonly address: AddresValidation;
 }

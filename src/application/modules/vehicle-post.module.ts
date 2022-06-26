@@ -4,6 +4,7 @@ import { VehiclePostsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { VehiclePostsService } from "../services/implementations";
+import { UsersModule } from "./users.module";
 
 const VehiclePostProvider: Provider = {
   provide: "IVehiclePostsService",
@@ -12,6 +13,7 @@ const VehiclePostProvider: Provider = {
 
 @Module({
   imports: [
+    UsersModule,
     MongooseModule.forFeature([
       {
         name: "VehiclePost",

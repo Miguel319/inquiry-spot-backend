@@ -1,4 +1,4 @@
-import { User, UserDocument } from "@/domain/entities";
+import { User, UserDocument } from "../../../../domain/entities";
 import {
   BadRequestException,
   ForbiddenException,
@@ -11,23 +11,30 @@ import { Response } from "express";
 import bcrypt from "bcrypt";
 import { IAuthResult, IAuthService, IUsersService } from "../../contracts";
 import crypto from "crypto";
+import { UserTranslations } from "../../../../domain/types";
+import { I18nContext, I18nService } from "nestjs-i18n";
 
 @Injectable()
 export class AuthService implements IAuthService {
   constructor(
     @Inject("IUsersService") private readonly _usersService: IUsersService,
+    private readonly _i18n: I18nService,
     private readonly _jwtService: JwtService,
   ) {}
 
-  async signUp(user: User): Promise<IAuthResult> {
-    await this.validateSignUpEmail(user.email);
+  async signUp(user: User, i18n?: I18nContext): Promise<IAuthResult> {
+    await this.validateSignUpEmail(user.email, i18n as I18nContext);
 
     const newUser = await this._usersService.create?.(
       await this.handleUserSignUp(user),
     );
 
     if (!newUser)
-      throw new InternalServerErrorException("Could not create user");
+      throw new InternalServerErrorException(
+        i18n
+          ? i18n.t(UserTranslations.USER_CREATION_ERROR)
+          : this._i18n.t(UserTranslations.USER_CREATION_ERROR),
+      );
 
     const authResult: IAuthResult = {
       user: newUser,
@@ -37,13 +44,17 @@ export class AuthService implements IAuthService {
     return authResult;
   }
 
-  async signIn(email: string, password: string): Promise<IAuthResult> {
+  async signIn(
+    email: string,
+    password: string,
+    i18n?: I18nContext,
+  ): Promise<IAuthResult> {
     const user: Partial<User> = await this._usersService.findByEmail(
       email,
       true,
     );
 
-    await this.validatePassword(user as User, password);
+    await this.validatePassword(user as User, password, i18n);
 
     delete user.password;
 
@@ -85,20 +96,36 @@ export class AuthService implements IAuthService {
     res.clearCookie("token");
   }
 
-  private async validatePassword(user: User, password: string): Promise<void> {
+  private async validatePassword(
+    user: User,
+    password: string,
+    i18n?: I18nContext,
+  ): Promise<void> {
     const isPasswordRight: boolean = await bcrypt.compare(
       password,
       user.password,
     );
 
-    if (!isPasswordRight) throw new ForbiddenException("Invalid credentials.");
+    if (!isPasswordRight)
+      throw new ForbiddenException(
+        i18n
+          ? i18n.t(UserTranslations.INVALID_CREDENTIALS)
+          : this._i18n.t(UserTranslations.INVALID_CREDENTIALS),
+      );
   }
 
-  private async validateSignUpEmail(email: string): Promise<void> {
+  private async validateSignUpEmail(
+    email: string,
+    i18n: I18nContext,
+  ): Promise<void> {
     const user: User | null = await this._usersService.findByEmail(email);
 
     if (user)
-      throw new BadRequestException("The provided email is already taken.");
+      throw new BadRequestException(
+        i18n
+          ? i18n.t(UserTranslations.DUPLICATE_EMAIL)
+          : this._i18n.t(UserTranslations.DUPLICATE_EMAIL),
+      );
   }
 
   private async handleUserSignUp(user: User): Promise<User> {

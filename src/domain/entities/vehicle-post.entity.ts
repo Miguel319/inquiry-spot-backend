@@ -8,6 +8,7 @@ import {
   Fuel,
   Transmission,
   VehicleStatus,
+  VehiclePostTranslations,
 } from "../types";
 
 import paginate from "mongoose-paginate-v2";
@@ -22,19 +23,22 @@ export type VehiclePostDocument = VehiclePost & Document;
 export class VehiclePost {
   _id: string;
 
-  @Prop({ required: [true, "validations.vehiclePost.description"] })
+  @Prop({ required: [true, VehiclePostTranslations.DESCRIPTION] })
   description: string;
 
-  @Prop({ required: [true, "validations.vehiclePost.make"], enum: VehicleMake })
+  @Prop({
+    required: [true, VehiclePostTranslations.MAKE],
+    enum: VehicleMake,
+  })
   make: VehicleMake;
 
   @Prop({
-    required: [true, "validations.vehiclePost.model"],
+    required: [true, VehiclePostTranslations.MODEL],
   })
   model: string;
 
   @Prop({
-    required: [true, "validations.vehiclePost.vehicleType"],
+    required: [true, VehiclePostTranslations.TYPE],
     enum: VehicleType,
     type: String,
   })
@@ -43,25 +47,28 @@ export class VehiclePost {
   @Prop({
     type: String,
     enum: Transmission,
-    required: [true, "validations.vehiclePost.transmission"],
+    required: [true, VehiclePostTranslations.TRANSMISSION],
   })
   transmission: Transmission;
 
-  @Prop({ required: [true, "validations.vehiclePost.price"] })
+  @Prop({ required: [true, VehiclePostTranslations.PRICE] })
   price: string;
 
-  @Prop({ required: [true, "validations.vehiclePost.doorCount"] })
+  @Prop({
+    required: [true, VehiclePostTranslations.DOOR_COUNT],
+    isInteger: [true, VehiclePostTranslations.DOOR_COUNT_INT],
+  })
   doorCount: number;
 
   @Prop({
-    required: [true, "validations.vehiclePost.exteriorColor"],
+    required: [true, VehiclePostTranslations.EXTERIOR_COLOR],
     enum: Color,
     type: String,
   })
   exteriorColor: Color;
 
   @Prop({
-    required: [true, "validations.vehiclePost.interiorColor"],
+    required: [true, VehiclePostTranslations.INTERIOR_COLOR],
     enum: Color,
     type: String,
   })
@@ -74,14 +81,14 @@ export class VehiclePost {
   topSpeed: string;
 
   @Prop({
-    required: [true, "validations.vehiclePost.fuelType"],
+    required: [true, VehiclePostTranslations.FUEL_TYPE],
     enum: Fuel,
     type: String,
   })
   fuelType: Fuel;
 
   @Prop({
-    required: [true, "validations.vehiclePost.status"],
+    required: [true, VehiclePostTranslations.STATUS],
     enum: VehicleStatus,
     type: String,
   })
@@ -90,13 +97,13 @@ export class VehiclePost {
   @Prop()
   use: string;
 
-  @Prop({ required: [true, "validations.vehiclePost.accessories"] })
+  @Prop({ required: [true, VehiclePostTranslations.ACCESSORIES] })
   accessories: string[];
 
   @Prop({
     type: ObjectId,
     ref: "User",
-    required: [true, "validations.vehiclePost.seller"],
+    required: [true, VehiclePostTranslations.SELLER],
   })
   seller: string;
 
@@ -110,14 +117,14 @@ export class VehiclePost {
 
   @Prop({
     type: String,
-    required: [true, "validations.vehiclePost.primaryImage"],
+    required: [true, VehiclePostTranslations.PRIMARY_IMAGE],
   })
   primaryImage: string;
 
   @Prop([
     {
       type: String,
-      required: [true, "validations.vehiclePost.secondaryImages"],
+      required: [true, VehiclePostTranslations.SECONDARY_IMAGES],
     },
   ])
   secondaryImages: string[];

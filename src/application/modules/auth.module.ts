@@ -15,7 +15,7 @@ const AuthUseCaseProvider: Provider = {
 @Module({
   imports: [
     forwardRef(() => EmailsModule),
-    UsersModule,
+    forwardRef(() => UsersModule),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

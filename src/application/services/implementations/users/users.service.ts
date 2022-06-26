@@ -4,12 +4,13 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
-import { REQUEST } from "@nestjs/core";
-import { Request } from "@nestjs/common";
 import { User } from "@/domain/entities";
 import { UsersRepository } from "../../../../infrastructure/repositories";
 import { IUsersService } from "../../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
+import { UserTranslations } from "../../../../domain/types";
+import { REQUEST } from "@nestjs/core";
+import { Request } from "express";
 
 @Injectable()
 export class UsersService implements IUsersService {
@@ -34,10 +35,10 @@ export class UsersService implements IUsersService {
         ((await this.userRepository.findOne({ email }, {})) as User);
 
     if (signIn && !user)
-      throw new BadRequestException(
+      throw new NotFoundException(
         i18n
-          ? i18n.t("validations.user.notFound")
-          : this._i18n.t("validations.user.notFound"),
+          ? i18n.t(UserTranslations.NOT_FOUND)
+          : this._i18n.t(UserTranslations.NOT_FOUND),
       );
 
     return user;
@@ -55,8 +56,8 @@ export class UsersService implements IUsersService {
     if (!user)
       throw new BadRequestException(
         i18n
-          ? i18n.t("validations.user.invalidToken")
-          : this._i18n.t("validations.user.invalidToken"),
+          ? i18n.t(UserTranslations.INVALID_TOKEN)
+          : this._i18n.t(UserTranslations.INVALID_TOKEN),
       );
 
     return user;
@@ -74,8 +75,8 @@ export class UsersService implements IUsersService {
     if (!user)
       throw new NotFoundException(
         i18n
-          ? i18n.t("validations.user.notFound")
-          : this._i18n.t("validations.user.notFound"),
+          ? i18n.t(UserTranslations.NOT_FOUND)
+          : this._i18n.t(UserTranslations.NOT_FOUND),
       );
 
     return user;

@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { UsersService as UserServiceType, UsersService } from "./users.service";
 import { UsersRepository as UsersRepositoryType } from "../../../../infrastructure/repositories";
 import { UsersRepository } from "../../../../../test/mocks";
-import { User } from "@/domain/entities";
+import { User } from "../../../../domain/entities";
 import { getUserStub } from "../../../../../test/stubs";
 import { REQUEST } from "@nestjs/core";
 import { I18nService } from "nestjs-i18n";
