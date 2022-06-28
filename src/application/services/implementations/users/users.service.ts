@@ -34,7 +34,7 @@ export class UsersService implements IUsersService {
       : //Else
         ((await this.userRepository.findOne({ email }, {})) as User);
 
-    if (signIn && !user)
+    if (!signIn && !user)
       throw new NotFoundException(
         i18n
           ? i18n.t(UserTranslations.NOT_FOUND)

@@ -1,8 +1,8 @@
 export enum VehiclePostTranslations {
   // General Operations
-  CREATE = "general.auth.create",
-  UPDATE = "general.auth.update",
-  DELETE = "general.auth.delete",
+  CREATE = "general.vehiclePost.create",
+  UPDATE = "general.vehiclePost.update",
+  DELETE = "general.vehiclePost.delete",
   // Validations
   DESCRIPTION = "validations.vehiclePost.description",
   MAKE = "validations.vehiclePost.make",

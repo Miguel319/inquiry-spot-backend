@@ -9,6 +9,8 @@ import {
   SharedTranslations,
 } from "../types";
 
+import paginate from "mongoose-paginate-v2";
+
 export type PropertyPostDocument = PropertyPost & Document;
 
 const {
@@ -123,3 +125,5 @@ export class PropertyPost {
 }
 
 export const PropertyPostSchema = SchemaFactory.createForClass(PropertyPost);
+
+PropertyPostSchema.plugin(paginate);

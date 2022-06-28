@@ -54,6 +54,13 @@ export class AuthService implements IAuthService {
       true,
     );
 
+    if (!user)
+      throw new ForbiddenException(
+        i18n
+          ? i18n.t(UserTranslations.INVALID_CREDENTIALS)
+          : this._i18n.t(UserTranslations.INVALID_CREDENTIALS),
+      );
+
     await this.validatePassword(user as User, password, i18n);
 
     delete user.password;
