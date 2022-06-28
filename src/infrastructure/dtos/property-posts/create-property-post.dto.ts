@@ -31,9 +31,7 @@ export class CreatePropertyPostDto {
     ),
   })
   @IsNotEmpty({
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.BATHROOM_COUNT_INT,
-    ),
+    message: i18nValidationMessage(PropertyPostsTranslations.BATHROOM_COUNT),
   })
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.BATHROOM_COUNT),

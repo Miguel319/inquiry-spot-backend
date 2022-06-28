@@ -36,7 +36,7 @@ export class VehiclePostsController {
   async findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
-  ) {
+  ): Promise<VehiclePost[]> {
     return await this._vehiclePostsService.findAll(paginationQuery, i18n);
   }
 
@@ -76,7 +76,7 @@ export class VehiclePostsController {
     @Body() vehiclePostDto: UpdateVehiclePostDto,
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
-  ) {
+  ): Promise<Response> {
     const vehiclePost = await this._vehiclePostsService.update?.(
       _id,
       vehiclePostDto as unknown as VehiclePost,
@@ -96,7 +96,7 @@ export class VehiclePostsController {
     @Param("_id") _id: string,
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
-  ) {
+  ): Promise<Response<unknown, Record<string, unknown>>> {
     await this._vehiclePostsService.delete?.(_id, i18n);
 
     return ApiResponse.delete({

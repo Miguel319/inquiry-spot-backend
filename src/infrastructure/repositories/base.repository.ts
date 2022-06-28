@@ -1,4 +1,4 @@
-import { IRepository } from "@/application/repositories";
+import { IRepository } from "../../application/repositories";
 import { PipelineStage } from "mongoose";
 import {
   AnyKeys,
@@ -54,13 +54,12 @@ export abstract class BaseRepository<T extends Document>
   }
 
   async find(entityFilterQuery: FilterQuery<T>, select?: string): Promise<T[]> {
-    if (select) {
+    if (select)
       return await this.entityModel
         .find(entityFilterQuery, {
           __v: 0,
         })
         .select(select);
-    }
 
     return await this.entityModel.find(entityFilterQuery, {
       __v: 0,
