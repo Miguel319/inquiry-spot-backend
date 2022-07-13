@@ -1,8 +1,14 @@
 import { PaginationQuery } from "@/domain/types";
+import { PaginatedQuery } from "@/infrastructure/common/util";
 import { I18nContext } from "nestjs-i18n";
+import { Document } from "mongoose";
 
-export interface IBaseService<T> {
-  findAll(paginationQuery?: PaginationQuery, i18n?: I18nContext): Promise<T[]>;
+export interface IBaseService<T extends Document> {
+  findAll(
+    paginationQuery?: PaginationQuery,
+    i18n?: I18nContext,
+  ): Promise<T[] | PaginatedQuery<T>>;
+
   findById(_id: string, i18n?: I18nContext): Promise<T>;
   create?(entity: T, i18n?: I18nContext): Promise<T>;
   update?(_id: string, entity: T, i18n?: I18nContext): Promise<T | null>;

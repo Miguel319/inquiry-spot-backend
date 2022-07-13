@@ -4,3 +4,4 @@ export { IAuthResult, IAuthService } from "./i-auth.service";
 export { IEmailsService } from "./i-email.service";
 export { IVehiclePostsService } from "./i-vehicle-post.service";
 export { IPropertyPostsService } from "./i-property-post.service";
+export { ISellersService } from "./i-sellers.service";

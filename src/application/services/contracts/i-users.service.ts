@@ -1,8 +1,8 @@
-import { User } from "@/domain/entities";
+import { User, UserDocument } from "@/domain/entities";
 import { I18nContext } from "nestjs-i18n";
 import { IBaseService } from "./i-base.service";
 
-export interface IUsersService extends IBaseService<User> {
+export interface IUsersService extends IBaseService<UserDocument> {
   findByEmail(
     email: string,
     signIn?: boolean,

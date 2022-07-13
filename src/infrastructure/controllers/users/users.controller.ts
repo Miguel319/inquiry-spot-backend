@@ -19,7 +19,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async findAll(): Promise<Array<User>> {
+  async findAll() {
     return await this.usersService.findAll();
   }
 

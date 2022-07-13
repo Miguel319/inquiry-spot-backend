@@ -1,8 +1,11 @@
-import { PropertyPost, UserDocument } from "@/domain/entities";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+  UserDocument,
+} from "@/domain/entities";
 import { PropertyPostsRepository } from "../../../../infrastructure/repositories";
 import {
   Inject,
-  // Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -17,6 +20,7 @@ import {
 } from "../../../../domain/types";
 import {
   getPaginationOptions,
+  PaginatedQuery,
   PaginationOptions,
 } from "../../../../infrastructure/common/util";
 
@@ -43,16 +47,22 @@ export class PropertyPostsService implements IPropertyPostsService {
   async findAll(
     paginationQuery: PaginationQuery,
     i18n?: I18nContext,
-  ): Promise<PropertyPost[]> {
+  ): Promise<PaginatedQuery<PropertyPostDocument>> {
     const options: PaginationOptions = this.getPaginationOptions(
       paginationQuery,
       i18n as I18nContext,
     );
 
-    return await this._propertyPostRepo.paginate({}, options);
+    return (await this._propertyPostRepo.paginate(
+      {},
+      options,
+    )) as unknown as PaginatedQuery<PropertyPostDocument>;
   }
 
-  async findById(_id: string, i18n?: I18nContext): Promise<PropertyPost> {
+  async findById(
+    _id: string,
+    i18n?: I18nContext,
+  ): Promise<PropertyPostDocument> {
     const propertyPost: PropertyPost | null =
       await this._propertyPostRepo.findOne({ _id });
 
@@ -64,7 +74,7 @@ export class PropertyPostsService implements IPropertyPostsService {
       );
     }
 
-    return propertyPost;
+    return propertyPost as PropertyPostDocument;
   }
 
   private async findCurrentUser(i18n: I18nContext): Promise<UserDocument> {
@@ -83,7 +93,7 @@ export class PropertyPostsService implements IPropertyPostsService {
   async create(
     propertyPost: PropertyPost,
     i18n?: I18nContext,
-  ): Promise<PropertyPost> {
+  ): Promise<PropertyPostDocument> {
     const user = await this.findCurrentUser(i18n as I18nContext);
 
     if (!user.propertyPostsPublished) user.propertyPostsPublished = [];
@@ -104,7 +114,7 @@ export class PropertyPostsService implements IPropertyPostsService {
     _id: string,
     propertyPost: PropertyPost,
     i18n?: I18nContext,
-  ): Promise<PropertyPost | null> {
+  ): Promise<PropertyPostDocument | null> {
     const user = await this.findCurrentUser(i18n as I18nContext);
 
     const propertyPostFound = await this.findById(_id, i18n);

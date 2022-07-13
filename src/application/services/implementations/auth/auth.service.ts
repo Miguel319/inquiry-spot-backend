@@ -22,7 +22,7 @@ export class AuthService implements IAuthService {
     private readonly _jwtService: JwtService,
   ) {}
 
-  async signUp(user: User, i18n?: I18nContext): Promise<IAuthResult> {
+  async signUp(user: UserDocument, i18n?: I18nContext): Promise<IAuthResult> {
     await this.validateSignUpEmail(user.email, i18n as I18nContext);
 
     const newUser = await this._usersService.create?.(
@@ -135,7 +135,7 @@ export class AuthService implements IAuthService {
       );
   }
 
-  private async handleUserSignUp(user: User): Promise<User> {
+  private async handleUserSignUp(user: UserDocument): Promise<UserDocument> {
     user.password = await this.hashPassword(user.password);
 
     return user;

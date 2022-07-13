@@ -1,12 +1,26 @@
 import { PaginationQuery, SharedTranslations } from "../../../domain/types";
 import { UnauthorizedException } from "@nestjs/common";
 import { I18nContext, I18nService } from "nestjs-i18n";
+import { Document } from "mongoose";
 
 export interface PaginationOptions {
   page: number;
   limit: number;
   sort?: string;
   select?: string;
+}
+
+export interface PaginatedQuery<T extends Document> {
+  docs: T[];
+  totalDocs: number;
+  offset: number;
+  limit: number;
+  page: number;
+  pagingCunter: number;
+  hasPrevPage: number;
+  hasNextPage: number;
+  prevPage: number | null;
+  nextPage: number | null;
 }
 
 export const getPaginationOptions = (

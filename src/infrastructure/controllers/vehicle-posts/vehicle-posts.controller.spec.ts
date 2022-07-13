@@ -4,7 +4,7 @@ import { mockResObj, VehiclePostsService } from "../../../../test/mocks";
 
 import { VehiclePostsService as VehiclePostsServiceType } from "../../../application/services/implementations";
 import { Test, TestingModule } from "@nestjs/testing";
-import { VehiclePost } from "../../../domain/entities";
+import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 import { getVehiclePostStub } from "../../../../test/stubs";
 import {
   CreateVehiclePostDto,
@@ -13,6 +13,7 @@ import {
 import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
 import e, { Response } from "express";
+import { PaginatedQuery } from "@/infrastructure/common/util";
 
 describe("VehicleController", () => {
   let controller: VehiclePostsController;
@@ -46,7 +47,7 @@ describe("VehicleController", () => {
 
   describe("findAll", () => {
     describe("when findAll is called", () => {
-      let vehiclePosts: VehiclePost[];
+      let vehiclePosts: PaginatedQuery<VehiclePostDocument>;
 
       beforeEach(async () => {
         vehiclePosts = await controller.findAll({ page: 1, perPage: 10 });

@@ -10,11 +10,15 @@ import {
   UsersRepository,
   UsersService,
 } from "../../../../../test/mocks";
-import { PropertyPost } from "../../../../domain/entities";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+} from "../../../../domain/entities";
 import { getPropertyPostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
 import { UsersService as UsersServiceType } from "../users/users.service";
 import { UsersRepository as UsersRepositoryType } from "../../../../infrastructure/repositories";
+import { PaginatedQuery } from "@/infrastructure/common/util";
 
 describe.skip("PropertyPostsService", () => {
   let service: PropertyPostServiceType;
@@ -80,7 +84,7 @@ describe.skip("PropertyPostsService", () => {
 
   describe("operations", () => {
     describe("findAll", () => {
-      let propertyPosts: Array<PropertyPost>;
+      let propertyPosts: PaginatedQuery<PropertyPostDocument>;
 
       beforeEach(async () => {
         propertyPosts = await service.findAll({ page: 1, perPage: 10 });
