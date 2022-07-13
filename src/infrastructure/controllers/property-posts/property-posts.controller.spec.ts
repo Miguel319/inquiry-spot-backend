@@ -4,7 +4,7 @@ import { mockResObj, PropertyPostsService } from "../../../../test/mocks";
 
 import { PropertyPostsService as PropertyPostsServiceType } from "../../../application/services/implementations";
 import { Test, TestingModule } from "@nestjs/testing";
-import { PropertyPost } from "../../../domain/entities";
+import { PropertyPost, PropertyPostDocument } from "../../../domain/entities";
 import { getPropertyPostStub } from "../../../../test/stubs";
 import {
   CreatePropertyPostDto,
@@ -13,6 +13,7 @@ import {
 import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
 import e, { Response } from "express";
+import { PaginatedQuery } from "@/infrastructure/common/util";
 
 describe("PropertyController", () => {
   let controller: PropertyPostsController;
@@ -46,7 +47,7 @@ describe("PropertyController", () => {
 
   describe("findAll", () => {
     describe("when findAll is called", () => {
-      let propertyPosts: PropertyPost[];
+      let propertyPosts: PaginatedQuery<PropertyPostDocument>;
 
       beforeEach(async () => {
         propertyPosts = await controller.findAll({ page: 1, perPage: 10 });

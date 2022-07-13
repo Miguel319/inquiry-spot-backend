@@ -10,14 +10,14 @@ export class UserPresenter extends Presenter {
   email: string;
 
   @ApiProperty()
-  photo: string;
+  image: string;
 
   private constructor(user: User) {
     super(user._id);
 
     this.name = user.name;
     this.email = user.email;
-    this.photo = user.photo;
+    this.image = user.image;
   }
 
   static create(user: User): UserPresenter {

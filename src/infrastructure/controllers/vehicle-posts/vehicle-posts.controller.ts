@@ -1,5 +1,4 @@
 import { IVehiclePostsService } from "../../../application/services/contracts";
-import { VehiclePost } from "../../../domain/entities";
 import { PaginationQuery } from "../../../domain/types/common/pagination-query";
 import { ApiResponse } from "../../../infrastructure/common/api";
 import {
@@ -24,6 +23,13 @@ import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { VehiclePostTranslations } from "../../../domain/types";
 import { JwtAuthGuard } from "../../../infrastructure/guards";
+import { HasRoles } from "../../../infrastructure/common/decorators";
+import { PaginatedQuery } from "../../../infrastructure/common/util";
+import {
+  Role,
+  VehiclePost,
+  VehiclePostDocument,
+} from "../../../domain/entities";
 
 @Controller("vehicle-posts")
 export class VehiclePostsController {
@@ -36,7 +42,7 @@ export class VehiclePostsController {
   async findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
-  ): Promise<VehiclePost[]> {
+  ): Promise<PaginatedQuery<VehiclePostDocument>> {
     return await this._vehiclePostsService.findAll(paginationQuery, i18n);
   }
 
@@ -51,13 +57,14 @@ export class VehiclePostsController {
   @Post()
   @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async create(
     @Body() vehiclePostDto: CreateVehiclePostDto,
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
     const vehiclePost = await this._vehiclePostsService.create?.(
-      vehiclePostDto as unknown as VehiclePost,
+      vehiclePostDto as unknown as VehiclePostDocument,
       i18n,
     );
 
@@ -79,7 +86,7 @@ export class VehiclePostsController {
   ): Promise<Response> {
     const vehiclePost = await this._vehiclePostsService.update?.(
       _id,
-      vehiclePostDto as unknown as VehiclePost,
+      vehiclePostDto as unknown as VehiclePostDocument,
       i18n,
     );
 
@@ -114,7 +121,7 @@ export class VehiclePostsController {
     return await this._vehiclePostsService.findFromSeller(_id, seller, i18n);
   }
 
-  @Get(":seller")
+  @Get("from-seller/:seller")
   async findAllFromSeller(
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,

@@ -9,12 +9,13 @@ import {
   UsersRepository,
   VehiclePostsRepository,
 } from "../../../../../test/mocks";
-import { VehiclePost } from "../../../../domain/entities";
+import { VehiclePost, VehiclePostDocument } from "../../../../domain/entities";
 import { getVehiclePostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
 import { UsersRepository as UsersRepositoryType } from "../../../../infrastructure/repositories";
 
 import { UsersService } from "../users/users.service";
+import { PaginatedQuery } from "@/infrastructure/common/util";
 
 describe.skip("VehiclePostsService", () => {
   let service: VehiclePostServiceType;
@@ -72,7 +73,7 @@ describe.skip("VehiclePostsService", () => {
 
   describe("operations", () => {
     describe("findAll", () => {
-      let vehiclePosts: Array<VehiclePost>;
+      let vehiclePosts: PaginatedQuery<VehiclePostDocument>;
 
       beforeEach(async () => {
         vehiclePosts = await service.findAll({ page: 1, perPage: 10 });

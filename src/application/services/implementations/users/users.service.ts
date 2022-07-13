@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
-import { User } from "@/domain/entities";
+import { User, UserDocument } from "@/domain/entities";
 import { UsersRepository } from "../../../../infrastructure/repositories";
 import { IUsersService } from "../../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
@@ -34,7 +34,7 @@ export class UsersService implements IUsersService {
       : //Else
         ((await this.userRepository.findOne({ email }, {})) as User);
 
-    if (!signIn && !user)
+    if (signIn && !user)
       throw new NotFoundException(
         i18n
           ? i18n.t(UserTranslations.NOT_FOUND)
@@ -63,14 +63,16 @@ export class UsersService implements IUsersService {
     return user;
   }
 
-  async findAll(): Promise<User[]> {
-    const users: User[] = await this.userRepository.find({});
+  async findAll(): Promise<UserDocument[]> {
+    const users = await this.userRepository.find({});
 
     return users;
   }
 
-  async findById(_id: string, i18n?: I18nContext): Promise<User> {
-    const user: User | null = await this.userRepository.findOne({ _id });
+  async findById(_id: string, i18n?: I18nContext): Promise<UserDocument> {
+    const user: UserDocument | null = await this.userRepository.findOne({
+      _id,
+    });
 
     if (!user)
       throw new NotFoundException(
@@ -92,11 +94,11 @@ export class UsersService implements IUsersService {
     return user;
   }
 
-  async create(user: User): Promise<User> {
+  async create(user: User): Promise<UserDocument> {
     return await this.userRepository.create(user);
   }
 
-  async update(_id: string, entity: User): Promise<User | null> {
+  async update(_id: string, entity: User): Promise<UserDocument | null> {
     await this.findById(_id);
 
     return await this.userRepository.findOneAndUpdate({ _id }, entity);

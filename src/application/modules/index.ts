@@ -8,6 +8,7 @@ import { LoggerModule } from "./logger.module";
 import { PropertyPostModule } from "./property-post.module";
 import { UsersModule } from "./users.module";
 import { VehiclePostModule } from "./vehicle-post.module";
+import { SellersModule } from "./sellers.module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { VehiclePostModule } from "./vehicle-post.module";
     LoggerModule,
     InternationalizationModule,
     PropertyPostModule,
+    SellersModule,
     AuthModule,
     EmailsModule,
     VehiclePostModule,

@@ -1,4 +1,8 @@
-import { UserDocument, VehiclePost } from "@/domain/entities";
+import {
+  UserDocument,
+  VehiclePost,
+  VehiclePostDocument,
+} from "@/domain/entities";
 import { VehiclePostsRepository } from "../../../../infrastructure/repositories";
 import {
   Inject,
@@ -14,9 +18,9 @@ import {
   UserTranslations,
   VehiclePostTranslations,
 } from "../../../../domain/types";
-
 import {
   getPaginationOptions,
+  PaginatedQuery,
   PaginationOptions,
 } from "../../../../infrastructure/common/util";
 
@@ -28,7 +32,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     @Inject("IUsersService") private readonly _usersService: IUsersService,
   ) {}
 
-  private getPaginationOptions(
+  private getVehiclePostPaginationOptions(
     paginationQuery: PaginationQuery,
     i18n?: I18nContext,
   ): PaginationOptions {
@@ -43,16 +47,22 @@ export class VehiclePostsService implements IVehiclePostsService {
   async findAll(
     paginationQuery: PaginationQuery,
     i18n?: I18nContext,
-  ): Promise<VehiclePost[]> {
-    const options: PaginationOptions = this.getPaginationOptions(
+  ): Promise<PaginatedQuery<VehiclePostDocument>> {
+    const options: PaginationOptions = this.getVehiclePostPaginationOptions(
       paginationQuery,
       i18n as I18nContext,
     );
 
-    return await this._vehiclePostRepo.paginate({}, options);
+    return (await this._vehiclePostRepo.paginate(
+      {},
+      options,
+    )) as unknown as PaginatedQuery<VehiclePostDocument>;
   }
 
-  async findById(_id: string, i18n?: I18nContext): Promise<VehiclePost> {
+  async findById(
+    _id: string,
+    i18n?: I18nContext,
+  ): Promise<VehiclePostDocument> {
     const vehiclePost: VehiclePost | null = await this._vehiclePostRepo.findOne(
       { _id },
     );
@@ -64,7 +74,7 @@ export class VehiclePostsService implements IVehiclePostsService {
           : this._i18n.t(VehiclePostTranslations.NOT_FOUND),
       );
 
-    return vehiclePost;
+    return vehiclePost as VehiclePostDocument;
   }
 
   private async findCurrentUser(i18n: I18nContext): Promise<UserDocument> {
@@ -83,28 +93,28 @@ export class VehiclePostsService implements IVehiclePostsService {
   async create(
     vehiclePost: VehiclePost,
     i18n?: I18nContext,
-  ): Promise<VehiclePost> {
+  ): Promise<VehiclePostDocument> {
     const user = await this.findCurrentUser(i18n as I18nContext);
 
     if (!user.vehiclePostsPublished) user.vehiclePostsPublished = [];
 
-    const newPropertyPost = await this._vehiclePostRepo.create({
+    const newVehiclePost = await this._vehiclePostRepo.create({
       ...vehiclePost,
       seller: user._id,
     });
 
-    user.vehiclePostsPublished.push(newPropertyPost._id);
+    user.vehiclePostsPublished.push(newVehiclePost._id);
 
     await user.save();
 
-    return newPropertyPost;
+    return newVehiclePost;
   }
 
   async update(
     _id: string,
     vehiclePost: VehiclePost,
     i18n?: I18nContext,
-  ): Promise<VehiclePost | null> {
+  ): Promise<VehiclePostDocument | null> {
     const user = await this.findCurrentUser(i18n as I18nContext);
 
     const vehiclePostFound = await this.findById(_id, i18n);
@@ -122,9 +132,9 @@ export class VehiclePostsService implements IVehiclePostsService {
   async delete(_id: string, i18n?: I18nContext): Promise<boolean> {
     const user = await this.findCurrentUser(i18n as I18nContext);
 
-    const propertyPost = await this.findById(_id);
+    const vehiclePost = await this.findById(_id, i18n);
 
-    if (propertyPost.seller !== user._id)
+    if (vehiclePost.seller !== user._id)
       throw new UnauthorizedException(
         i18n
           ? i18n.t(SharedTranslations.UNAUTHORIZED)
@@ -139,17 +149,18 @@ export class VehiclePostsService implements IVehiclePostsService {
     seller: string,
     i18n?: I18nContext,
   ): Promise<VehiclePost> {
-    const propertyPost: VehiclePost | null =
-      await this._vehiclePostRepo.findOne({ seller, _id });
+    const vehiclePost: VehiclePost | null = await this._vehiclePostRepo.findOne(
+      { seller, _id },
+    );
 
-    if (!propertyPost)
+    if (!vehiclePost)
       throw new NotFoundException(
         i18n
           ? i18n.t(VehiclePostTranslations.NOT_FOUND)
           : this._i18n.t(VehiclePostTranslations.NOT_FOUND),
       );
 
-    return propertyPost;
+    return vehiclePost;
   }
 
   async findAllFromSeller(
@@ -157,7 +168,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     paginationQuery: PaginationQuery,
     i18n?: I18nContext,
   ): Promise<VehiclePost[]> {
-    const options: PaginationOptions = this.getPaginationOptions(
+    const options: PaginationOptions = this.getVehiclePostPaginationOptions(
       paginationQuery,
       i18n as I18nContext,
     );

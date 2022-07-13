@@ -1,9 +1,10 @@
-import { PropertyPost } from "@/domain/entities";
+import { PropertyPost, PropertyPostDocument } from "@/domain/entities";
 import { PaginationQuery } from "@/domain/types";
 import { I18nContext } from "nestjs-i18n";
 import { IBaseService } from "./i-base.service";
 
-export interface IPropertyPostsService extends IBaseService<PropertyPost> {
+export interface IPropertyPostsService
+  extends IBaseService<PropertyPostDocument> {
   findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,

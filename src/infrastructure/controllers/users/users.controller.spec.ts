@@ -4,10 +4,11 @@ import { UsersController } from "./users.controller";
 import { getUserStub } from "../../../../test/stubs";
 import { Provider } from "@nestjs/common";
 
-import { User } from "../../../domain/entities";
+import { User, UserDocument } from "../../../domain/entities";
 import { UsersService as UserServiceType } from "../../../application/services/implementations";
 
 import { UsersService } from "../../../../test/mocks";
+import { PaginatedQuery } from "@/infrastructure/common/util";
 
 describe("UsersController", () => {
   let controller: UsersController;
@@ -36,7 +37,8 @@ describe("UsersController", () => {
 
   describe("findAll", () => {
     describe("when findAll is called", () => {
-      let users: Array<User>;
+      let users: User[] | PaginatedQuery<UserDocument>;
+
       beforeEach(async () => {
         users = await controller.findAll();
       });

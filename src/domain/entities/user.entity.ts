@@ -97,7 +97,7 @@ export class User {
   resetPasswordExpire?: number;
 
   @Prop({ data: Buffer, contentType: String })
-  photo: string;
+  image: string;
 
   @Prop()
   resetPasswordLink: string;

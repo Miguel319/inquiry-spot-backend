@@ -1,5 +1,9 @@
 import { IPropertyPostsService } from "@/application/services/contracts";
-import { PropertyPost } from "../../../domain/entities";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+  Role,
+} from "../../../domain/entities";
 import {
   PaginationQuery,
   PropertyPostsTranslations,
@@ -25,6 +29,8 @@ import {
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { JwtAuthGuard } from "../../../infrastructure/guards";
+import { HasRoles } from "../../../infrastructure/common/decorators";
+import { PaginatedQuery } from "../../../infrastructure/common/util";
 
 @Controller("property-posts")
 export class PropertyPostsController {
@@ -37,8 +43,11 @@ export class PropertyPostsController {
   async findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
-  ) {
-    return await this._propertyPostsService.findAll(paginationQuery, i18n);
+  ): Promise<PaginatedQuery<PropertyPostDocument>> {
+    return (await this._propertyPostsService.findAll(
+      paginationQuery,
+      i18n,
+    )) as PaginatedQuery<PropertyPostDocument>;
   }
 
   @Get(":_id")
@@ -52,13 +61,14 @@ export class PropertyPostsController {
   @Post()
   @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async create(
     @Body() propertyPostDto: CreatePropertyPostDto,
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
     const propertyPost = await this._propertyPostsService.create?.(
-      propertyPostDto as unknown as PropertyPost,
+      propertyPostDto as unknown as PropertyPostDocument,
       i18n,
     );
 
@@ -72,6 +82,7 @@ export class PropertyPostsController {
   @Put(":_id")
   @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async update(
     @Param("_id") _id: string,
     @Body() propertyPostDto: UpdatePropertyPostDto,
@@ -80,7 +91,7 @@ export class PropertyPostsController {
   ): Promise<Response> {
     const propertyPost = await this._propertyPostsService.update?.(
       _id,
-      propertyPostDto as unknown as PropertyPost,
+      propertyPostDto as unknown as PropertyPostDocument,
       i18n,
     );
 
@@ -93,6 +104,7 @@ export class PropertyPostsController {
 
   @Put(":_id")
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async delete(
     @Param("_id") _id: string,
     @Res() res: Response,
@@ -106,7 +118,8 @@ export class PropertyPostsController {
     });
   }
 
-  @Get(":seller")
+  @Get("from-seller/:seller")
+  @UseGuards(JwtAuthGuard)
   async findAllFromSeller(
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,
