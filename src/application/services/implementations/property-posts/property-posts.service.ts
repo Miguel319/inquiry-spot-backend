@@ -39,7 +39,7 @@ export class PropertyPostsService implements IPropertyPostsService {
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
       select:
-        "_id description model fuelType type bedroomCount bathroomCount seller primaryImage createdAt",
+        "_id description buyingOption propertyType propertyStatus price seller primaryImage createdAt",
       sort: "-createdAt",
     };
   }
@@ -52,7 +52,6 @@ export class PropertyPostsService implements IPropertyPostsService {
       paginationQuery,
       i18n as I18nContext,
     );
-
     return (await this._propertyPostRepo.paginate(
       {},
       options,
@@ -73,7 +72,6 @@ export class PropertyPostsService implements IPropertyPostsService {
           : this._i18n.t(PropertyPostsTranslations.NOT_FOUND),
       );
     }
-
     return propertyPost as PropertyPostDocument;
   }
 

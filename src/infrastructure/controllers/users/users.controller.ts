@@ -9,7 +9,7 @@ import {
   UseFilters,
   UseGuards,
 } from "@nestjs/common";
-import { I18nValidationExceptionFilter } from "nestjs-i18n";
+import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 
 @Controller("users")
 export class UsersController {
@@ -25,9 +25,23 @@ export class UsersController {
 
   @Get(":_id")
   @UseFilters(new I18nValidationExceptionFilter())
-  async findById(@Param("_id") _id: string): Promise<User> {
-    const user: User = await this.usersService.findById(_id);
+  async findById(
+    @Param("_id") _id: string,
+    @I18n() i18n?: I18nContext,
+  ): Promise<User> {
+    const user: User = await this.usersService.findById(_id, i18n);
 
+    return user;
+  }
+
+  @Get("by-email/:email")
+  @UseFilters(new I18nValidationExceptionFilter())
+  async findByEmail(
+    @Param("email") email: string,
+    @I18n() i18n: I18nContext,
+  ): Promise<User> {
+    const user: User = await this.usersService.findByEmail(email, false, i18n);
+    console.log(email);
     return user;
   }
 

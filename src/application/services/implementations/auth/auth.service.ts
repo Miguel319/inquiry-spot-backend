@@ -28,7 +28,6 @@ export class AuthService implements IAuthService {
     const newUser = await this._usersService.create?.(
       await this.handleUserSignUp(user),
     );
-
     if (!newUser)
       throw new InternalServerErrorException(
         i18n
