@@ -52,7 +52,6 @@ export class PropertyPostsService implements IPropertyPostsService {
       paginationQuery,
       i18n as I18nContext,
     );
-
     return (await this._propertyPostRepo.paginate(
       {},
       options,
@@ -73,7 +72,6 @@ export class PropertyPostsService implements IPropertyPostsService {
           : this._i18n.t(PropertyPostsTranslations.NOT_FOUND),
       );
     }
-
     return propertyPost as PropertyPostDocument;
   }
 
