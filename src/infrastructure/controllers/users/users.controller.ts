@@ -40,7 +40,7 @@ export class UsersController {
     @Param("email") email: string,
     @I18n() i18n: I18nContext,
   ): Promise<User> {
-    const user: User = await this.usersService.findByEmail(email, false, i18n);
+    const user: User = await this.usersService.findByEmail(email, true, i18n);
     console.log(email);
     return user;
   }
