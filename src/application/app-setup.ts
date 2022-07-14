@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
 import { RootModule } from "./modules";
-import { ConfigService } from "@nestjs/config";
+// import { ConfigService } from "@nestjs/config";
 import { LoggingInterceptor } from "@/infrastructure/common/interceptors";
 import {
   ValidationFilter,
@@ -22,8 +22,8 @@ export class AppSetup {
       const app: NestExpressApplication =
         await NestFactory.create<NestExpressApplication>(RootModule);
 
-      const configService: ConfigService<unknown, boolean> =
-        app.get(ConfigService);
+      // const configService: ConfigService<unknown, boolean> =
+      //   app.get(ConfigService);
 
       this.setBasicConfig(app);
       this.setupGlobalPipes(app);
@@ -32,7 +32,7 @@ export class AppSetup {
       this.setupGlobalInterceptors(app);
       this.buildAPIDocumentation(app);
 
-      const port: number = configService.get("API_PORT") || 3000;
+      const port: number = Number(process.env["API_PORT"]) || 3000;
 
       this.log(port);
 
