@@ -114,7 +114,7 @@ export class AppSetup {
   }
 
   private log(port: number): void {
-    Logger.log(`✔️   Server started on port: ${port}.`);
+    Logger.log(`✔️  Server started on port: ${port}.`);
   }
 
   static create(): AppSetup {
