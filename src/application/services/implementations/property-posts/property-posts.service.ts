@@ -39,7 +39,7 @@ export class PropertyPostsService implements IPropertyPostsService {
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
       select:
-        "_id description buyingOption propertyType propertyStatus price seller primaryImage createdAt",
+        "_id description buyingOption territory type address propertyStatus price bedroomCoupnt bathroomCount parkingLotCount seller primaryImage createdAt",
       sort: "-createdAt",
     };
   }
