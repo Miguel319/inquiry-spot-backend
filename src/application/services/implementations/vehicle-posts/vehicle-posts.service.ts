@@ -39,7 +39,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
       select:
-        "_id make model price type transmission status seller primaryImage createdAt",
+        "_id make model price type transmission use status seller primaryImage createdAt",
       sort: "-createdAt",
     };
   }

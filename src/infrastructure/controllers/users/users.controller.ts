@@ -41,7 +41,7 @@ export class UsersController {
     @I18n() i18n: I18nContext,
   ): Promise<User> {
     const user: User = await this.usersService.findByEmail(email, false, i18n);
-    console.log(email);
+
     return user;
   }
 
