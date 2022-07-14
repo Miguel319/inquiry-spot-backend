@@ -21,6 +21,6 @@ steps:
       npm run build
     displayName: "Build the app"
 
-  - script: |
-      npm run test
-    displayName: "Run all tests"
+  # - script: |
+  #     npm run test
+  #   displayName: "Run all tests"
