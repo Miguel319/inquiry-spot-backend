@@ -32,7 +32,7 @@ export class AppSetup {
       this.setupGlobalInterceptors(app);
       this.buildAPIDocumentation(app);
 
-      const port: number = Number(process.env["API_PORT"]) || 3000;
+      const port: number = (process.env.PORT as unknown as number) || 3000;
 
       this.log(port);
 
