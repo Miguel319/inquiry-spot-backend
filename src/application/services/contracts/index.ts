@@ -5,3 +5,6 @@ export { IEmailsService } from "./i-email.service";
 export { IVehiclePostsService } from "./i-vehicle-post.service";
 export { IPropertyPostsService } from "./i-property-post.service";
 export { ISellersService } from "./i-sellers.service";
+export { IBaseSlugUseCase } from "./i-base.slug.service";
+export { IBlogsService } from "./i-blogs.service";
+export { ITagsService } from "./i-tags.service";

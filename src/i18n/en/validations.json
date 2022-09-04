@@ -53,11 +53,13 @@
     "invalidStatus": "The vehicle status provided is invalid.",
     "accessories": "The accessories are mandatory.",
     "accessoriesArray": "The accessories must be an array.",
+    "accessoriesLength": "You must include at least one accessory.",
     "transmission": "The transmission is mandatory.",
     "invalidTransmission": "The provided transmission is invalid.",
     "primaryImage": "The primary image is mandatory.",
     "secondaryImages": "The secondary images are mandatory.",
     "secondaryImagesArray": "The secondary images must be an array.",
+    "secondaryImagesLength": "You must include at least one secondary image.",
     "notFound": "Vehicle post not found.",
     "electric": {
       "range": "The range of the electric vehicle is mandatory.",

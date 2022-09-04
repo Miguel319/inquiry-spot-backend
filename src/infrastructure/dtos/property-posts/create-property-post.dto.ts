@@ -1,5 +1,6 @@
 import {
   BuyingOption,
+  Price,
   PropertyPostsTranslations,
   PropertyStatus,
   PropertyType,
@@ -68,7 +69,7 @@ export class CreatePropertyPostDto {
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.PRICE),
   })
-  readonly price: number;
+  readonly price: Price;
 
   @IsNumber(
     {},

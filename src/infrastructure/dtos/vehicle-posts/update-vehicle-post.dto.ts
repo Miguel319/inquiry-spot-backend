@@ -83,4 +83,6 @@ export class UpdateVehiclePostDto {
     ),
   })
   readonly secondaryImages: string[];
+
+  readonly isOptional: boolean;
 }

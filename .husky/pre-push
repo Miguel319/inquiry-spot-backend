@@ -2,10 +2,10 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 
-echo 'Running tests...';
-npm run test || (
-    echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.'
-);
+# echo 'Running tests...';
+# npm run test || (
+#     echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.'
+# );
 
 echo 'Building project...';
 npm run build || (

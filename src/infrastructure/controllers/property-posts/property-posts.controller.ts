@@ -1,12 +1,9 @@
 import { IPropertyPostsService } from "@/application/services/contracts";
-import {
-  PropertyPost,
-  PropertyPostDocument,
-  Role,
-} from "../../../domain/entities";
+import { PropertyPost, PropertyPostDocument } from "../../../domain/entities";
 import {
   PaginationQuery,
   PropertyPostsTranslations,
+  Role,
 } from "../../../domain/types";
 import { ApiResponse } from "../../../infrastructure/common/api";
 import {
@@ -51,11 +48,11 @@ export class PropertyPostsController {
   }
 
   @Get(":_id")
-  async findById(
+  findById(
     @Param("_id") _id: string,
     @I18n() i18n?: I18nContext,
   ): Promise<PropertyPost> {
-    return await this._propertyPostsService.findById(_id, i18n);
+    return this._propertyPostsService.findById(_id, i18n);
   }
 
   @Post()
@@ -120,12 +117,12 @@ export class PropertyPostsController {
 
   @Get("from-seller/:seller")
   @UseGuards(JwtAuthGuard)
-  async findAllFromSeller(
+  findAllFromSeller(
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
   ): Promise<PropertyPost[]> {
-    return await this._propertyPostsService.findAllFromSeller(
+    return this._propertyPostsService.findAllFromSeller(
       seller,
       paginationQuery,
       i18n,

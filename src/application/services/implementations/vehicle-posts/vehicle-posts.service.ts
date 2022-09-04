@@ -126,7 +126,7 @@ export class VehiclePostsService implements IVehiclePostsService {
           : this._i18n.t(SharedTranslations.UNAUTHORIZED),
       );
 
-    return await this._vehiclePostRepo.findOneAndUpdate({ _id }, vehiclePost);
+    return this._vehiclePostRepo.findOneAndUpdate({ _id }, vehiclePost);
   }
 
   async delete(_id: string, i18n?: I18nContext): Promise<boolean> {
@@ -141,7 +141,7 @@ export class VehiclePostsService implements IVehiclePostsService {
           : this._i18n.t(SharedTranslations.UNAUTHORIZED),
       );
 
-    return await this._vehiclePostRepo.deleteOne({ _id });
+    return this._vehiclePostRepo.deleteOne({ _id });
   }
 
   async findFromSeller(
@@ -173,6 +173,6 @@ export class VehiclePostsService implements IVehiclePostsService {
       i18n as I18nContext,
     );
 
-    return await this._vehiclePostRepo.paginate({ seller }, options);
+    return this._vehiclePostRepo.paginate({ seller }, options);
   }
 }

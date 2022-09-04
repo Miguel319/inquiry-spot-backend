@@ -124,7 +124,7 @@ export class PropertyPostsService implements IPropertyPostsService {
           : this._i18n.t(SharedTranslations.UNAUTHORIZED),
       );
 
-    return await this._propertyPostRepo.findOneAndUpdate({ _id }, propertyPost);
+    return this._propertyPostRepo.findOneAndUpdate({ _id }, propertyPost);
   }
 
   async delete(_id: string, i18n?: I18nContext): Promise<boolean> {
@@ -139,10 +139,10 @@ export class PropertyPostsService implements IPropertyPostsService {
           : this._i18n.t(SharedTranslations.UNAUTHORIZED),
       );
 
-    return await this._propertyPostRepo.deleteOne({ _id });
+    return this._propertyPostRepo.deleteOne({ _id });
   }
 
-  async findAllFromSeller(
+  findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,
     i18n?: I18nContext,
@@ -152,6 +152,6 @@ export class PropertyPostsService implements IPropertyPostsService {
       i18n as I18nContext,
     );
 
-    return await this._propertyPostRepo.paginate({ seller }, options);
+    return this._propertyPostRepo.paginate({ seller }, options);
   }
 }

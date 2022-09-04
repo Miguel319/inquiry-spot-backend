@@ -3,6 +3,8 @@ import { Document, Schema as SchemaAlt } from "mongoose";
 import {
   Address,
   BuyingOption,
+  Currency,
+  Price,
   PropertyPostsTranslations,
   PropertyStatus,
   PropertyType,
@@ -45,9 +47,19 @@ export class PropertyPost {
   })
   parkingLotCount: number;
 
-  @Prop({ required: [true, PropertyPostsTranslations.PRICE] })
-  price: string;
-
+  @Prop({
+    type: {
+      value: {
+        type: Number,
+      },
+      currency: {
+        type: String,
+        enum: [Currency],
+      },
+    },
+    required: [true, PropertyPostsTranslations.PRICE],
+  })
+  price: Price;
   @Prop({
     type: ObjectId,
     ref: "User",

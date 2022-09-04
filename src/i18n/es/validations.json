@@ -53,11 +53,13 @@
     "invalidStatus": "El estatus provisto es inválidlo.",
     "accessories": "Los accesorios son obligatorios.",
     "accessoriesArray": "Los accesorios deben ser un arreglo.",
+    "accessoriesLength": "Debe incluir al menos un accesorio.",
     "transmission": "La transmisión es obligatoria.",
     "invalidTransmission": "La transmisión provista es inválida.",
     "primaryImage": "La imagen principal es obligatoria.",
     "secondaryImages": "Las imágenes secundarias son obligatorias.",
     "secondaryImagesArray": "Las imágenes secundarias deben ser un arreglo.",
+    "secondaryImagesLength": "Debe incluir al menos una imagen secundaria.",
     "notFound": "No se encontró la publicación del vehículo que busca.",
     "electric": {
       "range": "El rango del vehículo eléctrico es obligatorio.",

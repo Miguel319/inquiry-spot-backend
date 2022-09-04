@@ -3,14 +3,14 @@ import {
   Catch,
   ArgumentsHost,
   HttpException,
+  HttpStatus,
 } from "@nestjs/common";
 
 import e, { Request, Response } from "express";
-import { HttpStatus } from "@nestjs/common";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 import { LoggerService } from "@/infrastructure/logger";
 import { getI18nContextFromArgumentsHost, I18nContext } from "nestjs-i18n";
-import { StringFormatter } from "../util";
+import { Formatter } from "../util";
 
 interface IError {
   message: string;
@@ -75,8 +75,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const isArrayOfErrors: boolean = errorMessage.includes(",");
 
     const formattedErrorMessage: string = isArrayOfErrors
-      ? StringFormatter.formatMongooseErrors(errorMessage, i18n)
-      : StringFormatter.formatSingleMongooseError(errorMessage, i18n);
+      ? Formatter.formatMongooseErrors(errorMessage, i18n)
+      : Formatter.formatSingleMongooseError(errorMessage, i18n);
 
     return {
       message: formattedErrorMessage,

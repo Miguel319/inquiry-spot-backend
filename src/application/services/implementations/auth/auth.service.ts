@@ -9,10 +9,16 @@ import {
 import { JwtService } from "@nestjs/jwt";
 import { Response } from "express";
 import bcrypt from "bcrypt";
-import { IAuthResult, IAuthService, IUsersService } from "../../contracts";
+import {
+  IAuthResult,
+  IAuthService,
+  IEmailsService,
+  IUsersService,
+} from "../../contracts";
 import crypto from "crypto";
-import { UserTranslations } from "../../../../domain/types";
+import { ChatUser, UserTranslations } from "../../../../domain/types";
 import { I18nContext, I18nService } from "nestjs-i18n";
+import axios from "axios";
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -20,14 +26,17 @@ export class AuthService implements IAuthService {
     @Inject("IUsersService") private readonly _usersService: IUsersService,
     private readonly _i18n: I18nService,
     private readonly _jwtService: JwtService,
+    @Inject("IEmailsService") private readonly _emailsService: IEmailsService,
   ) {}
 
   async signUp(user: UserDocument, i18n?: I18nContext): Promise<IAuthResult> {
     await this.validateSignUpEmail(user.email, i18n as I18nContext);
+    await this.createChatUser(user);
 
     const newUser = await this._usersService.create?.(
       await this.handleUserSignUp(user),
     );
+
     if (!newUser)
       throw new InternalServerErrorException(
         i18n
@@ -102,6 +111,36 @@ export class AuthService implements IAuthService {
     res.clearCookie("token");
   }
 
+  private async createChatUser(user: User, i18n?: I18nContext): Promise<void> {
+    try {
+      this._emailsService;
+
+      const chatUser = {
+        email: user.email,
+        first_name: user.name,
+        secret: user.email,
+        username: user.email,
+      } as ChatUser;
+
+      await axios.post(String(process.env.CHAT_ENGINE_URL), chatUser, {
+        headers: {
+          "PRIVATE-KEY": String(process.env.CHAT_PRIVATE_KEY),
+        },
+      });
+    } catch (error) {
+      const message = error?.response?.data?.message as string;
+
+      if (message.includes("This username is taken"))
+        throw new BadRequestException(
+          i18n
+            ? i18n.t(UserTranslations.DUPLICATE_EMAIL)
+            : this._i18n.t(UserTranslations.DUPLICATE_EMAIL),
+        );
+
+      throw error.response.data;
+    }
+  }
+
   private async validatePassword(
     user: User,
     password: string,
@@ -142,9 +181,7 @@ export class AuthService implements IAuthService {
 
   private async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt(12);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    return hashedPassword;
+    return await bcrypt.hash(password, salt);
   }
 
   private getToken({ email, _id, name }: User): string {

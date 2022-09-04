@@ -21,15 +21,11 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { VehiclePostTranslations } from "../../../domain/types";
+import { Role, VehiclePostTranslations } from "../../../domain/types";
 import { JwtAuthGuard } from "../../../infrastructure/guards";
 import { HasRoles } from "../../../infrastructure/common/decorators";
 import { PaginatedQuery } from "../../../infrastructure/common/util";
-import {
-  Role,
-  VehiclePost,
-  VehiclePostDocument,
-} from "../../../domain/entities";
+import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 
 @Controller("vehicle-posts")
 export class VehiclePostsController {
@@ -39,11 +35,11 @@ export class VehiclePostsController {
   ) {}
 
   @Get()
-  async findAll(
+  findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
   ): Promise<PaginatedQuery<VehiclePostDocument>> {
-    return await this._vehiclePostsService.findAll(paginationQuery, i18n);
+    return this._vehiclePostsService.findAll(paginationQuery, i18n);
   }
 
   @Get(":_id")
@@ -51,7 +47,7 @@ export class VehiclePostsController {
     @Param("_id") _id: string,
     @I18n() i18n?: I18nContext,
   ): Promise<VehiclePost> {
-    return await this._vehiclePostsService.findById(_id, i18n);
+    return this._vehiclePostsService.findById(_id, i18n);
   }
 
   @Post()
@@ -63,6 +59,10 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
+    console.log("is optional", vehiclePostDto.isOptional);
+
+    if (vehiclePostDto.isOptional) return ApiResponse.getEmptyRes(res);
+
     const vehiclePost = await this._vehiclePostsService.create?.(
       vehiclePostDto as unknown as VehiclePostDocument,
       i18n,
@@ -84,6 +84,10 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
+    console.log("optional", vehiclePostDto.isOptional);
+
+    if (vehiclePostDto.isOptional) return ApiResponse.getEmptyRes(res);
+
     const vehiclePost = await this._vehiclePostsService.update?.(
       _id,
       vehiclePostDto as unknown as VehiclePostDocument,
@@ -113,12 +117,12 @@ export class VehiclePostsController {
   }
 
   @Get(":_id/:seller")
-  async findFromSeller(
+  findFromSeller(
     @Param("_id") _id: string,
     @Param("seller") seller: string,
     @I18n() i18n?: I18nContext,
   ): Promise<VehiclePost> {
-    return await this._vehiclePostsService.findFromSeller(_id, seller, i18n);
+    return this._vehiclePostsService.findFromSeller(_id, seller, i18n);
   }
 
   @Get("from-seller/:seller")
@@ -126,9 +130,6 @@ export class VehiclePostsController {
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,
   ): Promise<VehiclePost[]> {
-    return await this._vehiclePostsService.findAllFromSeller(
-      seller,
-      paginationQuery,
-    );
+    return this._vehiclePostsService.findAllFromSeller(seller, paginationQuery);
   }
 }

@@ -9,6 +9,8 @@ import { PropertyPostModule } from "./property-post.module";
 import { UsersModule } from "./users.module";
 import { VehiclePostModule } from "./vehicle-post.module";
 import { SellersModule } from "./sellers.module";
+import { TagsModule } from "./tags.module";
+import { BlogsModule } from "./blog.module";
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { SellersModule } from "./sellers.module";
     SellersModule,
     AuthModule,
     EmailsModule,
+    TagsModule,
+    BlogsModule,
     VehiclePostModule,
     DBModule,
   ],

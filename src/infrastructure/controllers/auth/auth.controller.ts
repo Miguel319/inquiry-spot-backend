@@ -3,7 +3,7 @@ import {
   IAuthService,
   IEmailsService,
 } from "@/application/services/contracts";
-import { User } from "@/domain/entities";
+import { User, UserDocument } from "@/domain/entities";
 import { ApiResponse } from "../../../infrastructure/common/api";
 import { SignInDto, SignUpDto } from "@/infrastructure/dtos";
 import { PresenterFactory, UserPresenter } from "@/infrastructure/presenters";
@@ -37,13 +37,13 @@ export class AuthController {
     @Res() res: Response,
     @I18n() i18n: I18nContext,
   ): Promise<Response> {
-    const authResult: IAuthResult = (await this._authService.signUp(
+    const authResult: IAuthResult = await this._authService.signUp(
       signupDto as unknown as User,
       i18n,
-    )) as IAuthResult;
+    );
 
     const user: UserPresenter = PresenterFactory.getInstance(
-      authResult.user,
+      authResult.user as UserDocument,
       "user",
     ) as UserPresenter;
 
@@ -62,14 +62,10 @@ export class AuthController {
     @Res() res: Response,
     @I18n() i18n: I18nContext,
   ): Promise<Response> {
-    const authResult = (await this._authService.signIn(
-      email,
-      password,
-      i18n,
-    )) as IAuthResult;
+    const authResult = await this._authService.signIn(email, password, i18n);
 
     const user: UserPresenter = PresenterFactory.getInstance(
-      authResult.user,
+      authResult.user as UserDocument,
       "user",
     ) as UserPresenter;
 
@@ -82,11 +78,8 @@ export class AuthController {
   }
 
   @Put("forgot-password/")
-  async forgotPassword(@Body("email") email: string, @Req() req: Request) {
-    return await this._emailsService.sendResetPasswordEmail(
-      email,
-      req as Request,
-    );
+  forgotPassword(@Body("email") email: string, @Req() req: Request) {
+    return this._emailsService.sendResetPasswordEmail(email, req);
   }
 
   @Put("reset-password/:token")
@@ -100,7 +93,7 @@ export class AuthController {
     );
 
     const user: UserPresenter = PresenterFactory.getInstance(
-      authResult.user,
+      authResult.user as UserDocument,
       "user",
     ) as UserPresenter;
 

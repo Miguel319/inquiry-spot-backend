@@ -1,14 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
-import { UserTranslations } from "../types";
+import { Role, UserTranslations } from "../types";
 
 export type UserDocument = User & Document;
-
-export enum Role {
-  CLIENT = "Client",
-  SELLER = "Seller",
-  MIXED = "Mixed",
-}
 
 const {
   Types: { ObjectId },

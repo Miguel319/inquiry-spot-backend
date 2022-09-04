@@ -13,7 +13,7 @@ export class UserPresenter extends Presenter {
   image: string;
 
   private constructor(user: User) {
-    super(user._id);
+    super(user);
 
     this.name = user.name;
     this.email = user.email;

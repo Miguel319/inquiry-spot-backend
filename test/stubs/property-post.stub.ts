@@ -1,5 +1,6 @@
 import * as types from "../../src/domain/types";
 import { PropertyPost } from "../../src/domain/entities";
+import { Currency } from "../../src/domain/types";
 
 export const getPropertyPostStub = (): PropertyPost =>
   ({
@@ -18,6 +19,9 @@ export const getPropertyPostStub = (): PropertyPost =>
     parkingLotCount: 2,
     buyingOption: types.BuyingOption.BUY,
     seller: "23423498sdfsd98932",
-    price: "USD$ 200,000.00",
+    price: {
+      currency: Currency.DOP,
+      value: "USD$ 200,000.00",
+    },
     propertyType: types.PropertyType.APARTMENT,
-  } as PropertyPost);
+  } as unknown as PropertyPost);

@@ -1,17 +1,17 @@
 import { VoidDecorator } from "@/domain/types";
 import { registerDecorator, ValidationOptions } from "class-validator";
 
-export function IsValidDate(
+export const IsValidDate = (
   validationOptions?: ValidationOptions,
-): VoidDecorator {
-  return function (object: object, propertyName: string): void {
+): VoidDecorator => {
+  return (object: object, propertyName: string): void => {
     registerDecorator({
       name: "IsValidDate",
       target: object.constructor,
       propertyName: propertyName,
       constraints: [],
       options: {
-        message: "The date must be in the format 'YYYY-MM-DD'.",
+        message: "The date must be in the format 'YYYY-MM-DD.",
         ...validationOptions,
       },
       validator: {
@@ -22,4 +22,4 @@ export function IsValidDate(
       },
     });
   };
-}
+};

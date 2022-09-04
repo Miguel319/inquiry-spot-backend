@@ -112,7 +112,7 @@ describe("VehicleController", () => {
 
       test("then it should return a vehicle post", async () => {
         expect(
-          await service.create(createVehiclePostDto as VehiclePost),
+          await service.create(createVehiclePostDto as unknown as VehiclePost),
         ).toEqual(createVehiclePostDto);
       });
 
@@ -150,7 +150,7 @@ describe("VehicleController", () => {
       test("then it should return a vehicle post", async () => {
         const vehiclePost = await service.update(
           getVehiclePostStub()._id,
-          updateVehiclePostDto as VehiclePost,
+          updateVehiclePostDto as unknown as VehiclePost,
         );
 
         expect(vehiclePost).toEqual(getVehiclePostStub());

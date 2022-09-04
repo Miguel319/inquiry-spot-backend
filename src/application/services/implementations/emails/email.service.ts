@@ -30,6 +30,25 @@ export class EmailsService implements IEmailsService {
     this.sendGrid.setApiKey(process.env["SENDGRID_API_KEY"]);
   }
 
+  async sendContactDetails(
+    { name }: { name: string; sender: string },
+    message: string,
+  ): Promise<void> {
+    const receiver = String(process.env.SENDGRID_API_KEY);
+
+    const html = `
+      <div>Hi, there. ${name} wants to contact you!</div>
+
+      <p>${message}</p>
+    `;
+
+    await this.send({
+      html,
+      subject: "Contact",
+      to: receiver,
+    });
+  }
+
   private buildEmail({
     html,
     subject,
@@ -75,7 +94,7 @@ export class EmailsService implements IEmailsService {
       "host",
     )}/auth/reset-password/${resetToken}`;
 
-    const message = `
+    return `
         <h1>Reset Password</h1>
     
         <p>Hi, ${user.name}!</p>
@@ -86,8 +105,6 @@ export class EmailsService implements IEmailsService {
     
         <p><${resetUrl}/p>
      `;
-
-    return message;
   }
 
   async sendResetPasswordEmail(email: string, req: Request): Promise<User> {
@@ -100,7 +117,7 @@ export class EmailsService implements IEmailsService {
     const message: string = await this.buildResetPasswordEmail(user, req);
 
     try {
-      this.send({
+      await this.send({
         html: message,
         subject: "Reset Password",
         to: user.email,

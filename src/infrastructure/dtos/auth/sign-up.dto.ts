@@ -1,8 +1,7 @@
 import { IsDefined, IsEnum, Length, ValidateIf } from "class-validator";
 import { IsNotEmpty, IsValidEmail, MinLength } from "../../common/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { Role } from "../../../domain/entities";
-import { UserTranslations } from "../../../domain/types";
+import { Role, UserTranslations } from "../../../domain/types";
 
 export class SignUpDto {
   @IsNotEmpty({ message: i18nValidationMessage(UserTranslations.NAME) })

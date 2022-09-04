@@ -31,8 +31,7 @@ export class UsersService implements IUsersService {
           {},
           { projection: "+password name email" },
         )) as User)
-      : //Else
-        ((await this.userRepository.findOne({ email }, {})) as User);
+      : ((await this.userRepository.findOne({ email }, {})) as User);
 
     if (signIn && !user)
       throw new NotFoundException(
@@ -63,10 +62,8 @@ export class UsersService implements IUsersService {
     return user;
   }
 
-  async findAll(): Promise<UserDocument[]> {
-    const users = await this.userRepository.find({});
-
-    return users;
+  findAll(): Promise<UserDocument[]> {
+    return this.userRepository.find({});
   }
 
   async findById(_id: string, i18n?: I18nContext): Promise<UserDocument> {
@@ -94,13 +91,13 @@ export class UsersService implements IUsersService {
     return user;
   }
 
-  async create(user: User): Promise<UserDocument> {
-    return await this.userRepository.create(user);
+  create(user: User): Promise<UserDocument> {
+    return this.userRepository.create(user);
   }
 
   async update(_id: string, entity: User): Promise<UserDocument | null> {
     await this.findById(_id);
 
-    return await this.userRepository.findOneAndUpdate({ _id }, entity);
+    return this.userRepository.findOneAndUpdate({ _id }, entity);
   }
 }

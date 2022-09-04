@@ -1,8 +1,8 @@
 import { IRepository } from "../../application/repositories";
-import { PipelineStage } from "mongoose";
 import {
   AnyKeys,
   AnyObject,
+  PipelineStage,
   Document,
   FilterQuery,
   Model,
@@ -16,26 +16,26 @@ export abstract class BaseRepository<T extends Document>
 {
   constructor(protected readonly entityModel: Model<T>) {}
 
-  async findOne(
+  findOne(
     entityFilterQuery: FilterQuery<T>,
     projection?: Record<string, unknown>,
     select?: QueryOptions | null,
   ): Promise<T | null> {
     if (select) {
-      return await this.entityModel
+      return this.entityModel
         .findOne(
           { ...entityFilterQuery },
           {
             __v: 0,
             ...projection,
           },
-          select as QueryOptions,
+          select,
         )
         .select(select)
         .exec();
     }
 
-    return await this.entityModel
+    return this.entityModel
       .findOne(
         { ...entityFilterQuery },
         {
@@ -50,18 +50,18 @@ export abstract class BaseRepository<T extends Document>
     pipeline?: PipelineStage[] | undefined,
     options?: Record<string, unknown> | undefined,
   ) {
-    return await this.entityModel.aggregate(pipeline, options);
+    return this.entityModel.aggregate(pipeline, options);
   }
 
   async find(entityFilterQuery: FilterQuery<T>, select?: string): Promise<T[]> {
     if (select)
-      return await this.entityModel
+      return this.entityModel
         .find(entityFilterQuery, {
           __v: 0,
         })
         .select(select);
 
-    return await this.entityModel.find(entityFilterQuery, {
+    return this.entityModel.find(entityFilterQuery, {
       __v: 0,
     });
   }
@@ -71,7 +71,7 @@ export abstract class BaseRepository<T extends Document>
     options: PaginationOptions,
   ): Promise<T[]> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return await (this.entityModel as any).paginate(
+    return (this.entityModel as any).paginate(
       { entityFilterQuery },
       { options },
     );
@@ -89,7 +89,7 @@ export abstract class BaseRepository<T extends Document>
     entityFilterQuery: FilterQuery<T>,
     updateEntityData: UpdateQuery<unknown>,
   ) {
-    return await this.entityModel.findOneAndUpdate(
+    return this.entityModel.findOneAndUpdate(
       entityFilterQuery,
       updateEntityData,
       {

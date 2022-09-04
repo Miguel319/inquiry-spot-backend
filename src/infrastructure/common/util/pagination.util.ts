@@ -34,10 +34,8 @@ export const getPaginationOptions = (
       i18n.t(SharedTranslations.PAGINATION_LIMIT),
     );
 
-  const options = {
+  return {
     page: parseInt(String(page), 10) || 1,
     limit: parseInt(String(perPage), 10) || 15,
   };
-
-  return options;
 };

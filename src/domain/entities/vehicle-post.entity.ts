@@ -9,6 +9,9 @@ import {
   Transmission,
   VehicleStatus,
   VehiclePostTranslations,
+  Price,
+  Traction,
+  Currency,
 } from "../types";
 
 import paginate from "mongoose-paginate-v2";
@@ -51,8 +54,19 @@ export class VehiclePost {
   })
   transmission: Transmission;
 
-  @Prop({ required: [true, VehiclePostTranslations.PRICE] })
-  price: string;
+  @Prop({
+    type: {
+      value: {
+        type: Number,
+      },
+      currency: {
+        type: String,
+        enum: [Currency],
+      },
+    },
+    required: [true, VehiclePostTranslations.PRICE],
+  })
+  price: Price;
 
   @Prop({
     required: [true, VehiclePostTranslations.DOOR_COUNT],
@@ -75,7 +89,7 @@ export class VehiclePost {
   interiorColor: Color;
 
   @Prop()
-  traction: string;
+  traction: Traction;
 
   @Prop()
   topSpeed: string;

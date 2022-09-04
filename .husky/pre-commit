@@ -26,11 +26,11 @@ npm run check-lint ||
         false; 
 );
 
-echo 'Running tests...';
-npm run test || (
-    echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.';
-    false;
-);
+# echo 'Running tests...';
+# npm run test || (
+#     echo '❌👷🔨❌ Some tests are failing ❌👷🔨❌. Please, solve them, and try again.';
+#     false;
+# );
 
 echo 'Checking type issues...';
 npm run check-types || (

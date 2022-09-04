@@ -1,30 +1,93 @@
-import { User } from "@/domain/entities/user.entity";
+import {
+  Blog,
+  BlogDocument,
+  PropertyPost,
+  PropertyPostDocument,
+  Tag,
+  TagDocument,
+  VehiclePost,
+  User,
+  UserDocument,
+  VehiclePostDocument,
+} from "@/domain/entities";
 import { Presenter } from "../base-presenter";
+import { BlogsPresenter } from "../blogs.presenter";
+import { TagsPresenter } from "../tags.presenter";
 import { UserPresenter } from "../users.presenter";
+import { Document } from "mongoose";
+import { PropertyPostPresenter } from "../property-post.presenter";
+import { VehiclePostPresenter } from "../vehicle-post.presenter";
+import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQueryPresenter } from "../pagination-query.presenter";
+export { Document } from "mongoose";
 
-type EntityType = "user";
+type EntityType = "user" | "blog" | "tag" | "vehiclePost" | "propertyPost";
 
 export class PresenterFactory {
   private static handleSingleValue(
     value: unknown,
     type: EntityType,
-  ): Presenter | undefined {
+  ): Presenter | null {
     if (type === "user") return UserPresenter.create(value as User);
+
+    if (type === "blog") return BlogsPresenter.create(value as Blog);
+
+    if (type === "tag") return TagsPresenter.create(value as Tag);
+
+    if (type === "vehiclePost")
+      return VehiclePostPresenter.create(value as VehiclePost);
+
+    if (type === "propertyPost")
+      return PropertyPostPresenter.create(value as PropertyPost);
+
+    return null;
   }
 
-  private static handleArray(values: unknown[], type: EntityType): Presenter[] {
+  private static handleArray(
+    values: Document[],
+    type: EntityType,
+  ): Presenter[] {
     if (values.length > 0) {
-      if (type === "user")
-        return (values as User[]).map((user) => UserPresenter.create(user));
+      switch (type) {
+        case "user":
+          return (values as UserDocument[]).map((user) =>
+            UserPresenter.create(user),
+          );
+        case "blog":
+          return (values as BlogDocument[]).map((blog) =>
+            BlogsPresenter.create(blog),
+          );
+        case "tag":
+          return (values as TagDocument[]).map((tag) =>
+            TagsPresenter.create(tag),
+          );
+        case "vehiclePost":
+          return (values as VehiclePostDocument[]).map((tag) =>
+            VehiclePostPresenter.create(tag),
+          );
+        case "propertyPost":
+          return (values as PropertyPostDocument[]).map((tag) =>
+            PropertyPostPresenter.create(tag),
+          );
+      }
     }
+
     return [];
   }
 
   public static getInstance(
-    value: unknown,
+    value: Document | Document[],
     type: EntityType,
-  ): Presenter | Presenter[] {
-    if (Array.isArray(value)) return PresenterFactory.handleArray(value, type);
+    isPaginated = false,
+  ): Presenter | Presenter[] | PaginatedQueryPresenter<Document> {
+    if (Array.isArray(value)) {
+      if (isPaginated)
+        return PaginatedQueryPresenter.create(
+          value as unknown as PaginatedQuery<Document>,
+        );
+
+      return PresenterFactory.handleArray(value, type);
+    }
 
     return this.handleSingleValue(value, type) as Presenter;
   }

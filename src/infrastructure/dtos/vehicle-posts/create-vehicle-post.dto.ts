@@ -6,8 +6,12 @@ import {
   VehicleMake,
   VehicleStatus,
   VehicleType,
+  Price,
 } from "../../../domain/types";
-import { IsNotEmpty } from "../../../infrastructure/common/decorators";
+import {
+  IsNotEmpty,
+  MinLengthArray,
+} from "../../../infrastructure/common/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
 import {
   IsArray,
@@ -74,7 +78,7 @@ export class CreateVehiclePostDto {
   @IsDefined({
     message: i18nValidationMessage(VehiclePostTranslations.PRICE),
   })
-  readonly price: string;
+  readonly price: Price;
 
   @IsEnum(Color, {
     message: i18nValidationMessage(
@@ -141,6 +145,7 @@ export class CreateVehiclePostDto {
   @ValidateIf((prop) => prop.status === VehicleStatus.USED)
   readonly use: string;
 
+  @MinLengthArray(1, { message: VehiclePostTranslations.ACCESSORIES_LENGTH })
   @IsArray({
     message: i18nValidationMessage(VehiclePostTranslations.ACCESSORIES_ARRAY),
   })
@@ -158,8 +163,14 @@ export class CreateVehiclePostDto {
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.PRIMARY_IMAGE),
   })
+  @ValidateIf((prop) => !prop.isOptional)
   readonly primaryImage: string;
 
+  @MinLengthArray(1, {
+    message: i18nValidationMessage(
+      VehiclePostTranslations.SECONDARY_IMAGES_LENGTH,
+    ),
+  })
   @IsArray({
     message: i18nValidationMessage(
       VehiclePostTranslations.SECONDARY_IMAGES_ARRAY,
@@ -171,5 +182,8 @@ export class CreateVehiclePostDto {
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.SECONDARY_IMAGES),
   })
+  @ValidateIf((prop) => !prop.isOptional)
   readonly secondaryImages: string[];
+
+  readonly isOptional: boolean;
 }

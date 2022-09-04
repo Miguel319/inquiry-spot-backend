@@ -19,37 +19,31 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async findAll() {
-    return await this.usersService.findAll();
+  findAll() {
+    return this.usersService.findAll();
   }
 
   @Get(":_id")
   @UseFilters(new I18nValidationExceptionFilter())
-  async findById(
+  findById(
     @Param("_id") _id: string,
     @I18n() i18n?: I18nContext,
   ): Promise<User> {
-    const user: User = await this.usersService.findById(_id, i18n);
-
-    return user;
+    return this.usersService.findById(_id, i18n);
   }
 
   @Get("by-email/:email")
   @UseFilters(new I18nValidationExceptionFilter())
-  async findByEmail(
+  findByEmail(
     @Param("email") email: string,
     @I18n() i18n: I18nContext,
   ): Promise<User> {
-    const user: User = await this.usersService.findByEmail(email, false, i18n);
-
-    return user;
+    return this.usersService.findByEmail(email, false, i18n);
   }
 
   @Get("current/user")
   @UseGuards(JwtAuthGuard)
-  async helloWorld(): Promise<User | null> {
-    const user: User | null = await this.usersService.findCurrent();
-
-    return user;
+  helloWorld(): Promise<User | null> {
+    return this.usersService.findCurrent();
   }
 }

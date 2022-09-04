@@ -1,10 +1,10 @@
 import { VoidDecorator } from "@/domain/types";
 import { registerDecorator, ValidationOptions } from "class-validator";
 
-export function IsValidEmail(
+export const IsValidEmail = (
   validationOptions?: ValidationOptions,
-): VoidDecorator {
-  return function (object: object, propertyName: string): void {
+): VoidDecorator => {
+  return (object: object, propertyName: string): void => {
     registerDecorator({
       name: "IsValidEmail",
       target: object.constructor,
@@ -25,4 +25,4 @@ export function IsValidEmail(
       },
     });
   };
-}
+};

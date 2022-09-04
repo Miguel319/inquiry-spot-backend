@@ -21,7 +21,12 @@ const EmailUseCaseProvider: Provider = {
       },
     ]),
   ],
-  providers: [EmailsRepository, EmailUseCaseProvider, LoggerService],
-  exports: [EmailsRepository, EmailUseCaseProvider],
+  providers: [
+    EmailsRepository,
+    EmailUseCaseProvider,
+    EmailsService,
+    LoggerService,
+  ],
+  exports: [EmailsRepository, EmailsService, EmailUseCaseProvider],
 })
 export class EmailsModule {}
