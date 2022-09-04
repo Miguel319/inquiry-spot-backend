@@ -19,7 +19,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll() {
+  async findAll() {
     return this.usersService.findAll();
   }
 
@@ -38,12 +38,12 @@ export class UsersController {
     @Param("email") email: string,
     @I18n() i18n: I18nContext,
   ): Promise<User> {
-    return this.usersService.findByEmail(email, false, i18n);
+    return this.usersService.findByEmail(email, true, i18n);
   }
 
   @Get("current/user")
   @UseGuards(JwtAuthGuard)
-  helloWorld(): Promise<User | null> {
+  getCurrentUser(): Promise<User | null> {
     return this.usersService.findCurrent();
   }
 }
