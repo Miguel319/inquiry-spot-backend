@@ -38,7 +38,7 @@ export class UsersController {
     @Param("email") email: string,
     @I18n() i18n: I18nContext,
   ): Promise<User> {
-    return this.usersService.findByEmail(email, true, i18n);
+    return this.usersService.findByEmail(email, false, i18n);
   }
 
   @Get("current/user")
