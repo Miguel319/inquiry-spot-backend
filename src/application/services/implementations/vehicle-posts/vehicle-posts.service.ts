@@ -144,25 +144,6 @@ export class VehiclePostsService implements IVehiclePostsService {
     return this._vehiclePostRepo.deleteOne({ _id });
   }
 
-  async findFromSeller(
-    _id: string,
-    seller: string,
-    i18n?: I18nContext,
-  ): Promise<VehiclePost> {
-    const vehiclePost: VehiclePost | null = await this._vehiclePostRepo.findOne(
-      { seller, _id },
-    );
-
-    if (!vehiclePost)
-      throw new NotFoundException(
-        i18n
-          ? i18n.t(VehiclePostTranslations.NOT_FOUND)
-          : this._i18n.t(VehiclePostTranslations.NOT_FOUND),
-      );
-
-    return vehiclePost;
-  }
-
   async findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,

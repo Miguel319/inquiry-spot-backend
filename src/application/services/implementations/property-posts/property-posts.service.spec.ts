@@ -4,7 +4,10 @@ import {
   PropertyPostsService as PropertyPostServiceType,
   PropertyPostsService,
 } from "./property-posts.service";
-import { PropertyPostsRepository as PropertyPostsRepositoryType } from "../../../../infrastructure/repositories";
+import {
+  PropertyPostsRepository as PropertyPostsRepositoryType,
+  UsersRepository as UsersRepositoryType,
+} from "../../../../infrastructure/repositories";
 import {
   PropertyPostsRepository,
   UsersRepository,
@@ -17,7 +20,6 @@ import {
 import { getPropertyPostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
 import { UsersService as UsersServiceType } from "../users/users.service";
-import { UsersRepository as UsersRepositoryType } from "../../../../infrastructure/repositories";
 import { PaginatedQuery } from "@/infrastructure/common/util";
 
 describe.skip("PropertyPostsService", () => {
@@ -79,7 +81,6 @@ describe.skip("PropertyPostsService", () => {
   it("should be defined", () => {
     expect(service).toBeDefined();
     expect(usersService).toBeDefined();
-    console.log(usersService);
   });
 
   describe("operations", () => {
@@ -147,7 +148,6 @@ describe.skip("PropertyPostsService", () => {
         propertyPost = await service.update(
           getPropertyPostStub()._id,
           getPropertyPostStub(),
-          undefined,
         );
       });
 

@@ -11,12 +11,6 @@ export interface IVehiclePostsService
     i18n?: I18nContext,
   ): Promise<PaginatedQuery<VehiclePostDocument>>;
 
-  findFromSeller(
-    id: string,
-    seller: string,
-    i18n?: I18nContext,
-  ): Promise<VehiclePost>;
-
   findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,
