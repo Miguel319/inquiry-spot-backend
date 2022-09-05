@@ -59,8 +59,6 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
-    console.log("is optional", vehiclePostDto.isOptional);
-
     if (vehiclePostDto.isOptional) return ApiResponse.getEmptyRes(res);
 
     const vehiclePost = await this._vehiclePostsService.create?.(
@@ -84,8 +82,6 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
-    console.log("optional", vehiclePostDto.isOptional);
-
     if (vehiclePostDto.isOptional) return ApiResponse.getEmptyRes(res);
 
     const vehiclePost = await this._vehiclePostsService.update?.(
@@ -116,17 +112,8 @@ export class VehiclePostsController {
     });
   }
 
-  @Get(":_id/:seller")
-  findFromSeller(
-    @Param("_id") _id: string,
-    @Param("seller") seller: string,
-    @I18n() i18n?: I18nContext,
-  ): Promise<VehiclePost> {
-    return this._vehiclePostsService.findFromSeller(_id, seller, i18n);
-  }
-
-  @Get("from-seller/:seller")
-  async findAllFromSeller(
+  @Get("seller/many/:seller")
+  findAllFromSeller(
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,
   ): Promise<VehiclePost[]> {

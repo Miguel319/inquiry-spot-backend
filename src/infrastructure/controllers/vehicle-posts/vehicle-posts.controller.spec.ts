@@ -73,7 +73,6 @@ describe("VehicleController", () => {
       beforeEach(async () => {
         vehiclePost = await controller.findById(
           "sajdnasj32324e.3443sdfapSSL.d",
-          undefined,
         );
       });
 
@@ -190,30 +189,6 @@ describe("VehicleController", () => {
 
       test("then it should return a response object", () => {
         expect(responseFromRequest).toBeDefined();
-      });
-    });
-  });
-
-  describe("findFromSeller", () => {
-    describe("when findFromSeller is called", () => {
-      const vehiclePostId = getVehiclePostStub()._id;
-      const sellerId = "123456789012345678abc123";
-
-      beforeEach(async () => {
-        await controller.findFromSeller(vehiclePostId, sellerId);
-      });
-
-      test("then it should call findFromSeller from VehiclePostsService", () => {
-        expect(service.findFromSeller).toBeCalled();
-      });
-
-      test("then the service should return a vehicle post", async () => {
-        const vehiclePost = await service.findFromSeller(
-          vehiclePostId,
-          sellerId,
-        );
-
-        expect(vehiclePost).toStrictEqual(getVehiclePostStub());
       });
     });
   });

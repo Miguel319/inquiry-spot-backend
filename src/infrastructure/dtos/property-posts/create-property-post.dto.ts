@@ -156,4 +156,6 @@ export class CreatePropertyPostDto {
 
   @ValidateNested()
   readonly address: AddresValidation;
+
+  readonly isOptional: boolean;
 }

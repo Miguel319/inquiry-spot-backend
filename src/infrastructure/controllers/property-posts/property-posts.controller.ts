@@ -64,6 +64,8 @@ export class PropertyPostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ): Promise<Response> {
+    if (propertyPostDto.isOptional) return ApiResponse.getEmptyRes(res);
+
     const propertyPost = await this._propertyPostsService.create?.(
       propertyPostDto as unknown as PropertyPostDocument,
       i18n,
