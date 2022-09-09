@@ -15,6 +15,7 @@ import {
 } from "../types";
 
 import paginate from "mongoose-paginate-v2";
+import { BaseEntity } from "./base.entity";
 
 const {
   Types: { ObjectId },
@@ -23,9 +24,7 @@ const {
 export type VehiclePostDocument = VehiclePost & Document;
 
 @Schema({ timestamps: true })
-export class VehiclePost {
-  _id: string;
-
+export class VehiclePost extends BaseEntity {
   @Prop({ required: [true, VehiclePostTranslations.DESCRIPTION] })
   description: string;
 
@@ -142,10 +141,6 @@ export class VehiclePost {
     },
   ])
   secondaryImages: string[];
-
-  createdAt: Date;
-
-  updatedAt: Date;
 }
 
 export const VehiclePostSchema = SchemaFactory.createForClass(VehiclePost);

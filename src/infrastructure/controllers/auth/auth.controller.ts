@@ -48,7 +48,7 @@ export class AuthController {
     ) as UserPresenter;
 
     return ApiResponse.signUp({
-      user: user as User,
+      user,
       token: authResult.token,
       message: i18n ? i18n.t(AuthTranslations.SIGN_UP) : "",
       res,
@@ -70,7 +70,7 @@ export class AuthController {
     ) as UserPresenter;
 
     return ApiResponse.signIn({
-      user: user as User,
+      user,
       message: i18n ? i18n.t(AuthTranslations.SIGN_IN) : "",
       token: authResult.token,
       res,
@@ -98,7 +98,7 @@ export class AuthController {
     ) as UserPresenter;
 
     return ApiResponse.signIn({
-      user: user as User,
+      user: user,
       token: authResult.token,
       message: i18n ? i18n.t(AuthTranslations.PASSWORD_RESET) : "",
       res,

@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
 import { Role, UserTranslations } from "../types";
+import { BaseEntity } from "./base.entity";
 
 export type UserDocument = User & Document;
 
@@ -9,11 +10,9 @@ const {
 } = SchemaAlt;
 
 @Schema({ timestamps: true })
-export class User {
-  _id: string;
-
+export class User extends BaseEntity {
   @Prop({ required: [true, UserTranslations.NAME] })
-  name: string;
+  readonly name: string;
 
   @Prop({
     required: [true, UserTranslations.REQUIRED_EMAIL],
@@ -21,7 +20,7 @@ export class User {
     match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, UserTranslations.INVALID_EMAIL],
     trim: true,
   })
-  email: string;
+  readonly email: string;
 
   @Prop({
     required: [true, UserTranslations.PASSWORD],
@@ -35,14 +34,14 @@ export class User {
     minlength: [11, UserTranslations.MIN_LENGTH_IDENTIFICATION_NUMBER],
     maxlength: [11, UserTranslations.MAX_LENGTH_IDENTIFICATION_NUMBER],
   })
-  identificationNumber: string;
+  readonly identificationNumber: string;
 
   @Prop({
     enum: [Role, UserTranslations.INVALID_ROLE],
     type: String,
     required: [true, UserTranslations.ROLE],
   })
-  role: Role;
+  readonly role: Role;
 
   @Prop([
     {
@@ -91,14 +90,10 @@ export class User {
   resetPasswordExpire?: number;
 
   @Prop({ data: Buffer, contentType: String })
-  image: string;
+  readonly image: string;
 
   @Prop()
   resetPasswordLink: string;
-
-  createdAt: Date;
-
-  updatedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

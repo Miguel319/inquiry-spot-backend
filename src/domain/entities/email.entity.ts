@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import { EmailTranslations } from "../types";
+import { BaseEntity } from "./base.entity";
 
 export interface SendgridEmailParams {
   to: string; // Recipient email address
@@ -21,14 +22,12 @@ export interface SendgridEmail {
 export type EmailDocument = Email & Document;
 
 @Schema({ timestamps: true })
-export class Email {
-  _id: string;
-
+export class Email extends BaseEntity {
   @Prop({ required: [true, EmailTranslations.SUBJECT] })
-  subject: string;
+  readonly subject: string;
 
   @Prop({ required: [true, EmailTranslations.BODY] })
-  body: string;
+  readonly body: string;
 
   @Prop({
     type: {
@@ -48,7 +47,7 @@ export class Email {
       },
     },
   })
-  from: {
+  readonly from: {
     name: string;
     email: string;
   };
@@ -62,11 +61,7 @@ export class Email {
     ],
     trim: true,
   })
-  recipientEmailAddress: string;
-
-  createdAt: Date;
-
-  updatedAt: Date;
+  readonly recipientEmailAddress: string;
 }
 
 export const EmailSchema = SchemaFactory.createForClass(Email);

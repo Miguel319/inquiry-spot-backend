@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Types } from "mongoose";
+import { BaseEntity } from "./base.entity";
 
 export type BlogDocument = Blog & Document;
 
@@ -9,9 +10,7 @@ export enum BlogCategory {
 }
 
 @Schema({ timestamps: true })
-export class Blog {
-  _id: string;
-
+export class Blog extends BaseEntity {
   @Prop({
     min: [3, "The title must be at least 3 characters long."],
     max: [3, "The title cannot have more than 160 characters."],
@@ -69,10 +68,6 @@ export class Blog {
 
   @Prop({ type: Types.ObjectId, ref: "User" })
   postedBy: string;
-
-  createdAt: Date;
-
-  updatedAt: Date;
 }
 
 export const BlogSchema = SchemaFactory.createForClass(Blog);

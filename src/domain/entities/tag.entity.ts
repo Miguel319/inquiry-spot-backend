@@ -1,12 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
+import { BaseEntity } from "./base.entity";
 
 export type TagDocument = Tag & Document;
 
 @Schema({ timestamps: true })
-export class Tag {
-  _id: string;
-
+export class Tag extends BaseEntity {
   @Prop({
     required: [true, "The name is mandatory."],
     max: [32, "The name can't have more than 32 characters."],
@@ -21,10 +20,6 @@ export class Tag {
     index: [true],
   })
   slug: string;
-
-  createdAt: Date;
-
-  updatedAt: Date;
 }
 
 export const TagSchema = SchemaFactory.createForClass(Tag);

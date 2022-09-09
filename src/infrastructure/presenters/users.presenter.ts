@@ -1,16 +1,16 @@
-import { User } from "@/domain/entities/user.entity";
+import { User } from "@/domain/entities";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "./base-presenter";
 
 export class UserPresenter extends Presenter {
   @ApiProperty()
-  name: string;
+  readonly name: string;
 
   @ApiProperty()
-  email: string;
+  readonly email: string;
 
   @ApiProperty()
-  image: string;
+  readonly image: string;
 
   private constructor(user: User) {
     super(user);

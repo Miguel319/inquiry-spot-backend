@@ -1,4 +1,4 @@
-import { User } from "@/domain/entities";
+import { UserPresenter } from "@/infrastructure/presenters";
 import { HttpStatus } from "@nestjs/common";
 import { Response } from "express";
 
@@ -10,7 +10,7 @@ export interface IApiResponse {
 
 export interface IApiAuthResponse {
   token: string;
-  user: User;
+  user: UserPresenter;
   message: string;
   res: Response;
 }

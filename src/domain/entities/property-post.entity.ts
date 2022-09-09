@@ -12,6 +12,7 @@ import {
 } from "../types";
 
 import paginate from "mongoose-paginate-v2";
+import { BaseEntity } from "./base.entity";
 
 export type PropertyPostDocument = PropertyPost & Document;
 
@@ -20,32 +21,30 @@ const {
 } = SchemaAlt;
 
 @Schema({ timestamps: true })
-export class PropertyPost {
-  _id: string;
-
+export class PropertyPost extends BaseEntity {
   @Prop({ required: [true, PropertyPostsTranslations.DESCRIPTION] })
-  description: string;
+  readonly description: string;
 
   @Prop({
     type: Number,
     required: [true, PropertyPostsTranslations.BATHROOM_COUNT],
     isInteger: [true, PropertyPostsTranslations.BATHROOM_COUNT_INT],
   })
-  bathroomCount: number;
+  readonly bathroomCount: number;
 
   @Prop({
     type: Number,
     required: [true, PropertyPostsTranslations.BEDROOM_COUNT],
     isInteger: [true, PropertyPostsTranslations.BEDROOM_COUNT_INT],
   })
-  bedroomCount: number;
+  readonly bedroomCount: number;
 
   @Prop({
     type: Number,
     required: [true, PropertyPostsTranslations.PARKING_LOT_COUNT],
     isInteger: [true, PropertyPostsTranslations.PARKING_LOT_COUNT_INT],
   })
-  parkingLotCount: number;
+  readonly parkingLotCount: number;
 
   @Prop({
     type: {
@@ -59,43 +58,43 @@ export class PropertyPost {
     },
     required: [true, PropertyPostsTranslations.PRICE],
   })
-  price: Price;
+  readonly price: Price;
   @Prop({
     type: ObjectId,
     ref: "User",
     required: [true, PropertyPostsTranslations.SELLER],
   })
-  seller: string;
+  readonly seller: string;
 
   @Prop({ type: Number })
-  territory: number;
+  readonly territory: number;
 
   @Prop({
     required: [true, PropertyPostsTranslations.BUYING_OPTION],
     enum: BuyingOption,
     type: String,
   })
-  buyingOption: BuyingOption;
+  readonly buyingOption: BuyingOption;
 
   @Prop({
     required: [true, PropertyPostsTranslations.PROPERTY_TYPE],
     enum: PropertyType,
     type: String,
   })
-  propertyType: PropertyType;
+  readonly propertyType: PropertyType;
 
   @Prop({
     required: [true, PropertyPostsTranslations.PROPERTY_STATUS],
     type: String,
     enum: PropertyStatus,
   })
-  propertyStatus: PropertyStatus;
+  readonly propertyStatus: PropertyStatus;
 
   @Prop({
     type: String,
     required: [true, PropertyPostsTranslations.PRIMARY_IMAGE],
   })
-  primaryImage: string;
+  readonly primaryImage: string;
 
   @Prop([
     {
@@ -103,7 +102,7 @@ export class PropertyPost {
       required: [true, PropertyPostsTranslations.SECONDARY_IMAGES],
     },
   ])
-  secondaryImages: string[];
+  readonly secondaryImages: string[];
 
   @Prop([
     {
@@ -111,7 +110,7 @@ export class PropertyPost {
       required: [true, PropertyPostsTranslations.ADDITIONAL_INFO],
     },
   ])
-  additionalInfo: string[];
+  readonly additionalInfo: string[];
 
   @Prop({
     type: {
@@ -129,11 +128,7 @@ export class PropertyPost {
       },
     },
   })
-  address: Address;
-
-  createdAt: Date;
-
-  updatedAt: Date;
+  readonly address: Address;
 }
 
 export const PropertyPostSchema = SchemaFactory.createForClass(PropertyPost);

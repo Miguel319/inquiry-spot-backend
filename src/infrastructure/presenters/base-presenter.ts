@@ -1,16 +1,17 @@
+import { BaseEntity } from "@/domain/entities/base.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 export abstract class Presenter {
   @ApiProperty()
-  _id: string;
+  readonly _id: string;
 
   @ApiProperty()
-  createdAt: Date;
+  readonly createdAt: Date;
 
   @ApiProperty()
-  updatedAt: Date;
+  readonly updatedAt: Date;
 
-  protected constructor(presenter: Presenter) {
+  protected constructor(presenter: BaseEntity) {
     this._id = presenter._id;
     this.createdAt = presenter.createdAt;
     this.updatedAt = presenter.updatedAt;

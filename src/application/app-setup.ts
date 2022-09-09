@@ -7,14 +7,14 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
 import { RootModule } from "./modules";
-import { LoggingInterceptor } from "@/infrastructure/common/interceptors";
-import {
-  ValidationFilter,
-  FallbackExpectionFilter,
-  HttpExceptionFilter,
-} from "@/infrastructure/common/filters";
 import { i18nValidationErrorFactory } from "nestjs-i18n";
 import { ConfigService } from "@nestjs/config";
+import {
+  FallbackExpectionFilter,
+  HttpExceptionFilter,
+  ValidationFilter,
+} from "@/infrastructure/common/filters";
+import { LoggingInterceptor } from "@/infrastructure/common/interceptors";
 
 export class AppSetup {
   async run(): Promise<void> {
