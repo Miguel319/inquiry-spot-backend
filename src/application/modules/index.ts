@@ -15,6 +15,7 @@ import { BlogsModule } from "./blog.module";
 @Module({
   imports: [
     EnvModule,
+    TagsModule,
     UsersModule,
     LoggerModule,
     InternationalizationModule,
@@ -22,7 +23,6 @@ import { BlogsModule } from "./blog.module";
     SellersModule,
     AuthModule,
     EmailsModule,
-    TagsModule,
     BlogsModule,
     VehiclePostModule,
     DBModule,

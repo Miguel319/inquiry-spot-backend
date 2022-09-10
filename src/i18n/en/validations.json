@@ -11,6 +11,10 @@
     "unauthorized": "You are not authorized to perform this operation.",
     "paginationLimit": "You cannot filter more than 50 items per page."
   },
+  "tag": {
+    "name": "The name is mandatory.",
+    "nameLength": "The name cannot have more than 32 characters."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",

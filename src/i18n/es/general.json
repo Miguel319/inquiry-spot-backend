@@ -1,9 +1,11 @@
 {
-  "accessories": "accesorios",
-  "secondaryImages": "imágenes secundarias",
-  "bedroomCount": "número de habitaciones",
-  "bathroomCount": "número de baños",
-  "seller": "vendedor",
+  "names": {
+    "accessories": "accesorios",
+    "secondaryImages": "imágenes secundarias",
+    "bedroomCount": "número de habitaciones",
+    "bathroomCount": "número de baños",
+    "seller": "vendedor"
+  },
   "auth": {
     "signUp": "¡Usuario creado satisfactoriamente!",
     "signIn": "¡Sesión iniciada satisfactoriamente!",

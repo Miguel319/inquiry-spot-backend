@@ -1,3 +1,3 @@
 import { AppSetup } from "./application/app-setup";
 
-(async (): Promise<void> => await AppSetup.create().run())();
+(async (): Promise<void> => AppSetup.create().run())();
