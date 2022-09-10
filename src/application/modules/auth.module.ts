@@ -1,4 +1,4 @@
-import { AuthController } from "@/infrastructure/controllers";
+import { AuthController } from "@/presentation/controllers";
 import { forwardRef, Module, Provider } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";

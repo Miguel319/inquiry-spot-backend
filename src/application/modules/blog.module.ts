@@ -1,5 +1,5 @@
 import { BlogSchema } from "@/domain/entities/blog.entity";
-import { BlogsController } from "@/infrastructure/controllers/blogs/blogs.controller";
+import { BlogsController } from "@/presentation/controllers/blogs/blogs.controller";
 import { BlogRepository } from "@/infrastructure/repositories";
 import { forwardRef, Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";

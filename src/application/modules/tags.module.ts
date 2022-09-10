@@ -1,5 +1,5 @@
 import { TagSchema } from "@/domain/entities";
-import { TagsController } from "@/infrastructure/controllers";
+import { TagsController } from "@/presentation/controllers";
 import { TagsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
