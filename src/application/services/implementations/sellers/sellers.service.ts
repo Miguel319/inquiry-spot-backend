@@ -4,7 +4,7 @@ import {
   getPaginationOptions,
   PaginatedQuery,
   PaginationOptions,
-} from "@/infrastructure/common/util";
+} from "@/common/infrastructure/util";
 import { UsersRepository } from "@/infrastructure/repositories";
 import { Injectable } from "@nestjs/common";
 import { I18nContext, I18nService } from "nestjs-i18n";

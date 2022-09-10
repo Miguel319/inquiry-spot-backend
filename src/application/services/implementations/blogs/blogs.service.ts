@@ -1,5 +1,5 @@
 import { Blog, BlogDocument, User } from "@/domain/entities";
-import { Formatter } from "@/infrastructure/common/util";
+import { Formatter } from "@/common/infrastructure/util";
 import { BlogRepository } from "@/infrastructure/repositories";
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import slugify from "slugify";

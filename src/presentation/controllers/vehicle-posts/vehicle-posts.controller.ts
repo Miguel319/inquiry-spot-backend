@@ -1,6 +1,5 @@
 import { IVehiclePostsService } from "../../../application/services/contracts";
 import { PaginationQuery } from "../../../domain/types/common/pagination-query";
-import { ApiResponse } from "../../../infrastructure/common/api";
 import {
   UpdateVehiclePostDto,
   CreateVehiclePostDto,
@@ -23,9 +22,10 @@ import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { Role, VehiclePostTranslations } from "../../../domain/types";
 import { JwtAuthGuard } from "../../../infrastructure/guards";
-import { HasRoles } from "../../../infrastructure/common/decorators";
-import { PaginatedQuery } from "../../../infrastructure/common/util";
+import { HasRoles } from "../../../common/infrastructure/decorators";
+import { PaginatedQuery } from "../../../common/infrastructure/util";
 import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
+import { ApiResponse } from "@/common/infrastructure/api";
 
 @Controller("vehicle-posts")
 export class VehiclePostsController {

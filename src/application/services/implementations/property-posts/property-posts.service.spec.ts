@@ -20,7 +20,7 @@ import {
 import { getPropertyPostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
 import { UsersService as UsersServiceType } from "../users/users.service";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 
 describe.skip("PropertyPostsService", () => {
   let service: PropertyPostServiceType;

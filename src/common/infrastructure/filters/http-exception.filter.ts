@@ -8,7 +8,7 @@ import {
 
 import e, { Request, Response } from "express";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
-import { LoggerService } from "@/infrastructure/logger";
+import { LoggerService } from "@/common/infrastructure/logger";
 import { getI18nContextFromArgumentsHost, I18nContext } from "nestjs-i18n";
 import { Formatter } from "../util";
 

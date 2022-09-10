@@ -22,7 +22,7 @@ import {
   getPaginationOptions,
   PaginatedQuery,
   PaginationOptions,
-} from "../../../../infrastructure/common/util";
+} from "../../../../common/infrastructure/util";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {

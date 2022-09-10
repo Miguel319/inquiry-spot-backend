@@ -1,7 +1,7 @@
 import { IBlogsService } from "@/application/services/contracts";
 import { Blog, BlogDocument } from "@/domain/entities/blog.entity";
-import { ApiResponse } from "@/infrastructure/common/api";
-import { CreateBlogDto } from "@/infrastructure/dtos/blogs/create-blog.dto";
+import { ApiResponse } from "@/common/infrastructure/api";
+import { CreateBlogDto } from "@/blogs/infrastructure/dtos/create-blog.dto";
 import { BlogsPresenter, PresenterFactory } from "@/infrastructure/presenters";
 import {
   Body,

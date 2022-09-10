@@ -1,4 +1,4 @@
-import { LoggerService } from "../../../../infrastructure/logger";
+import { LoggerService } from "../../../../common/infrastructure/logger";
 import { Provider } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import { EmailsService } from "./email.service";

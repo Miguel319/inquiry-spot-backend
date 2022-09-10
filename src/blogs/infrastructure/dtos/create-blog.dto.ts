@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "@/infrastructure/common/decorators/is-not-empty.decorator";
+import { IsNotEmpty } from "@/common/infrastructure/decorators/is-not-empty.decorator";
 import { IsDefined, MinLength } from "class-validator";
 
 export class CreateBlogDto {

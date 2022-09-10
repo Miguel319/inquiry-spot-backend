@@ -13,8 +13,8 @@ import {
   FallbackExpectionFilter,
   HttpExceptionFilter,
   ValidationFilter,
-} from "@/infrastructure/common/filters";
-import { LoggingInterceptor } from "@/infrastructure/common/interceptors";
+} from "@/common/infrastructure/filters";
+import { LoggingInterceptor } from "@/common/infrastructure/interceptors";
 
 export class AppSetup {
   async run(): Promise<void> {

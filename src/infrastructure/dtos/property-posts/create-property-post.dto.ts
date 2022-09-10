@@ -5,7 +5,7 @@ import {
   PropertyStatus,
   PropertyType,
 } from "../../../domain/types";
-import { IsNotEmpty } from "../../../infrastructure/common/decorators";
+import { IsNotEmpty } from "../../../common/infrastructure/decorators";
 import {
   IsArray,
   IsDefined,

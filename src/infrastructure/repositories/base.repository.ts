@@ -9,7 +9,7 @@ import {
   QueryOptions,
   UpdateQuery,
 } from "mongoose";
-import { PaginationOptions } from "../common/util";
+import { PaginationOptions } from "../../common/infrastructure/util";
 
 export abstract class BaseRepository<T extends Document>
   implements IRepository<T>

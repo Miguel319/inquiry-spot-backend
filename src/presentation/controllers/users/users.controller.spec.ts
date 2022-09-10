@@ -8,7 +8,7 @@ import { User, UserDocument } from "../../../domain/entities";
 import { UsersService as UserServiceType } from "../../../application/services/implementations";
 
 import { UsersService } from "../../../../test/mocks";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 
 describe("UsersController", () => {
   let controller: UsersController;

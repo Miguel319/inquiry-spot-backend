@@ -1,5 +1,5 @@
 // import { translations } from "@/i18n/translations";
-import { IsNotEmpty } from "@/infrastructure/common/decorators";
+import { IsNotEmpty } from "@/common/infrastructure/decorators";
 import { IsDefined, MaxLength } from "class-validator";
 
 export class CreateTagDto {

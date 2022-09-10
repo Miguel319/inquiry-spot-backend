@@ -17,7 +17,7 @@ import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
 import { PropertyPostPresenter } from "../property-post.presenter";
 import { VehiclePostPresenter } from "../vehicle-post.presenter";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 export { Document } from "mongoose";
 

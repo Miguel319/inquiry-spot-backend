@@ -1,6 +1,6 @@
 import { UserDocument } from "@/domain/entities";
 import { PaginationQuery } from "@/domain/types";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import { I18nContext } from "nestjs-i18n";
 
 export interface ISellersService {

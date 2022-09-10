@@ -1,4 +1,4 @@
-import { LoggerService } from "@/infrastructure/logger";
+import { LoggerService } from "@/common/infrastructure/logger";
 import { Module } from "@nestjs/common";
 
 @Module({

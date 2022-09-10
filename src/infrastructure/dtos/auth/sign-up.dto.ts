@@ -1,5 +1,9 @@
 import { IsDefined, IsEnum, Length, ValidateIf } from "class-validator";
-import { IsNotEmpty, IsValidEmail, MinLength } from "../../common/decorators";
+import {
+  IsNotEmpty,
+  IsValidEmail,
+  MinLength,
+} from "../../../common/infrastructure/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { Role, UserTranslations } from "../../../domain/types";
 
