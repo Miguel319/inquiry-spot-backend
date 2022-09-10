@@ -1,5 +1,5 @@
 import { UserSchema } from "@/domain/entities";
-import { SellersController } from "@/infrastructure/controllers/sellers/sellers.controller";
+import { SellersController } from "@/presentation/controllers/sellers/sellers.controller";
 import { UsersRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";

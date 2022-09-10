@@ -1,5 +1,5 @@
 import { PropertyPostSchema } from "@/domain/entities";
-import { PropertyPostsController } from "@/infrastructure/controllers";
+import { PropertyPostsController } from "@/presentation/controllers";
 import { PropertyPostsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";

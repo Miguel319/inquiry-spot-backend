@@ -1,6 +1,6 @@
 import { IUsersService } from "@/application/services/contracts";
 import { User } from "@/domain/entities";
-import { JwtAuthGuard } from "../../guards";
+import { JwtAuthGuard } from "../../../infrastructure/guards";
 import {
   Controller,
   Get,

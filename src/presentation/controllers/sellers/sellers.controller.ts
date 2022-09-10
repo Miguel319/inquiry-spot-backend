@@ -3,7 +3,7 @@ import { UserDocument } from "@/domain/entities";
 import { PaginationQuery } from "@/domain/types";
 import { Controller, Get, Inject, Query } from "@nestjs/common";
 import { I18n, I18nContext } from "nestjs-i18n";
-import { PaginatedQuery } from "../../common/util";
+import { PaginatedQuery } from "../../../infrastructure/common/util";
 
 @Controller("sellers")
 export class SellersController {

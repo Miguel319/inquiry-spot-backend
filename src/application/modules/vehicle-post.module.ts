@@ -1,5 +1,5 @@
 import { VehiclePostSchema } from "@/domain/entities";
-import { VehiclePostsController } from "@/infrastructure/controllers";
+import { VehiclePostsController } from "@/presentation/controllers";
 import { VehiclePostsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
