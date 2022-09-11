@@ -66,6 +66,24 @@ export class Blog extends AggregateRoot {
     return this.blog.updatedAt;
   }
 
+  public updateBlog(blog: IBlog) {
+    this.blog = {
+      _id: blog._id || this.blog._id,
+      body: blog.body || this.blog.body,
+      category: blog.category || this.blog.category,
+      excerpt: blog.excerpt || this.blog.excerpt,
+      mdescription: blog.mdescription || this.blog.mdescription,
+      mtitle: blog.mtitle || this.blog.mtitle,
+      photo: blog.photo || this.blog.photo,
+      postedBy: blog.postedBy || this.blog.postedBy,
+      slug: blog.slug || this.blog.slug,
+      tags: blog.tags || this.blog.tags,
+      createdAt: blog.createdAt || this.blog.createdAt,
+      title: blog.title || this.blog.title,
+      updatedAt: blog.updatedAt || this.blog.updatedAt,
+    };
+  }
+
   private setMissingProperties(newBlog: IBlog): void {
     if (!this.blog.slug) {
       this.blog.slug = slugify(newBlog.title).toLowerCase();

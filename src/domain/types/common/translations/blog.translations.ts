@@ -4,6 +4,7 @@ export enum BlogTranslations {
   UPDATE = "general.blogPost.update",
   DELETE = "general.blogPost.delete",
   // Validations
+  NOT_FOUND = "validations.blogPost.notFound",
   REQUIRED_BODY = "validations.blogPost.body",
   BODY_MIN_LENGTH = "validations.blogPost.bodyMinLength",
   REQUIRED_TITLE = "validations.blogPost.title",

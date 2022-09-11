@@ -106,6 +106,7 @@
     "invalidRecipientEmailAddress": "El correo electrónico del destinatario provisto es inválido."
   },
   "blogPost": {
+    "notFound": "No se encontró ninguna publicación de blog con el id provisto.",
     "body": "El cuerpo de la publicación es obligatorio.",
     "bodyMinLength": "El cuerpo de la publicación debe tener un mínimo de 150 caracteres.",
     "title": "El título de la publicación es obligatorio.",
