@@ -1,5 +1,4 @@
 import { IVehiclePostsService } from "../../../application/services/contracts";
-import { PaginationQuery } from "../../../domain/types/common/pagination-query";
 import {
   UpdateVehiclePostDto,
   CreateVehiclePostDto,
@@ -20,10 +19,13 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { Role, VehiclePostTranslations } from "../../../domain/types";
+import {
+  Role,
+  VehiclePostTranslations,
+  PaginationQuery,
+} from "../../../domain/types";
 import { JwtAuthGuard } from "../../../infrastructure/guards";
 import { HasRoles } from "../../../common/infrastructure/decorators";
-import { PaginatedQuery } from "../../../common/infrastructure/util";
 import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 import { ApiResponse } from "@/common/infrastructure/api";
 
@@ -38,7 +40,7 @@ export class VehiclePostsController {
   findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
-  ): Promise<PaginatedQuery<VehiclePostDocument>> {
+  ) {
     return this._vehiclePostsService.findAll(paginationQuery, i18n);
   }
 

@@ -1,4 +1,4 @@
-import { BlogSchema } from "@/domain/entities/blog.entity";
+import { BlogSchema } from "@/blogs/domain/blog.entity";
 import { BlogsController } from "@/presentation/controllers/blogs/blogs.controller";
 import { BlogRepository } from "@/infrastructure/repositories";
 import { forwardRef, Module, Provider } from "@nestjs/common";

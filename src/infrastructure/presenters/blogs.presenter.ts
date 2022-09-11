@@ -1,4 +1,4 @@
-import { Blog } from "@/domain/entities/blog.entity";
+import { Blog } from "@/blogs/domain/blog.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "./base-presenter";
 
