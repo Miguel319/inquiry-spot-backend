@@ -9,8 +9,6 @@ export class BlogSchemaFactory
   implements EntitySchemaFactory<BlogSchema, Blog>
 {
   create(blog: Blog): BlogSchema {
-    console.log("blog", blog);
-
     return {
       _id: new Types.ObjectId(blog.getId()),
       body: blog.getBody(),
@@ -30,25 +28,6 @@ export class BlogSchemaFactory
   createFromSchema(blogSchema: BlogSchema | null): Blog | null {
     if (!blogSchema) return null;
 
-    return new Blog(
-      blogSchema._id.toHexString(),
-      blogSchema.title,
-      blogSchema.slug,
-      blogSchema.body,
-      blogSchema.excerpt,
-      blogSchema.mtitle,
-      blogSchema.mdescription,
-      blogSchema.category,
-      blogSchema.photo,
-      blogSchema.postedBy,
-      blogSchema.tags,
-      blogSchema.createdAt,
-      blogSchema.updatedAt,
-    );
-
-    // return new Blog({
-    //   ...blogSchema,
-    //   _id: blogSchema._id,
-    // } as unknown as IBlog);
+    return new Blog({ ...blogSchema, _id: blogSchema._id.toHexString() });
   }
 }
