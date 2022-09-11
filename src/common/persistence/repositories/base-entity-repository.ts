@@ -1,13 +1,13 @@
 import { AggregateRoot } from "@nestjs/cqrs";
 import { FilterQuery, Types } from "mongoose";
-import { IdEntitySchema } from "../schemas/id-entity.schema";
+import { BaseSchema } from "../schemas";
 import { EntityRepository } from "./entity.repository";
 
 export abstract class BaseEntityRepository<
-  TSchema extends IdEntitySchema,
+  TSchema extends BaseSchema,
   TEntity extends AggregateRoot,
 > extends EntityRepository<TSchema, TEntity> {
-  async findOneById(id: string): Promise<TEntity> {
+  async findOneById(id: string): Promise<TEntity | null> {
     return this.findOne({
       _id: new Types.ObjectId(id),
     } as FilterQuery<TSchema>);
@@ -21,6 +21,6 @@ export abstract class BaseEntityRepository<
   }
 
   async findAll(): Promise<TEntity[]> {
-    return this.find({});
+    return this.find({}) as unknown as TEntity[];
   }
 }

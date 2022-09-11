@@ -1,16 +1,12 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
-import { BaseEntity } from "../../domain/entities/base.entity";
+import { BaseSchema } from "@/common/persistence/schemas/base.schema";
+import { Prop, Schema } from "@nestjs/mongoose";
+import { Types } from "mongoose";
+import { Document } from "mongoose";
 
-export type BlogDocument = Blog & Document;
+export type BlogDocument = BlogSchema & Document;
 
-export enum BlogCategory {
-  VEHICLE = "VEHICLE",
-  PROPERTY = "PROPERTY",
-}
-
-@Schema({ timestamps: true })
-export class Blog extends BaseEntity {
+@Schema({ timestamps: true, collection: "blogs" })
+export class BlogSchema extends BaseSchema {
   @Prop({
     min: [3, "The title must be at least 3 characters long."],
     max: [3, "The title cannot have more than 160 characters."],
@@ -69,5 +65,3 @@ export class Blog extends BaseEntity {
   @Prop({ type: Types.ObjectId, ref: "User" })
   postedBy: string;
 }
-
-export const BlogSchema = SchemaFactory.createForClass(Blog);

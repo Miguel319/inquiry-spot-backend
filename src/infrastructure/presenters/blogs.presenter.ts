@@ -1,4 +1,4 @@
-import { Blog } from "@/blogs/domain/blog.entity";
+import { BlogDocument } from "@/blogs/persistence/schemas";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "./base-presenter";
 
@@ -27,10 +27,10 @@ export class BlogsPresenter extends Presenter {
   @ApiProperty({ required: true })
   postedBy: string;
 
-  private constructor(blog: Blog) {
+  private constructor(blog: BlogDocument) {
     super(blog);
 
-    this.title = blog.title;
+    this.title = blog._id;
     this.slug = blog.slug;
     this.body = blog.body;
     this.excerpt = blog.excerpt;
@@ -40,7 +40,7 @@ export class BlogsPresenter extends Presenter {
     this.postedBy = blog.postedBy;
   }
 
-  public static create(blog: Blog): BlogsPresenter {
+  public static create(blog: BlogDocument): BlogsPresenter {
     return new BlogsPresenter(blog);
   }
 }

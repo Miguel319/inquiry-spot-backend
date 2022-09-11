@@ -1,10 +1,10 @@
 import { AggregateRoot } from "@nestjs/cqrs";
 import { FilterQuery, Model } from "mongoose";
 import { EntitySchemaFactory } from "../factories/id-schema.factory";
-import { IdEntitySchema } from "../schemas/id-entity.schema";
+import { BaseSchema } from "../schemas";
 
 export abstract class EntityRepository<
-  TSchema extends IdEntitySchema,
+  TSchema extends BaseSchema,
   TEntity extends AggregateRoot,
 > {
   constructor(
@@ -17,7 +17,7 @@ export abstract class EntityRepository<
 
   protected async findOne(
     entityFilterQuery?: FilterQuery<TSchema>,
-  ): Promise<TEntity> {
+  ): Promise<TEntity | null> {
     const entityDocument = await this.entityModel.findOne(
       entityFilterQuery,
       {},
@@ -29,7 +29,7 @@ export abstract class EntityRepository<
 
   protected async find(
     entityFilterQuery?: FilterQuery<TSchema>,
-  ): Promise<TEntity[]> {
+  ): Promise<(TEntity | null)[]> {
     return (
       await this.entityModel.find(
         entityFilterQuery as FilterQuery<TSchema>,
@@ -47,11 +47,11 @@ export abstract class EntityRepository<
 
   protected async findOneAndReplace(
     entityFilterQuery: FilterQuery<TSchema>,
-    entity: TEntity,
+    entity: TEntity | null,
   ) {
     return this.entityModel.findOneAndReplace(
       entityFilterQuery,
-      this.entitySchemaFactory.create(entity),
+      this.entitySchemaFactory.create(entity) as unknown as TEntity,
       {
         new: true,
         useFindAndModify: false,

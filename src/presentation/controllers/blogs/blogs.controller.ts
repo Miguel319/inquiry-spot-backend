@@ -1,7 +1,6 @@
 import { IBlogsService } from "@/application/services/contracts";
-import { Blog, BlogDocument } from "@/blogs/domain/blog.entity";
 import { ApiResponse } from "@/common/infrastructure/api";
-import { CreateBlogDto } from "@/blogs/infrastructure/dtos/create-blog.dto";
+import { CreateBlogDto } from "@/blogs/infrastructure/dtos";
 import { BlogsPresenter, PresenterFactory } from "@/infrastructure/presenters";
 import {
   Body,
@@ -15,6 +14,7 @@ import {
 import { Response } from "express";
 
 import { FileInterceptor } from "@nestjs/platform-express";
+import { BlogDocument } from "@/blogs/persistence/schemas";
 
 @Controller("blogs")
 export class BlogsController {
@@ -24,7 +24,8 @@ export class BlogsController {
 
   @Get()
   async fetchAll(@Res() res: Response): Promise<Response> {
-    const blogs = (await this.blogsService.findAll()) as BlogDocument[];
+    const blogs =
+      (await this.blogsService.findAll()) as unknown as BlogDocument[];
 
     const blogsPresenter = PresenterFactory.getInstance(
       blogs,
@@ -41,7 +42,9 @@ export class BlogsController {
     blogDto: CreateBlogDto,
     @Res() res: Response,
   ): Promise<Response> {
-    const blog = await this.blogsService.create(blogDto as unknown as Blog);
+    const blog = await this.blogsService.create(
+      blogDto as unknown as BlogDocument,
+    );
 
     return ApiResponse.create({ res, data: blog });
   }

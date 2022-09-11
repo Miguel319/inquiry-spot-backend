@@ -1,5 +1,6 @@
-import { Blog, BlogDocument, User } from "@/domain/entities";
+import { BlogDocument } from "@/blogs/persistence/schemas";
 import { Formatter } from "@/common/infrastructure/util";
+import { User } from "@/domain/entities";
 import { BlogRepository } from "@/infrastructure/repositories";
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import slugify from "slugify";
@@ -12,29 +13,34 @@ export class BlogsService implements IBlogsService {
     @Inject("IUsersService") private readonly userService: IUsersService,
   ) {}
 
-  findById(_id: string): Promise<Blog | null> {
+  findById(_id: string): Promise<BlogDocument | null> {
     return this.blogRepository.findOne({ _id });
   }
 
-  public findAll(): Promise<Blog[]> {
+  public findAll(): Promise<BlogDocument[]> {
     return this.blogRepository.find({});
   }
 
-  public async findBySlug(slug: string): Promise<Blog> {
-    const blog: Blog | null = await this.blogRepository.findOne({ slug });
+  public async findBySlug(slug: string): Promise<BlogDocument> {
+    const blog: BlogDocument | null = await this.blogRepository.findOne({
+      slug,
+    });
 
-    if (!blog) throw new NotFoundException("Blog not found.");
+    if (!blog) throw new NotFoundException("BlogDocumentnot found.");
 
     return blog;
   }
 
-  public async create(entity: Blog): Promise<Blog | null> {
+  public async create(entity: BlogDocument): Promise<BlogDocument | null> {
     await this.userService.findCurrent();
 
     return this.handleBlogCreation(entity);
   }
 
-  public update(slug: string, entity: Blog): Promise<Blog | null> {
+  public update(
+    slug: string,
+    entity: BlogDocument,
+  ): Promise<BlogDocument | null> {
     return this.blogRepository.findOneAndUpdate({ slug }, entity);
   }
 
@@ -42,13 +48,15 @@ export class BlogsService implements IBlogsService {
     return this.blogRepository.deleteOne({ slug });
   }
 
-  private pushToCategoriesAndTags(blog: Blog, fields: any) {
+  private pushToCategoriesAndTags(blog: BlogDocument, fields: any) {
     if (!blog.tags) blog.tags = [];
 
     blog.tags.push(fields.tags.split(","));
   }
 
-  private async handleBlogCreation(fields: Blog): Promise<Blog> {
+  private async handleBlogCreation(
+    fields: BlogDocument,
+  ): Promise<BlogDocument> {
     fields.slug = slugify(fields.title).toLowerCase();
     fields.excerpt = Formatter.trimText(fields.body, 235, " ", "...");
 

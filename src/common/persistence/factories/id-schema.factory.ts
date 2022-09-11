@@ -1,10 +1,10 @@
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IdEntitySchema } from "../schemas/id-entity.schema";
+import { BaseSchema } from "../schemas";
 
 export interface EntitySchemaFactory<
-  TSchema extends IdEntitySchema,
+  TSchema extends BaseSchema,
   TEntity extends AggregateRoot,
 > {
-  create(entity?: TEntity): TSchema;
-  createFromSchema(entitySchema: TSchema | null): TEntity;
+  create(entity: TEntity | null): TSchema | null;
+  createFromSchema(entitySchema: TSchema | null): TEntity | null;
 }
