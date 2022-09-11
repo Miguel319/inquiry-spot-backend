@@ -17,7 +17,7 @@ import { PropertyPostPresenter } from "../property-post.presenter";
 import { VehiclePostPresenter } from "../vehicle-post.presenter";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
-import { BlogDocument } from "@/blogs/persistence/schemas";
+import { BlogDocument } from "@/blogs/infrastructure/persistence/schemas";
 export { Document } from "mongoose";
 
 type EntityType = "user" | "blog" | "tag" | "vehiclePost" | "propertyPost";

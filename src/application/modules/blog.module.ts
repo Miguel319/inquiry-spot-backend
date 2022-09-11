@@ -4,7 +4,7 @@ import { forwardRef, Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { BlogsService } from "../services/implementations";
 import { UsersModule } from "./users.module";
-import { BlogSchema } from "@/blogs/persistence/schemas";
+import { BlogSchema } from "@/blogs/infrastructure/persistence/schemas";
 
 const BlogServiceProvider: Provider = {
   provide: "IBlogsService",

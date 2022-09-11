@@ -1,4 +1,4 @@
-import { BlogDocument } from "@/blogs/persistence/schemas";
+import { BlogDocument } from "@/blogs/infrastructure/persistence/schemas";
 import { Formatter } from "@/common/infrastructure/util";
 import { User } from "@/domain/entities";
 import { BlogRepository } from "@/infrastructure/repositories";

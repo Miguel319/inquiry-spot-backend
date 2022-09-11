@@ -1,5 +1,5 @@
 import { IBlog } from "@/blogs/domain/types/i-blog";
-import { BlogEntityRepository } from "@/blogs/persistence/repositories";
+import { BlogEntityRepository } from "@/blogs/infrastructure/persistence/repositories";
 import { Blog, User } from "@/domain/entities";
 import { BlogTranslations, SharedTranslations } from "@/domain/types";
 import { NotFoundException, UnauthorizedException } from "@nestjs/common";

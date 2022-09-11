@@ -22,7 +22,7 @@ import {
 import { CommandBus } from "@nestjs/cqrs";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { CreateBlogDto, UpdateBlogDto } from "../dtos";
+import { CreateBlogDto, UpdateBlogDto } from "../../infrastructure/dtos";
 
 @Controller("blogs")
 export class BlogsController {

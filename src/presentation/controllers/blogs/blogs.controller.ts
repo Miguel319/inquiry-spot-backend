@@ -14,7 +14,7 @@ import {
 import { Response } from "express";
 
 import { FileInterceptor } from "@nestjs/platform-express";
-import { BlogDocument } from "@/blogs/persistence/schemas";
+import { BlogDocument } from "@/blogs/infrastructure/persistence/schemas";
 
 @Controller("blogs")
 export class BlogsController {
