@@ -15,11 +15,9 @@ export class UpdateBlogHandler implements ICommandHandler<UpdateBlogCommand> {
     private readonly _i18n: I18nService,
   ) {}
 
-  handleAuthorization(user: User, blog: Blog, i18n: I18nContext) {
-    console.log("blog.getPostedBy()._id", blog.getPostedBy()._id);
-    console.log("user._id", user._id);
-
-    const isPublisher = String(blog.getPostedBy()._id) === String(user._id);
+  handleAuthorization(user: User, blog: Blog, i18n: I18nContext): void {
+    const isPublisher: boolean =
+      String(blog.getPostedBy()._id) === String(user._id);
 
     if (!isPublisher)
       throw new UnauthorizedException(
