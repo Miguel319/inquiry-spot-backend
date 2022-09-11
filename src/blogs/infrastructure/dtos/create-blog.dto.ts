@@ -1,24 +1,52 @@
-import { IsNotEmpty } from "@/common/infrastructure/decorators/is-not-empty.decorator";
+import { IsNotEmpty, MinLengthArray } from "@/common/infrastructure/decorators";
+import { BlogTranslations } from "@/domain/types/common/translations";
 import { IsDefined, MinLength } from "class-validator";
+import { i18nValidationMessage } from "nestjs-i18n";
 
 export class CreateBlogDto {
-  @IsNotEmpty()
-  @IsDefined({ message: "The title is mandatory." })
+  @IsNotEmpty({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_TITLE),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_TITLE),
+  })
   readonly title: string;
 
-  @MinLength(150, { message: "The body must have at least 150 characters." })
-  @IsNotEmpty()
-  @IsDefined({ message: "The body is mandatory." })
+  @MinLength(150, {
+    message: i18nValidationMessage(BlogTranslations.BODY_MIN_LENGTH),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_BODY),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_BODY),
+  })
   readonly body: string;
 
-  @IsDefined({ message: "The photo is mandatory." })
-  photo: string;
+  @IsNotEmpty({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_PHOTO),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_PHOTO),
+  })
+  readonly photo: string;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The tags are mandatory." })
-  tags: Array<string>;
+  @MinLengthArray(1, {
+    message: i18nValidationMessage(BlogTranslations.TAGS_MIN_LENGTH),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_TAGS),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_TAGS),
+  })
+  readonly tags: Array<string>;
 
-  @IsNotEmpty()
-  @IsDefined({ message: "The categories are mandatory." })
-  readonly categories: Array<string>;
+  @IsNotEmpty({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_CATEGORY),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(BlogTranslations.REQUIRED_CATEGORY),
+  })
+  readonly category: string;
 }

@@ -1,4 +1,3 @@
-import { IBlog } from "@/blogs/domain/types/i-blog";
 import { EntitySchemaFactory } from "@/common/persistence/factories";
 import { Blog } from "@/domain/entities";
 import { Injectable } from "@nestjs/common";
@@ -9,11 +8,11 @@ import { BlogSchema } from "../schemas";
 export class BlogSchemaFactory
   implements EntitySchemaFactory<BlogSchema, Blog>
 {
-  create(blog: Blog): BlogSchema | null {
-    if (!blog) return null;
+  create(blog: Blog): BlogSchema {
+    console.log("blog", blog);
 
     return {
-      _id: new Types.ObjectId(blog.getId() as unknown as Types.ObjectId),
+      _id: new Types.ObjectId(blog.getId()),
       body: blog.getBody(),
       category: blog.getCategory(),
       createdAt: blog.getCreatedAt(),
@@ -28,13 +27,28 @@ export class BlogSchemaFactory
       updatedAt: blog.getUpdatedAt(),
     };
   }
-
   createFromSchema(blogSchema: BlogSchema | null): Blog | null {
     if (!blogSchema) return null;
 
-    return new Blog({
-      ...blogSchema,
-      _id: blogSchema._id.toHexString(),
-    } as unknown as IBlog);
+    return new Blog(
+      blogSchema._id.toHexString(),
+      blogSchema.title,
+      blogSchema.slug,
+      blogSchema.body,
+      blogSchema.excerpt,
+      blogSchema.mtitle,
+      blogSchema.mdescription,
+      blogSchema.category,
+      blogSchema.photo,
+      blogSchema.postedBy,
+      blogSchema.tags,
+      blogSchema.createdAt,
+      blogSchema.updatedAt,
+    );
+
+    // return new Blog({
+    //   ...blogSchema,
+    //   _id: blogSchema._id,
+    // } as unknown as IBlog);
   }
 }

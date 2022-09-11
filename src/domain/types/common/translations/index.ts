@@ -6,3 +6,4 @@ export { SharedTranslations } from "./shared.translations";
 export { UserTranslations } from "./user.translations";
 export { VehiclePostTranslations } from "./vehicle-post.translations";
 export { ExceptionTranslations } from "./exceptions.translations";
+export { BlogTranslations } from "./blog.translations";

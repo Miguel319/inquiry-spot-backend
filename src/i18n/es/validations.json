@@ -104,5 +104,14 @@
     "invalidFromEmail": "El correo electrónico del remitente provisto es inválido.",
     "recipientEmailAddress": "El correo electrónico del destinatario es obligatorio.",
     "invalidRecipientEmailAddress": "El correo electrónico del destinatario provisto es inválido."
+  },
+  "blogPost": {
+    "body": "El cuerpo de la publicación es obligatorio.",
+    "bodyMinLength": "El cuerpo de la publicación debe tener un mínimo de 150 caracteres.",
+    "title": "El título de la publicación es obligatorio.",
+    "photo": "La imagen es obligatoria.",
+    "tags": "Las etiquetas son obligatorias.",
+    "tagsLength": "Debe colocar al menos una etiqueta.",
+    "category": "La categoría es obligatoria."
   }
 }

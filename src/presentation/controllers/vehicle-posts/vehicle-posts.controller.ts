@@ -30,6 +30,7 @@ import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 import { ApiResponse } from "@/common/infrastructure/api";
 
 @Controller("vehicle-posts")
+@UseFilters(new I18nValidationExceptionFilter())
 export class VehiclePostsController {
   constructor(
     @Inject("IVehiclePostsService")
@@ -53,7 +54,6 @@ export class VehiclePostsController {
   }
 
   @Post()
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.MIXED, Role.SELLER)
   async create(
@@ -76,7 +76,6 @@ export class VehiclePostsController {
   }
 
   @Put(":_id")
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   async update(
     @Param("_id") _id: string,

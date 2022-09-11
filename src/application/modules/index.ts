@@ -10,7 +10,7 @@ import { UsersModule } from "./users.module";
 import { VehiclePostModule } from "./vehicle-post.module";
 import { SellersModule } from "./sellers.module";
 import { TagsModule } from "./tags.module";
-import { BlogsModule } from "./blog.module";
+import { BlogsModule } from "@/blogs/application/modules";
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 import { AggregateRoot } from "@nestjs/cqrs";
 import { FilterQuery, Model } from "mongoose";
-import { EntitySchemaFactory } from "../factories/id-schema.factory";
+import { EntitySchemaFactory } from "../factories/entity-schema.factory";
 import { BaseSchema } from "../schemas";
 
 export abstract class EntityRepository<
@@ -40,14 +40,13 @@ export abstract class EntityRepository<
       this.entitySchemaFactory.createFromSchema(entityDocument),
     );
   }
-
   async create(entity: TEntity): Promise<void> {
     await new this.entityModel(this.entitySchemaFactory.create(entity)).save();
   }
 
   protected async findOneAndReplace(
     entityFilterQuery: FilterQuery<TSchema>,
-    entity: TEntity | null,
+    entity: TEntity,
   ) {
     return this.entityModel.findOneAndReplace(
       entityFilterQuery,

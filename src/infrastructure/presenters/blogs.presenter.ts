@@ -28,7 +28,7 @@ export class BlogsPresenter extends Presenter {
   postedBy: string;
 
   private constructor(blog: BlogDocument) {
-    super(blog);
+    super(blog as any);
 
     this.title = blog._id;
     this.slug = blog.slug;

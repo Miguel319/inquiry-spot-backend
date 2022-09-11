@@ -1,7 +1,6 @@
 import { BaseSchema } from "@/common/persistence/schemas/base.schema";
 import { Prop, Schema } from "@nestjs/mongoose";
-import { Types } from "mongoose";
-import { Document } from "mongoose";
+import { Types, Document } from "mongoose";
 
 export type BlogDocument = BlogSchema & Document;
 

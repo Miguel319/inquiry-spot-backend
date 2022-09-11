@@ -1,64 +1,73 @@
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IBlog } from "../types/i-blog";
 
 export class Blog extends AggregateRoot {
-  private blog: IBlog;
-
-  constructor(newBlog: IBlog) {
+  constructor(
+    private readonly _id: string,
+    private readonly title: string,
+    private readonly slug: string,
+    private readonly body: string,
+    private readonly excerpt: string,
+    private readonly mtitle: string,
+    private readonly mdescription: string,
+    private readonly category: string,
+    private readonly photo: string,
+    private readonly postedBy: string,
+    private readonly tags: string[],
+    private readonly createdAt: Date,
+    private readonly updatedAt: Date,
+  ) {
     super();
-
-    this.blog = newBlog;
   }
 
   public getId(): string {
-    return this.blog._id;
+    return this._id;
   }
 
   public getTitle(): string {
-    return this.blog.title;
+    return this.title;
   }
 
   public getSlug(): string {
-    return this.blog.slug;
+    return this.slug;
   }
 
   public getBody(): string {
-    return this.blog.body;
+    return this.body;
   }
 
   public getExcerpt(): string {
-    return this.blog.excerpt;
+    return this.excerpt;
   }
 
   public getMtitle(): string {
-    return this.blog.mtitle;
+    return this.mtitle;
   }
 
   public getMdescription(): string {
-    return this.blog.mdescription;
+    return this.mdescription;
   }
 
   public getCategory(): string {
-    return this.blog.category;
+    return this.category;
   }
 
   public getPhoto(): string {
-    return this.blog.photo;
+    return this.photo;
   }
 
   public getPostedBy(): string {
-    return this.blog.postedBy;
+    return this.postedBy;
   }
 
   public getTags(): string[] {
-    return [...this.blog.tags];
+    return this.tags;
   }
 
   public getCreatedAt() {
-    return this.blog.createdAt;
+    return this.createdAt;
   }
 
   public getUpdatedAt() {
-    return this.blog.updatedAt;
+    return this.updatedAt;
   }
 }
