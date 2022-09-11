@@ -16,7 +16,7 @@ export abstract class BaseRepository<T extends Document>
 {
   constructor(protected readonly entityModel: Model<T>) {}
 
-  findOne(
+  async findOne(
     entityFilterQuery: FilterQuery<T>,
     projection?: Record<string, unknown>,
     select?: QueryOptions | null,

@@ -1,14 +1,19 @@
 import { IBaseEntity } from "@/common/domain/types";
 
+export interface IPostedBy {
+  _id: string;
+  name: string;
+}
+
 export interface IBlog extends IBaseEntity {
   readonly title: string;
-  readonly slug: string;
+  slug: string;
   readonly body: string;
-  readonly excerpt: string;
-  readonly mtitle: string;
-  readonly mdescription: string;
+  excerpt: string;
+  mtitle: string;
+  mdescription: string;
   readonly photo: string;
   readonly category: string;
   readonly tags: string[];
-  readonly postedBy: string;
+  readonly postedBy: IPostedBy;
 }

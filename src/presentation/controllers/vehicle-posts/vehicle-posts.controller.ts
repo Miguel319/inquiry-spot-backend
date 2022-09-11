@@ -77,6 +77,7 @@ export class VehiclePostsController {
 
   @Put(":_id")
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async update(
     @Param("_id") _id: string,
     @Body() vehiclePostDto: UpdateVehiclePostDto,
@@ -100,6 +101,7 @@ export class VehiclePostsController {
 
   @Delete(":_id")
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async delete(
     @Param("_id") _id: string,
     @Res() res: Response,

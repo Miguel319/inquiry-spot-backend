@@ -1,5 +1,7 @@
+import { Formatter } from "@/common/infrastructure/util";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IBlog } from "../types/i-blog";
+import slugify from "slugify";
+import { IBlog, IPostedBy } from "../types/i-blog";
 
 export class Blog extends AggregateRoot {
   private blog: IBlog;
@@ -8,6 +10,8 @@ export class Blog extends AggregateRoot {
     super();
 
     this.blog = newBlog;
+
+    this.setMissingProperties(newBlog);
   }
 
   public getId(): string {
@@ -46,7 +50,7 @@ export class Blog extends AggregateRoot {
     return this.blog.photo;
   }
 
-  public getPostedBy(): string {
+  public getPostedBy(): IPostedBy {
     return this.blog.postedBy;
   }
 
@@ -60,5 +64,17 @@ export class Blog extends AggregateRoot {
 
   public getUpdatedAt() {
     return this.blog.updatedAt;
+  }
+
+  private setMissingProperties(newBlog: IBlog): void {
+    if (!this.blog.slug) {
+      this.blog.slug = slugify(newBlog.title).toLowerCase();
+      this.blog.excerpt = Formatter.trimText(newBlog.body, 235, " ", "...");
+      this.blog.mtitle = `${newBlog.title} | ${process.env["APP_NAME"]}`;
+      this.blog.mdescription = Formatter.stripHtmlTags(newBlog.body).substring(
+        0,
+        160,
+      );
+    }
   }
 }

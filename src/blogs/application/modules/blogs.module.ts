@@ -1,18 +1,24 @@
 import { UsersModule } from "@/application/modules/users.module";
+import { UsersService } from "@/application/services/implementations";
 import { BlogsController } from "@/blogs/infrastructure/controllers";
 import { BlogFactory, BlogSchemaFactory } from "@/blogs/persistence/factories";
 import { BlogEntityRepository } from "@/blogs/persistence/repositories";
 import { BlogSchema } from "@/blogs/persistence/schemas";
 import { LoggerService } from "@/common/infrastructure/logger";
-import { forwardRef, Module } from "@nestjs/common";
+import { Module, Provider } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule, SchemaFactory } from "@nestjs/mongoose";
 import { BlogsCommandHandlers } from "../commands";
 import { BlogsEventHandler } from "../events";
 
+const UserUseCaseProvider: Provider = {
+  provide: "IUsersService",
+  useClass: UsersService,
+};
+
 @Module({
   imports: [
-    forwardRef(() => UsersModule),
+    UsersModule,
     CqrsModule,
     MongooseModule.forFeature([
       {
@@ -27,6 +33,7 @@ import { BlogsEventHandler } from "../events";
     BlogSchemaFactory,
     EventPublisher,
     LoggerService,
+    UserUseCaseProvider,
     BlogFactory,
     ...BlogsCommandHandlers,
     ...BlogsEventHandler,

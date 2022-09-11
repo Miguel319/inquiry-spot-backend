@@ -1,3 +1,4 @@
+import { IPostedBy } from "@/blogs/domain/types/i-blog";
 import { BaseSchema } from "@/common/persistence/schemas/base.schema";
 import { Prop, Schema } from "@nestjs/mongoose";
 import { Types, Document } from "mongoose";
@@ -61,6 +62,14 @@ export class BlogSchema extends BaseSchema {
   ])
   tags: Array<string>;
 
-  @Prop({ type: Types.ObjectId, ref: "User" })
-  postedBy: string;
+  @Prop({
+    type: {
+      _id: {
+        type: Types.ObjectId,
+        ref: "User",
+      },
+      name: String,
+    },
+  })
+  postedBy: IPostedBy;
 }

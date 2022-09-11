@@ -79,6 +79,15 @@ export class User extends BaseEntity {
   ])
   propertyPostsInterests?: string[];
 
+  @Prop([
+    {
+      type: ObjectId,
+      ref: "Blog",
+      default: [],
+    },
+  ])
+  blogPosts?: string[];
+
   @Prop({
     type: String,
   })

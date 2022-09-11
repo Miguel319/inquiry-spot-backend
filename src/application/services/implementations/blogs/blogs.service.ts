@@ -68,7 +68,10 @@ export class BlogsService implements IBlogsService {
 
     const user = (await this.userService.findCurrent()) as User;
 
-    blog.postedBy = user._id;
+    blog.postedBy = {
+      _id: user._id,
+      name: user.name,
+    };
 
     this.pushToCategoriesAndTags(blog, fields);
 

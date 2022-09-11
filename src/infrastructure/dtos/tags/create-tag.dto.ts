@@ -1,4 +1,3 @@
-// import { translations } from "@/i18n/translations";
 import { IsNotEmpty } from "@/common/infrastructure/decorators";
 import { IsDefined, MaxLength } from "class-validator";
 

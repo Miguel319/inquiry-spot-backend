@@ -1,6 +1,6 @@
-import { BlogFactory } from "@/blogs/persistence/factories/blog.factory";
+import { BlogFactory } from "@/blogs/persistence/factories";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
-import { CreateBlogCommand } from "../operations/create-blog.command";
+import { CreateBlogCommand } from "../operations";
 
 @CommandHandler(CreateBlogCommand)
 export class CreateBlogHandler implements ICommandHandler<CreateBlogCommand> {
@@ -9,9 +9,13 @@ export class CreateBlogHandler implements ICommandHandler<CreateBlogCommand> {
     private readonly eventPublisher: EventPublisher,
   ) {}
 
-  async execute({ createBlogDto }: CreateBlogCommand): Promise<void> {
+  async execute({
+    createBlogDto,
+    currentUser,
+    i18n,
+  }: CreateBlogCommand): Promise<void> {
     const blog = this.eventPublisher.mergeObjectContext(
-      await this.blogFactory.create(createBlogDto),
+      await this.blogFactory.create(createBlogDto, currentUser, i18n),
     );
 
     blog.commit();

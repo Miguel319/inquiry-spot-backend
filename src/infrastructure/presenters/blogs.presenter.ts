@@ -1,3 +1,4 @@
+import { IPostedBy } from "@/blogs/domain/types/i-blog";
 import { BlogDocument } from "@/blogs/persistence/schemas";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "./base-presenter";
@@ -25,10 +26,10 @@ export class BlogsPresenter extends Presenter {
   tags: Array<string>;
 
   @ApiProperty({ required: true })
-  postedBy: string;
+  postedBy: IPostedBy;
 
   private constructor(blog: BlogDocument) {
-    super(blog as any);
+    super(blog);
 
     this.title = blog._id;
     this.slug = blog.slug;
