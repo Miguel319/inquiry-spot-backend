@@ -9,7 +9,7 @@ import {
   UpdateQuery,
 } from "mongoose";
 
-export interface IRepository<T> {
+export interface IDocumentRepository<T> {
   findOne(
     entityFilterQuery: FilterQuery<T>,
     projection?: Record<string, unknown>,

@@ -1,7 +1,7 @@
 import { Formatter } from "@/common/infrastructure/util";
 import { AggregateRoot } from "@nestjs/cqrs";
 import slugify from "slugify";
-import { IBlog, IPostedBy } from "../types/i-blog";
+import { IBlog, IPostedBy } from "../types";
 
 export class Blog extends AggregateRoot {
   private blog: IBlog;

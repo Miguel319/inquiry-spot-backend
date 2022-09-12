@@ -142,7 +142,7 @@ export class PropertyPostsService implements IPropertyPostsService {
     return this._propertyPostRepo.deleteOne({ _id });
   }
 
-  findAllFromSeller(
+  async findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,
     i18n?: I18nContext,

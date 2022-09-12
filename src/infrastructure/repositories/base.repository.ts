@@ -1,4 +1,4 @@
-import { IRepository } from "../../application/repositories";
+import { IDocumentRepository } from "../../application/repositories";
 import {
   AnyKeys,
   AnyObject,
@@ -12,7 +12,7 @@ import {
 import { PaginationOptions } from "@/common/infrastructure/util";
 
 export abstract class BaseRepository<T extends Document>
-  implements IRepository<T>
+  implements IDocumentRepository<T>
 {
   constructor(protected readonly entityModel: Model<T>) {}
 

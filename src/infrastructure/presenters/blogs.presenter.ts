@@ -1,4 +1,4 @@
-import { IPostedBy } from "@/blogs/domain/types/i-blog";
+import { IPostedBy } from "@/blogs/domain/types";
 import { BlogDocument } from "@/blogs/infrastructure/persistence/schemas";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "./base-presenter";

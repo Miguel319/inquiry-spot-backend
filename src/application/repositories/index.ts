@@ -1,1 +1,1 @@
-export { IRepository } from "./i-repository";
+export { IDocumentRepository } from "./i-document.repository";

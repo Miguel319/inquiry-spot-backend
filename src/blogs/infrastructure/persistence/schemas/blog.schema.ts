@@ -1,5 +1,5 @@
-import { IPostedBy } from "@/blogs/domain/types/i-blog";
-import { BaseSchema } from "@/common/persistence/schemas/base.schema";
+import { IPostedBy } from "@/blogs/domain/types";
+import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
 import { Prop, Schema } from "@nestjs/mongoose";
 import { Types, Document } from "mongoose";
 

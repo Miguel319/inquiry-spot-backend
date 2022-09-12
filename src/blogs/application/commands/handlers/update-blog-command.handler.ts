@@ -1,4 +1,4 @@
-import { IBlog } from "@/blogs/domain/types/i-blog";
+import { IBlog } from "@/blogs/domain/types";
 import { BlogEntityRepository } from "@/blogs/infrastructure/persistence/repositories";
 import { Blog, User } from "@/domain/entities";
 import { BlogTranslations, SharedTranslations } from "@/domain/types";

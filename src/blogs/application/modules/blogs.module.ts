@@ -13,6 +13,7 @@ import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule, SchemaFactory } from "@nestjs/mongoose";
 import { BlogsCommandHandlers } from "../commands";
 import { BlogsEventHandler } from "../events";
+import { BlogQueryHandlers } from "../queries/handlers";
 
 const UserUseCaseProvider: Provider = {
   provide: "IUsersService",
@@ -38,6 +39,7 @@ const UserUseCaseProvider: Provider = {
     LoggerService,
     UserUseCaseProvider,
     BlogFactory,
+    ...BlogQueryHandlers,
     ...BlogsCommandHandlers,
     ...BlogsEventHandler,
   ],
@@ -45,6 +47,7 @@ const UserUseCaseProvider: Provider = {
     BlogEntityRepository,
     BlogSchemaFactory,
     BlogFactory,
+    ...BlogQueryHandlers,
     ...BlogsCommandHandlers,
     ...BlogsEventHandler,
   ],
