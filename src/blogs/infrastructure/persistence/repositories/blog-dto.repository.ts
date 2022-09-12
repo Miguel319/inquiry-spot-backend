@@ -4,9 +4,9 @@ import {
 } from "@/common/infrastructure/util";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { FilterQuery, Model } from "mongoose";
+import { FilterQuery, Model, Types } from "mongoose";
 import { BlogDto } from "../../dtos";
-import { BlogSchema } from "../schemas";
+import { BlogDocument, BlogSchema } from "../schemas";
 
 @Injectable()
 export class BlogDtoRepository {
@@ -25,11 +25,7 @@ export class BlogDtoRepository {
     );
   }
 
-  async getBySlug(slug: string): Promise<BlogDto | null> {
-    const blog = await this.blogModel.findOne({ slug }, {}, { lean: true });
-
-    if (!blog) return null;
-
+  private sanitizeBlog(blog: BlogDocument): BlogDto {
     return {
       _id: blog._id,
       body: blog.body,
@@ -45,6 +41,26 @@ export class BlogDtoRepository {
       title: blog.title,
       updatedAt: blog.updatedAt,
     };
+  }
+
+  async getBySlug(slug: string): Promise<BlogDto | null> {
+    const blog = await this.blogModel.findOne({ slug }, {}, { lean: true });
+
+    if (!blog) return null;
+
+    return this.sanitizeBlog(blog);
+  }
+
+  async getById(_id: string): Promise<BlogDto | null> {
+    const blog = await this.blogModel.findOne(
+      { _id: new Types.ObjectId(_id) },
+      {},
+      { lean: true },
+    );
+
+    if (!blog) return null;
+
+    return this.sanitizeBlog(blog);
   }
 
   async getAll() {

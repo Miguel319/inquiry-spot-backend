@@ -4,6 +4,7 @@ import {
   UpdateBlogCommand,
 } from "@/blogs/application/commands";
 import {
+  FetchBlogByIdQuery,
   FetchBlogBySlugQuery,
   FetchPaginatedBlogsQuery,
 } from "@/blogs/application/queries";
@@ -69,13 +70,23 @@ export class BlogsController {
     >(new FetchPaginatedBlogsQuery(query, i18n as I18nContext));
   }
 
-  @Get(":slug")
+  @Get("by-slug/:slug")
   async getBySlug(
     @Param("slug") slug: string,
     @I18n() i18n?: I18nContext,
   ): Promise<BlogDto> {
     return this.queryBus.execute<FetchBlogBySlugQuery, BlogDto>(
       new FetchBlogBySlugQuery(slug, i18n as I18nContext),
+    );
+  }
+
+  @Get("by-id/:_id")
+  async getById(
+    @Param("_id") _id: string,
+    @I18n() i18n?: I18nContext,
+  ): Promise<BlogDto> {
+    return this.queryBus.execute<FetchBlogByIdQuery, BlogDto>(
+      new FetchBlogByIdQuery(_id, i18n as I18nContext),
     );
   }
 
