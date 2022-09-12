@@ -1,6 +1,6 @@
-import { IBlogValuesQuery } from "@/blogs/domain/types";
-import { BlogDto } from "@/blogs/infrastructure/dtos";
-import { BlogDtoRepository } from "@/blogs/infrastructure/persistence/repositories";
+import { IBlogValuesQuery } from "@/blog/domain/types";
+import { BlogDto } from "@/blog/infrastructure/dtos";
+import { BlogDtoRepository } from "@/blog/infrastructure/persistence/repositories";
 import {
   getPaginationOptions,
   PaginatedQuery,

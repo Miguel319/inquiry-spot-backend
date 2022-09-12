@@ -1,4 +1,4 @@
-import { UpdateBlogDto } from "@/blogs/infrastructure/dtos";
+import { UpdateBlogDto } from "@/blog/infrastructure/dtos";
 import { User } from "@/domain/entities";
 import { I18nContext } from "nestjs-i18n";
 

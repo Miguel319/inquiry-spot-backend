@@ -1,4 +1,4 @@
-import { BlogCreatedEvent } from "@/blogs/application/events";
+import { BlogCreatedEvent } from "@/blog/application/events";
 import { EntityFactory } from "@/common/infrastructure/persistence/factories";
 import { Blog, UserDocument } from "@/domain/entities";
 import { Injectable } from "@nestjs/common";

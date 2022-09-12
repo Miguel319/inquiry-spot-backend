@@ -1,4 +1,4 @@
-import { IPostedBy } from "@/blogs/domain/types";
+import { IPostedBy } from "@/blog/domain/types";
 import { BaseDto } from "@/common/infrastructure/dtos";
 
 export class BlogDto extends BaseDto {

@@ -1,4 +1,4 @@
-import { BlogEntityRepository } from "@/blogs/infrastructure/persistence/repositories";
+import { BlogEntityRepository } from "@/blog/infrastructure/persistence/repositories";
 import { Blog, User } from "@/domain/entities";
 import { BlogTranslations, SharedTranslations } from "@/domain/types";
 import { NotFoundException, UnauthorizedException } from "@nestjs/common";

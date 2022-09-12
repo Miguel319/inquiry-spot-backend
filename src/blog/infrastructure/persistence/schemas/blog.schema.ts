@@ -1,4 +1,4 @@
-import { IPostedBy } from "@/blogs/domain/types";
+import { IPostedBy } from "@/blog/domain/types";
 import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Types, Document } from "mongoose";

@@ -1,4 +1,4 @@
-import { IBlogValuesQuery } from "@/blogs/domain/types";
+import { IBlogValuesQuery } from "@/blog/domain/types";
 import { I18nContext } from "nestjs-i18n";
 
 export class FetchPaginatedBlogsQuery {

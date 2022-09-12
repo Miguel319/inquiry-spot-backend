@@ -3,12 +3,12 @@ import {
   CreateBlogCommand,
   DeleteBlogCommand,
   UpdateBlogCommand,
-} from "@/blogs/application/commands";
+} from "@/blog/application/commands";
 import {
   FetchBlogByIdQuery,
   FetchBlogBySlugQuery,
   FetchPaginatedBlogsQuery,
-} from "@/blogs/application/queries";
+} from "@/blog/application/queries";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
 import { PaginatedQuery } from "@/common/infrastructure/util";

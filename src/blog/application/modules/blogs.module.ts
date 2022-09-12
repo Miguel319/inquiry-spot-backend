@@ -1,17 +1,17 @@
 import { UsersModule } from "@/application/modules/users.module";
-import { BlogsController } from "@/blogs/presentation/controllers";
+import { BlogsController } from "@/blog/presentation/controllers";
 import {
   BlogFactory,
   BlogSchemaFactory,
-} from "@/blogs/infrastructure/persistence/factories";
+} from "@/blog/infrastructure/persistence/factories";
 import {
   BlogDtoRepository,
   BlogEntityRepository,
-} from "@/blogs/infrastructure/persistence/repositories";
+} from "@/blog/infrastructure/persistence/repositories";
 import {
   BlogSchema,
   SchemaBlog,
-} from "@/blogs/infrastructure/persistence/schemas";
+} from "@/blog/infrastructure/persistence/schemas";
 import { LoggerService } from "@/common/infrastructure/logger";
 import { Module } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
