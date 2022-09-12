@@ -1,4 +1,4 @@
-import { PaginationOptions } from "@/common/infrastructure/util/pagination.util";
+import { PaginationOptions } from "@/common/infrastructure/util";
 import {
   AnyKeys,
   AnyObject,

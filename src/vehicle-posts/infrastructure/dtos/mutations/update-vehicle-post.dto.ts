@@ -6,7 +6,7 @@ import {
   VehiclePostTranslations,
   VehicleStatus,
   VehicleType,
-} from "../../../domain/types";
+} from "@/domain/types";
 import { IsArray, IsEnum, ValidateIf, ValidateNested } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { ElectricVehicleDto } from "./electric-vehicle.dto";

@@ -1,5 +1,5 @@
-import { ElectricValues, VehiclePostTranslations } from "../../../domain/types";
-import { IsNotEmpty } from "../../../common/infrastructure/decorators";
+import { IsNotEmpty } from "@/common/infrastructure/decorators";
+import { ElectricValues, VehiclePostTranslations } from "@/domain/types";
 import { IsDefined } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 

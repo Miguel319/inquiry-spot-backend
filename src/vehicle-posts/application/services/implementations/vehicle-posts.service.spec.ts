@@ -4,17 +4,17 @@ import {
   VehiclePostsService as VehiclePostServiceType,
   VehiclePostsService,
 } from "./vehicle-posts.service";
-import { VehiclePostsRepository as VehiclePostsRepositoryType } from "../../../../infrastructure/repositories";
+import { VehiclePostsRepository as VehiclePostsRepositoryType } from "../../../infrastructure/persistence/repositories";
 import {
   UsersRepository,
   VehiclePostsRepository,
 } from "../../../../../test/mocks";
-import { VehiclePost, VehiclePostDocument } from "../../../../domain/entities";
+import { VehiclePost, VehiclePostDocument } from "@/domain/entities";
 import { getVehiclePostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
-import { UsersRepository as UsersRepositoryType } from "../../../../infrastructure/repositories";
+import { UsersRepository as UsersRepositoryType } from "@/infrastructure/repositories";
 
-import { UsersService } from "../users/users.service";
+import { UsersService } from "../../../../application/services/implementations/users";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 
 describe.skip("VehiclePostsService", () => {

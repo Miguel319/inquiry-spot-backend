@@ -12,7 +12,7 @@ import {
   Price,
   Traction,
   Currency,
-} from "../types";
+} from "@/domain/types";
 
 import paginate from "mongoose-paginate-v2";
 import { BaseEntity } from "@/common/domain/entities";

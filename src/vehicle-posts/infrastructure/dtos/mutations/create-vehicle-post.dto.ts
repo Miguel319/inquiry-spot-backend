@@ -7,11 +7,11 @@ import {
   VehicleStatus,
   VehicleType,
   Price,
-} from "../../../domain/types";
+} from "../../../../domain/types";
 import {
   IsNotEmpty,
   MinLengthArray,
-} from "../../../common/infrastructure/decorators";
+} from "../../../../common/infrastructure/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
 import {
   IsArray,

@@ -3,26 +3,27 @@ import {
   VehiclePost,
   VehiclePostDocument,
 } from "@/domain/entities";
-import { VehiclePostsRepository } from "../../../../infrastructure/repositories";
 import {
   Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
-import { IUsersService, IVehiclePostsService } from "../../contracts";
+import { IVehiclePostsService } from "../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import {
   PaginationQuery,
   SharedTranslations,
   UserTranslations,
   VehiclePostTranslations,
-} from "../../../../domain/types";
+} from "@/domain/types";
 import {
   getPaginationOptions,
   PaginatedQuery,
   PaginationOptions,
-} from "../../../../common/infrastructure/util";
+} from "@/common/infrastructure/util";
+import { IUsersService } from "@/application/services/contracts";
+import { VehiclePostsRepository } from "@/vehicle-posts/infrastructure/persistence/repositories";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {

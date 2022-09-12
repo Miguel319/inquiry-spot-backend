@@ -2,7 +2,7 @@ import { BaseDto } from "@/common/infrastructure/dtos";
 import {
   PaginatedQuery,
   PaginationOptions,
-} from "@/common/infrastructure/util/pagination.util";
+} from "@/common/infrastructure/util";
 import { FilterQuery, QueryOptions } from "mongoose";
 
 export interface IDtoRepository<T extends BaseDto> {

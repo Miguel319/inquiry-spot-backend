@@ -11,7 +11,7 @@ import {
   VehicleType,
 } from "@/domain/types";
 import { ApiProperty } from "@nestjs/swagger";
-import { Presenter } from "./base-presenter";
+import { Presenter } from "../../../../infrastructure/presenters";
 
 export class VehiclePostPresenter extends Presenter {
   @ApiProperty({ required: true })

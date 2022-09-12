@@ -1,8 +1,3 @@
-import { IVehiclePostsService } from "../../../application/services/contracts";
-import {
-  UpdateVehiclePostDto,
-  CreateVehiclePostDto,
-} from "../../../infrastructure/dtos";
 import {
   Body,
   Controller,
@@ -28,6 +23,11 @@ import { JwtAuthGuard } from "../../../infrastructure/guards";
 import { HasRoles } from "../../../common/infrastructure/decorators";
 import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 import { ApiResponse } from "@/common/infrastructure/api";
+import {
+  CreateVehiclePostDto,
+  UpdateVehiclePostDto,
+} from "@/vehicle-posts/infrastructure/dtos";
+import { IVehiclePostsService } from "@/vehicle-posts/application/services/contracts";
 
 @Controller("vehicle-posts")
 @UseFilters(new I18nValidationExceptionFilter())
