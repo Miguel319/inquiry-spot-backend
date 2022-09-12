@@ -1,14 +1,15 @@
-import { IBlog } from "@/blogs/domain/types";
 import { BlogEntityRepository } from "@/blogs/infrastructure/persistence/repositories";
 import { Blog, User } from "@/domain/entities";
 import { BlogTranslations, SharedTranslations } from "@/domain/types";
 import { NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { UpdateBlogCommand } from "../operations";
+import { DeleteBlogCommand } from "../operations";
 
-@CommandHandler(UpdateBlogCommand)
-export class UpdateBlogHandler implements ICommandHandler<UpdateBlogCommand> {
+@CommandHandler(DeleteBlogCommand)
+export class DeleteBlogCommandHandler
+  implements ICommandHandler<DeleteBlogCommand>
+{
   constructor(
     private readonly _blogEntityRepository: BlogEntityRepository,
     private readonly eventPublisher: EventPublisher,
@@ -30,10 +31,9 @@ export class UpdateBlogHandler implements ICommandHandler<UpdateBlogCommand> {
   async execute({
     queryBy,
     valueToQuery,
-    updateBlogDto,
-    currentUser,
+    user,
     i18n,
-  }: UpdateBlogCommand): Promise<void> {
+  }: DeleteBlogCommand): Promise<boolean> {
     const blogFound = await this._blogEntityRepository.findByValue(
       valueToQuery,
       queryBy,
@@ -46,18 +46,17 @@ export class UpdateBlogHandler implements ICommandHandler<UpdateBlogCommand> {
           : this._i18n.t(BlogTranslations.NOT_FOUND),
       );
 
-    this.handleAuthorization(currentUser, blogFound, i18n);
-
     const blog = this.eventPublisher.mergeObjectContext(blogFound);
 
-    blog.updateBlog(updateBlogDto as unknown as IBlog);
+    this.handleAuthorization(user, blogFound, i18n);
 
-    await this._blogEntityRepository.findOneAndReplaceByValue(
+    const deleteCount = await this._blogEntityRepository.delete(
       valueToQuery,
       queryBy,
-      blog,
     );
 
     blog.commit();
+
+    return deleteCount;
   }
 }

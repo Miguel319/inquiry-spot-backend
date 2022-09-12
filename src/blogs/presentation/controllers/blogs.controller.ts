@@ -1,6 +1,7 @@
 import { IUsersService } from "@/application/services/contracts";
 import {
   CreateBlogCommand,
+  DeleteBlogCommand,
   UpdateBlogCommand,
 } from "@/blogs/application/commands";
 import {
@@ -17,6 +18,7 @@ import { JwtAuthGuard } from "@/infrastructure/guards";
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -155,6 +157,46 @@ export class BlogsController {
     return ApiResponse.update({
       res,
       message: i18n?.t?.(BlogTranslations.UPDATE) || "",
+    });
+  }
+
+  @Delete("by-slug/:slug")
+  @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.SELLER, Role.MIXED)
+  async deleteBlogBySlug(
+    @Param("slug") slug: string,
+    @Res() res: Response,
+    @I18n() i18n?: I18nContext,
+  ): Promise<Response> {
+    const currentUser = (await this._usersService.findCurrent()) as User;
+
+    await this.commandBus.execute<DeleteBlogCommand, boolean>(
+      new DeleteBlogCommand(slug, "slug", currentUser, i18n as I18nContext),
+    );
+
+    return ApiResponse.update({
+      res,
+      message: i18n?.t?.(BlogTranslations.UPDATE) || "",
+    });
+  }
+
+  @Delete("by-id/:_id")
+  @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.SELLER, Role.MIXED)
+  async deleteBlogById(
+    @Param("_id") _id: string,
+    @Res() res: Response,
+    @I18n() i18n?: I18nContext,
+  ): Promise<Response> {
+    const currentUser = (await this._usersService.findCurrent()) as User;
+
+    await this.commandBus.execute<DeleteBlogCommand, boolean>(
+      new DeleteBlogCommand(_id, "_id", currentUser, i18n as I18nContext),
+    );
+
+    return ApiResponse.delete({
+      res,
+      message: i18n?.t?.(BlogTranslations.DELETE) || "",
     });
   }
 }

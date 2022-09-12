@@ -29,6 +29,17 @@ export abstract class BaseEntityRepository<
     );
   }
 
+  async delete(value: string, queryBy: "slug" | "_id") {
+    const query = {
+      [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    const deletedEntity = await this.entityModel.deleteOne(query);
+
+    return deletedEntity.deletedCount > 0;
+  }
+
   async findAll(): Promise<TEntity[]> {
     return this.find({}) as unknown as TEntity[];
   }

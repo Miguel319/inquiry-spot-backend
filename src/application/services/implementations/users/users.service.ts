@@ -20,11 +20,7 @@ export class UsersService implements IUsersService {
     private readonly _i18n: I18nService,
   ) {}
 
-  async findByEmail(
-    email: string,
-    signIn = false,
-    i18n?: I18nContext,
-  ): Promise<User> {
+  async findByEmail(email: string, signIn = false): Promise<User> {
     const user = signIn
       ? ((await this.userRepository.findOne(
           { email },
@@ -32,13 +28,6 @@ export class UsersService implements IUsersService {
           { projection: "+password name email" },
         )) as User)
       : ((await this.userRepository.findOne({ email }, {})) as User);
-
-    if (signIn && !user)
-      throw new NotFoundException(
-        i18n
-          ? i18n.t(UserTranslations.NOT_FOUND)
-          : this._i18n.t(UserTranslations.NOT_FOUND),
-      );
 
     return user;
   }
