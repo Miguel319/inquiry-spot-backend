@@ -26,7 +26,7 @@ export class FetchPaginatedBlogsQueryHandler
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
       select:
-        "_id title body excerpt mtitle mdescription description photo category tags postedBy createdAt updatedAt",
+        "_id title body excerpt mtitle slug mdescription description photo category tags postedBy createdAt updatedAt",
       sort: "-createdAt",
     };
   }

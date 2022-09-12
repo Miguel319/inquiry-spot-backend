@@ -25,7 +25,29 @@ export class BlogDtoRepository {
     );
   }
 
+  async getBySlug(slug: string): Promise<BlogDto | null> {
+    const blog = await this.blogModel.findOne({ slug }, {}, { lean: true });
+
+    if (!blog) return null;
+
+    return {
+      _id: blog._id,
+      body: blog.body,
+      category: blog.category,
+      createdAt: blog.createdAt,
+      excerpt: blog.excerpt,
+      mdescription: blog.mdescription,
+      mtitle: blog.mtitle,
+      photo: blog.photo,
+      postedBy: blog.postedBy,
+      slug: blog.slug,
+      tags: blog.tags,
+      title: blog.title,
+      updatedAt: blog.updatedAt,
+    };
+  }
+
   async getAll() {
-    return (await this.blogModel.find({})).map((v) => v);
+    return (await this.blogModel.find({}, {}, { lean: true })).map((v) => v);
   }
 }

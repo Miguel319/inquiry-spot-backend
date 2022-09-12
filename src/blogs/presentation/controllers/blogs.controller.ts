@@ -3,9 +3,13 @@ import {
   CreateBlogCommand,
   UpdateBlogCommand,
 } from "@/blogs/application/commands";
-import { FetchPaginatedBlogsQuery } from "@/blogs/application/queries/operations";
+import {
+  FetchBlogBySlugQuery,
+  FetchPaginatedBlogsQuery,
+} from "@/blogs/application/queries";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import { User } from "@/domain/entities";
 import { BlogTranslations, Role } from "@/domain/types";
 import { JwtAuthGuard } from "@/infrastructure/guards";
@@ -41,7 +45,7 @@ export class BlogsController {
   ) {}
 
   @Get()
-  async fetchAll(
+  async fetchAllPaginated(
     @Query("page") page: string,
     @Query("perPage") perPage: string,
     @Query("title") title: string,
@@ -49,7 +53,7 @@ export class BlogsController {
     @Query("category") category: string,
     @Query("tags") tags: string[],
     @I18n() i18n?: I18nContext,
-  ) {
+  ): Promise<PaginatedQuery<BlogDto>> {
     const query = {
       page: Number(page),
       perPage: Number(perPage),
@@ -59,8 +63,19 @@ export class BlogsController {
       tags,
     };
 
-    return this.queryBus.execute<FetchPaginatedBlogsQuery, BlogDto[]>(
-      new FetchPaginatedBlogsQuery(query, i18n as I18nContext),
+    return this.queryBus.execute<
+      FetchPaginatedBlogsQuery,
+      PaginatedQuery<BlogDto>
+    >(new FetchPaginatedBlogsQuery(query, i18n as I18nContext));
+  }
+
+  @Get(":slug")
+  async getBySlug(
+    @Param("slug") slug: string,
+    @I18n() i18n?: I18nContext,
+  ): Promise<BlogDto> {
+    return this.queryBus.execute<FetchBlogBySlugQuery, BlogDto>(
+      new FetchBlogBySlugQuery(slug, i18n as I18nContext),
     );
   }
 
