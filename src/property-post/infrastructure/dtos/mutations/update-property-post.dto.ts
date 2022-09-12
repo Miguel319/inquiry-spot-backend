@@ -1,9 +1,10 @@
+import { AddresValidation } from "@/infrastructure/dtos/common";
+import { PropertyPostsTranslations } from "@/property-post/application/translations";
 import {
   BuyingOption,
-  PropertyPostsTranslations,
   PropertyStatus,
   PropertyType,
-} from "../../../domain/types";
+} from "@/property-post/domain";
 import {
   IsArray,
   IsEnum,
@@ -12,7 +13,6 @@ import {
   ValidateNested,
 } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { AddresValidation } from "../common";
 
 export class UpdatePropertyPostDto {
   readonly description: string;

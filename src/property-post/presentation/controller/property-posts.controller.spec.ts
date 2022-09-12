@@ -6,14 +6,14 @@ import { PropertyPostsService as PropertyPostsServiceType } from "../../../appli
 import { Test, TestingModule } from "@nestjs/testing";
 import { PropertyPost, PropertyPostDocument } from "../../../domain/entities";
 import { getPropertyPostStub } from "../../../../test/stubs";
-import {
-  CreatePropertyPostDto,
-  UpdatePropertyPostDto,
-} from "../../../infrastructure/dtos";
 import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
 import e, { Response } from "express";
 import { PaginatedQuery } from "@/common/infrastructure/util";
+import {
+  CreatePropertyPostDto,
+  UpdatePropertyPostDto,
+} from "@/property-post/infrastructure/dtos";
 
 describe("PropertyController", () => {
   let controller: PropertyPostsController;

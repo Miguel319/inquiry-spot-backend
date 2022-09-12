@@ -5,7 +5,7 @@ import { EmailsModule } from "./email.module";
 import { EnvModule } from "./env.module";
 import { InternationalizationModule } from "./internationalization.module";
 import { LoggerModule } from "./logger.module";
-import { PropertyPostModule } from "./property-post.module";
+import { PropertyPostModule } from "../../property-post/application/modules/property-post.module";
 import { UsersModule } from "./users.module";
 import { VehiclePostModule } from "../../vehicle-post/application/modules/vehicle-post.module";
 import { SellersModule } from "./sellers.module";

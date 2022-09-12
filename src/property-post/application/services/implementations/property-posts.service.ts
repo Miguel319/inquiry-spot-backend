@@ -3,18 +3,19 @@ import {
   PropertyPostDocument,
   UserDocument,
 } from "@/domain/entities";
-import { PropertyPostsRepository } from "../../../../infrastructure/repositories";
 import {
   Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
-import { IPropertyPostsService, IUsersService } from "../../contracts";
+import {
+  IPropertyPostsService,
+  IUsersService,
+} from "../../../../application/services/contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import {
   PaginationQuery,
-  PropertyPostsTranslations,
   SharedTranslations,
   UserTranslations,
 } from "../../../../domain/types";
@@ -23,6 +24,8 @@ import {
   PaginatedQuery,
   PaginationOptions,
 } from "../../../../common/infrastructure/util";
+import { PropertyPostsTranslations } from "../../translations";
+import { PropertyPostsRepository } from "@/property-post/infrastructure/persistence/repositories";
 
 @Injectable()
 export class PropertyPostsService implements IPropertyPostsService {

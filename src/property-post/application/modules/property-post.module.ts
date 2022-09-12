@@ -1,10 +1,10 @@
 import { PropertyPostSchema } from "@/domain/entities";
-import { PropertyPostsController } from "@/presentation/controllers";
-import { PropertyPostsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { PropertyPostsService } from "../services/implementations";
-import { UsersModule } from "./users.module";
+import { PropertyPostsService } from "../../../application/services/implementations";
+import { UsersModule } from "../../../application/modules/users.module";
+import { PropertyPostsController } from "@/property-post/presentation/controller";
+import { PropertyPostsRepository } from "@/property-post/infrastructure/persistence/repositories";
 
 const PropertyPostProvider: Provider = {
   provide: "IPropertyPostsService",

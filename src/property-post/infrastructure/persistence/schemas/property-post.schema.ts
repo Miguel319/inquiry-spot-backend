@@ -1,18 +1,15 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
-import {
-  Address,
-  BuyingOption,
-  Currency,
-  Price,
-  PropertyPostsTranslations,
-  PropertyStatus,
-  PropertyType,
-  SharedTranslations,
-} from "../types";
 
 import paginate from "mongoose-paginate-v2";
 import { BaseEntity } from "@/common/domain/entities";
+import {
+  BuyingOption,
+  PropertyStatus,
+  PropertyType,
+} from "@/property-post/domain";
+import { PropertyPostsTranslations } from "@/property-post/application/translations";
+import { Address, Currency, Price, SharedTranslations } from "@/domain/types";
 
 export type PropertyPostDocument = PropertyPost & Document;
 

@@ -66,7 +66,7 @@ export class Blog extends AggregateRoot {
     return this.blog.updatedAt;
   }
 
-  public updateBlog(blog: IBlog) {
+  public updateBlog(blog: IBlog): void {
     this.blog = {
       _id: blog._id || this.blog._id,
       body: blog.body || this.blog.body,

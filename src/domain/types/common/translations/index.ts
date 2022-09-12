@@ -1,7 +1,6 @@
 export { AuthTranslations } from "./auth.translations";
 export { EmailTranslations } from "./email.translations";
 export { NameTranslations } from "./name.translations";
-export { PropertyPostsTranslations } from "./property-posts.translations";
 export { SharedTranslations } from "./shared.translations";
 export { UserTranslations } from "./user.translations";
 export { VehiclePostTranslations } from "./vehicle-post.translations";

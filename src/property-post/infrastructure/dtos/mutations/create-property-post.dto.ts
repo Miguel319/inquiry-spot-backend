@@ -1,11 +1,4 @@
-import {
-  BuyingOption,
-  Price,
-  PropertyPostsTranslations,
-  PropertyStatus,
-  PropertyType,
-} from "../../../domain/types";
-import { IsNotEmpty } from "../../../common/infrastructure/decorators";
+import { IsNotEmpty } from "../../../../common/infrastructure/decorators";
 import {
   IsArray,
   IsDefined,
@@ -15,7 +8,14 @@ import {
   ValidateNested,
 } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { AddresValidation } from "../common";
+import { AddresValidation } from "../../../../infrastructure/dtos/common";
+import {
+  BuyingOption,
+  PropertyStatus,
+  PropertyType,
+} from "@/property-post/domain";
+import { PropertyPostsTranslations } from "@/property-post/application/translations";
+import { Price } from "@/domain/types";
 
 export class CreatePropertyPostDto {
   @IsNotEmpty({

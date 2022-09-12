@@ -4,10 +4,9 @@ import {
   PropertyPostsService as PropertyPostServiceType,
   PropertyPostsService,
 } from "./property-posts.service";
-import {
-  PropertyPostsRepository as PropertyPostsRepositoryType,
-  UsersRepository as UsersRepositoryType,
-} from "../../../../infrastructure/repositories";
+import { PropertyPostsRepository as PropertyPostsRepositoryType } from "@/property-post/infrastructure/persistence/repositories";
+import { UsersRepository as UsersRepositoryType } from "@/infrastructure/repositories/users";
+
 import {
   PropertyPostsRepository,
   UsersRepository,
@@ -19,7 +18,7 @@ import {
 } from "../../../../domain/entities";
 import { getPropertyPostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
-import { UsersService as UsersServiceType } from "../users/users.service";
+import { UsersService as UsersServiceType } from "@/application/services/implementations";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 
 describe.skip("PropertyPostsService", () => {

@@ -1,7 +1,8 @@
 import { PropertyPost } from "@/domain/entities";
-import { Address, BuyingOption, Price, PropertyStatus } from "@/domain/types";
+import { Address, Price } from "@/domain/types";
+import { BuyingOption, PropertyStatus } from "@/property-post/domain";
 import { ApiProperty } from "@nestjs/swagger";
-import { Presenter } from "./base-presenter";
+import { Presenter } from "../../../../infrastructure/presenters/base-presenter";
 
 export class PropertyPostPresenter extends Presenter {
   @ApiProperty({ required: true })
