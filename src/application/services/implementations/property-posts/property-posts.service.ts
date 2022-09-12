@@ -132,7 +132,7 @@ export class PropertyPostsService implements IPropertyPostsService {
 
     const propertyPost = await this.findById(_id);
 
-    if (propertyPost.seller !== user._id)
+    if (String(propertyPost.seller) !== String(user._id))
       throw new UnauthorizedException(
         i18n
           ? i18n.t(SharedTranslations.UNAUTHORIZED)
