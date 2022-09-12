@@ -73,8 +73,6 @@ export class AuthService implements IAuthService {
 
     delete user.password;
 
-    if (user && user.password) user.password;
-
     const authResult: IAuthResult = {
       user: user as User,
       token: this.getToken(user as User),

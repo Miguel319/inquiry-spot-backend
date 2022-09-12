@@ -11,7 +11,7 @@ import {
 import {
   IsNotEmpty,
   MinLengthArray,
-} from "../../../infrastructure/common/decorators";
+} from "../../../common/infrastructure/decorators";
 import { i18nValidationMessage } from "nestjs-i18n";
 import {
   IsArray,

@@ -1,6 +1,6 @@
 import { ITagsService } from "@/application/services/contracts";
 import { Tag, TagDocument } from "@/domain/entities/tag.entity";
-import { ApiResponse } from "@/infrastructure/common/api";
+import { ApiResponse } from "@/common/infrastructure/api";
 import { CreateTagDto } from "@/infrastructure/dtos/tags";
 import { PresenterFactory, TagsPresenter } from "@/infrastructure/presenters";
 import {

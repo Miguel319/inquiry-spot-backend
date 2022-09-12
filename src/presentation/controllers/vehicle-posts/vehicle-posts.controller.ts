@@ -1,6 +1,4 @@
 import { IVehiclePostsService } from "../../../application/services/contracts";
-import { PaginationQuery } from "../../../domain/types/common/pagination-query";
-import { ApiResponse } from "../../../infrastructure/common/api";
 import {
   UpdateVehiclePostDto,
   CreateVehiclePostDto,
@@ -21,13 +19,18 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { Role, VehiclePostTranslations } from "../../../domain/types";
+import {
+  Role,
+  VehiclePostTranslations,
+  PaginationQuery,
+} from "../../../domain/types";
 import { JwtAuthGuard } from "../../../infrastructure/guards";
-import { HasRoles } from "../../../infrastructure/common/decorators";
-import { PaginatedQuery } from "../../../infrastructure/common/util";
+import { HasRoles } from "../../../common/infrastructure/decorators";
 import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
+import { ApiResponse } from "@/common/infrastructure/api";
 
 @Controller("vehicle-posts")
+@UseFilters(new I18nValidationExceptionFilter())
 export class VehiclePostsController {
   constructor(
     @Inject("IVehiclePostsService")
@@ -38,7 +41,7 @@ export class VehiclePostsController {
   findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
-  ): Promise<PaginatedQuery<VehiclePostDocument>> {
+  ) {
     return this._vehiclePostsService.findAll(paginationQuery, i18n);
   }
 
@@ -51,7 +54,6 @@ export class VehiclePostsController {
   }
 
   @Post()
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.MIXED, Role.SELLER)
   async create(
@@ -74,8 +76,8 @@ export class VehiclePostsController {
   }
 
   @Put(":_id")
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async update(
     @Param("_id") _id: string,
     @Body() vehiclePostDto: UpdateVehiclePostDto,
@@ -99,6 +101,7 @@ export class VehiclePostsController {
 
   @Delete(":_id")
   @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.MIXED, Role.SELLER)
   async delete(
     @Param("_id") _id: string,
     @Res() res: Response,

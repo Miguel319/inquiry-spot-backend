@@ -15,7 +15,7 @@ import {
 } from "../types";
 
 import paginate from "mongoose-paginate-v2";
-import { BaseEntity } from "./base.entity";
+import { BaseEntity } from "@/common/domain/entities";
 
 const {
   Types: { ObjectId },

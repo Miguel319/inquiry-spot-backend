@@ -4,5 +4,4 @@ export { EmailsService } from "./emails/email.service";
 export { VehiclePostsService } from "./vehicle-posts/vehicle-posts.service";
 export { PropertyPostsService } from "./property-posts/property-posts.service";
 export { SellersService } from "./sellers/sellers.service";
-export { BlogsService } from "./blogs";
 export { TagsService } from "./tags/tags.service";

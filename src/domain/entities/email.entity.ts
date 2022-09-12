@@ -1,7 +1,7 @@
+import { BaseEntity } from "@/common/domain/entities";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import { EmailTranslations } from "../types";
-import { BaseEntity } from "./base.entity";
 
 export interface SendgridEmailParams {
   to: string; // Recipient email address

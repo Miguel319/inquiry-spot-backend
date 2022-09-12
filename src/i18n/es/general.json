@@ -21,5 +21,10 @@
     "create": "¡Publicación creada satisfactoriamente!",
     "update": "¡Publicación actualizada satisfactoriamente!",
     "delete": "¡Publicación eliminada satisfactoriamente!"
+  },
+  "blogPost": {
+    "create": "¡Publicación de blog creada satisfactoriamente!",
+    "update": "¡Publicación de blog actualizada satisfactoriamente!",
+    "delete": "¡Publicación de blog satisfactoriamente!"
   }
 }

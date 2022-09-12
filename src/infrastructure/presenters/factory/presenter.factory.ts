@@ -1,6 +1,4 @@
 import {
-  Blog,
-  BlogDocument,
   PropertyPost,
   PropertyPostDocument,
   Tag,
@@ -17,8 +15,9 @@ import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
 import { PropertyPostPresenter } from "../property-post.presenter";
 import { VehiclePostPresenter } from "../vehicle-post.presenter";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
+import { BlogDocument } from "@/blogs/infrastructure/persistence/schemas";
 export { Document } from "mongoose";
 
 type EntityType = "user" | "blog" | "tag" | "vehiclePost" | "propertyPost";
@@ -30,7 +29,7 @@ export class PresenterFactory {
   ): Presenter | null {
     if (type === "user") return UserPresenter.create(value as User);
 
-    if (type === "blog") return BlogsPresenter.create(value as Blog);
+    if (type === "blog") return BlogsPresenter.create(value as BlogDocument);
 
     if (type === "tag") return TagsPresenter.create(value as Tag);
 

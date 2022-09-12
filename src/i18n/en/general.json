@@ -21,5 +21,10 @@
     "create": "Property post created successfully!",
     "update": "Property post updated successfully!",
     "delete": "Property post deleted successfully!"
+  },
+  "blogPost": {
+    "create": "Blog post created successfully!",
+    "update": "Blog post updated successfully!",
+    "delete": "Blog post deleted successfully!"
   }
 }

@@ -15,7 +15,7 @@ import { I18nService } from "nestjs-i18n";
 import { UsersRepository as UsersRepositoryType } from "../../../../infrastructure/repositories";
 
 import { UsersService } from "../users/users.service";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 
 describe.skip("VehiclePostsService", () => {
   let service: VehiclePostServiceType;

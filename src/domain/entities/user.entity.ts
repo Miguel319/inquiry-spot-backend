@@ -1,7 +1,7 @@
+import { BaseEntity } from "@/common/domain/entities";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
 import { Role, UserTranslations } from "../types";
-import { BaseEntity } from "./base.entity";
 
 export type UserDocument = User & Document;
 
@@ -78,6 +78,15 @@ export class User extends BaseEntity {
     },
   ])
   propertyPostsInterests?: string[];
+
+  @Prop([
+    {
+      type: ObjectId,
+      ref: "Blog",
+      default: [],
+    },
+  ])
+  blogPosts?: string[];
 
   @Prop({
     type: String,

@@ -103,5 +103,15 @@
     "invalidFromEmail": "The provided sender's email is invalid.",
     "recipientEmailAddress": "The recipient email is required.",
     "invalidRecipientEmailAddress": "The provided recipient email is invalid."
+  },
+  "blogPost": {
+    "notFound": "Blog post not found.",
+    "body": "The body of the post is mandatory.",
+    "bodyMinLength": "The body of the post must have at least 150 characters.",
+    "title": "The title is mandatory.",
+    "photo": "The photo is mandatory.",
+    "tags": "The tags are mandatory.",
+    "tagsLength": "You must provide at least one tag.",
+    "category": "The category is mandatory."
   }
 }

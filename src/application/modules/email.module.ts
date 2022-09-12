@@ -1,5 +1,5 @@
 import { EmailSchema } from "@/domain/entities";
-import { LoggerService } from "@/infrastructure/logger";
+import { LoggerService } from "@/common/infrastructure/logger";
 import { EmailsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";

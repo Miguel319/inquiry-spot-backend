@@ -13,7 +13,7 @@ import {
 import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
 import e, { Response } from "express";
-import { PaginatedQuery } from "@/infrastructure/common/util";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 
 describe("PropertyController", () => {
   let controller: PropertyPostsController;

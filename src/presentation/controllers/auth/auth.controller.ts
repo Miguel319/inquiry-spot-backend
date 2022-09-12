@@ -4,7 +4,7 @@ import {
   IEmailsService,
 } from "@/application/services/contracts";
 import { User, UserDocument } from "@/domain/entities";
-import { ApiResponse } from "../../../infrastructure/common/api";
+import { ApiResponse } from "../../../common/infrastructure/api";
 import { SignInDto, SignUpDto } from "@/infrastructure/dtos";
 import { PresenterFactory, UserPresenter } from "@/infrastructure/presenters";
 import {

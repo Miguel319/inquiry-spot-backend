@@ -4,4 +4,3 @@ export { EmailsRepository } from "./emails/emails.repository";
 export { VehiclePostsRepository } from "./vehicle-posts/vehicle-post.repository";
 export { PropertyPostsRepository } from "./property-posts/property-posts.repository";
 export { TagsRepository } from "./tags/tags.repository";
-export { BlogRepository } from "./blogs/blog.repository";

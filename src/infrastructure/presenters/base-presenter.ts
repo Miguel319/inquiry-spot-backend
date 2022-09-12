@@ -1,5 +1,11 @@
-import { BaseEntity } from "@/domain/entities/base.entity";
+import { IBaseEntity } from "@/common/domain/types";
 import { ApiProperty } from "@nestjs/swagger";
+
+interface IAggrateRoot {
+  getId: () => string;
+  getCreatedAt: () => Date;
+  getUpdatedAt: () => Date;
+}
 
 export abstract class Presenter {
   @ApiProperty()
@@ -11,9 +17,21 @@ export abstract class Presenter {
   @ApiProperty()
   readonly updatedAt: Date;
 
-  protected constructor(presenter: BaseEntity) {
-    this._id = presenter._id;
-    this.createdAt = presenter.createdAt;
-    this.updatedAt = presenter.updatedAt;
+  private isBaseEntity(
+    entity: IBaseEntity | IAggrateRoot,
+  ): entity is IBaseEntity {
+    return "_id" in entity;
+  }
+
+  protected constructor(presenter: IBaseEntity | IAggrateRoot) {
+    this._id = this.isBaseEntity(presenter) ? presenter._id : presenter.getId();
+
+    this.createdAt = this.isBaseEntity(presenter)
+      ? presenter.createdAt
+      : presenter.getCreatedAt();
+
+    this.updatedAt = this.isBaseEntity(presenter)
+      ? presenter.updatedAt
+      : presenter.getUpdatedAt();
   }
 }

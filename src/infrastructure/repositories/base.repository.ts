@@ -1,4 +1,4 @@
-import { IRepository } from "../../application/repositories";
+import { IDocumentRepository } from "../../application/repositories";
 import {
   AnyKeys,
   AnyObject,
@@ -9,14 +9,14 @@ import {
   QueryOptions,
   UpdateQuery,
 } from "mongoose";
-import { PaginationOptions } from "../common/util";
+import { PaginationOptions } from "@/common/infrastructure/util";
 
 export abstract class BaseRepository<T extends Document>
-  implements IRepository<T>
+  implements IDocumentRepository<T>
 {
   constructor(protected readonly entityModel: Model<T>) {}
 
-  findOne(
+  async findOne(
     entityFilterQuery: FilterQuery<T>,
     projection?: Record<string, unknown>,
     select?: QueryOptions | null,
@@ -50,7 +50,7 @@ export abstract class BaseRepository<T extends Document>
     pipeline?: PipelineStage[] | undefined,
     options?: Record<string, unknown> | undefined,
   ) {
-    return this.entityModel.aggregate(pipeline, options);
+    return this.entityModel.aggregate(pipeline as any, options as any);
   }
 
   async find(entityFilterQuery: FilterQuery<T>, select?: string): Promise<T[]> {
@@ -101,11 +101,15 @@ export abstract class BaseRepository<T extends Document>
   async deleteOne(entityFilterQuery: FilterQuery<T>): Promise<boolean> {
     const deleteResult = await this.entityModel.deleteOne(entityFilterQuery);
 
+    if (!deleteResult) return false;
+
     return deleteResult.deletedCount >= 1;
   }
 
   async deleteMany(entityFilterQuery: FilterQuery<T>): Promise<boolean> {
     const deleteResult = await this.entityModel.deleteMany(entityFilterQuery);
+
+    if (!deleteResult) return false;
 
     return deleteResult.deletedCount >= 1;
   }

@@ -1,6 +1,6 @@
+import { BaseEntity } from "@/common/domain/entities";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
-import { BaseEntity } from "./base.entity";
 
 export type TagDocument = Tag & Document;
 
