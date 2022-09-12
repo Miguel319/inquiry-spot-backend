@@ -82,17 +82,17 @@ export class Blog extends AggregateRoot {
       title: blog.title || this.blog.title,
       updatedAt: blog.updatedAt || this.blog.updatedAt,
     };
+
+    this.setMissingProperties(this.blog);
   }
 
   private setMissingProperties(newBlog: IBlog): void {
-    if (!this.blog.slug) {
-      this.blog.slug = slugify(newBlog.title).toLowerCase();
-      this.blog.excerpt = Formatter.trimText(newBlog.body, 235, " ", "...");
-      this.blog.mtitle = `${newBlog.title} | ${process.env["APP_NAME"]}`;
-      this.blog.mdescription = Formatter.stripHtmlTags(newBlog.body).substring(
-        0,
-        160,
-      );
-    }
+    this.blog.slug = slugify(newBlog.title).toLowerCase();
+    this.blog.excerpt = Formatter.trimText(newBlog.body, 235, " ", "...");
+    this.blog.mtitle = `${newBlog.title} | ${process.env["APP_NAME"]}`;
+    this.blog.mdescription = Formatter.stripHtmlTags(newBlog.body).substring(
+      0,
+      160,
+    );
   }
 }

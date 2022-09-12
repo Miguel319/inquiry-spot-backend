@@ -110,10 +110,10 @@ export class BlogsController {
     });
   }
 
-  @Put(":_id")
+  @Put("by-id/:_id")
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.SELLER, Role.MIXED)
-  async updateBlog(
+  async updateBlogById(
     @Param("_id") _id: string,
     @Body() blog: UpdateBlogDto,
     @Res() res: Response,
@@ -122,10 +122,37 @@ export class BlogsController {
     const currentUser = (await this._usersService.findCurrent()) as User;
 
     await this.commandBus.execute<UpdateBlogCommand, void>(
-      new UpdateBlogCommand(_id, blog, currentUser, i18n as I18nContext),
+      new UpdateBlogCommand(_id, "_id", blog, currentUser, i18n as I18nContext),
     );
 
-    return ApiResponse.create({
+    return ApiResponse.update({
+      res,
+      message: i18n?.t?.(BlogTranslations.UPDATE) || "",
+    });
+  }
+
+  @Put("by-slug/:slug")
+  @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.SELLER, Role.MIXED)
+  async updateBlogBySlug(
+    @Param("slug") slug: string,
+    @Body() blog: UpdateBlogDto,
+    @Res() res: Response,
+    @I18n() i18n?: I18nContext,
+  ): Promise<Response> {
+    const currentUser = (await this._usersService.findCurrent()) as User;
+
+    await this.commandBus.execute<UpdateBlogCommand, void>(
+      new UpdateBlogCommand(
+        slug,
+        "slug",
+        blog,
+        currentUser,
+        i18n as I18nContext,
+      ),
+    );
+
+    return ApiResponse.update({
       res,
       message: i18n?.t?.(BlogTranslations.UPDATE) || "",
     });

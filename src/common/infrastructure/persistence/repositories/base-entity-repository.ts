@@ -7,15 +7,24 @@ export abstract class BaseEntityRepository<
   TSchema extends BaseSchema,
   TEntity extends AggregateRoot,
 > extends EntityRepository<TSchema, TEntity> {
-  async findOneById(id: string): Promise<TEntity | null> {
+  async findByValue(
+    value: string,
+    queryBy: "slug" | "_id",
+  ): Promise<TEntity | null> {
     return this.findOne({
-      _id: new Types.ObjectId(id),
+      [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
     } as FilterQuery<TSchema>);
   }
 
-  async findOneAndReplaceById(id: string, entity: TEntity): Promise<void> {
-    await this.findOneAndReplace(
-      { _id: new Types.ObjectId(id) } as FilterQuery<TSchema>,
+  async findOneAndReplaceByValue(
+    value: string,
+    queryBy: "slug" | "_id",
+    entity: TEntity,
+  ): Promise<void> {
+    this.findOneAndReplace(
+      {
+        [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
+      } as FilterQuery<TSchema>,
       entity,
     );
   }

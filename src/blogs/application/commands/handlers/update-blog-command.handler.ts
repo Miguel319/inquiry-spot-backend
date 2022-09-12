@@ -28,12 +28,16 @@ export class UpdateBlogHandler implements ICommandHandler<UpdateBlogCommand> {
   }
 
   async execute({
-    _id,
+    queryBy,
+    valueToQuery,
     updateBlogDto,
     currentUser,
     i18n,
   }: UpdateBlogCommand): Promise<void> {
-    const blogFound = await this._blogEntityRepository.findOneById(_id);
+    const blogFound = await this._blogEntityRepository.findByValue(
+      valueToQuery,
+      queryBy,
+    );
 
     if (!blogFound)
       throw new NotFoundException(
@@ -48,7 +52,11 @@ export class UpdateBlogHandler implements ICommandHandler<UpdateBlogCommand> {
 
     blog.updateBlog(updateBlogDto as unknown as IBlog);
 
-    await this._blogEntityRepository.findOneAndReplaceById(_id, blog);
+    await this._blogEntityRepository.findOneAndReplaceByValue(
+      valueToQuery,
+      queryBy,
+      blog,
+    );
 
     blog.commit();
   }
