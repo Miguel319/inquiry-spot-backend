@@ -3,6 +3,7 @@ import {
   CreateBlogCommand,
   UpdateBlogCommand,
 } from "@/blogs/application/commands";
+import { FetchPaginatedBlogsQuery } from "@/blogs/application/queries/operations";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
 import { User } from "@/domain/entities";
@@ -11,28 +12,59 @@ import { JwtAuthGuard } from "@/infrastructure/guards";
 import {
   Body,
   Controller,
+  Get,
   Inject,
   Param,
   Post,
   Put,
+  Query,
   Res,
   UseFilters,
   UseGuards,
 } from "@nestjs/common";
-import { CommandBus } from "@nestjs/cqrs";
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { CreateBlogDto, UpdateBlogDto } from "../../infrastructure/dtos";
+import {
+  BlogDto,
+  CreateBlogDto,
+  UpdateBlogDto,
+} from "../../infrastructure/dtos";
 
 @Controller("blogs")
+@UseFilters(new I18nValidationExceptionFilter())
 export class BlogsController {
   constructor(
     private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
     @Inject("IUsersService") private readonly _usersService: IUsersService,
   ) {}
 
+  @Get()
+  async fetchAll(
+    @Query("page") page: string,
+    @Query("perPage") perPage: string,
+    @Query("title") title: string,
+    @Query("slug") slug: string,
+    @Query("category") category: string,
+    @Query("tags") tags: string[],
+    @I18n() i18n?: I18nContext,
+  ) {
+    const query = {
+      page: Number(page),
+      perPage: Number(perPage),
+      title,
+      slug,
+      category,
+      tags,
+    };
+
+    return this.queryBus.execute<FetchPaginatedBlogsQuery, BlogDto[]>(
+      new FetchPaginatedBlogsQuery(query, i18n as I18nContext),
+    );
+  }
+
   @Post()
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.SELLER, Role.MIXED)
   async createBlog(
@@ -53,7 +85,6 @@ export class BlogsController {
   }
 
   @Put(":_id")
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.SELLER, Role.MIXED)
   async updateBlog(

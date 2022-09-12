@@ -1,7 +1,8 @@
 import { IPostedBy } from "@/blogs/domain/types";
 import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Types, Document } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 
 export type BlogDocument = BlogSchema & Document;
 
@@ -73,3 +74,7 @@ export class BlogSchema extends BaseSchema {
   })
   postedBy: IPostedBy;
 }
+
+export const SchemaBlog = SchemaFactory.createForClass(BlogSchema);
+
+SchemaBlog.plugin(paginate);

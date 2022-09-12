@@ -1,24 +1,24 @@
 import { UsersModule } from "@/application/modules/users.module";
-import { UsersService } from "@/application/services/implementations";
 import { BlogsController } from "@/blogs/presentation/controllers";
 import {
   BlogFactory,
   BlogSchemaFactory,
 } from "@/blogs/infrastructure/persistence/factories";
-import { BlogEntityRepository } from "@/blogs/infrastructure/persistence/repositories";
-import { BlogSchema } from "@/blogs/infrastructure/persistence/schemas";
+import {
+  BlogDtoRepository,
+  BlogEntityRepository,
+} from "@/blogs/infrastructure/persistence/repositories";
+import {
+  BlogSchema,
+  SchemaBlog,
+} from "@/blogs/infrastructure/persistence/schemas";
 import { LoggerService } from "@/common/infrastructure/logger";
-import { Module, Provider } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
-import { MongooseModule, SchemaFactory } from "@nestjs/mongoose";
+import { MongooseModule } from "@nestjs/mongoose";
 import { BlogsCommandHandlers } from "../commands";
 import { BlogsEventHandler } from "../events";
 import { BlogQueryHandlers } from "../queries/handlers";
-
-const UserUseCaseProvider: Provider = {
-  provide: "IUsersService",
-  useClass: UsersService,
-};
 
 @Module({
   imports: [
@@ -27,7 +27,7 @@ const UserUseCaseProvider: Provider = {
     MongooseModule.forFeature([
       {
         name: BlogSchema.name,
-        schema: SchemaFactory.createForClass(BlogSchema),
+        schema: SchemaBlog,
       },
     ]),
   ],
@@ -36,16 +36,8 @@ const UserUseCaseProvider: Provider = {
     BlogEntityRepository,
     BlogSchemaFactory,
     EventPublisher,
+    BlogDtoRepository,
     LoggerService,
-    UserUseCaseProvider,
-    BlogFactory,
-    ...BlogQueryHandlers,
-    ...BlogsCommandHandlers,
-    ...BlogsEventHandler,
-  ],
-  exports: [
-    BlogEntityRepository,
-    BlogSchemaFactory,
     BlogFactory,
     ...BlogQueryHandlers,
     ...BlogsCommandHandlers,
