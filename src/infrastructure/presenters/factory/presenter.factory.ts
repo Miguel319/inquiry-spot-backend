@@ -14,7 +14,7 @@ import { TagsPresenter } from "../tags.presenter";
 import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
 import { PropertyPostPresenter } from "../property-post.presenter";
-import { VehiclePostPresenter } from "../../../vehicle-posts/infrastructure/dtos";
+import { VehiclePostPresenter } from "../../../vehicle-post/infrastructure/dtos";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 import { BlogDocument } from "@/blog/infrastructure/persistence/schemas";

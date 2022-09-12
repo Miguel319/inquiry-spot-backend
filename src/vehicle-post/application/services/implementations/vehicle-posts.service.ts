@@ -23,7 +23,7 @@ import {
   PaginationOptions,
 } from "@/common/infrastructure/util";
 import { IUsersService } from "@/application/services/contracts";
-import { VehiclePostsRepository } from "@/vehicle-posts/infrastructure/persistence/repositories";
+import { VehiclePostsRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {

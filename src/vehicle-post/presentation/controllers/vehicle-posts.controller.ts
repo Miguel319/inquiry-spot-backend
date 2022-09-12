@@ -26,8 +26,8 @@ import { ApiResponse } from "@/common/infrastructure/api";
 import {
   CreateVehiclePostDto,
   UpdateVehiclePostDto,
-} from "@/vehicle-posts/infrastructure/dtos";
-import { IVehiclePostsService } from "@/vehicle-posts/application/services/contracts";
+} from "@/vehicle-post/infrastructure/dtos";
+import { IVehiclePostsService } from "@/vehicle-post/application/services/contracts";
 
 @Controller("vehicle-posts")
 @UseFilters(new I18nValidationExceptionFilter())
