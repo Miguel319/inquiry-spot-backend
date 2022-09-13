@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AuthModule } from "./auth.module";
 import { DBModule } from "./db.module";
-import { EmailsModule } from "./email.module";
+import { EmailsModule } from "../../email/application/modules/email.module";
 import { EnvModule } from "./env.module";
 import { InternationalizationModule } from "./internationalization.module";
 import { LoggerModule } from "./logger.module";

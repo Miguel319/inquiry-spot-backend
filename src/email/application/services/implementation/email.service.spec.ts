@@ -2,10 +2,10 @@ import { LoggerService } from "../../../../common/infrastructure/logger";
 import { Provider } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import { EmailsService } from "./email.service";
-import { UsersService } from "../users/users.service";
 import { EmailsRepository as EmailsRepositoryType } from "../../../../infrastructure/repositories";
 import { EmailsRepository } from "../../../../../test/mocks";
 import { I18nService } from "nestjs-i18n";
+import { UsersService } from "@/application/services/implementations";
 
 describe("EmailsService", () => {
   let service: EmailsService;

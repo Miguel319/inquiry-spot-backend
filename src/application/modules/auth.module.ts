@@ -5,7 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { AuthService } from "../services/implementations";
 import { UsersModule } from "./users.module";
 import { JwtAuthGuard, JwtStrategy } from "@/infrastructure/guards";
-import { EmailsModule } from "./email.module";
+import { EmailsModule } from "../../email/application/modules/email.module";
 
 const AuthUseCaseProvider: Provider = {
   provide: "IAuthService",
