@@ -5,4 +5,4 @@ export { IEmailsService } from "../../../email/application/services/contracts/i-
 export { IPropertyPostsService } from "../../../property-post/application/services/contracts/i-property-post.service";
 export { ISellersService } from "./i-sellers.service";
 export { IBaseSlugUseCase } from "./i-base.slug.service";
-export { ITagsService } from "./i-tags.service";
+export { ITagsService } from "../../../tag/application/services/contracts/i-tags.service";

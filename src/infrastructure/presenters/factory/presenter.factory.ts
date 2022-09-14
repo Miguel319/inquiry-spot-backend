@@ -10,7 +10,7 @@ import {
 } from "@/domain/entities";
 import { Presenter } from "../base-presenter";
 import { BlogsPresenter } from "../blogs.presenter";
-import { TagsPresenter } from "../tags.presenter";
+import { TagsPresenter } from "../../../tag/infrastructure/dtos/queries/tags.presenter";
 import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
 import { PropertyPostPresenter } from "../../../property-post/infrastructure/dtos/queries/property-post.presenter";

@@ -12,8 +12,17 @@
     "paginationLimit": "No puede filtrar más de 50 elementos a la vez (por página)."
   },
   "tag": {
-    "name": "El nombre es obligatorio.",
-    "nameLength": "El nombre no puede tener más de 32 caracteres."
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "length": "El nombre no puede tener más de 32 caracteres.",
+      "unique": "El nombre provisto ya está existe."
+    },
+    "slug": {
+      "required": "El campo 'slug' es obligatorio",
+      "lowercase": "El campo 'slug' debe estar en minúsculas.",
+      "duplicate": "El valor de 'slug' provisto ya existe."
+    },
+    "notFound": "Etiqueta no encontrada."
   },
   "user": {
     "name": "El nombre es obligatorio.",
