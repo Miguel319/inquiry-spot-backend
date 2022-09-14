@@ -1,4 +1,4 @@
-import { SellersController } from "@/presentation/controllers/sellers/sellers.controller";
+import { SellersController } from "@/common/presentation/controllers/sellers/sellers.controller";
 import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
 import { UserSchema } from "@/user/infrastructure/persistence/schemas";
 import { Module, Provider } from "@nestjs/common";

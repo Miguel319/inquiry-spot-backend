@@ -1,4 +1,3 @@
-import { IDocumentRepository } from "../../common/application/repositories";
 import {
   AnyKeys,
   AnyObject,
@@ -10,6 +9,7 @@ import {
   UpdateQuery,
 } from "mongoose";
 import { PaginationOptions } from "@/common/infrastructure/util";
+import { IDocumentRepository } from "@/common/application/repositories";
 
 export abstract class BaseRepository<T extends Document>
   implements IDocumentRepository<T>
@@ -50,7 +50,7 @@ export abstract class BaseRepository<T extends Document>
     pipeline?: PipelineStage[] | undefined,
     options?: Record<string, unknown> | undefined,
   ) {
-    return this.entityModel.aggregate(pipeline as any, options as any);
+    return this.entityModel.aggregate(pipeline, options);
   }
 
   async find(entityFilterQuery: FilterQuery<T>, select?: string): Promise<T[]> {

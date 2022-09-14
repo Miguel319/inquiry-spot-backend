@@ -1,5 +1,3 @@
-import { SignInDto, SignUpDto } from "@/infrastructure/dtos";
-import { PresenterFactory, UserPresenter } from "@/infrastructure/presenters";
 import {
   Body,
   Controller,
@@ -22,6 +20,11 @@ import {
   IAuthResult,
   IAuthService,
 } from "@/user/application/services/contracts";
+import { SignInDto, SignUpDto } from "@/user/infrastructure/dtos";
+import {
+  PresenterFactory,
+  UserPresenter,
+} from "@/common/infrastructure/presenters";
 
 @Controller("auth")
 export class AuthController {

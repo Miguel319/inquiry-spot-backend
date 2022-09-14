@@ -1,9 +1,9 @@
-import { IsNotEmpty } from "../../../common/infrastructure/decorators";
+import { IsNotEmpty } from "../decorators";
 import { IsDefined } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { SharedTranslations } from "@/common/domain/types";
 
-export class AddresValidation {
+export class AddressValidationDto {
   @IsNotEmpty({
     message: i18nValidationMessage(SharedTranslations.ADDRESS__ADDRESS_LINE_1),
   })

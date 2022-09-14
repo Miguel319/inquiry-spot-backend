@@ -1,9 +1,9 @@
 import { Presenter } from "../base-presenter";
 import { BlogsPresenter } from "../blogs.presenter";
-import { TagsPresenter } from "../../../tag/infrastructure/dtos/queries/tags.presenter";
+import { TagsPresenter } from "../../../../tag/infrastructure/dtos/queries/tags.presenter";
 import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
-import { VehiclePostPresenter } from "../../../vehicle-post/infrastructure/dtos";
+import { VehiclePostPresenter } from "../../../../vehicle-post/infrastructure/dtos";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 import { BlogDocument } from "@/blog/infrastructure/persistence/schemas";

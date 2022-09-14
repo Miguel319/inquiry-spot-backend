@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/common/infrastructure/api";
-import { PresenterFactory } from "@/infrastructure/presenters";
+import { PresenterFactory } from "@/common/infrastructure/presenters";
 import { ITagsService } from "@/tag/application/services/contracts";
 import { CreateTagDto } from "@/tag/infrastructure/dtos/mutations";
 import { Tag, TagDocument } from "@/tag/infrastructure/persistence/schemas";

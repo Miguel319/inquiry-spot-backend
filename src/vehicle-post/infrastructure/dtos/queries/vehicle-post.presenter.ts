@@ -9,7 +9,7 @@ import {
   VehicleType,
 } from "@/vehicle-post/domain/types";
 import { ApiProperty } from "@nestjs/swagger";
-import { Presenter } from "../../../../infrastructure/presenters";
+import { Presenter } from "../../../../common/infrastructure/presenters";
 import { VehiclePost } from "../../persistence/schemas";
 
 export class VehiclePostPresenter extends Presenter {

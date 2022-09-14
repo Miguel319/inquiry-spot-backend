@@ -1,4 +1,4 @@
-import { BaseRepository } from "@/infrastructure/repositories";
+import { BaseRepository } from "@/common/infrastructure/persistence/repositories";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";

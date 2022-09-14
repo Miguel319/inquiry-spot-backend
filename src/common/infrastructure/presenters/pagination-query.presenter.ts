@@ -1,4 +1,4 @@
-import { PaginatedQuery } from "../../common/infrastructure/util";
+import { PaginatedQuery } from "../util";
 import { Document } from "mongoose";
 
 export class PaginatedQueryPresenter<T extends Document> {
