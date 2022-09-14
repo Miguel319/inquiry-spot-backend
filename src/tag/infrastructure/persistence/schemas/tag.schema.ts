@@ -1,4 +1,5 @@
 import { BaseEntity } from "@/common/domain/entities";
+import { TagTranslations } from "@/tag/application/translations";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
@@ -7,16 +8,16 @@ export type TagDocument = Tag & Document;
 @Schema({ timestamps: true })
 export class Tag extends BaseEntity {
   @Prop({
-    required: [true, "The name is mandatory."],
-    max: [32, "The name can't have more than 32 characters."],
-    unique: [true, "The provided name already exists."],
+    required: [true, TagTranslations.NAME],
+    max: [32, TagTranslations.NAME_LENGTH],
+    unique: [true, TagTranslations.SLUG_DUPLICATE],
   })
   name: string;
 
   @Prop({
-    required: [true, "The slug is mandatory."],
-    lowercase: [true, "The slug must be in lower case"],
-    unique: [true, "The provided slug already exists."],
+    required: [true, TagTranslations.SLUG],
+    lowercase: [true, TagTranslations.SLUG_LOWERCASE],
+    unique: [true, TagTranslations.SLUG_DUPLICATE],
     index: [true],
   })
   slug: string;

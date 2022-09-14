@@ -1,8 +1,9 @@
-import { ITagsService } from "@/application/services/contracts";
-import { Tag, TagDocument } from "@/domain/entities/tag.entity";
 import { ApiResponse } from "@/common/infrastructure/api";
-import { CreateTagDto } from "@/infrastructure/dtos/tags";
-import { PresenterFactory, TagsPresenter } from "@/infrastructure/presenters";
+import { PresenterFactory } from "@/infrastructure/presenters";
+import { ITagsService } from "@/tag/application/services/contracts";
+import { CreateTagDto } from "@/tag/infrastructure/dtos/mutations";
+import { Tag, TagDocument } from "@/tag/infrastructure/persistence/schemas";
+import { TagsPresenter } from "@/tag/infrastructure/dtos/queries";
 import {
   Body,
   Controller,
@@ -15,6 +16,7 @@ import {
   Res,
 } from "@nestjs/common";
 import { Response } from "express";
+import { I18n, I18nContext } from "nestjs-i18n";
 
 @Controller("tags")
 export class TagsController {
@@ -39,8 +41,9 @@ export class TagsController {
   async fetchBySlug(
     @Res() res: Response,
     @Param("slug") slug: string,
+    @I18n() i18n: I18nContext,
   ): Promise<Response> {
-    const tag: Tag = await this.tagsService.findBySlug(slug);
+    const tag: Tag = await this.tagsService.findBySlug(slug, i18n);
 
     const tagPresenter: TagsPresenter = PresenterFactory.getInstance(
       tag as TagDocument,
@@ -74,8 +77,13 @@ export class TagsController {
     @Res() res: Response,
     @Param("slug") slug: string,
     @Body() tagsDto: CreateTagDto,
+    @I18n() i18n: I18nContext,
   ): Promise<Response> {
-    const tag: Tag | null = await this.tagsService.update(slug, tagsDto as Tag);
+    const tag: Tag | null = await this.tagsService.update(
+      slug,
+      tagsDto as Tag,
+      i18n,
+    );
 
     const tagPresenter: TagsPresenter = PresenterFactory.getInstance(
       tag as TagDocument,

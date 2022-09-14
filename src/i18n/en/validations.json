@@ -12,8 +12,17 @@
     "paginationLimit": "You cannot filter more than 50 items per page."
   },
   "tag": {
-    "name": "The name is mandatory.",
-    "nameLength": "The name cannot have more than 32 characters."
+    "name": {
+      "required": "The name is mandatory.",
+      "length": "The name cannot have more than 32 characters.",
+      "unique": "The provided name already exists."
+    },
+    "slug": {
+      "required": "The slug is mandatory.",
+      "lowercase": "The slug must be in lowercase.",
+      "duplicate": "The provided slug already exists."
+    },
+    "notFound": "Tag not found."
   },
   "user": {
     "name": "The name is mandatory.",

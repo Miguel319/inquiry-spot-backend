@@ -3,7 +3,7 @@ import { TagsController } from "@/presentation/controllers";
 import { TagsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { TagsService } from "../services/implementations/tags/tags.service";
+import { TagsService } from "../../tag/application/services/implementations/tags.service";
 
 const TagsServiceProvider: Provider = {
   provide: "ITagsService",
