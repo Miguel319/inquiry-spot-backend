@@ -1,14 +1,4 @@
 import {
-  Color,
-  Fuel,
-  Transmission,
-  VehiclePostTranslations,
-  VehicleMake,
-  VehicleStatus,
-  VehicleType,
-  Price,
-} from "../../../../domain/types";
-import {
   IsNotEmpty,
   MinLengthArray,
 } from "../../../../common/infrastructure/decorators";
@@ -21,6 +11,15 @@ import {
   ValidateNested,
 } from "class-validator";
 import { ElectricVehicleDto } from "./electric-vehicle.dto";
+import { VehiclePostTranslations } from "@/vehicle-post/application/translations";
+import {
+  Fuel,
+  Transmission,
+  VehicleMake,
+  VehicleStatus,
+  VehicleType,
+} from "@/vehicle-post/domain/types";
+import { Color, Price } from "@/common/domain/types";
 
 export class CreateVehiclePostDto {
   @IsNotEmpty({

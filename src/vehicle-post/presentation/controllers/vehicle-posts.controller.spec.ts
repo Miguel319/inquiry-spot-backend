@@ -4,7 +4,6 @@ import { mockResObj, VehiclePostsService } from "../../../../test/mocks";
 
 import { VehiclePostsService as VehiclePostsServiceType } from "../../application/services/implementations";
 import { Test, TestingModule } from "@nestjs/testing";
-import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 import { getVehiclePostStub } from "../../../../test/stubs";
 import {
   CreateVehiclePostDto,
@@ -14,6 +13,7 @@ import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
 import e, { Response } from "express";
 import { PaginatedQuery } from "@/common/infrastructure/util";
+import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
 
 describe("VehicleController", () => {
   let controller: VehiclePostsController;

@@ -1,9 +1,4 @@
 import {
-  UserDocument,
-  VehiclePost,
-  VehiclePostDocument,
-} from "@/domain/entities";
-import {
   Inject,
   Injectable,
   NotFoundException,
@@ -12,18 +7,17 @@ import {
 import { IVehiclePostsService } from "../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import {
-  PaginationQuery,
-  SharedTranslations,
-  UserTranslations,
-  VehiclePostTranslations,
-} from "@/domain/types";
-import {
   getPaginationOptions,
   PaginatedQuery,
   PaginationOptions,
 } from "@/common/infrastructure/util";
-import { IUsersService } from "@/application/services/contracts";
 import { VehiclePostsRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
+import { IUsersService } from "@/user/application/services/contracts";
+import { UserTranslations } from "@/user/application/translations";
+import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
+import { UserDocument } from "@/user/infrastructure/persistence/schemas";
+import { PaginationQuery, SharedTranslations } from "@/common/domain/types";
+import { VehiclePostTranslations } from "../../translations";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {

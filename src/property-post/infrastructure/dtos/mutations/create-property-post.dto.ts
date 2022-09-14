@@ -8,14 +8,14 @@ import {
   ValidateNested,
 } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { AddresValidation } from "../../../../infrastructure/dtos/common";
 import {
   BuyingOption,
   PropertyStatus,
   PropertyType,
 } from "@/property-post/domain";
 import { PropertyPostsTranslations } from "@/property-post/application/translations";
-import { Price } from "@/domain/types";
+import { Price } from "@/common/domain/types/common";
+import { AddressValidationDto } from "@/common/infrastructure/dtos";
 
 export class CreatePropertyPostDto {
   @IsNotEmpty({
@@ -155,7 +155,7 @@ export class CreatePropertyPostDto {
   readonly additionalInfo: string[];
 
   @ValidateNested()
-  readonly address: AddresValidation;
+  readonly address: AddressValidationDto;
 
   readonly isOptional: boolean;
 }

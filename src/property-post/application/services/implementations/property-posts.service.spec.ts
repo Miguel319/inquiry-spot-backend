@@ -5,21 +5,21 @@ import {
   PropertyPostsService,
 } from "./property-posts.service";
 import { PropertyPostsRepository as PropertyPostsRepositoryType } from "@/property-post/infrastructure/persistence/repositories";
-import { UsersRepository as UsersRepositoryType } from "@/infrastructure/repositories/users";
+import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories";
 
 import {
   PropertyPostsRepository,
   UsersRepository,
   UsersService,
 } from "../../../../../test/mocks";
+import { getPropertyPostStub } from "../../../../../test/stubs";
+import { I18nService } from "nestjs-i18n";
+import { UsersService as UsersServiceType } from "@/user/application/services/implementations";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import {
   PropertyPost,
   PropertyPostDocument,
-} from "../../../../domain/entities";
-import { getPropertyPostStub } from "../../../../../test/stubs";
-import { I18nService } from "nestjs-i18n";
-import { UsersService as UsersServiceType } from "@/application/services/implementations";
-import { PaginatedQuery } from "@/common/infrastructure/util";
+} from "@/property-post/infrastructure/persistence/schemas";
 
 describe.skip("PropertyPostsService", () => {
   let service: PropertyPostServiceType;

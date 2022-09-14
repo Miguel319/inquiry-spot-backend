@@ -1,4 +1,4 @@
-import { ValidationException } from "@/domain/exceptions";
+import { ValidationException } from "@/common/domain/exceptions";
 import {
   ArgumentsHost,
   Catch,

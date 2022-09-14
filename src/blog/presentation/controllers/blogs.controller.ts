@@ -1,4 +1,3 @@
-import { IUsersService } from "@/application/services/contracts";
 import {
   CreateBlogCommand,
   DeleteBlogCommand,
@@ -9,12 +8,14 @@ import {
   FetchBlogBySlugQuery,
   FetchPaginatedBlogsQuery,
 } from "@/blog/application/queries";
+import { BlogTranslations } from "@/blog/application/translations";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
 import { PaginatedQuery } from "@/common/infrastructure/util";
-import { User } from "@/domain/entities";
-import { BlogTranslations, Role } from "@/domain/types";
-import { JwtAuthGuard } from "@/infrastructure/guards";
+import { IUsersService } from "@/user/application/services/contracts";
+import { Role } from "@/user/domain/types";
+import { JwtAuthGuard } from "@/user/infrastructure/guards";
+import { User } from "@/user/infrastructure/persistence/schemas";
 import {
   Body,
   Controller,

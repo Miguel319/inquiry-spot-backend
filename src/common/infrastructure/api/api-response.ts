@@ -1,4 +1,4 @@
-import { UserPresenter } from "@/infrastructure/presenters";
+import { UserPresenter } from "@/common/infrastructure/presenters";
 import { HttpStatus } from "@nestjs/common";
 import { Response } from "express";
 

@@ -1,6 +1,6 @@
 import { Tag } from "@/tag/infrastructure/persistence/schemas";
 import { ApiProperty } from "@nestjs/swagger";
-import { Presenter } from "../../../../infrastructure/presenters/base-presenter";
+import { Presenter } from "../../../../common/infrastructure/presenters/base-presenter";
 
 export class TagsPresenter extends Presenter {
   @ApiProperty()

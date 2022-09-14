@@ -1,10 +1,12 @@
+import { Blog } from "@/blog/domain/entities";
 import { IBlog } from "@/blog/domain/types";
 import { BlogEntityRepository } from "@/blog/infrastructure/persistence/repositories";
-import { Blog, User } from "@/domain/entities";
-import { BlogTranslations, SharedTranslations } from "@/domain/types";
+import { SharedTranslations } from "@/common/domain/types/common";
+import { User } from "@/user/infrastructure/persistence/schemas";
 import { NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
+import { BlogTranslations } from "../../translations";
 import { UpdateBlogCommand } from "../operations";
 
 @CommandHandler(UpdateBlogCommand)

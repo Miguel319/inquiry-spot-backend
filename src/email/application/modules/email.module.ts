@@ -1,10 +1,10 @@
-import { EmailSchema } from "@/domain/entities";
 import { LoggerService } from "@/common/infrastructure/logger";
-import { EmailsRepository } from "@/infrastructure/repositories";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { EmailsService } from "../../../application/services/implementations";
-import { UsersModule } from "../../../application/modules/users.module";
+import { UsersModule } from "../../../user/application/modules/users.module";
+import { EmailsRepository } from "@/email/infrastructure/persistence/repositories";
+import { EmailSchema } from "@/email/infrastructure/persistence/schemas";
+import { EmailsService } from "../services/implementation";
 
 const EmailUseCaseProvider: Provider = {
   provide: "IEmailsService",

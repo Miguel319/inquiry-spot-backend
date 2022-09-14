@@ -1,17 +1,16 @@
-import { VehiclePost } from "@/domain/entities";
+import { Color, Price } from "@/common/domain/types/common";
 import {
-  Color,
   ElectricValues,
   Fuel,
-  Price,
   Traction,
   Transmission,
   VehicleMake,
   VehicleStatus,
   VehicleType,
-} from "@/domain/types";
+} from "@/vehicle-post/domain/types";
 import { ApiProperty } from "@nestjs/swagger";
-import { Presenter } from "../../../../infrastructure/presenters";
+import { Presenter } from "../../../../common/infrastructure/presenters";
+import { VehiclePost } from "../../persistence/schemas";
 
 export class VehiclePostPresenter extends Presenter {
   @ApiProperty({ required: true })

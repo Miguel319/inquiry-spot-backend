@@ -1,4 +1,4 @@
-import { Email } from "../../src/domain/entities";
+import { Email } from "@/email/infrastructure/persistence/schemas";
 import { getEmailStub } from "../stubs";
 import { BaseRepoMock } from "./base-repo.mock";
 

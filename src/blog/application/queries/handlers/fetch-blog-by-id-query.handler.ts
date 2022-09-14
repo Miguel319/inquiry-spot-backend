@@ -1,9 +1,9 @@
 import { BlogDto } from "@/blog/infrastructure/dtos";
 import { BlogDtoRepository } from "@/blog/infrastructure/persistence/repositories";
-import { BlogTranslations } from "@/domain/types";
 import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { I18nService } from "nestjs-i18n";
+import { BlogTranslations } from "../../translations";
 import { FetchBlogByIdQuery } from "../operations";
 
 @QueryHandler(FetchBlogByIdQuery)

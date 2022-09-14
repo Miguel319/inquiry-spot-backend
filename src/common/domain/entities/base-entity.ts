@@ -1,4 +1,4 @@
-import { IBaseEntity } from "../types";
+import { IBaseEntity } from "../types/common/base.entity";
 
 export abstract class BaseEntity implements IBaseEntity {
   readonly _id: string;

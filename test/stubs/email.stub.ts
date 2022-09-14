@@ -1,4 +1,4 @@
-import { Email } from "../../src/domain/entities";
+import { Email } from "@/email/infrastructure/persistence/schemas";
 
 export const getEmailStub = (): Email =>
   ({

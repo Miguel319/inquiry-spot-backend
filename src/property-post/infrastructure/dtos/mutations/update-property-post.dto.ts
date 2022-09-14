@@ -1,4 +1,4 @@
-import { AddresValidation } from "@/infrastructure/dtos/common";
+import { AddressValidationDto } from "@/common/infrastructure/dtos";
 import { PropertyPostsTranslations } from "@/property-post/application/translations";
 import {
   BuyingOption,
@@ -86,5 +86,5 @@ export class UpdatePropertyPostDto {
   readonly additionalInfo: string[];
 
   @ValidateNested()
-  readonly address: AddresValidation;
+  readonly address: AddressValidationDto;
 }

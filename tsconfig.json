@@ -27,10 +27,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@/domain": ["src/domain/*"],
-      "@/infrastructure": ["src/infrastructure/*"],
-      "@/application": ["src/application/*"]
+      "@/*": ["src/*"]
     },
     "typeRoots": ["src/@types", "node_modules/@types"]
   },

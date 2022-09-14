@@ -1,1 +1,2 @@
-export { IBaseEntity } from "./i-base.entity";
+export { VoidDecorator } from "./any-function";
+export * from "./common";
