@@ -116,10 +116,16 @@ export class VehiclePostsController {
   }
 
   @Get("seller/many/:seller")
+  @UseGuards(JwtAuthGuard)
   findAllFromSeller(
     @Param("seller") seller: string,
     @Query() paginationQuery: PaginationQuery,
+    @I18n() i18n?: I18nContext,
   ): Promise<VehiclePost[]> {
-    return this._vehiclePostsService.findAllFromSeller(seller, paginationQuery);
+    return this._vehiclePostsService.findAllFromSeller(
+      seller,
+      paginationQuery,
+      i18n,
+    );
   }
 }

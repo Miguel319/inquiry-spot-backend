@@ -114,7 +114,7 @@ export class PropertyPostsController {
     });
   }
 
-  @Get("from-seller/:seller")
+  @Get("seller/many/:seller")
   @UseGuards(JwtAuthGuard)
   findAllFromSeller(
     @Param("seller") seller: string,
