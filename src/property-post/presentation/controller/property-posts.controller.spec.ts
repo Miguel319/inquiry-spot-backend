@@ -2,9 +2,8 @@ import { Provider } from "@nestjs/common";
 import { PropertyPostsController } from "./property-posts.controller";
 import { mockResObj, PropertyPostsService } from "../../../../test/mocks";
 
-import { PropertyPostsService as PropertyPostsServiceType } from "../../../application/services/implementations";
+import { PropertyPostsService as PropertyPostsServiceType } from "@/property-post/application/services/implementations";
 import { Test, TestingModule } from "@nestjs/testing";
-import { PropertyPost, PropertyPostDocument } from "../../../domain/entities";
 import { getPropertyPostStub } from "../../../../test/stubs";
 import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
@@ -14,6 +13,10 @@ import {
   CreatePropertyPostDto,
   UpdatePropertyPostDto,
 } from "@/property-post/infrastructure/dtos";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+} from "@/property-post/infrastructure/persistence/schemas";
 
 describe("PropertyController", () => {
   let controller: PropertyPostsController;

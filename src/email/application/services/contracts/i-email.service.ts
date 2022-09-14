@@ -1,4 +1,5 @@
-import { SendgridEmailParams, User } from "@/domain/entities";
+import { SendgridEmailParams } from "@/email/infrastructure/persistence/schemas";
+import { User } from "@/user/infrastructure/persistence/schemas";
 import { Request } from "express";
 
 type Sender = {

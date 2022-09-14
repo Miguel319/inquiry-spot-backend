@@ -1,4 +1,4 @@
-import { UsersModule } from "@/application/modules/users.module";
+import { UsersModule } from "@/user/application/modules/users.module";
 import { BlogsController } from "@/blog/presentation/controllers";
 import {
   BlogFactory,

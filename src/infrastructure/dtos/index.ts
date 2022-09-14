@@ -1,1 +1,1 @@
-export { SignUpDto, SignInDto } from "./auth";
+export { SignUpDto, SignInDto } from "../../user/infrastructure/dtos/auth";

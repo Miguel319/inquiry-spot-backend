@@ -1,4 +1,4 @@
-import { User } from "@/domain/entities";
+import { User } from "@/user/infrastructure/persistence/schemas";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "./base-presenter";
 

@@ -1,9 +1,9 @@
 import { ISellersService } from "@/application/services/contracts";
-import { UserDocument } from "@/domain/entities";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginationQuery } from "@/domain/types";
+import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { Controller, Get, Inject, Query } from "@nestjs/common";
 import { I18n, I18nContext } from "nestjs-i18n";
-import { PaginatedQuery } from "../../../common/infrastructure/util";
 
 @Controller("sellers")
 export class SellersController {

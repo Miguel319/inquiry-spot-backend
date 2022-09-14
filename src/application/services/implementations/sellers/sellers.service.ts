@@ -1,14 +1,14 @@
-import { UserDocument } from "@/domain/entities";
 import { PaginationQuery } from "@/domain/types";
 import {
   getPaginationOptions,
   PaginatedQuery,
   PaginationOptions,
 } from "@/common/infrastructure/util";
-import { UsersRepository } from "@/infrastructure/repositories";
 import { Injectable } from "@nestjs/common";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { ISellersService } from "../../contracts";
+import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
+import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 
 @Injectable()
 export class SellersService implements ISellersService {

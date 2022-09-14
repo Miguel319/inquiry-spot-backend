@@ -9,13 +9,13 @@ import {
   UsersRepository,
   VehiclePostsRepository,
 } from "../../../../../test/mocks";
-import { VehiclePost, VehiclePostDocument } from "@/domain/entities";
 import { getVehiclePostStub } from "../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
-import { UsersRepository as UsersRepositoryType } from "@/infrastructure/repositories";
+import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories";
 
-import { UsersService } from "../../../../application/services/implementations/users";
 import { PaginatedQuery } from "@/common/infrastructure/util";
+import { UsersService } from "@/user/application/services/implementations";
+import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
 
 describe.skip("VehiclePostsService", () => {
   let service: VehiclePostServiceType;

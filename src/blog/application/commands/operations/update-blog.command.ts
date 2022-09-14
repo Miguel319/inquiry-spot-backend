@@ -1,5 +1,5 @@
 import { UpdateBlogDto } from "@/blog/infrastructure/dtos";
-import { User } from "@/domain/entities";
+import { User } from "@/user/infrastructure/persistence/schemas";
 import { I18nContext } from "nestjs-i18n";
 
 export class UpdateBlogCommand {

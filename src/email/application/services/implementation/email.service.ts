@@ -1,9 +1,10 @@
+import { EmailsRepository } from "@/email/infrastructure/persistence/repositories";
 import {
   SendgridEmail,
   SendgridEmailParams,
-  User,
-  UserDocument,
-} from "@/domain/entities";
+} from "@/email/infrastructure/persistence/schemas";
+import { IUsersService } from "@/user/application/services/contracts";
+import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
 import {
   BadRequestException,
   Inject,
@@ -12,11 +13,7 @@ import {
 } from "@nestjs/common";
 import crypto from "crypto";
 import { Request } from "express";
-import {
-  IEmailsService,
-  IUsersService,
-} from "@/application/services/contracts";
-import { EmailsRepository } from "../../../../infrastructure/repositories";
+import { IEmailsService } from "../contracts";
 
 @Injectable()
 export class EmailsService implements IEmailsService {

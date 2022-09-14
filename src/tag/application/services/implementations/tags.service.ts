@@ -1,4 +1,4 @@
-import { TagsRepository } from "@/infrastructure/repositories";
+import { TagsRepository } from "@/tag/infrastructure/persistence/repositories";
 import { Tag } from "@/tag/infrastructure/persistence/schemas";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { I18nContext, I18nService } from "nestjs-i18n";

@@ -1,31 +1,28 @@
 import {
-  PropertyPost,
-  PropertyPostDocument,
-  UserDocument,
-} from "@/domain/entities";
-import {
   Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
-import {
-  IPropertyPostsService,
-  IUsersService,
-} from "../../../../application/services/contracts";
+
 import { I18nContext, I18nService } from "nestjs-i18n";
-import {
-  PaginationQuery,
-  SharedTranslations,
-  UserTranslations,
-} from "../../../../domain/types";
+
+import { PropertyPostsTranslations } from "../../translations";
+import { PropertyPostsRepository } from "@/property-post/infrastructure/persistence/repositories";
+import { IPropertyPostsService } from "../contracts";
+import { IUsersService } from "@/user/application/services/contracts";
+import { PaginationQuery, SharedTranslations } from "@/domain/types";
 import {
   getPaginationOptions,
   PaginatedQuery,
   PaginationOptions,
-} from "../../../../common/infrastructure/util";
-import { PropertyPostsTranslations } from "../../translations";
-import { PropertyPostsRepository } from "@/property-post/infrastructure/persistence/repositories";
+} from "@/common/infrastructure/util";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+} from "@/property-post/infrastructure/persistence/schemas";
+import { UserTranslations } from "@/user/application/translations";
+import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 
 @Injectable()
 export class PropertyPostsService implements IPropertyPostsService {

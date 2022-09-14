@@ -1,4 +1,4 @@
-import { VehiclePost } from "../../src/domain/entities";
+import { VehiclePost } from "@/vehicle-post/domain";
 import { getVehiclePostStub } from "../stubs";
 import { BaseRepoMock } from "./base-repo.mock";
 

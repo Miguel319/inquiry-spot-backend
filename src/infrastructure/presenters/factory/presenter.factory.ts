@@ -1,23 +1,20 @@
-import {
-  PropertyPost,
-  PropertyPostDocument,
-  Tag,
-  TagDocument,
-  VehiclePost,
-  User,
-  UserDocument,
-  VehiclePostDocument,
-} from "@/domain/entities";
 import { Presenter } from "../base-presenter";
 import { BlogsPresenter } from "../blogs.presenter";
 import { TagsPresenter } from "../../../tag/infrastructure/dtos/queries/tags.presenter";
 import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
-import { PropertyPostPresenter } from "../../../property-post/infrastructure/dtos/queries/property-post.presenter";
 import { VehiclePostPresenter } from "../../../vehicle-post/infrastructure/dtos";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 import { BlogDocument } from "@/blog/infrastructure/persistence/schemas";
+import { PropertyPostPresenter } from "@/property-post/infrastructure/dtos";
+import { Tag, TagDocument } from "@/tag/infrastructure/persistence/schemas";
+import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
+import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+} from "@/property-post/infrastructure/persistence/schemas";
 export { Document } from "mongoose";
 
 type EntityType = "user" | "blog" | "tag" | "vehiclePost" | "propertyPost";

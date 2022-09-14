@@ -1,6 +1,3 @@
-import { IPropertyPostsService } from "@/application/services/contracts";
-import { PropertyPost, PropertyPostDocument } from "../../../domain/entities";
-import { PaginationQuery, Role } from "@/domain/types";
 import { ApiResponse } from "../../../common/infrastructure/api";
 import {
   Body,
@@ -17,7 +14,7 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { JwtAuthGuard } from "../../../infrastructure/guards";
+import { JwtAuthGuard } from "../../../user/infrastructure/guards";
 import { HasRoles } from "../../../common/infrastructure/decorators";
 import { PaginatedQuery } from "../../../common/infrastructure/util";
 import { PropertyPostsTranslations } from "@/property-post/application/translations";
@@ -25,6 +22,13 @@ import {
   CreatePropertyPostDto,
   UpdatePropertyPostDto,
 } from "@/property-post/infrastructure/dtos/mutations";
+import { IPropertyPostsService } from "@/property-post/application/services/contracts";
+import { PaginationQuery } from "@/domain/types";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+} from "@/property-post/infrastructure/persistence/schemas";
+import { Role } from "@/user/domain/types";
 
 @Controller("property-posts")
 export class PropertyPostsController {

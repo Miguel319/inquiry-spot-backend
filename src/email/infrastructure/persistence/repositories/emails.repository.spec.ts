@@ -1,4 +1,3 @@
-import { Email } from "../../../../domain/entities";
 import { getModelToken } from "@nestjs/mongoose";
 import { Test } from "@nestjs/testing";
 import { FilterQuery } from "mongoose";
@@ -6,6 +5,7 @@ import { EmailModel } from "../../../../../test/support";
 import { EmailsRepository } from "./emails.repository";
 
 import { getEmailStub } from "../../../../../test/stubs";
+import { Email } from "../schemas";
 
 describe("EmailsRepository", () => {
   let emailsRepository: EmailsRepository;

@@ -1,4 +1,3 @@
-import { VehiclePost } from "@/domain/entities";
 import {
   Color,
   ElectricValues,
@@ -12,6 +11,7 @@ import {
 } from "@/domain/types";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "../../../../infrastructure/presenters";
+import { VehiclePost } from "../../persistence/schemas";
 
 export class VehiclePostPresenter extends Presenter {
   @ApiProperty({ required: true })

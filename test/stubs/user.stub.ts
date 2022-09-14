@@ -1,4 +1,4 @@
-import { User } from "../../src/domain/entities";
+import { User } from "@/user/infrastructure/persistence/schemas";
 
 export const getUserStub = (): User =>
   ({

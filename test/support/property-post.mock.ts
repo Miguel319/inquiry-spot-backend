@@ -1,4 +1,4 @@
-import { PropertyPost } from "../../src/domain/entities";
+import { PropertyPost } from "@/property-post/infrastructure/persistence/schemas";
 import { getPropertyPostStub } from "../stubs";
 import { BaseRepoMock } from "./base-repo.mock";
 

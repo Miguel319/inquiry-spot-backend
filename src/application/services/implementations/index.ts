@@ -1,6 +1,1 @@
-export { UsersService } from "./users/users.service";
-export { AuthService } from "./auth/auth.service";
-export { EmailsService } from "../../../email/application/services/implementation/email.service";
-export { PropertyPostsService } from "../../../property-post/application/services/implementations/property-posts.service";
 export { SellersService } from "./sellers/sellers.service";
-export { TagsService } from "../../../tag/application/services/implementations/tags.service";

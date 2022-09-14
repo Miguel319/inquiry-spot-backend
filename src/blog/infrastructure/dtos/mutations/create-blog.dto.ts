@@ -1,5 +1,5 @@
+import { BlogTranslations } from "@/blog/application/translations";
 import { IsNotEmpty, MinLengthArray } from "@/common/infrastructure/decorators";
-import { BlogTranslations } from "@/domain/types/common/translations";
 import { IsDefined, MinLength } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 

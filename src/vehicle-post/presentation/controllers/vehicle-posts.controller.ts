@@ -15,19 +15,19 @@ import {
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import {
-  Role,
   VehiclePostTranslations,
   PaginationQuery,
 } from "../../../domain/types";
-import { JwtAuthGuard } from "../../../infrastructure/guards";
+import { JwtAuthGuard } from "../../../user/infrastructure/guards";
 import { HasRoles } from "../../../common/infrastructure/decorators";
-import { VehiclePost, VehiclePostDocument } from "../../../domain/entities";
 import { ApiResponse } from "@/common/infrastructure/api";
 import {
   CreateVehiclePostDto,
   UpdateVehiclePostDto,
 } from "@/vehicle-post/infrastructure/dtos";
 import { IVehiclePostsService } from "@/vehicle-post/application/services/contracts";
+import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
+import { Role } from "@/user/domain/types";
 
 @Controller("vehicle-posts")
 @UseFilters(new I18nValidationExceptionFilter())

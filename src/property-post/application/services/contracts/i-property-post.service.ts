@@ -1,7 +1,10 @@
-import { PropertyPost, PropertyPostDocument } from "@/domain/entities";
+import { IBaseService } from "@/application/services/contracts";
 import { PaginationQuery } from "@/domain/types";
+import {
+  PropertyPost,
+  PropertyPostDocument,
+} from "@/property-post/infrastructure/persistence/schemas";
 import { I18nContext } from "nestjs-i18n";
-import { IBaseService } from "../../../../application/services/contracts/i-base.service";
 
 export interface IPropertyPostsService
   extends IBaseService<PropertyPostDocument> {
