@@ -1,4 +1,4 @@
-import { PaginationQuery } from "@/domain/types";
+import { PaginationQuery } from "@/common/domain/types/common";
 import {
   getPaginationOptions,
   PaginatedQuery,

@@ -1,6 +1,6 @@
-import { ISellersService } from "@/application/services/contracts";
+import { ISellersService } from "@/common/application/services/contracts";
+import { PaginationQuery } from "@/common/domain/types/common";
 import { PaginatedQuery } from "@/common/infrastructure/util";
-import { PaginationQuery } from "@/domain/types";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { Controller, Get, Inject, Query } from "@nestjs/common";
 import { I18n, I18nContext } from "nestjs-i18n";

@@ -1,7 +1,7 @@
 import { Blog } from "@/blog/domain/entities";
 import { IBlog } from "@/blog/domain/types";
 import { BlogEntityRepository } from "@/blog/infrastructure/persistence/repositories";
-import { SharedTranslations } from "@/domain/types";
+import { SharedTranslations } from "@/common/domain/types/common";
 import { User } from "@/user/infrastructure/persistence/schemas";
 import { NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";

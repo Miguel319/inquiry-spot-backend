@@ -1,4 +1,4 @@
-import { IBaseEntity } from "@/common/domain/types";
+import { IBaseEntity } from "@/common/domain/types/common/base.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 interface IAggrateRoot {

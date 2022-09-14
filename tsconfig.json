@@ -30,7 +30,7 @@
       "@/*": ["src/*"],
       "@/domain": ["src/domain/*"],
       "@/infrastructure": ["src/infrastructure/*"],
-      "@/application": ["src/application/*"]
+      "@/application": ["src/common/application/*"]
     },
     "typeRoots": ["src/@types", "node_modules/@types"]
   },

@@ -1,8 +1,8 @@
-import { PaginationQuery, SharedTranslations } from "../../../domain/types";
 import { UnauthorizedException } from "@nestjs/common";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { Document } from "mongoose";
 import { BaseDto } from "../dtos";
+import { PaginationQuery, SharedTranslations } from "@/common/domain/types";
 
 export interface PaginationOptions {
   page: number;

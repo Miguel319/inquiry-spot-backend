@@ -1,4 +1,4 @@
-import { Address, Price } from "@/domain/types";
+import { Address, Price } from "@/common/domain/types/common";
 import { BuyingOption, PropertyStatus } from "@/property-post/domain";
 import { ApiProperty } from "@nestjs/swagger";
 import { Presenter } from "../../../../infrastructure/presenters/base-presenter";

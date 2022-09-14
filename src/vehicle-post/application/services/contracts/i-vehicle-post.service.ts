@@ -1,7 +1,7 @@
-import { PaginationQuery } from "@/domain/types";
+import { PaginationQuery } from "@/common/domain/types/common";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { I18nContext } from "nestjs-i18n";
-import { IBaseService } from "@/application/services/contracts";
+import { IBaseService } from "@/common/application/services/contracts";
 import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
 
 export interface IVehiclePostsService

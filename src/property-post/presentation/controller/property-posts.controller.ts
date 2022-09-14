@@ -23,7 +23,7 @@ import {
   UpdatePropertyPostDto,
 } from "@/property-post/infrastructure/dtos/mutations";
 import { IPropertyPostsService } from "@/property-post/application/services/contracts";
-import { PaginationQuery } from "@/domain/types";
+import { PaginationQuery } from "@/common/domain/types/common";
 import {
   PropertyPost,
   PropertyPostDocument,

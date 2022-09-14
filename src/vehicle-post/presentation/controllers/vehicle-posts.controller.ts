@@ -14,10 +14,6 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import {
-  VehiclePostTranslations,
-  PaginationQuery,
-} from "../../../domain/types";
 import { JwtAuthGuard } from "../../../user/infrastructure/guards";
 import { HasRoles } from "../../../common/infrastructure/decorators";
 import { ApiResponse } from "@/common/infrastructure/api";
@@ -28,6 +24,8 @@ import {
 import { IVehiclePostsService } from "@/vehicle-post/application/services/contracts";
 import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
 import { Role } from "@/user/domain/types";
+import { VehiclePostTranslations } from "@/vehicle-post/application/translations";
+import { PaginationQuery } from "@/common/domain/types/common";
 
 @Controller("vehicle-posts")
 @UseFilters(new I18nValidationExceptionFilter())

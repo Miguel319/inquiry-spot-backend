@@ -15,7 +15,7 @@ import {
   PropertyType,
 } from "@/property-post/domain";
 import { PropertyPostsTranslations } from "@/property-post/application/translations";
-import { Price } from "@/domain/types";
+import { Price } from "@/common/domain/types/common";
 
 export class CreatePropertyPostDto {
   @IsNotEmpty({

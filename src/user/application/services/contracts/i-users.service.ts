@@ -1,6 +1,6 @@
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { I18nContext } from "nestjs-i18n";
-import { IBaseService } from "../../../../application/services/contracts/i-base.service";
+import { IBaseService } from "../../../../common/application/services/contracts/i-base.service";
 
 export interface IUsersService extends IBaseService<UserDocument> {
   findByEmail(

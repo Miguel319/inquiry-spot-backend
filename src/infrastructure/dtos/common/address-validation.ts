@@ -1,7 +1,7 @@
 import { IsNotEmpty } from "../../../common/infrastructure/decorators";
 import { IsDefined } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { SharedTranslations } from ".././../../domain/types";
+import { SharedTranslations } from "@/common/domain/types";
 
 export class AddresValidation {
   @IsNotEmpty({

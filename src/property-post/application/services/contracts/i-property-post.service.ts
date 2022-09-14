@@ -1,5 +1,5 @@
-import { IBaseService } from "@/application/services/contracts";
-import { PaginationQuery } from "@/domain/types";
+import { IBaseService } from "@/common/application/services/contracts";
+import { PaginationQuery } from "@/common/domain/types/common";
 import {
   PropertyPost,
   PropertyPostDocument,

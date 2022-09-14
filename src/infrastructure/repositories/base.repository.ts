@@ -1,4 +1,4 @@
-import { IDocumentRepository } from "../../application/repositories";
+import { IDocumentRepository } from "../../common/application/repositories";
 import {
   AnyKeys,
   AnyObject,

@@ -11,7 +11,6 @@ import { PropertyPostsTranslations } from "../../translations";
 import { PropertyPostsRepository } from "@/property-post/infrastructure/persistence/repositories";
 import { IPropertyPostsService } from "../contracts";
 import { IUsersService } from "@/user/application/services/contracts";
-import { PaginationQuery, SharedTranslations } from "@/domain/types";
 import {
   getPaginationOptions,
   PaginatedQuery,
@@ -23,6 +22,10 @@ import {
 } from "@/property-post/infrastructure/persistence/schemas";
 import { UserTranslations } from "@/user/application/translations";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";
+import {
+  PaginationQuery,
+  SharedTranslations,
+} from "@/common/domain/types/common";
 
 @Injectable()
 export class PropertyPostsService implements IPropertyPostsService {

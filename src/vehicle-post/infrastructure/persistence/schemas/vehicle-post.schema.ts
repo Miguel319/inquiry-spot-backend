@@ -1,21 +1,19 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
-import {
-  Color,
-  VehicleType,
-  ElectricValues,
-  VehicleMake,
-  Fuel,
-  Transmission,
-  VehicleStatus,
-  VehiclePostTranslations,
-  Price,
-  Traction,
-  Currency,
-} from "@/domain/types";
 
 import paginate from "mongoose-paginate-v2";
 import { BaseEntity } from "@/common/domain/entities";
+import { VehiclePostTranslations } from "@/vehicle-post/application/translations";
+import {
+  ElectricValues,
+  Fuel,
+  Traction,
+  Transmission,
+  VehicleMake,
+  VehicleStatus,
+  VehicleType,
+} from "@/vehicle-post/domain/types";
+import { Color, Currency, Price } from "@/common/domain/types/common";
 
 const {
   Types: { ObjectId },

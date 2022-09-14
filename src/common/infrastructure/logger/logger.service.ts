@@ -1,4 +1,4 @@
-import { ILogger } from "@/domain/logger";
+import { ILogger } from "@/common/domain/logger";
 import { Injectable, Logger } from "@nestjs/common";
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { PaginationQuery } from "@/domain/types";
+import { PaginationQuery } from "@/common/domain/types/common";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { I18nContext } from "nestjs-i18n";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";

@@ -1,4 +1,4 @@
-import { VoidDecorator } from "@/domain/types";
+import { VoidDecorator } from "@/common/domain/types";
 import { registerDecorator, ValidationOptions } from "class-validator";
 
 export function IsNotEmpty(
