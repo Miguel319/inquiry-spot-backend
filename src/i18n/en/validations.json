@@ -24,6 +24,9 @@
     },
     "notFound": "Tag not found."
   },
+  "vehicleType": {
+    "name": "The name is mandatory."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",

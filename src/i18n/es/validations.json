@@ -24,6 +24,9 @@
     },
     "notFound": "Etiqueta no encontrada."
   },
+  "vehicleType": {
+    "name": "El nombre es obligatorio."
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",
