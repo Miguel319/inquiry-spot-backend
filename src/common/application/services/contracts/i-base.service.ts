@@ -3,8 +3,9 @@ import { PaginatedQuery } from "@/common/infrastructure/util";
 import { I18nContext } from "nestjs-i18n";
 import { Document } from "mongoose";
 import { BaseDto } from "@/common/infrastructure/dtos";
+import { Presenter } from "@/common/infrastructure/presenters";
 
-export interface IBaseService<T extends Document | BaseDto> {
+export interface IBaseService<T extends Document | BaseDto | Presenter> {
   findAll(
     paginationQuery?: PaginationQuery,
     i18n?: I18nContext,
