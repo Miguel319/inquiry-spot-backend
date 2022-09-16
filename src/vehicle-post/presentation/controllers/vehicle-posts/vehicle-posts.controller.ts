@@ -14,8 +14,8 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { JwtAuthGuard } from "../../../user/infrastructure/guards";
-import { HasRoles } from "../../../common/infrastructure/decorators";
+import { JwtAuthGuard } from "../../../../user/infrastructure/guards";
+import { HasRoles } from "../../../../common/infrastructure/decorators";
 import { ApiResponse } from "@/common/infrastructure/api";
 import {
   CreateVehiclePostDto,
