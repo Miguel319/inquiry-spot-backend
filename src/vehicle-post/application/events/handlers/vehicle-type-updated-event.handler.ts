@@ -8,10 +8,10 @@ export class VehicleTypeUpdatedEventHandler
 {
   constructor(private readonly _logger: LoggerService) {}
 
-  async handle({ vehicleTypeId }: VehicleTypeUpdatedEvent) {
+  async handle({ vehicleTypeId, newName }: VehicleTypeUpdatedEvent) {
     this._logger.log(
-      "Vehicle type creation",
-      `✅ New vehicle type updated successfully!. Vehicle Type ID: ${vehicleTypeId}`,
+      "Vehicle type update",
+      `✅ New vehicle type updated successfully!. ID = ${vehicleTypeId}. Name = ${newName} `,
     );
   }
 }

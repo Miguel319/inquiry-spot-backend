@@ -1,19 +1,18 @@
-import { VehicleTypeUpdatedEvent } from "@/vehicle-post/application/events";
+import { VehicleTypeDeletedEvent } from "@/vehicle-post/application/events";
 import { VehicleTypeTranslations } from "@/vehicle-post/application/translations";
 import { VehicleType } from "@/vehicle-post/domain/entities";
-import { IVehicleType } from "@/vehicle-post/domain/types/i-vehicle-type";
 import { VehicleTypeEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
 import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { UpdateVehicleTypeCommand } from "../../operations";
+import { DeleteVehicleTypeCommand } from "../../operations";
 
-@CommandHandler(UpdateVehicleTypeCommand)
-export class UpdateVehicleTypeCommandHandler
-  implements ICommandHandler<UpdateVehicleTypeCommand>
+@CommandHandler(DeleteVehicleTypeCommand)
+export class DeleteVehicleTypeCommandHandler
+  implements ICommandHandler<DeleteVehicleTypeCommand>
 {
   constructor(
-    private readonly _vehicleEntityRepository: VehicleTypeEntityRepository,
+    private readonly _vehicleTypeEntityRepository: VehicleTypeEntityRepository,
     private readonly eventPublisher: EventPublisher,
     private readonly _i18n: I18nService,
   ) {}
@@ -22,7 +21,7 @@ export class UpdateVehicleTypeCommandHandler
     _id: string,
     i18n: I18nContext,
   ): Promise<VehicleType> {
-    const vehicleType = await this._vehicleEntityRepository.findByValue(
+    const vehicleType = await this._vehicleTypeEntityRepository.findByValue(
       _id,
       "_id",
     );
@@ -37,28 +36,21 @@ export class UpdateVehicleTypeCommandHandler
     return vehicleType;
   }
 
-  async execute({
-    _id,
-    updateVehicleTypeDto,
-    i18n,
-  }: UpdateVehicleTypeCommand): Promise<void> {
+  async execute({ _id, i18n }: DeleteVehicleTypeCommand): Promise<boolean> {
     const vehicleTypeFound = await this.getVehicleType(_id, i18n);
 
     const vehicleType =
       this.eventPublisher.mergeObjectContext(vehicleTypeFound);
 
-    vehicleType.updateVehicle(updateVehicleTypeDto as unknown as IVehicleType);
-
-    vehicleType.apply(
-      new VehicleTypeUpdatedEvent(vehicleType.getId(), vehicleType.getName()),
-    );
-
-    await this._vehicleEntityRepository.findOneAndReplaceByValue(
+    const deleteCount = await this._vehicleTypeEntityRepository.delete(
       _id,
       "_id",
-      vehicleType,
     );
 
+    vehicleType.apply(new VehicleTypeDeletedEvent(vehicleType.getId()));
+
     vehicleType.commit();
+
+    return deleteCount;
   }
 }
