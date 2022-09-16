@@ -1,4 +1,5 @@
 import { EntityFactory } from "@/common/infrastructure/persistence/factories";
+import { VehicleTypeCreatedEvent } from "@/vehicle-post/application/events";
 import { VehicleType } from "@/vehicle-post/domain/entities";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
@@ -18,6 +19,10 @@ export class VehicleTypeFactory implements EntityFactory<VehicleType> {
     });
 
     await this._vehicleTypeRepository.create(vehicleType);
+
+    vehicleType.apply(
+      new VehicleTypeCreatedEvent(vehicleType.getId(), vehicleType.getName()),
+    );
 
     return vehicleType;
   }

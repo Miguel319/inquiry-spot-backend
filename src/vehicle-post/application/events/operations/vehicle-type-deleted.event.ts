@@ -1,3 +1,3 @@
-export class VehicleTypeCreatedEvent {
+export class VehicleTypeDeletedEvent {
   constructor(public readonly vehicleTypeId: string) {}
 }
