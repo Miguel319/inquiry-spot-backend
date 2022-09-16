@@ -4,12 +4,12 @@ import {
   VehiclePostsService as VehiclePostServiceType,
   VehiclePostsService,
 } from "./vehicle-posts.service";
-import { VehiclePostsRepository as VehiclePostsRepositoryType } from "../../../infrastructure/persistence/repositories";
+import { VehiclePostsRepository as VehiclePostsRepositoryType } from "../../../../infrastructure/persistence/repositories";
 import {
   UsersRepository,
   VehiclePostsRepository,
-} from "../../../../../test/mocks";
-import { getVehiclePostStub } from "../../../../../test/stubs";
+} from "../../../../../../test/mocks";
+import { getVehiclePostStub } from "../../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
 import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories";
 

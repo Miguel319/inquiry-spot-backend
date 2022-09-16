@@ -1,1 +1,1 @@
-export { VehiclePostsService } from "./vehicle-posts.service";
+export * from "./vehicle-posts";

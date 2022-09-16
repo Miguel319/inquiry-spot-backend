@@ -2,7 +2,7 @@ import { Provider } from "@nestjs/common";
 import { VehiclePostsController } from "./vehicle-posts.controller";
 import { mockResObj, VehiclePostsService } from "../../../../test/mocks";
 
-import { VehiclePostsService as VehiclePostsServiceType } from "../../application/services/implementations";
+import { VehiclePostsService as VehiclePostsServiceType } from "../../application/services/implementations/vehicle-posts";
 import { Test, TestingModule } from "@nestjs/testing";
 import { getVehiclePostStub } from "../../../../test/stubs";
 import {

@@ -4,7 +4,6 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
-import { IVehiclePostsService } from "../contracts";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import {
   getPaginationOptions,
@@ -17,7 +16,8 @@ import { UserTranslations } from "@/user/application/translations";
 import { VehiclePost, VehiclePostDocument } from "@/vehicle-post/domain";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { PaginationQuery, SharedTranslations } from "@/common/domain/types";
-import { VehiclePostTranslations } from "../../translations";
+import { IVehiclePostsService } from "../../contracts";
+import { VehiclePostTranslations } from "@/vehicle-post/application/translations";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {
