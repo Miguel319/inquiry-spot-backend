@@ -1,10 +1,10 @@
-import { VehicleTypeFactory } from "@/vehicle-post/infrastructure/factories/vehicle-type.factory";
+import { VehicleTypeFactory } from "@/vehicle-post/infrastructure/factories";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
-import { CreateVehiclePostTypeCommand } from "../../operations";
+import { CreateVehicleTypeCommand } from "../../operations";
 
-@CommandHandler(CreateVehiclePostTypeCommand)
-export class CreateVehiclePostTypeCommandHandler
-  implements ICommandHandler<CreateVehiclePostTypeCommand>
+@CommandHandler(CreateVehicleTypeCommand)
+export class CreateVehicleTypeCommandHandler
+  implements ICommandHandler<CreateVehicleTypeCommand>
 {
   constructor(
     private readonly vehicleTypeFactory: VehicleTypeFactory,
@@ -14,7 +14,7 @@ export class CreateVehiclePostTypeCommandHandler
   async execute({
     createVehicleTypeDto,
     i18n,
-  }: CreateVehiclePostTypeCommand): Promise<void> {
+  }: CreateVehicleTypeCommand): Promise<void> {
     const vehicleType = this.eventPublisher.mergeObjectContext(
       await this.vehicleTypeFactory.create(createVehicleTypeDto, i18n),
     );

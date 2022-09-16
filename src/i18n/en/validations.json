@@ -25,7 +25,8 @@
     "notFound": "Tag not found."
   },
   "vehicleType": {
-    "name": "The name is mandatory."
+    "name": "The name is mandatory.",
+    "notFound": "Vehicle type not found."
   },
   "user": {
     "name": "The name is mandatory.",

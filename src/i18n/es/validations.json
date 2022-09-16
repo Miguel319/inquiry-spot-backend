@@ -25,7 +25,8 @@
     "notFound": "Etiqueta no encontrada."
   },
   "vehicleType": {
-    "name": "El nombre es obligatorio."
+    "name": "El nombre es obligatorio.",
+    "notFound": "Tipo de vehículo no encontrado."
   },
   "user": {
     "name": "El nombre es obligatorio.",
