@@ -2,7 +2,7 @@ import { Blog } from "@/blog/domain/entities";
 import { EntitySchemaFactory } from "@/common/infrastructure/persistence/factories";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
-import { BlogSchema } from "../schemas";
+import { BlogSchema } from "../persistence/schemas";
 
 @Injectable()
 export class BlogSchemaFactory

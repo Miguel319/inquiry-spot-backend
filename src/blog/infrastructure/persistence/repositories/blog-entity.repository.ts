@@ -3,7 +3,7 @@ import { BaseEntityRepository } from "@/common/infrastructure/persistence/reposi
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { BlogSchemaFactory } from "../factories";
+import { BlogSchemaFactory } from "../../factories";
 import { BlogSchema } from "../schemas";
 
 @Injectable()

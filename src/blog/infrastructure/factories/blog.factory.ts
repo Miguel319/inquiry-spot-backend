@@ -4,8 +4,8 @@ import { EntityFactory } from "@/common/infrastructure/persistence/factories";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
-import { BlogEntityRepository } from "../repositories";
-import { BlogDocument } from "../schemas";
+import { BlogEntityRepository } from "../persistence/repositories";
+import { BlogDocument } from "../persistence/schemas";
 
 @Injectable()
 export class BlogFactory implements EntityFactory<Blog> {
@@ -25,6 +25,7 @@ export class BlogFactory implements EntityFactory<Blog> {
     await user.save();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async create(...args: any): Promise<Blog> {
     const blog = new Blog({
       ...args[0],

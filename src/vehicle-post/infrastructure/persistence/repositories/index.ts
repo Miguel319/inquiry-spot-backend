@@ -1,1 +1,2 @@
-export { VehiclePostsRepository } from "./vehicle-post.repository";
+export * from "./vehicle-posts";
+export * from "./vehicle-types";

@@ -1,11 +1,11 @@
 import { getModelToken } from "@nestjs/mongoose";
 import { Test } from "@nestjs/testing";
 import { FilterQuery } from "mongoose";
-import { VehiclePostModel } from "../../../../../test/support";
+import { VehiclePostModel } from "../../../../../../test/support";
 
-import { getVehiclePostStub } from "../../../../../test/stubs";
+import { getVehiclePostStub } from "../../../../../../test/stubs";
 import { VehiclePostsRepository } from "./vehicle-post.repository";
-import { VehiclePost } from "../schemas";
+import { VehiclePost } from "../../schemas";
 
 describe("VehiclePostsRepository", () => {
   let vehiclePostsRepository: VehiclePostsRepository;

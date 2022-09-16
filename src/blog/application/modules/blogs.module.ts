@@ -3,7 +3,7 @@ import { BlogsController } from "@/blog/presentation/controllers";
 import {
   BlogFactory,
   BlogSchemaFactory,
-} from "@/blog/infrastructure/persistence/factories";
+} from "@/blog/infrastructure/factories";
 import {
   BlogDtoRepository,
   BlogEntityRepository,
