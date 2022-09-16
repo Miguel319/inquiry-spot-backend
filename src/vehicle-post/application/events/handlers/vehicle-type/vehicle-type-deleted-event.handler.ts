@@ -3,7 +3,7 @@ import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import {
   VehicleTypeDeletedEvent,
   VehicleTypeUpdatedEvent,
-} from "../../operations";
+} from "../../operations/vehicle-type";
 
 @EventsHandler(VehicleTypeDeletedEvent)
 export class VehicleTypeDeletedEventHandler
