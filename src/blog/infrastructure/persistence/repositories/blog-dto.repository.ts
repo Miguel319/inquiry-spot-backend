@@ -18,11 +18,16 @@ export class BlogDtoRepository {
     entityFilterQuery: FilterQuery<BlogSchema>,
     options: PaginationOptions,
   ): Promise<PaginatedQuery<BlogDto>> {
+    const query = {} as Record<string, unknown>;
+
+    Object.keys(entityFilterQuery).forEach((key) => {
+      if (entityFilterQuery[key]) {
+        query[key] = entityFilterQuery[key];
+      }
+    });
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (this.blogModel as any).paginate(
-      { ...entityFilterQuery },
-      { options },
-    );
+    return (this.blogModel as any).paginate({ ...query }, { options });
   }
 
   private sanitizeBlog(blog: BlogDocument): BlogDto {

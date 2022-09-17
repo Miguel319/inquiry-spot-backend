@@ -9,6 +9,7 @@ import {
   FetchPaginatedBlogsQuery,
 } from "@/blog/application/queries";
 import { BlogTranslations } from "@/blog/application/translations";
+import { IBlogValuesQuery } from "@/blog/domain/types";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
 import { PaginatedQuery } from "@/common/infrastructure/util";
@@ -50,12 +51,7 @@ export class BlogsController {
 
   @Get()
   async fetchAllPaginated(
-    @Query("page") page: string,
-    @Query("perPage") perPage: string,
-    @Query("title") title: string,
-    @Query("slug") slug: string,
-    @Query("category") category: string,
-    @Query("tags") tags: string[],
+    @Query() { category, page, perPage, slug, tags, title }: IBlogValuesQuery,
     @I18n() i18n?: I18nContext,
   ): Promise<PaginatedQuery<BlogDto>> {
     const query = {
