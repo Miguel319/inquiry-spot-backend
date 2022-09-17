@@ -31,5 +31,10 @@
     "create": "¡Tipo de vehículo creado satisfactoriamente!",
     "update": "¡Tipo de vehículo actualizado satisfactoriamente!",
     "delete": "¡Tipo de vehículo eliminado satisfactoriamente!"
+  },
+  "vehicleMake": {
+    "create": "¡Marca de vehículo creada satisfactoriamente!",
+    "update": "¡Marca de vehículo actualizada satisfactoriamente!",
+    "delete": "¡Marca de vehículo eliminada satisfactoriamente!"
   }
 }

@@ -31,5 +31,10 @@
     "create": "Vehicle type created successfully!",
     "update": "Vehicle type updated successfully!",
     "delete": "Vehicle type deleted successfully!"
+  },
+  "vehicleMake": {
+    "create": "Vehicle make created successfully!",
+    "update": "Vehicle make updated successfully!",
+    "delete": "Vehicle make deleted successfully!"
   }
 }

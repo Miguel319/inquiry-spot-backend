@@ -34,6 +34,12 @@
     "notFound": "Vehicle type not found.",
     "forbiddenDeletion": "This vehicle type is being used in a vehicle post. Please delete the post before deleting the vehicle type."
   },
+  "vehicleMake": {
+    "name": "The name is mandatory.",
+    "nameDuplicate": "The provided name already exists.",
+    "notFound": "Vehicle make not found.",
+    "forbiddenDeletion": "This vehicle make is being used in a vehicle post. Please delete the post before deleting the make."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",
