@@ -1,8 +1,10 @@
-import { VehicleTypeDeletedEvent } from "@/vehicle-post/application/events";
 import { VehicleTypeTranslations } from "@/vehicle-post/application/translations";
 import { VehicleType } from "@/vehicle-post/domain/entities";
-import { VehicleTypeEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
-import { NotFoundException } from "@nestjs/common";
+import {
+  VehiclePostsRepository,
+  VehicleTypeEntityRepository,
+} from "@/vehicle-post/infrastructure/persistence/repositories";
+import { ForbiddenException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { DeleteVehicleTypeCommand } from "../../operations";
@@ -14,6 +16,7 @@ export class DeleteVehicleTypeCommandHandler
   constructor(
     private readonly _vehicleTypeEntityRepository: VehicleTypeEntityRepository,
     private readonly eventPublisher: EventPublisher,
+    private readonly _vehiclePostRepository: VehiclePostsRepository,
     private readonly _i18n: I18nService,
   ) {}
 
@@ -36,8 +39,26 @@ export class DeleteVehicleTypeCommandHandler
     return vehicleType;
   }
 
+  async handleAuthorization(
+    type: string,
+    i18n: I18nContext,
+  ): Promise<never | void> {
+    const postFound = await this._vehiclePostRepository.findOne({
+      type,
+    });
+
+    if (postFound)
+      throw new ForbiddenException(
+        i18n
+          ? i18n.t(VehicleTypeTranslations.FORBIDDEN_DELETION)
+          : this._i18n.t(VehicleTypeTranslations.FORBIDDEN_DELETION),
+      );
+  }
+
   async execute({ _id, i18n }: DeleteVehicleTypeCommand): Promise<boolean> {
     const vehicleTypeFound = await this.getVehicleType(_id, i18n);
+
+    await this.handleAuthorization(vehicleTypeFound.getId(), i18n);
 
     const vehicleType =
       this.eventPublisher.mergeObjectContext(vehicleTypeFound);
@@ -46,8 +67,6 @@ export class DeleteVehicleTypeCommandHandler
       _id,
       "_id",
     );
-
-    vehicleType.apply(new VehicleTypeDeletedEvent(vehicleType.getId()));
 
     vehicleType.commit();
 

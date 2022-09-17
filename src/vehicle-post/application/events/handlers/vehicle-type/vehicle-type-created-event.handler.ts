@@ -1,6 +1,6 @@
 import { LoggerService } from "@/common/infrastructure/logger";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
-import { VehicleTypeCreatedEvent } from "../../operations/vehicle-type";
+import { VehicleTypeCreatedEvent } from "../../operations";
 
 @EventsHandler(VehicleTypeCreatedEvent)
 export class VehicleTypeCreatedEventHandler
@@ -11,7 +11,7 @@ export class VehicleTypeCreatedEventHandler
   async handle({ vehicleTypeId, name }: VehicleTypeCreatedEvent) {
     this._logger.log(
       "Vehicle type creation",
-      `✅ New vehicle type created successfully!. ID = ${vehicleTypeId}. Name = ${name}`,
+      `✅ New vehicle type created successfully! ID = ${vehicleTypeId}. Name = ${name}`,
     );
   }
 }

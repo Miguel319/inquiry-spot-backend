@@ -8,7 +8,7 @@ import { VehicleTypeSchema } from "../persistence/schemas";
 export class VehicleTypeSchemaFactory
   implements EntitySchemaFactory<VehicleTypeSchema, VehicleType>
 {
-  create(vehicleType: VehicleType): VehicleTypeSchema {
+  public create(vehicleType: VehicleType): VehicleTypeSchema {
     return {
       _id: new Types.ObjectId(vehicleType.getId()),
       name: vehicleType.getName(),
@@ -17,7 +17,7 @@ export class VehicleTypeSchemaFactory
     };
   }
 
-  createFromSchema(
+  public createFromSchema(
     vehicleTypeSchema: VehicleTypeSchema | null,
   ): VehicleType | null {
     if (!vehicleTypeSchema) return null;

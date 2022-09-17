@@ -6,7 +6,7 @@ import paginate from "mongoose-paginate-v2";
 
 export type VehicleTypeDocument = VehicleTypeSchema & Document;
 
-@Schema({ timestamps: true, collection: "vehicle-types" })
+@Schema({ timestamps: true, collection: "vehicletypes" })
 export class VehicleTypeSchema extends BaseSchema {
   @Prop({
     required: [true, VehicleTypeTranslations.NAME],

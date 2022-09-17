@@ -32,7 +32,7 @@ export class FetchPaginatedVehicleTypesQueryHandler
   async execute({
     query,
     i18n,
-  }: FetchPaginatedVehicleTypesQuery): Promise<PaginatedQuery<VehicleTypeDto>> {
+  }: FetchPaginatedVehicleTypesQuery): Promise<PaginatedQuery<VehicleTypeDto> | null> {
     const queryToSend = this.getPaginationQueryOptions(query, i18n);
 
     return this._vehicleTypeDtoRepository.getPaginated({}, queryToSend);

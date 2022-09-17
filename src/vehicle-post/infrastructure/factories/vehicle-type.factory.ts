@@ -2,13 +2,22 @@ import { EntityFactory } from "@/common/infrastructure/persistence/factories";
 import { VehicleTypeCreatedEvent } from "@/vehicle-post/application/events";
 import { VehicleType } from "@/vehicle-post/domain/entities";
 import { Injectable } from "@nestjs/common";
-import { Types } from "mongoose";
-import { VehicleTypeEntityRepository } from "../persistence/repositories/vehicle-types";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model, Types } from "mongoose";
+// import { InjectModel } from "@nestjs/mongoose";
+// import { Model, Types } from "mongoose";
+// import { VehicleTypeEntityRepository } from "../persistence/repositories";
+import { VehicleTypeSchema } from "../persistence/schemas";
+// import { VehicleTypeEntityRepository } from "../persistence/repositories";
+// import { VehicleTypeSchema } from "../persistence/schemas";
 
 @Injectable()
 export class VehicleTypeFactory implements EntityFactory<VehicleType> {
   constructor(
-    private readonly _vehicleTypeRepository: VehicleTypeEntityRepository,
+    // private readonly _vehicleTypeRepository: VehicleTypeEntityRepository,
+
+    @InjectModel(VehicleTypeSchema.name)
+    private readonly _vehicleTypes: Model<VehicleTypeSchema>,
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,12 +27,13 @@ export class VehicleTypeFactory implements EntityFactory<VehicleType> {
       _id: new Types.ObjectId().toHexString(),
     });
 
-    await this._vehicleTypeRepository.create(vehicleType);
+    await this._vehicleTypes.create(vehicleType);
 
+    // await this._vehicleTypeRepository.create(vehicleType);
     vehicleType.apply(
       new VehicleTypeCreatedEvent(vehicleType.getId(), vehicleType.getName()),
     );
 
-    return vehicleType;
+    return null as unknown as VehicleType;
   }
 }

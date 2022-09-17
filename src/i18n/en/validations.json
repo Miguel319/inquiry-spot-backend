@@ -26,7 +26,8 @@
   },
   "vehicleType": {
     "name": "The name is mandatory.",
-    "notFound": "Vehicle type not found."
+    "notFound": "Vehicle type not found.",
+    "forbiddenDeletion": "This vehicle type is being used in a vehicle post. Please delete the post before deleting the vehicle type."
   },
   "user": {
     "name": "The name is mandatory.",

@@ -4,7 +4,15 @@ import { HasRoles } from "@/common/infrastructure/decorators";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { Role } from "@/user/domain/types";
 import { JwtAuthGuard } from "@/user/infrastructure/guards";
-import { IVehicleTypesService } from "@/vehicle-post/application/services/contracts";
+import {
+  CreateVehicleTypeCommand,
+  DeleteVehicleTypeCommand,
+  UpdateVehicleTypeCommand,
+} from "@/vehicle-post/application/commands/operations";
+import {
+  FetchPaginatedVehicleTypesQuery,
+  FetchVehicleTypeByIdQuery,
+} from "@/vehicle-post/application/queries";
 import { VehicleTypeTranslations } from "@/vehicle-post/application/translations";
 import {
   CreateVehicleTypeDto,
@@ -24,19 +32,28 @@ import {
   UseFilters,
   UseGuards,
 } from "@nestjs/common";
-import { Response } from "express";
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
+import { Response } from "express";
 
-@Controller()
+@Controller("vehicle-types")
 export class VehicleTypesController {
-  constructor(private readonly _vehicleTypesService: IVehicleTypesService) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getAll(
     @Query() paginationQuery: PaginationQuery,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ): Promise<PaginatedQuery<VehicleTypeDto>> {
-    return this._vehicleTypesService.findAll(paginationQuery, i18n);
+    return this.queryBus.execute<
+      FetchPaginatedVehicleTypesQuery,
+      PaginatedQuery<VehicleTypeDto>
+    >(
+      new FetchPaginatedVehicleTypesQuery(paginationQuery, i18n as I18nContext),
+    );
   }
 
   @Get(":_id")
@@ -44,7 +61,9 @@ export class VehicleTypesController {
     @Param("_id") _id: string,
     @I18n() i18n?: I18nContext,
   ): Promise<VehicleTypeDto> {
-    return this._vehicleTypesService.findById(_id, i18n);
+    return this.queryBus.execute<FetchVehicleTypeByIdQuery, VehicleTypeDto>(
+      new FetchVehicleTypeByIdQuery(_id, i18n as I18nContext),
+    );
   }
 
   @Post()
@@ -54,9 +73,11 @@ export class VehicleTypesController {
   async create(
     @Body() createVehicleTypeDto: CreateVehicleTypeDto,
     @Res() res: Response,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ) {
-    await this._vehicleTypesService.create(createVehicleTypeDto, i18n);
+    await this.commandBus.execute<CreateVehicleTypeCommand, void>(
+      new CreateVehicleTypeCommand(createVehicleTypeDto, i18n as I18nContext),
+    );
 
     return ApiResponse.create({
       message: i18n ? i18n.t(VehicleTypeTranslations.UPDATE) : "",
@@ -72,9 +93,11 @@ export class VehicleTypesController {
     @Param("_id") _id: string,
     @Body() updateVehicleDto: UpdateVehicleTypeDto,
     @Res() res: Response,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ) {
-    await this._vehicleTypesService.update(_id, updateVehicleDto);
+    await this.commandBus.execute<UpdateVehicleTypeCommand, void>(
+      new UpdateVehicleTypeCommand(_id, updateVehicleDto, i18n as I18nContext),
+    );
 
     return ApiResponse.update({
       res,
@@ -89,9 +112,11 @@ export class VehicleTypesController {
   async delete(
     @Param("_id") _id: string,
     @Res() res: Response,
-    @I18n() i18n: I18nContext,
+    @I18n() i18n?: I18nContext,
   ) {
-    await this._vehicleTypesService.delete(_id);
+    await this.commandBus.execute<DeleteVehicleTypeCommand, boolean>(
+      new DeleteVehicleTypeCommand(_id, i18n as I18nContext),
+    );
 
     return ApiResponse.delete({
       res,

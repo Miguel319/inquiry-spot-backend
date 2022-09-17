@@ -4,13 +4,15 @@ import {
 } from "@/common/infrastructure/util";
 import { VehicleType } from "@/vehicle-post/domain/entities";
 import { VehicleTypeDto } from "@/vehicle-post/infrastructure/dtos";
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { FilterQuery, Model, Types } from "mongoose";
 import { VehicleTypeDocument, VehicleTypeSchema } from "../../schemas";
 
+@Injectable()
 export class VehicleTypeDtoRepository {
   constructor(
-    @InjectModel(VehicleType.name)
+    @InjectModel(VehicleTypeSchema.name)
     private readonly vehicleType: Model<VehicleTypeSchema>,
   ) {}
 

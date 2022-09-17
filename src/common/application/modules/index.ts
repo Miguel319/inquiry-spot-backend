@@ -9,7 +9,10 @@ import { TagsModule } from "@/tag/application/modules";
 import { AuthModule, UsersModule } from "@/user/application/modules";
 import { PropertyPostModule } from "@/property-post/application/modules";
 import { EmailsModule } from "@/email/application/modules";
-import { VehiclePostModule } from "@/vehicle-post/application/modules";
+import {
+  VehiclePostModule,
+  VehicleTypeModule,
+} from "@/vehicle-post/application/modules";
 
 @Module({
   imports: [
@@ -22,6 +25,7 @@ import { VehiclePostModule } from "@/vehicle-post/application/modules";
     SellersModule,
     AuthModule,
     EmailsModule,
+    VehicleTypeModule,
     BlogsModule,
     VehiclePostModule,
     DBModule,

@@ -26,7 +26,8 @@
   },
   "vehicleType": {
     "name": "El nombre es obligatorio.",
-    "notFound": "Tipo de vehículo no encontrado."
+    "notFound": "Tipo de vehículo no encontrado.",
+    "forbiddenDeletion": "Este tipo de vehículo está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de vehículo."
   },
   "user": {
     "name": "El nombre es obligatorio.",

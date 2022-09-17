@@ -6,4 +6,5 @@ export enum VehicleTypeTranslations {
   // Validation
   NAME = "validations.vehicleType.name",
   NOT_FOUND = "validations.vehicleType.notFound",
+  FORBIDDEN_DELETION = "validations.vehicleType.forbiddenDeletion",
 }

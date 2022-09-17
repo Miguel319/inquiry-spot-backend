@@ -4,21 +4,21 @@ import { VehicleTypeDtoRepository } from "@/vehicle-post/infrastructure/persiste
 import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { I18nService } from "nestjs-i18n";
-import { FetchVehicleTypeByIdQuery } from "../../operations";
+import { FetchVehicleTypeByIdQuery } from "../..";
 
 @QueryHandler(FetchVehicleTypeByIdQuery)
 export class FetchVehicleTypeByIdQueryHandler
   implements IQueryHandler<FetchVehicleTypeByIdQuery>
 {
   constructor(
-    public readonly _vehicleTypeDtoRepository: VehicleTypeDtoRepository,
     private readonly _i18n: I18nService,
+    private readonly _vehicleTypeDtoRepository: VehicleTypeDtoRepository,
   ) {}
 
   async execute({
     _id,
     i18n,
-  }: FetchVehicleTypeByIdQuery): Promise<VehicleTypeDto> {
+  }: FetchVehicleTypeByIdQuery): Promise<VehicleTypeDto | null> {
     const vehicleType = await this._vehicleTypeDtoRepository.getById(_id);
 
     if (!vehicleType)
@@ -28,6 +28,6 @@ export class FetchVehicleTypeByIdQueryHandler
           : this._i18n.t(VehicleTypeTranslations.NOT_FOUND),
       );
 
-    return vehicleType;
+    return null;
   }
 }

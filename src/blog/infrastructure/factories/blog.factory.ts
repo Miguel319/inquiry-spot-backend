@@ -26,7 +26,7 @@ export class BlogFactory implements EntityFactory<Blog> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async create(...args: any): Promise<Blog> {
+  async create(...args: any[]): Promise<Blog> {
     const blog = new Blog({
       ...args[0],
       _id: new Types.ObjectId().toHexString(),
