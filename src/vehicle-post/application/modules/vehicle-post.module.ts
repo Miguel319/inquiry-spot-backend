@@ -3,8 +3,8 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { UsersModule } from "../../../user/application/modules/users.module";
 import { VehiclePostsController } from "@/vehicle-post/presentation/controllers";
 import { VehiclePostsRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
-import { VehiclePostsService } from "../services/implementations";
-import { VehiclePostSchema } from "@/vehicle-post/domain";
+import { VehiclePostsService } from "../services/implementations/vehicle-posts";
+import { VehiclePost, VehiclePostSchema } from "@/vehicle-post/domain";
 
 const VehiclePostProvider: Provider = {
   provide: "IVehiclePostsService",
@@ -16,7 +16,7 @@ const VehiclePostProvider: Provider = {
     UsersModule,
     MongooseModule.forFeature([
       {
-        name: "VehiclePost",
+        name: VehiclePost.name,
         schema: VehiclePostSchema,
       },
     ]),

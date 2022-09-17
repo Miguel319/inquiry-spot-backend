@@ -68,6 +68,7 @@ export class Blog extends AggregateRoot {
 
   public updateBlog(blog: IBlog): void {
     this.blog = {
+      ...this.blog,
       _id: blog._id || this.blog._id,
       body: blog.body || this.blog.body,
       category: blog.category || this.blog.category,
@@ -78,7 +79,6 @@ export class Blog extends AggregateRoot {
       postedBy: blog.postedBy || this.blog.postedBy,
       slug: blog.slug || this.blog.slug,
       tags: blog.tags || this.blog.tags,
-      createdAt: blog.createdAt || this.blog.createdAt,
       title: blog.title || this.blog.title,
       updatedAt: blog.updatedAt || this.blog.updatedAt,
     };

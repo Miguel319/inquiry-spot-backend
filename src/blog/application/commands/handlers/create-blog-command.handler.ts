@@ -1,4 +1,4 @@
-import { BlogFactory } from "@/blog/infrastructure/persistence/factories";
+import { BlogFactory } from "@/blog/infrastructure/factories";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { CreateBlogCommand } from "../operations";
 

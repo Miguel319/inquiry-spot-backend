@@ -3,6 +3,7 @@ import { I18nContext, I18nService } from "nestjs-i18n";
 import { Document } from "mongoose";
 import { BaseDto } from "../dtos";
 import { PaginationQuery, SharedTranslations } from "@/common/domain/types";
+import { Presenter } from "../presenters";
 
 export interface PaginationOptions {
   page: number;
@@ -11,7 +12,7 @@ export interface PaginationOptions {
   select?: string;
 }
 
-export interface PaginatedQuery<T extends Document | BaseDto> {
+export interface PaginatedQuery<T extends Document | BaseDto | Presenter> {
   docs: T[];
   totalDocs: number;
   offset: number;

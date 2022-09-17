@@ -1,1 +1,2 @@
-export { VehiclePostsController } from "./vehicle-posts.controller";
+export * from "./vehicle-posts";
+export * from "./vehicle-types";

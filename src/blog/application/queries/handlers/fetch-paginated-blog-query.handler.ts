@@ -37,6 +37,6 @@ export class FetchPaginatedBlogsQueryHandler
   }: FetchPaginatedBlogsQuery): Promise<PaginatedQuery<BlogDto>> {
     const queryToSend = this.getPaginationOptions(query, i18n);
 
-    return this._blogDtoRepository.getPaginated({}, queryToSend);
+    return this._blogDtoRepository.getPaginated(query, queryToSend);
   }
 }

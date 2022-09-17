@@ -9,7 +9,11 @@
       "province": "La provincia es obligatoria."
     },
     "unauthorized": "No está autorizado(a) a realizar esta operación.",
-    "paginationLimit": "No puede filtrar más de 50 elementos a la vez (por página)."
+    "paginationLimit": "No puede filtrar más de 50 elementos a la vez (por página).",
+    "name": {
+      "en": "El nombre en inglés es obligatorio.",
+      "es": "El nombre en español es obligatorio."
+    }
   },
   "tag": {
     "name": {
@@ -23,6 +27,12 @@
       "duplicate": "El valor de 'slug' provisto ya existe."
     },
     "notFound": "Etiqueta no encontrada."
+  },
+  "vehicleType": {
+    "name": "El nombre es obligatorio.",
+    "nameDuplicate": "El nombre provisto ya existe.",
+    "notFound": "Tipo de vehículo no encontrado.",
+    "forbiddenDeletion": "Este tipo de vehículo está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de vehículo."
   },
   "user": {
     "name": "El nombre es obligatorio.",

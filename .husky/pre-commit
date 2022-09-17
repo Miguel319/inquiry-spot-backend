@@ -17,7 +17,6 @@ echo 'Fixing linting issues...';
 npm run lint;
 
 # Staging changes
-git add .;
 
 echo 'Checking linting issues...';
 npm run check-lint ||

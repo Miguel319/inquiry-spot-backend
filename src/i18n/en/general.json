@@ -26,5 +26,10 @@
     "create": "Blog post created successfully!",
     "update": "Blog post updated successfully!",
     "delete": "Blog post deleted successfully!"
+  },
+  "vehicleType": {
+    "create": "Vehicle type created successfully!",
+    "update": "Vehicle type updated successfully!",
+    "delete": "Vehicle type deleted successfully!"
   }
 }
