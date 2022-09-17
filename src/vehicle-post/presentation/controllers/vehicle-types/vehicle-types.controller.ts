@@ -8,7 +8,7 @@ import {
   CreateVehicleTypeCommand,
   DeleteVehicleTypeCommand,
   UpdateVehicleTypeCommand,
-} from "@/vehicle-post/application/commands/operations";
+} from "@/vehicle-post/application/commands";
 import {
   FetchPaginatedVehicleTypesQuery,
   FetchVehicleTypeByIdQuery,

@@ -18,7 +18,7 @@ import { VehicleTypesController } from "@/vehicle-post/presentation/controllers"
 import { Module } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
-import { VehicleTypesCommandsHandlers } from "../commands/handlers";
+import { VehicleTypesCommandHandlers } from "../commands/handlers";
 import { VehicleTypesEventHandlers } from "../events/handlers";
 import { VehicleTypesQueryHandlers } from "../queries/handlers";
 
@@ -31,7 +31,7 @@ const providers = [
   VehicleTypeFactory,
   VehiclePostsRepository,
   ...VehicleTypesQueryHandlers,
-  ...VehicleTypesCommandsHandlers,
+  ...VehicleTypesCommandHandlers,
   ...VehicleTypesEventHandlers,
 ];
 

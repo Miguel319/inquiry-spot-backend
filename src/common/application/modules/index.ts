@@ -13,6 +13,7 @@ import {
   VehiclePostModule,
   VehicleTypeModule,
 } from "@/vehicle-post/application/modules";
+import { VehicleMakeModule } from "@/vehicle-post/application/modules";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import {
     LoggerModule,
     InternationalizationModule,
     PropertyPostModule,
+    VehicleMakeModule,
     SellersModule,
     AuthModule,
     EmailsModule,

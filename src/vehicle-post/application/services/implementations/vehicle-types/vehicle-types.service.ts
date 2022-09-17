@@ -5,11 +5,11 @@ import {
   CreateVehicleTypeCommand,
   DeleteVehicleTypeCommand,
   UpdateVehicleTypeCommand,
-} from "@/vehicle-post/application/commands/operations";
+} from "@/vehicle-post/application/commands";
 import {
   FetchPaginatedVehicleTypesQuery,
   FetchVehicleTypeByIdQuery,
-} from "@/vehicle-post/application/queries/operations";
+} from "@/vehicle-post/application/queries";
 import {
   CreateVehicleTypeDto,
   UpdateVehicleTypeDto,

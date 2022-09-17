@@ -8,7 +8,7 @@ import { VehicleTypeDto } from "@/vehicle-post/infrastructure/dtos";
 import { VehicleTypeDtoRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { FetchPaginatedVehicleTypesQuery } from "../../operations";
+import { FetchPaginatedVehicleTypesQuery } from "../..";
 
 @QueryHandler(FetchPaginatedVehicleTypesQuery)
 export class FetchPaginatedVehicleTypesQueryHandler

@@ -10,7 +10,7 @@ const {
   Types: { ObjectId },
 } = SchemaAlt;
 
-@Schema({ timestamps: true })
+@Schema({ versionKey: false, timestamps: true })
 export class User extends BaseEntity {
   @Prop({ required: [true, UserTranslations.NAME] })
   readonly name: string;

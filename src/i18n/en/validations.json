@@ -35,8 +35,12 @@
     "forbiddenDeletion": "This vehicle type is being used in a vehicle post. Please delete the post before deleting the vehicle type."
   },
   "vehicleMake": {
-    "name": "The name is mandatory.",
-    "nameDuplicate": "The provided name already exists.",
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
     "notFound": "Vehicle make not found.",
     "forbiddenDeletion": "This vehicle make is being used in a vehicle post. Please delete the post before deleting the make."
   },

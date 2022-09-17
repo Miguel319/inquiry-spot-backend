@@ -1,8 +1,10 @@
 import { EntitySchemaFactory } from "@/common/infrastructure/persistence/factories";
 import { VehicleMake } from "@/vehicle-post/domain/entities";
+import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
 import { VehicleMakeSchema } from "../../persistence/schemas";
 
+@Injectable()
 export class VehicleMakeSchemaFactory
   implements EntitySchemaFactory<VehicleMakeSchema, VehicleMake>
 {
@@ -14,6 +16,7 @@ export class VehicleMakeSchemaFactory
       updatedAt: vehicleMake.getUpdatedAt(),
     };
   }
+
   public createFromSchema(
     entitySchema: VehicleMakeSchema | null,
   ): VehicleMake | null {

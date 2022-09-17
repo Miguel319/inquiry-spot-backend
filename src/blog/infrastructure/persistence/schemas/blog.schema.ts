@@ -6,7 +6,7 @@ import paginate from "mongoose-paginate-v2";
 
 export type BlogDocument = BlogSchema & Document;
 
-@Schema({ timestamps: true, collection: "blogs" })
+@Schema({ versionKey: false, timestamps: true, collection: "blogs" })
 export class BlogSchema extends BaseSchema {
   @Prop({
     min: [3, "The title must be at least 3 characters long."],

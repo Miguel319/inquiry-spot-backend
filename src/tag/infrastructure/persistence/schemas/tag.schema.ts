@@ -5,7 +5,7 @@ import { Document } from "mongoose";
 
 export type TagDocument = Tag & Document;
 
-@Schema({ timestamps: true })
+@Schema({ versionKey: false, timestamps: true })
 export class Tag extends BaseEntity {
   @Prop({
     required: [true, TagTranslations.NAME],

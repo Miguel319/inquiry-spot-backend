@@ -7,7 +7,7 @@ import {
 import { ForbiddenException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { DeleteVehicleTypeCommand } from "../../operations";
+import { DeleteVehicleTypeCommand } from "../..";
 
 @CommandHandler(DeleteVehicleTypeCommand)
 export class DeleteVehicleTypeCommandHandler

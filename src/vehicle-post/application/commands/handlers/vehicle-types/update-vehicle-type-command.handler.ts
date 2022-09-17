@@ -1,7 +1,7 @@
 import { VehicleTypeUpdatedEvent } from "@/vehicle-post/application/events";
 import { VehicleTypeTranslations } from "@/vehicle-post/application/translations";
 import { VehicleType } from "@/vehicle-post/domain/entities";
-import { IVehicleType } from "@/vehicle-post/domain/types/i-vehicle-type";
+import { IVehicleType } from "@/vehicle-post/domain/types";
 import { VehicleTypeEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
 import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";

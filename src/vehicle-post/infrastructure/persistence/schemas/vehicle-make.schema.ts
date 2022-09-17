@@ -8,7 +8,7 @@ import { Document } from "mongoose";
 
 export type VehicleMakeDocument = VehicleMakeSchema & Document;
 
-@Schema({ timestamps: true, collection: "vehiclemakes" })
+@Schema({ versionKey: false, timestamps: true, collection: "vehiclemakes" })
 export class VehicleMakeSchema extends BaseSchema {
   @Prop({
     type: {
@@ -16,13 +16,13 @@ export class VehicleMakeSchema extends BaseSchema {
         type: String,
         required: [true, SharedTranslations.NAME_ES],
         index: true,
-        unique: true,
+        unique: [true, VehicleMakeTranslations.NAME_UNIQUE_ES],
       },
       en: {
         type: String,
         required: [true, SharedTranslations.NAME_EN],
         index: true,
-        unique: true,
+        unique: [true, VehicleMakeTranslations.NAME_UNIQUE_EN],
       },
     },
     required: [true, VehicleMakeTranslations.NAME],
