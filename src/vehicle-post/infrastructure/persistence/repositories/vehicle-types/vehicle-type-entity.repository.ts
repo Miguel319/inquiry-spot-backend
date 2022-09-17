@@ -12,9 +12,9 @@ export class VehicleTypeEntityRepository extends BaseEntityRepository<
   VehicleType
 > {
   constructor(
-    @InjectModel(VehicleTypeSchema.name) blog: Model<VehicleTypeSchema>,
-    blogSchemaFactory: VehicleTypeSchemaFactory,
+    @InjectModel(VehicleTypeSchema.name) vehicleType: Model<VehicleTypeSchema>,
+    vehicleSchemaFactory: VehicleTypeSchemaFactory,
   ) {
-    super(blog, blogSchemaFactory);
+    super(vehicleType, vehicleSchemaFactory);
   }
 }

@@ -9,7 +9,11 @@
       "province": "The province is mandatory."
     },
     "unauthorized": "You are not authorized to perform this operation.",
-    "paginationLimit": "You cannot filter more than 50 items per page."
+    "paginationLimit": "You cannot filter more than 50 items per page.",
+    "name": {
+      "en": "The name in English is mandatory.",
+      "es": "The name in Spanish is mandatory."
+    }
   },
   "tag": {
     "name": {
@@ -26,6 +30,7 @@
   },
   "vehicleType": {
     "name": "The name is mandatory.",
+    "nameDuplicate": "The provided name already exists.",
     "notFound": "Vehicle type not found.",
     "forbiddenDeletion": "This vehicle type is being used in a vehicle post. Please delete the post before deleting the vehicle type."
   },

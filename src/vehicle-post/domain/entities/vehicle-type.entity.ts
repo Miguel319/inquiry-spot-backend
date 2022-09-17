@@ -1,3 +1,4 @@
+import { NameType } from "@/common/domain/entities";
 import { AggregateRoot } from "@nestjs/cqrs";
 import { IVehicleType } from "../types/i-vehicle-type";
 
@@ -14,7 +15,7 @@ export class VehicleType extends AggregateRoot {
     return this.vehicleType._id;
   }
 
-  public getName(): string {
+  public getName(): NameType {
     return this.vehicleType.name;
   }
 
@@ -29,7 +30,10 @@ export class VehicleType extends AggregateRoot {
   public updateVehicle(updatedType: IVehicleType): void {
     this.vehicleType = {
       ...this.vehicleType,
-      name: updatedType.name || this.vehicleType.name,
+      name: {
+        en: updatedType.name.en || this.vehicleType.name.en,
+        es: updatedType.name.es || this.vehicleType.name.es,
+      },
     };
   }
 }

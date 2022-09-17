@@ -24,12 +24,12 @@ import { VehicleTypesQueryHandlers } from "../queries/handlers";
 
 const providers = [
   VehicleTypeEntityRepository,
-  VehicleTypeDtoRepository,
   VehicleTypeSchemaFactory,
-  VehicleTypeFactory,
   EventPublisher,
-  VehiclePostsRepository,
+  VehicleTypeDtoRepository,
   LoggerService,
+  VehicleTypeFactory,
+  VehiclePostsRepository,
   ...VehicleTypesQueryHandlers,
   ...VehicleTypesCommandsHandlers,
   ...VehicleTypesEventHandlers,

@@ -7,4 +7,6 @@ export enum SharedTranslations {
   ADDRESS__PROVINCE = "validations.shared.province",
   UNAUTHORIZED = "validations.shared.unauthorized",
   PAGINATION_LIMIT = "validations.shared.paginationLimit",
+  NAME_ES = "validations.shared.name.es",
+  NAME_EN = "validations.shared.name.en",
 }

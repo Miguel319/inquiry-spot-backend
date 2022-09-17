@@ -80,7 +80,7 @@ export class VehicleTypesController {
     );
 
     return ApiResponse.create({
-      message: i18n ? i18n.t(VehicleTypeTranslations.UPDATE) : "",
+      message: i18n ? i18n.t(VehicleTypeTranslations.CREATE) : "",
       res,
     });
   }

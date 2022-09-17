@@ -18,7 +18,7 @@ export class FetchVehicleTypeByIdQueryHandler
   async execute({
     _id,
     i18n,
-  }: FetchVehicleTypeByIdQuery): Promise<VehicleTypeDto | null> {
+  }: FetchVehicleTypeByIdQuery): Promise<VehicleTypeDto> {
     const vehicleType = await this._vehicleTypeDtoRepository.getById(_id);
 
     if (!vehicleType)
@@ -28,6 +28,6 @@ export class FetchVehicleTypeByIdQueryHandler
           : this._i18n.t(VehicleTypeTranslations.NOT_FOUND),
       );
 
-    return null;
+    return vehicleType;
   }
 }

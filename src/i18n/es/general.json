@@ -27,9 +27,9 @@
     "update": "¡Publicación de blog actualizada satisfactoriamente!",
     "delete": "¡Publicación de blog satisfactoriamente!"
   },
-  "propertyType": {
+  "vehicleType": {
     "create": "¡Tipo de vehículo creado satisfactoriamente!",
-    "update": "¡Tipo de vehículo actualizada satisfactoriamente!",
-    "delete": "¡Tipo de vehículo eliminada satisfactoriamente!"
+    "update": "¡Tipo de vehículo actualizado satisfactoriamente!",
+    "delete": "¡Tipo de vehículo eliminado satisfactoriamente!"
   }
 }

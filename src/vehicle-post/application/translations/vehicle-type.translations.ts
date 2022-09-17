@@ -3,8 +3,9 @@ export enum VehicleTypeTranslations {
   CREATE = "general.vehicleType.create",
   UPDATE = "general.vehicleType.update",
   DELETE = "general.vehicleType.delete",
-  // Validation
+  // Validations
   NAME = "validations.vehicleType.name",
+  NAME_UNIQUE = "validations.vehicleType.nameDuplicate",
   NOT_FOUND = "validations.vehicleType.notFound",
   FORBIDDEN_DELETION = "validations.vehicleType.forbiddenDeletion",
 }

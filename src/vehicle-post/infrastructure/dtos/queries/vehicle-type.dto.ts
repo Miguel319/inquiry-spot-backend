@@ -1,15 +1,17 @@
+import { NameType } from "@/common/domain/entities";
 import { Presenter } from "@/common/infrastructure/presenters";
 import { VehicleType } from "@/vehicle-post/domain/entities";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class VehicleTypeDto extends Presenter {
   @ApiProperty({ required: true })
-  readonly name: string;
+  readonly name: NameType;
 
   private constructor(vehicleType: VehicleType) {
     super(vehicleType);
 
-    this.name = vehicleType.getName();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.name = (vehicleType as any).name || vehicleType?.getName();
   }
 
   public static create(vehicleType: VehicleType) {
