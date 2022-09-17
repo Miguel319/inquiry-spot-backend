@@ -8,7 +8,7 @@ import { BlogSchema } from "../persistence/schemas";
 export class BlogSchemaFactory
   implements EntitySchemaFactory<BlogSchema, Blog>
 {
-  create(blog: Blog): BlogSchema {
+  public create(blog: Blog): BlogSchema {
     return {
       _id: new Types.ObjectId(blog.getId()),
       body: blog.getBody(),
@@ -25,7 +25,7 @@ export class BlogSchemaFactory
       updatedAt: blog.getUpdatedAt(),
     };
   }
-  createFromSchema(blogSchema: BlogSchema | null): Blog | null {
+  public createFromSchema(blogSchema: BlogSchema | null): Blog | null {
     if (!blogSchema) return null;
 
     return new Blog({ ...blogSchema, _id: blogSchema._id.toHexString() });

@@ -6,8 +6,8 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { CreateVehicleTypeDto } from "../dtos";
-import { VehicleTypeSchema } from "../persistence/schemas";
+import { CreateVehicleTypeDto } from "../../dtos";
+import { VehicleTypeSchema } from "../../persistence/schemas";
 
 @Injectable()
 export class VehicleTypeFactory implements EntityFactory<VehicleType> {

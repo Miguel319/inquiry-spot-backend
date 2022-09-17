@@ -27,7 +27,7 @@ export class VehicleType extends AggregateRoot {
     return this.vehicleType.updatedAt;
   }
 
-  public updateVehicle(updatedType: IVehicleType): void {
+  public updateVehicleType(updatedType: IVehicleType): void {
     this.vehicleType = {
       ...this.vehicleType,
       name: {

@@ -2,7 +2,7 @@ import { EntitySchemaFactory } from "@/common/infrastructure/persistence/factori
 import { VehicleType } from "@/vehicle-post/domain/entities";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
-import { VehicleTypeSchema } from "../persistence/schemas";
+import { VehicleTypeSchema } from "../../persistence/schemas";
 
 @Injectable()
 export class VehicleTypeSchemaFactory

@@ -5,3 +5,4 @@ export { VehicleMake } from "./vehicle-make";
 export { VehicleStatus } from "./vehicle-status";
 export { VehicleType } from "./vehicle-type";
 export { Traction } from "./traction";
+export { IVehicleMake } from "./i-vehicle-make";

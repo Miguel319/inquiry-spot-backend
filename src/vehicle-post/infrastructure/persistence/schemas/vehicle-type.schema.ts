@@ -16,15 +16,13 @@ export class VehicleTypeSchema extends BaseSchema {
         type: String,
         required: [true, SharedTranslations.NAME_ES],
         index: true,
-
-        // unique: [true, "The provided name in Spanish already exists."],
         unique: true,
       },
       en: {
         type: String,
         required: [true, SharedTranslations.NAME_EN],
         index: true,
-        unique: [true, "The provided name in English already exists."],
+        unique: true,
       },
     },
     required: [true, VehicleTypeTranslations.NAME],

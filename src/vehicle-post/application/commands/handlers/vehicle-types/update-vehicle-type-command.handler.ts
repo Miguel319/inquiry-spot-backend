@@ -47,7 +47,9 @@ export class UpdateVehicleTypeCommandHandler
     const vehicleType =
       this.eventPublisher.mergeObjectContext(vehicleTypeFound);
 
-    vehicleType.updateVehicle(updateVehicleTypeDto as unknown as IVehicleType);
+    vehicleType.updateVehicleType(
+      updateVehicleTypeDto as unknown as IVehicleType,
+    );
 
     vehicleType.apply(
       new VehicleTypeUpdatedEvent(vehicleType.getId(), vehicleType.getName()),
