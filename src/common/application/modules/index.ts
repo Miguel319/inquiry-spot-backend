@@ -14,6 +14,7 @@ import {
   VehicleTypeModule,
   VehicleMakeModule,
   TransmissionModule,
+  FuelModule,
 } from "@/vehicle-post/application/modules";
 
 @Module({
@@ -27,6 +28,7 @@ import {
     VehicleMakeModule,
     SellersModule,
     TransmissionModule,
+    FuelModule,
     AuthModule,
     EmailsModule,
     VehicleTypeModule,
