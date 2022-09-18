@@ -41,5 +41,10 @@
     "create": "Transmission created successfully!",
     "update": "Transmission updated successfully!",
     "delete": "Transmission deleted successfully!"
+  },
+  "fuel": {
+    "create": "Fuel type created successfully!",
+    "update": "Fuel type updated successfully!",
+    "delete": "Fuel type deleted successfully!"
   }
 }

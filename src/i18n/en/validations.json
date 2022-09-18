@@ -54,6 +54,12 @@
     "notFound": "Transmission not found.",
     "forbiddenDeletion": "This transmission is being used in a vehicle post. Please delete the post before deleting the transmission."
   },
+  "fuel": {
+    "name": "The name is mandatory.",
+    "notFound": "Fuel type not found.",
+    "forbiddenDeletion": "This fuel type is being used in a vehicle post. Please delete the post before deleting the fuel type."
+  },
+
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",
