@@ -1,4 +1,5 @@
 export * from "./vehicle-types";
 export * from "./vehicle-makes";
 export * from "./transmissions";
-export * from "./fuel";
+export * from "./fuels";
+export * from "./tractions";
