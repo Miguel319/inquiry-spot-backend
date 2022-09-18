@@ -1,6 +1,6 @@
 import { NameType } from "@/common/domain/entities";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IVehicleType } from "../types/i-vehicle-type";
+import { IVehicleType } from "../types";
 
 export class VehicleType extends AggregateRoot {
   private vehicleType: IVehicleType;

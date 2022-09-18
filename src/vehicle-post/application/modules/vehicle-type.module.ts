@@ -8,7 +8,7 @@ import {
 import {
   VehicleTypeFactory,
   VehicleTypeSchemaFactory,
-} from "@/vehicle-post/infrastructure/factories/vehicle-types";
+} from "@/vehicle-post/infrastructure/factories";
 import {
   VehiclePostsRepository,
   VehicleTypeDtoRepository,

@@ -1,2 +1,3 @@
 export * from "./vehicle-types";
 export * from "./vehicle-makes";
+export * from "./transmissions";

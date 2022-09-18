@@ -12,8 +12,9 @@ import { EmailsModule } from "@/email/application/modules";
 import {
   VehiclePostModule,
   VehicleTypeModule,
+  VehicleMakeModule,
+  TransmissionModule,
 } from "@/vehicle-post/application/modules";
-import { VehicleMakeModule } from "@/vehicle-post/application/modules";
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { VehicleMakeModule } from "@/vehicle-post/application/modules";
     PropertyPostModule,
     VehicleMakeModule,
     SellersModule,
+    TransmissionModule,
     AuthModule,
     EmailsModule,
     VehicleTypeModule,
