@@ -40,6 +40,12 @@
     "notFound": "Marca no encontrada.",
     "forbiddenDeletion": "Este marca está siendo usada por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar la marca."
   },
+  "transmission": {
+    "name": "El nombre es obligatorio.",
+    "nameDuplicate": "El nombre provisto ya existe.",
+    "notFound": "Transmisión no encontrada.",
+    "forbiddenDeletion": "Este transmisión está siendo usada por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar la transmisión."
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",

@@ -36,5 +36,10 @@
     "create": "¡Marca de vehículo creada satisfactoriamente!",
     "update": "¡Marca de vehículo actualizada satisfactoriamente!",
     "delete": "¡Marca de vehículo eliminada satisfactoriamente!"
+  },
+  "transmission": {
+    "create": "¡Transmisión creada satisfactoriamente!",
+    "update": "¡Transmisión actualizada satisfactoriamente!",
+    "delete": "¡Transmisión eliminada satisfactoriamente!"
   }
 }

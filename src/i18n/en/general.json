@@ -36,5 +36,10 @@
     "create": "Vehicle make created successfully!",
     "update": "Vehicle make updated successfully!",
     "delete": "Vehicle make deleted successfully!"
+  },
+  "transmission": {
+    "create": "Transmission created successfully!",
+    "update": "Transmission updated successfully!",
+    "delete": "Transmission deleted successfully!"
   }
 }
