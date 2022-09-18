@@ -46,5 +46,10 @@
     "create": "Fuel type created successfully!",
     "update": "Fuel type updated successfully!",
     "delete": "Fuel type deleted successfully!"
+  },
+  "traction": {
+    "create": "Traction type created successfully!",
+    "update": "Traction type updated successfully!",
+    "delete": "Traction type deleted successfully!"
   }
 }

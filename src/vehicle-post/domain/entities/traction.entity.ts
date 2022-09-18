@@ -1,14 +1,14 @@
 import { NameType } from "@/common/domain/entities";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IFuel } from "../types";
+import { ITraction } from "../types";
 
-export class Fuel extends AggregateRoot {
-  private traction: IFuel;
+export class Traction extends AggregateRoot {
+  private traction: ITraction;
 
-  constructor(newFuel: IFuel) {
+  constructor(newTraction: ITraction) {
     super();
 
-    this.traction = newFuel;
+    this.traction = newTraction;
   }
 
   public getId(): string {
@@ -27,7 +27,7 @@ export class Fuel extends AggregateRoot {
     return this.traction.updatedAt;
   }
 
-  public updateFuel(updatedType: IFuel): void {
+  public updateTraction(updatedType: ITraction): void {
     this.traction = {
       ...this.traction,
       name: {
