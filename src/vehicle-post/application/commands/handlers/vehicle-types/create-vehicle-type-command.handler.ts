@@ -1,4 +1,4 @@
-import { VehicleTypeFactory } from "@/vehicle-post/infrastructure/factories/vehicle-types";
+import { VehicleTypeFactory } from "@/vehicle-post/infrastructure/factories";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { CreateVehicleTypeCommand } from "../..";
 

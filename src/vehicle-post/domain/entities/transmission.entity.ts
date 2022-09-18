@@ -1,14 +1,14 @@
 import { NameType } from "@/common/domain/entities";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IVehicleType } from "../types";
+import { ITransmission } from "../types";
 
-export class VehicleType extends AggregateRoot {
-  private vehicleType: IVehicleType;
+export class Transmission extends AggregateRoot {
+  private vehicleType: ITransmission;
 
-  constructor(newVehicleType: IVehicleType) {
+  constructor(newTransmission: ITransmission) {
     super();
 
-    this.vehicleType = newVehicleType;
+    this.vehicleType = newTransmission;
   }
 
   public getId(): string {
@@ -27,7 +27,7 @@ export class VehicleType extends AggregateRoot {
     return this.vehicleType.updatedAt;
   }
 
-  public updateVehicleType(updatedType: IVehicleType): void {
+  public updateTransmission(updatedType: ITransmission): void {
     this.vehicleType = {
       ...this.vehicleType,
       name: {
