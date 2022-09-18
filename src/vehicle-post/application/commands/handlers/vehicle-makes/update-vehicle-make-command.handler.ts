@@ -1,6 +1,6 @@
 import { VehicleMakeTranslations } from "@/vehicle-post/application/translations";
 import { VehicleMake } from "@/vehicle-post/domain/entities";
-import { IVehicleType } from "@/vehicle-post/domain/types";
+import { IVehicleMake } from "@/vehicle-post/domain/types";
 import { VehicleMakesEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
 import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
@@ -46,7 +46,7 @@ export class UpdateVehicleMakeCommandHandler
     const vehicleMake =
       this.eventPublisher.mergeObjectContext(vehicleMakeFound);
 
-    vehicleMake.updateMake(updateVehicleMakeDto as unknown as IVehicleType);
+    vehicleMake.updateMake(updateVehicleMakeDto as unknown as IVehicleMake);
 
     await this._vehicleMakeEntityRepository.findOneAndReplaceByValue(
       _id,

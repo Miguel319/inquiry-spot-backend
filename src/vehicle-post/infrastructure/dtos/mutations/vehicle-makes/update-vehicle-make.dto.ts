@@ -1,8 +1,5 @@
-import {
-  BaseValidationDto,
-  NameTypeValidationDto,
-} from "@/common/infrastructure/dtos";
+import { BaseValidationDto } from "@/common/infrastructure/dtos";
 
 export class UpdateVehicleMakeDto extends BaseValidationDto {
-  readonly name: NameTypeValidationDto;
+  readonly name: string;
 }
