@@ -1,5 +1,10 @@
 export { CreateTransmissionCommandHandler } from "./create-transmission-command.handler";
+export { UpdateTransmissionCommandHandler } from "./update-transmission-command.handler";
 
 import { CreateTransmissionCommandHandler } from "./create-transmission-command.handler";
+import { UpdateTransmissionCommandHandler } from "./update-transmission-command.handler";
 
-export const TransmissionCommandHandlers = [CreateTransmissionCommandHandler];
+export const TransmissionCommandHandlers = [
+  CreateTransmissionCommandHandler,
+  UpdateTransmissionCommandHandler,
+];

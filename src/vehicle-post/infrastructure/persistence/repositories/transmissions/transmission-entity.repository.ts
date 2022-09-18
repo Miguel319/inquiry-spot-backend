@@ -7,7 +7,7 @@ import { Model } from "mongoose";
 import { TransmissionSchema } from "../../schemas";
 
 @Injectable()
-export class TransmissionsEntityRepository extends BaseEntityRepository<
+export class TransmissionEntityRepository extends BaseEntityRepository<
   TransmissionSchema,
   Transmission
 > {

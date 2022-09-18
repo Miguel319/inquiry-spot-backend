@@ -12,7 +12,7 @@ import {
 import {
   VehiclePostsRepository,
   TransmissionDtoRepository,
-  TransmissionsEntityRepository,
+  TransmissionEntityRepository,
 } from "@/vehicle-post/infrastructure/persistence/repositories";
 import { TransmissionController } from "@/vehicle-post/presentation/controllers";
 import { Module } from "@nestjs/common";
@@ -36,7 +36,7 @@ import { TransmissionEventHandlers } from "../events/handlers";
     ]),
   ],
   providers: [
-    TransmissionsEntityRepository,
+    TransmissionEntityRepository,
     TransmissionSchemaFactory,
     TransmissionDtoRepository,
     VehiclePostsRepository,
