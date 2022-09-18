@@ -37,6 +37,7 @@ import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { Response } from "express";
 
 @Controller("vehicle-types")
+@UseFilters(new I18nValidationExceptionFilter())
 export class VehicleTypesController {
   constructor(
     private readonly commandBus: CommandBus,
@@ -67,7 +68,6 @@ export class VehicleTypesController {
   }
 
   @Post()
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.ADMIN)
   async create(
@@ -86,7 +86,6 @@ export class VehicleTypesController {
   }
 
   @Put(":_id")
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.ADMIN)
   async update(
@@ -106,7 +105,6 @@ export class VehicleTypesController {
   }
 
   @Delete(":_id")
-  @UseFilters(new I18nValidationExceptionFilter())
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.ADMIN)
   async delete(

@@ -20,6 +20,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { TransmissionCommandHandlers } from "../commands/handlers";
 import { TransmissionEventHandlers } from "../events/handlers";
+import { TransmissionQueryHandlers } from "../queries/handlers";
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { TransmissionEventHandlers } from "../events/handlers";
     LoggerService,
     ...TransmissionCommandHandlers,
     ...TransmissionEventHandlers,
+    ...TransmissionQueryHandlers,
   ],
   controllers: [TransmissionController],
 })
