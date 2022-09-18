@@ -66,6 +66,16 @@
     "notFound": "Tipo de combustible no encontrado.",
     "forbiddenDeletion": "Este tipo de combustible está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de combustible."
   },
+  "traction": {
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
+    "notFound": "Tipo de tracción no encontrado.",
+    "forbiddenDeletion": "Este tipo tracción está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de tracción."
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",

@@ -9,3 +9,4 @@ export { VehicleType } from "./vehicle-type";
 export { IVehicleType } from "./i-vehicle-type";
 export { ITransmission } from "./i-transmission";
 export { IFuel } from "./i-fuel";
+export { ITraction } from "./i-traction";

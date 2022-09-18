@@ -3,36 +3,36 @@ import { AggregateRoot } from "@nestjs/cqrs";
 import { IFuel } from "../types";
 
 export class Fuel extends AggregateRoot {
-  private vehicleType: IFuel;
+  private traction: IFuel;
 
   constructor(newFuel: IFuel) {
     super();
 
-    this.vehicleType = newFuel;
+    this.traction = newFuel;
   }
 
   public getId(): string {
-    return this.vehicleType._id;
+    return this.traction._id;
   }
 
   public getName(): NameType {
-    return this.vehicleType.name;
+    return this.traction.name;
   }
 
   public getCreatedAt(): Date {
-    return this.vehicleType.createdAt;
+    return this.traction.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.vehicleType.updatedAt;
+    return this.traction.updatedAt;
   }
 
   public updateFuel(updatedType: IFuel): void {
-    this.vehicleType = {
-      ...this.vehicleType,
+    this.traction = {
+      ...this.traction,
       name: {
-        en: updatedType.name.en || this.vehicleType.name.en,
-        es: updatedType.name.es || this.vehicleType.name.es,
+        en: updatedType.name.en || this.traction.name.en,
+        es: updatedType.name.es || this.traction.name.es,
       },
     };
   }

@@ -46,5 +46,10 @@
     "create": "¡Tipo de combustible creado satisfactoriamente!",
     "update": "¡Tipo de combustible actualizado satisfactoriamente!",
     "delete": "¡Tipo de combustible eliminado satisfactoriamente!"
+  },
+  "traction": {
+    "create": "¡Tipo de tracción creada satisfactoriamente!",
+    "update": "¡Tipo de tracción actualizada satisfactoriamente!",
+    "delete": "¡Tipo de tracción eliminada satisfactoriamente!"
   }
 }

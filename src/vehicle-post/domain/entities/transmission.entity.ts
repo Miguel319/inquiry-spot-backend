@@ -3,36 +3,36 @@ import { AggregateRoot } from "@nestjs/cqrs";
 import { ITransmission } from "../types";
 
 export class Transmission extends AggregateRoot {
-  private vehicleType: ITransmission;
+  private transmission: ITransmission;
 
   constructor(newTransmission: ITransmission) {
     super();
 
-    this.vehicleType = newTransmission;
+    this.transmission = newTransmission;
   }
 
   public getId(): string {
-    return this.vehicleType._id;
+    return this.transmission._id;
   }
 
   public getName(): NameType {
-    return this.vehicleType.name;
+    return this.transmission.name;
   }
 
   public getCreatedAt(): Date {
-    return this.vehicleType.createdAt;
+    return this.transmission.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.vehicleType.updatedAt;
+    return this.transmission.updatedAt;
   }
 
   public updateTransmission(updatedType: ITransmission): void {
-    this.vehicleType = {
-      ...this.vehicleType,
+    this.transmission = {
+      ...this.transmission,
       name: {
-        en: updatedType.name.en || this.vehicleType.name.en,
-        es: updatedType.name.es || this.vehicleType.name.es,
+        en: updatedType.name.en || this.transmission.name.en,
+        es: updatedType.name.es || this.transmission.name.es,
       },
     };
   }
