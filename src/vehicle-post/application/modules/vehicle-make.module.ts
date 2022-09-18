@@ -10,6 +10,7 @@ import {
   VehicleMakeSchemaFactory,
 } from "@/vehicle-post/infrastructure/factories";
 import {
+  VehicleMakeDtoRepository,
   VehicleMakesEntityRepository,
   VehiclePostsRepository,
 } from "@/vehicle-post/infrastructure/persistence/repositories";
@@ -19,6 +20,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { VehicleMakesCommandHandlers } from "../commands/handlers";
 import { VehicleMakesEventHandlers } from "../events/handlers";
+import { VehicleMakesQueryHandlers } from "../queries/handlers";
 
 @Module({
   imports: [
@@ -37,11 +39,13 @@ import { VehicleMakesEventHandlers } from "../events/handlers";
   providers: [
     VehicleMakesEntityRepository,
     VehicleMakeSchemaFactory,
+    VehicleMakeDtoRepository,
     VehiclePostsRepository,
     VehicleMakeFactory,
     LoggerService,
     ...VehicleMakesCommandHandlers,
     ...VehicleMakesEventHandlers,
+    ...VehicleMakesQueryHandlers,
   ],
   controllers: [VehicleMakesController],
 })

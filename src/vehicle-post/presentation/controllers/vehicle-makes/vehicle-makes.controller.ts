@@ -1,5 +1,7 @@
+import { PaginationQuery } from "@/common/domain/types";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
+import { PaginatedQuery } from "@/common/infrastructure/util";
 import { Role } from "@/user/domain/types";
 import { JwtAuthGuard } from "@/user/infrastructure/guards";
 import {
@@ -7,30 +9,63 @@ import {
   DeleteVehicleMakeCommand,
   UpdateVehicleMakeCommand,
 } from "@/vehicle-post/application/commands/operations/vehicle-makes";
+import {
+  FetchPaginatedVehicleMakesQuery,
+  FetchVehicleMakeByIdQuery,
+} from "@/vehicle-post/application/queries";
 import { VehicleMakeTranslations } from "@/vehicle-post/application/translations";
 import {
   CreateVehicleMakeDto,
   UpdateVehicleMakeDto,
+  VehicleMakeDto,
 } from "@/vehicle-post/infrastructure/dtos";
 import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   Post,
   Put,
+  Query,
   Res,
   UseFilters,
   UseGuards,
 } from "@nestjs/common";
-import { CommandBus } from "@nestjs/cqrs";
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 
 @Controller("vehicle-makes")
 @UseFilters(new I18nValidationExceptionFilter())
 export class VehicleMakesController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
+
+  @Get()
+  async getAll(
+    @Query() paginationQuery: PaginationQuery,
+    @I18n() i18n?: I18nContext,
+  ): Promise<PaginatedQuery<VehicleMakeDto>> {
+    return this.queryBus.execute<
+      FetchPaginatedVehicleMakesQuery,
+      PaginatedQuery<VehicleMakeDto>
+    >(
+      new FetchPaginatedVehicleMakesQuery(paginationQuery, i18n as I18nContext),
+    );
+  }
+
+  @Get(":_id")
+  findById(
+    @Param("_id") _id: string,
+    @I18n() i18n?: I18nContext,
+  ): Promise<VehicleMakeDto> {
+    return this.queryBus.execute<FetchVehicleMakeByIdQuery, VehicleMakeDto>(
+      new FetchVehicleMakeByIdQuery(_id, i18n as I18nContext),
+    );
+  }
 
   @Post()
   @UseGuards(JwtAuthGuard)
