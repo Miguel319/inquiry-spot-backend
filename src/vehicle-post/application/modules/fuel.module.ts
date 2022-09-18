@@ -9,13 +9,16 @@ import {
   FuelFactory,
   FuelSchemaFactory,
 } from "@/vehicle-post/infrastructure/factories";
-import { VehiclePostsRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
-import { FuelDtoRepository } from "@/vehicle-post/infrastructure/persistence/repositories/fuels/fuel-dto.repository";
-import { FuelEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories/fuels/fuel-entity.repository";
+import {
+  VehiclePostsRepository,
+  FuelDtoRepository,
+  FuelEntityRepository,
+} from "@/vehicle-post/infrastructure/persistence/repositories";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { FuelCommandHandlers } from "../commands/handlers";
+import { FuelQueryHandlers } from "../queries/handlers";
 
 @Module({
   imports: [
@@ -39,6 +42,7 @@ import { FuelCommandHandlers } from "../commands/handlers";
     FuelFactory,
     LoggerService,
     ...FuelCommandHandlers,
+    ...FuelQueryHandlers,
   ],
 })
 export class FuelModule {}
