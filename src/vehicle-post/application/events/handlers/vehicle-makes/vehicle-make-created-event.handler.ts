@@ -10,7 +10,7 @@ export class VehicleMakeCreatedEventHandler
 
   public handle({ vehicleMakeId }: VehicleMakeCreatedEvent) {
     this._logger.log(
-      "Vehicle make Creation",
+      "Vehicle make creation",
       `✅ Vehicle Make created successfully! ID = ${vehicleMakeId}`,
     );
   }

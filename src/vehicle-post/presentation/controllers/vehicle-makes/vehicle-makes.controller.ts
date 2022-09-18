@@ -2,13 +2,23 @@ import { ApiResponse } from "@/common/infrastructure/api";
 import { HasRoles } from "@/common/infrastructure/decorators";
 import { Role } from "@/user/domain/types";
 import { JwtAuthGuard } from "@/user/infrastructure/guards";
-import { CreateVehicleMakeCommand } from "@/vehicle-post/application/commands/operations/vehicle-makes";
+import {
+  CreateVehicleMakeCommand,
+  DeleteVehicleMakeCommand,
+  UpdateVehicleMakeCommand,
+} from "@/vehicle-post/application/commands/operations/vehicle-makes";
 import { VehicleMakeTranslations } from "@/vehicle-post/application/translations";
-import { CreateVehicleMakeDto } from "@/vehicle-post/infrastructure/dtos";
+import {
+  CreateVehicleMakeDto,
+  UpdateVehicleMakeDto,
+} from "@/vehicle-post/infrastructure/dtos";
 import {
   Body,
   Controller,
+  Delete,
+  Param,
   Post,
+  Put,
   Res,
   UseFilters,
   UseGuards,
@@ -37,6 +47,47 @@ export class VehicleMakesController {
     return ApiResponse.create({
       res,
       message: i18n?.t(VehicleMakeTranslations.CREATE) || "",
+    });
+  }
+
+  @Put(":_id")
+  @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.ADMIN)
+  async update(
+    @Param("_id") _id: string,
+    @Body() updateVehicleMakeDto: UpdateVehicleMakeDto,
+    @Res() res: Response,
+    @I18n() i18n?: I18nContext,
+  ) {
+    await this.commandBus.execute<UpdateVehicleMakeCommand, void>(
+      new UpdateVehicleMakeCommand(
+        _id,
+        updateVehicleMakeDto,
+        i18n as I18nContext,
+      ),
+    );
+
+    return ApiResponse.update({
+      res,
+      message: i18n ? i18n.t(VehicleMakeTranslations.UPDATE) : "",
+    });
+  }
+
+  @Delete(":_id")
+  @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.ADMIN)
+  async delete(
+    @Param("_id") _id: string,
+    @Res() res: Response,
+    @I18n() i18n?: I18nContext,
+  ) {
+    await this.commandBus.execute<DeleteVehicleMakeCommand, boolean>(
+      new DeleteVehicleMakeCommand(_id, i18n as I18nContext),
+    );
+
+    return ApiResponse.delete({
+      res,
+      message: i18n ? i18n.t(VehicleMakeTranslations.DELETE) : "",
     });
   }
 }

@@ -21,7 +21,7 @@ import { PropertyPostsTranslations } from "@/property-post/application/translati
 import {
   CreatePropertyPostDto,
   UpdatePropertyPostDto,
-} from "@/property-post/infrastructure/dtos/mutations";
+} from "@/property-post/infrastructure/dtos";
 import { IPropertyPostsService } from "@/property-post/application/services/contracts";
 import { PaginationQuery } from "@/common/domain/types/common";
 import {
