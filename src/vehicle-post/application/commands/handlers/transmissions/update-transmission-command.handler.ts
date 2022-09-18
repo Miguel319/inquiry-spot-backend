@@ -1,7 +1,7 @@
 import { TransmissionTranslations } from "@/vehicle-post/application/translations";
 import { Transmission } from "@/vehicle-post/domain/entities";
 import { ITransmission } from "@/vehicle-post/domain/types";
-import { TransmissionEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories/transmissions";
+import { TransmissionEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
 import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
