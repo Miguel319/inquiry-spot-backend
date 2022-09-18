@@ -13,9 +13,9 @@ export class TransmissionEntityRepository extends BaseEntityRepository<
 > {
   constructor(
     @InjectModel(TransmissionSchema.name)
-    vehicleMakeModel: Model<TransmissionSchema>,
-    vehicleMakeSchemaFactory: TransmissionSchemaFactory,
+    transmissionModel: Model<TransmissionSchema>,
+    transmissionSchemaFactory: TransmissionSchemaFactory,
   ) {
-    super(vehicleMakeModel, vehicleMakeSchemaFactory);
+    super(transmissionModel, transmissionSchemaFactory);
   }
 }

@@ -41,5 +41,10 @@
     "create": "¡Transmisión creada satisfactoriamente!",
     "update": "¡Transmisión actualizada satisfactoriamente!",
     "delete": "¡Transmisión eliminada satisfactoriamente!"
+  },
+  "fuel": {
+    "create": "¡Tipo de combustible creado satisfactoriamente!",
+    "update": "¡Tipo de combustible actualizado satisfactoriamente!",
+    "delete": "¡Tipo de combustible eliminado satisfactoriamente!"
   }
 }

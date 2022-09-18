@@ -29,17 +29,19 @@
     "notFound": "Tag not found."
   },
   "vehicleType": {
-    "name": "The name is mandatory.",
-    "nameDuplicate": "The provided name already exists.",
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
     "notFound": "Vehicle type not found.",
     "forbiddenDeletion": "This vehicle type is being used in a vehicle post. Please delete the post before deleting the vehicle type."
   },
   "vehicleMake": {
     "name": {
       "required": "The name is mandatory.",
-      "duplicate": "The provided name already exists.",
-      "duplicateEs": "The provided name in English already exists.",
-      "duplicateEn": "The provided name in Spanish already exists."
+      "duplicate": "The provided name already exists."
     },
     "notFound": "Vehicle make not found.",
     "forbiddenDeletion": "This vehicle make is being used in a vehicle post. Please delete the post before deleting the make."
@@ -54,6 +56,17 @@
     "notFound": "Transmission not found.",
     "forbiddenDeletion": "This transmission is being used in a vehicle post. Please delete the post before deleting the transmission."
   },
+  "fuel": {
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
+    "notFound": "Fuel type not found.",
+    "forbiddenDeletion": "This fuel type is being used in a vehicle post. Please delete the post before deleting the fuel type."
+  },
+
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",

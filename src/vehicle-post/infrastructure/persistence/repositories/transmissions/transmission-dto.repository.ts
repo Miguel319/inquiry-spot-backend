@@ -13,7 +13,7 @@ import { TransmissionDocument, TransmissionSchema } from "../../schemas";
 export class TransmissionDtoRepository {
   constructor(
     @InjectModel(TransmissionSchema.name)
-    private readonly vehicleType: Model<TransmissionSchema>,
+    private readonly transmission: Model<TransmissionSchema>,
   ) {}
 
   async getPaginated(
@@ -21,32 +21,32 @@ export class TransmissionDtoRepository {
     options: PaginationOptions,
   ): Promise<PaginatedQuery<TransmissionDto>> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (this.vehicleType as any).paginate(
+    return (this.transmission as any).paginate(
       { ...entityFilterQuery },
       { options },
     );
   }
 
   private createTransmissionDto(
-    vehicleType: TransmissionDocument,
+    transmission: TransmissionDocument,
   ): TransmissionDto {
-    return TransmissionDto.create(vehicleType as unknown as Transmission);
+    return TransmissionDto.create(transmission as unknown as Transmission);
   }
 
   async getById(_id: string): Promise<TransmissionDto | null> {
-    const vehicleType = await this.vehicleType.findOne(
+    const transmission = await this.transmission.findOne(
       { _id: new Types.ObjectId(_id) },
       {},
       { lean: true },
     );
 
-    if (!vehicleType) return null;
+    if (!transmission) return null;
 
-    return this.createTransmissionDto(vehicleType);
+    return this.createTransmissionDto(transmission);
   }
 
   async getAll(): Promise<TransmissionDto[]> {
-    return (await this.vehicleType.find({}, {}, { lean: true })).map(
+    return (await this.transmission.find({}, {}, { lean: true })).map(
       (v) => v as unknown as TransmissionDto,
     );
   }

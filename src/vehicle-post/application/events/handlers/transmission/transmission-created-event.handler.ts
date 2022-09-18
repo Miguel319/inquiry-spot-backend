@@ -11,7 +11,7 @@ export class TransmissionCreatedEventHandler
   async handle({ transmissionId, name }: TransmissionCreatedEvent) {
     this._logger.log(
       "Transmission creation",
-      `✅ New vehicle type created successfully! ID = ${transmissionId}. Name = ${name}`,
+      `✅ New transmission created successfully! ID = ${transmissionId}. Name = ${name}`,
     );
   }
 }
