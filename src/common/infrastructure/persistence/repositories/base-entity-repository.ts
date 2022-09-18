@@ -16,6 +16,10 @@ export abstract class BaseEntityRepository<
     } as FilterQuery<TSchema>);
   }
 
+  findOneEntity(entityFilterQuery?: FilterQuery<TSchema>) {
+    return this.findOne(entityFilterQuery);
+  }
+
   async findOneAndReplaceByValue(
     value: string,
     queryBy: "slug" | "_id",

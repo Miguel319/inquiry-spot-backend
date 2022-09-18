@@ -1,8 +1,9 @@
 import { TransmissionTranslations } from "@/vehicle-post/application/translations";
 import { Transmission } from "@/vehicle-post/domain/entities";
 import { ITransmission } from "@/vehicle-post/domain/types";
+import { UpdateTransmissionDto } from "@/vehicle-post/infrastructure/dtos";
 import { TransmissionEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
-import { NotFoundException } from "@nestjs/common";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { UpdateTransmissionCommand } from "../../operations";
@@ -36,12 +37,36 @@ export class UpdateTransmissionCommandHandler
     return transmission;
   }
 
+  private async checkDuplicates(
+    transmission: Transmission,
+    updateTransmissionDto: UpdateTransmissionDto,
+    i18n: I18nContext,
+  ): Promise<never | void> {
+    const entityFound = await this._transmissionRepository.findOneEntity({
+      $or: [
+        { "name.es": updateTransmissionDto.name.es },
+        { "name.en": updateTransmissionDto.name.en },
+      ],
+    });
+
+    const exists = entityFound && entityFound.getId() !== transmission.getId();
+
+    if (exists)
+      throw new BadRequestException(
+        i18n
+          ? i18n.t(TransmissionTranslations.NAME_DUPLICATE)
+          : this._i18n.t(TransmissionTranslations.NAME_DUPLICATE),
+      );
+  }
+
   async execute({
     _id,
     updateTransmissionDto,
     i18n,
   }: UpdateTransmissionCommand): Promise<void> {
     const transmissionFound = await this.getTransmission(_id, i18n);
+
+    await this.checkDuplicates(transmissionFound, updateTransmissionDto, i18n);
 
     const transmission =
       this.eventPublisher.mergeObjectContext(transmissionFound);

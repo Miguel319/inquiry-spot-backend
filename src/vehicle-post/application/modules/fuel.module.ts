@@ -14,10 +14,12 @@ import {
   FuelDtoRepository,
   FuelEntityRepository,
 } from "@/vehicle-post/infrastructure/persistence/repositories";
+import { FuelsController } from "@/vehicle-post/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { FuelCommandHandlers } from "../commands/handlers";
+import { FuelEventHandlers } from "../events/handlers";
 import { FuelQueryHandlers } from "../queries/handlers";
 
 @Module({
@@ -43,6 +45,8 @@ import { FuelQueryHandlers } from "../queries/handlers";
     LoggerService,
     ...FuelCommandHandlers,
     ...FuelQueryHandlers,
+    ...FuelEventHandlers,
   ],
+  controllers: [FuelsController],
 })
 export class FuelModule {}

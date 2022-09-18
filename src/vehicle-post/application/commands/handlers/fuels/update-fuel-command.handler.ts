@@ -1,8 +1,9 @@
 import { FuelTranslations } from "@/vehicle-post/application/translations";
 import { Fuel } from "@/vehicle-post/domain/entities";
 import { IFuel } from "@/vehicle-post/domain/types";
+import { UpdateFuelDto } from "@/vehicle-post/infrastructure/dtos";
 import { FuelEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
-import { NotFoundException } from "@nestjs/common";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { UpdateFuelCommand } from "../../operations";
@@ -30,12 +31,36 @@ export class UpdateFuelCommandHandler
     return fuel;
   }
 
+  private async checkDuplicates(
+    fuel: Fuel,
+    updateFuelDto: UpdateFuelDto,
+    i18n: I18nContext,
+  ): Promise<never | void> {
+    const entityFound = await this._fuelRepository.findOneEntity({
+      $or: [
+        { "name.es": updateFuelDto.name.es },
+        { "name.en": updateFuelDto.name.en },
+      ],
+    });
+
+    const exists = entityFound && entityFound.getId() !== fuel.getId();
+
+    if (exists)
+      throw new BadRequestException(
+        i18n
+          ? i18n.t(FuelTranslations.NAME_DUPLICATE)
+          : this._i18n.t(FuelTranslations.NAME_DUPLICATE),
+      );
+  }
+
   async execute({
     _id,
     updateFuelDto,
     i18n,
   }: UpdateFuelCommand): Promise<void> {
     const fuelFound = await this.getFuel(_id, i18n);
+
+    await this.checkDuplicates(fuelFound, updateFuelDto, i18n);
 
     const fuel = this.eventPublisher.mergeObjectContext(fuelFound);
 

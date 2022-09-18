@@ -1,8 +1,9 @@
 import { VehicleMakeTranslations } from "@/vehicle-post/application/translations";
 import { VehicleMake } from "@/vehicle-post/domain/entities";
 import { IVehicleMake } from "@/vehicle-post/domain/types";
+import { UpdateVehicleMakeDto } from "@/vehicle-post/infrastructure/dtos";
 import { VehicleMakesEntityRepository } from "@/vehicle-post/infrastructure/persistence/repositories";
-import { NotFoundException } from "@nestjs/common";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { UpdateVehicleMakeCommand } from "../../operations";
@@ -36,12 +37,33 @@ export class UpdateVehicleMakeCommandHandler
     return vehicleType;
   }
 
+  private async checkDuplicates(
+    vehicleType: VehicleMake,
+    updateVehicleMakeDto: UpdateVehicleMakeDto,
+    i18n: I18nContext,
+  ): Promise<never | void> {
+    const entityFound = await this._vehicleMakeEntityRepository.findOneEntity({
+      name: updateVehicleMakeDto.name,
+    });
+
+    const exists = entityFound && entityFound.getId() !== vehicleType.getId();
+
+    if (exists)
+      throw new BadRequestException(
+        i18n
+          ? i18n.t(VehicleMakeTranslations.NAME_DUPLICATE)
+          : this._i18n.t(VehicleMakeTranslations.NAME_DUPLICATE),
+      );
+  }
+
   async execute({
     _id,
-    i18n,
     updateVehicleMakeDto,
+    i18n,
   }: UpdateVehicleMakeCommand): Promise<void> {
     const vehicleMakeFound = await this.getVehicleMake(_id, i18n);
+
+    await this.checkDuplicates(vehicleMakeFound, updateVehicleMakeDto, i18n);
 
     const vehicleMake =
       this.eventPublisher.mergeObjectContext(vehicleMakeFound);

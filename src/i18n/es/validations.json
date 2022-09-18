@@ -29,25 +29,40 @@
     "notFound": "Etiqueta no encontrada."
   },
   "vehicleType": {
-    "name": "El nombre es obligatorio.",
-    "nameDuplicate": "El nombre provisto ya existe.",
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
     "notFound": "Tipo de vehículo no encontrado.",
     "forbiddenDeletion": "Este tipo de vehículo está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de vehículo."
   },
   "vehicleMake": {
-    "name": "El nombre es obligatorio.",
-    "nameDuplicate": "El nombre provisto ya existe.",
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe."
+    },
     "notFound": "Marca no encontrada.",
     "forbiddenDeletion": "Este marca está siendo usada por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar la marca."
   },
   "transmission": {
-    "name": "El nombre es obligatorio.",
-    "nameDuplicate": "El nombre provisto ya existe.",
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
     "notFound": "Transmisión no encontrada.",
     "forbiddenDeletion": "Este transmisión está siendo usada por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar la transmisión."
   },
   "fuel": {
-    "name": "El nombre es obligatorio.",
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
     "notFound": "Tipo de combustible no encontrado.",
     "forbiddenDeletion": "Este tipo de combustible está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de combustible."
   },
