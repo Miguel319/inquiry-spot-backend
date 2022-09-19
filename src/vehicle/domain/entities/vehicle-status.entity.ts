@@ -27,7 +27,7 @@ export class VehicleStatus extends AggregateRoot {
     return this.make.updatedAt;
   }
 
-  public updateMake(updatedType: IVehicleStatus): void {
+  public updateStatus(updatedType: IVehicleStatus): void {
     this.make = {
       ...this.make,
       name: updatedType.name || this.make.name,
