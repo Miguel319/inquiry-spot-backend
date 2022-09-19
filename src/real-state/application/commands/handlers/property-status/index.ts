@@ -6,7 +6,7 @@ import { CreatePropertyStatusCommandHandler } from "./create-property-status-com
 import { UpdatePropertyStatusCommandHandler } from "./update-property-status-command.handler";
 import { DeletePropertyStatusCommandHandler } from "./delete-property-status-command.handler";
 
-export const PropertyStatussCommandHandlers = [
+export const PropertyStatusCommandHandlers = [
   CreatePropertyStatusCommandHandler,
   DeletePropertyStatusCommandHandler,
   UpdatePropertyStatusCommandHandler,
