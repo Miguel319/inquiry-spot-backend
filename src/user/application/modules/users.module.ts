@@ -1,6 +1,6 @@
-import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository } from "@/user/infrastructure/persistence/repositories/user";
 import { UserSchema } from "@/user/infrastructure/persistence/schemas";
-import { UsersController } from "@/user/presentation/users";
+import { UsersController } from "@/user/presentation/controllers/users";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UsersService } from "../services/implementations";

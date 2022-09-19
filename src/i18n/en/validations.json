@@ -15,6 +15,16 @@
       "es": "The name in Spanish is mandatory."
     }
   },
+  "role": {
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
+    "notFound": "Role not found.",
+    "forbiddenDeletion": "This role is being used by a user."
+  },
   "tag": {
     "name": {
       "required": "The name is mandatory.",

@@ -7,7 +7,7 @@ import {
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { REQUEST } from "@nestjs/core";
 import { Request } from "express";
-import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository } from "@/user/infrastructure/persistence/repositories/user";
 import { UserTranslations } from "@/user/application/translations";
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { IUsersService } from "../../contracts";

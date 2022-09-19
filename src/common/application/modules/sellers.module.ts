@@ -1,5 +1,5 @@
 import { SellersController } from "@/common/presentation/controllers/sellers/sellers.controller";
-import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository } from "@/user/infrastructure/persistence/repositories/user";
 import { UserSchema } from "@/user/infrastructure/persistence/schemas";
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";

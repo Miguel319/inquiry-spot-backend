@@ -12,6 +12,11 @@
     "signOut": "¡Sesión cerrada satisfactoriamente!",
     "passwordReset": "¡Contraseña reestablecida satisfactoriamente!"
   },
+  "role": {
+    "create": "¡Rol creado satisfactoriamente!",
+    "update": "¡Rol actualizado satisfactoriamente!",
+    "delete": "¡Rol eliminado satisfactoriamente!"
+  },
   "vehiclePost": {
     "create": "¡Publicación creada satisfactoriamente!",
     "update": "¡Publicación actualizada satisfactoriamente!",

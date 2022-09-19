@@ -1,7 +1,7 @@
 import { Provider } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import { UsersService as UserServiceType, UsersService } from "./users.service";
-import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories/user";
 import { UsersRepository } from "../../../../../../test/mocks";
 import { getUserStub } from "../../../../../../test/stubs";
 import { REQUEST } from "@nestjs/core";
