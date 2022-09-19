@@ -1,11 +1,11 @@
 import { getModelToken } from "@nestjs/mongoose";
 import { Test } from "@nestjs/testing";
 import { FilterQuery } from "mongoose";
-import { UserModel } from "../../../../../test/support";
+import { UserModel } from "../../../../../../test/support";
 import { UsersRepository } from "./users.repository";
 
-import { getUserStub } from "../../../../../test/stubs";
-import { User } from "../schemas";
+import { getUserStub } from "../../../../../../test/stubs";
+import { User } from "../../schemas";
 
 describe("UsersRepository", () => {
   let usersRepository: UsersRepository;

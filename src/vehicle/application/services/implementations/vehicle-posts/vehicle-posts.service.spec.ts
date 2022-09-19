@@ -11,7 +11,7 @@ import {
 } from "../../../../../../test/mocks";
 import { getVehiclePostStub } from "../../../../../../test/stubs";
 import { I18nService } from "nestjs-i18n";
-import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories/user";
 
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { UsersService } from "@/user/application/services/implementations";

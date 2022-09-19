@@ -7,7 +7,7 @@ import {
 import { Injectable } from "@nestjs/common";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { ISellersService } from "../../contracts";
-import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository } from "@/user/infrastructure/persistence/repositories/user";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 
 @Injectable()

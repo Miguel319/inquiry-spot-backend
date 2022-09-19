@@ -1,4 +1,4 @@
-import { UsersRepository } from "@/user/infrastructure/persistence/repositories";
+import { UsersRepository } from "@/user/infrastructure/persistence/repositories/user";
 import { UserSchema } from "@/user/infrastructure/persistence/schemas";
 import { UsersController } from "@/user/presentation/users";
 import { Module, Provider } from "@nestjs/common";
