@@ -15,6 +15,7 @@ import {
   PropertyBuyingOptionSchema,
   SchemaPropertyBuyingOption,
 } from "@/real-state/infrastructure/persistence/schemas";
+import { PropertyBuyingOptionController } from "@/real-state/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -47,5 +48,6 @@ import { PropertyBuyingOptionQueryHandlers } from "../queries/handlers";
     ...PropertyBuyingOptionCommandHandlers,
     ...PropertyBuyingOptionEventHandlers,
   ],
+  controllers: [PropertyBuyingOptionController],
 })
 export class PropertyBuyingOptionModule {}
