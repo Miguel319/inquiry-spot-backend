@@ -36,7 +36,7 @@ export class DeleteTractionCommandHandler
     return traction;
   }
 
-  async handleAuthorization(
+  private async handleAuthorization(
     type: string,
     i18n: I18nContext,
   ): Promise<never | void> {

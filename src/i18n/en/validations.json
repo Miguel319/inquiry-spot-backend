@@ -96,6 +96,16 @@
     "notFound": "Real state status not found.",
     "forbiddenDeletion": "This real state status is being used in a real state post. Please delete the post before deleting the real state status."
   },
+  "propertyBuyingOption": {
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
+    "notFound": "Real state buying option not found.",
+    "forbiddenDeletion": "This real state buying option is being used in a real state post. Please delete the post before deleting the real state buying option."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",

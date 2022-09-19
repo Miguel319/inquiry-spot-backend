@@ -96,6 +96,16 @@
     "notFound": "Estado de inmueble no encontrado.",
     "forbiddenDeletion": "Este estado de inmueble está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el estado de inmueble."
   },
+  "propertyBuyingOption": {
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
+    "notFound": "Opción de compra de inmueble no encontrada.",
+    "forbiddenDeletion": "Esta opción de compra de inmueble está siendo utilizada por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar la opción de compra de inmueble."
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",
