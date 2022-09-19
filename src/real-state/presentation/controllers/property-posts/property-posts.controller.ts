@@ -1,4 +1,3 @@
-import { ApiResponse } from "../../../common/infrastructure/api";
 import {
   Body,
   Controller,
@@ -14,9 +13,6 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { JwtAuthGuard } from "../../../user/infrastructure/guards";
-import { HasRoles } from "../../../common/infrastructure/decorators";
-import { PaginatedQuery } from "../../../common/infrastructure/util";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
 import {
   CreatePropertyPostDto,
@@ -29,6 +25,10 @@ import {
   PropertyPostDocument,
 } from "@/real-state/infrastructure/persistence/schemas";
 import { Role } from "@/user/domain/types";
+import { PaginatedQuery } from "@/common/infrastructure/util";
+import { JwtAuthGuard } from "@/user/infrastructure/guards";
+import { HasRoles } from "@/common/infrastructure/decorators";
+import { ApiResponse } from "@/common/infrastructure/api";
 
 @Controller("property-posts")
 export class PropertyPostsController {

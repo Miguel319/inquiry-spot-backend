@@ -1,10 +1,10 @@
 import { Provider } from "@nestjs/common";
 import { PropertyPostsController } from "./property-posts.controller";
-import { mockResObj, PropertyPostsService } from "../../../../test/mocks";
+import { mockResObj, PropertyPostsService } from "../../../../../test/mocks";
 
 import { PropertyPostsService as PropertyPostsServiceType } from "@/real-state/application/services/implementations";
 import { Test, TestingModule } from "@nestjs/testing";
-import { getPropertyPostStub } from "../../../../test/stubs";
+import { getPropertyPostStub } from "../../../../../test/stubs";
 import { REQUEST } from "@nestjs/core";
 import { DeepMocked } from "@golevelup/ts-jest";
 import e, { Response } from "express";

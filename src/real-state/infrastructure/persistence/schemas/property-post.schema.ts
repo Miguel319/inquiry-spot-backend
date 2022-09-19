@@ -2,7 +2,11 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaAlt } from "mongoose";
 
 import paginate from "mongoose-paginate-v2";
-import { BuyingOption, PropertyStatus, PropertyType } from "@/real-state/domain";
+import {
+  BuyingOption,
+  PropertyStatus,
+  PropertyType,
+} from "@/real-state/domain";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
 import {
   Address,

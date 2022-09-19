@@ -8,7 +8,11 @@ import {
   ValidateNested,
 } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
-import { BuyingOption, PropertyStatus, PropertyType } from "@/real-state/domain";
+import {
+  BuyingOption,
+  PropertyStatus,
+  PropertyType,
+} from "@/real-state/domain";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
 import { Price } from "@/common/domain/types/common";
 import { AddressValidationDto } from "@/common/infrastructure/dtos";

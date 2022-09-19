@@ -15,8 +15,9 @@ import {
   PropertyTypeSchema,
   SchemaPropertyType,
 } from "@/real-state/infrastructure/persistence/schemas";
+import { PropertyTypesController } from "@/real-state/presentation/controllers";
 import { Module } from "@nestjs/common";
-import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
+import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { PropertyTypesCommandHandlers } from "../commands/handlers";
 import { PropertyTypeEventHandlers } from "../events/handlers";
@@ -39,7 +40,6 @@ import { PropertyTypesQueryHandlers } from "../queries/handlers";
   providers: [
     PropertyTypeEntityRepository,
     PropertyTypeSchemaFactory,
-    EventPublisher,
     PropertyTypeDtoRepository,
     LoggerService,
     PropertyTypeFactory,
@@ -48,5 +48,6 @@ import { PropertyTypesQueryHandlers } from "../queries/handlers";
     ...PropertyTypesCommandHandlers,
     ...PropertyTypeEventHandlers,
   ],
+  controllers: [PropertyTypesController],
 })
 export class PropertyTypeModule {}

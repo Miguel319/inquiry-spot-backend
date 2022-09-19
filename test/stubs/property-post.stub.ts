@@ -1,5 +1,9 @@
 import { Currency } from "@/common/domain/types";
-import { BuyingOption, PropertyStatus, PropertyType } from "@/real-state/domain";
+import {
+  BuyingOption,
+  PropertyStatus,
+  PropertyType,
+} from "@/real-state/domain";
 import { PropertyPost } from "@/real-state/infrastructure/persistence/schemas";
 
 export const getPropertyPostStub = (): PropertyPost =>

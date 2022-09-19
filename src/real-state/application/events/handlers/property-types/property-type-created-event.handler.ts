@@ -11,9 +11,7 @@ export class PropertyTypeCreatedEventHandler
   async handle({ propertyTypeId, name }: PropertyTypeCreatedEvent) {
     this._logger.log(
       "Property type creation",
-      `✅ New property type created successfully! ID = ${propertyTypeId}. Name = ${JSON.stringify(
-        name,
-      )}`,
+      `✅ New property type created successfully! ID = ${propertyTypeId}. Name = ${name.en}`,
     );
   }
 }

@@ -1,6 +1,10 @@
 import { AddressValidationDto } from "@/common/infrastructure/dtos";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
-import { BuyingOption, PropertyStatus, PropertyType } from "@/real-state/domain";
+import {
+  BuyingOption,
+  PropertyStatus,
+  PropertyType,
+} from "@/real-state/domain";
 import {
   IsArray,
   IsEnum,
