@@ -1,3 +1,4 @@
+import { NameType } from "@/common/domain/entities";
 import { IVehicleStatus } from "@/vehicle/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
 
@@ -14,7 +15,7 @@ export class VehicleStatus extends AggregateRoot {
     return this.make._id;
   }
 
-  public getName(): string {
+  public getName(): NameType {
     return this.make.name;
   }
 
