@@ -12,6 +12,11 @@
     "signOut": "Signed out successfully!",
     "passwordReset": "Password reseted successfully!"
   },
+  "role": {
+    "create": "Role created successfully!",
+    "update": "Role updated successfully!",
+    "delete": "Role deleted successfully!"
+  },
   "vehiclePost": {
     "create": "Vehicle post created successfully!",
     "update": "Vehicle post updated successfully!",

@@ -15,6 +15,16 @@
       "es": "El nombre en español es obligatorio."
     }
   },
+  "role": {
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
+    "notFound": "Rol no encontrado.",
+    "forbiddenDeletion": "Este rol está siendo utilizado por un usuario."
+  },
   "tag": {
     "name": {
       "required": "El nombre es obligatorio.",
