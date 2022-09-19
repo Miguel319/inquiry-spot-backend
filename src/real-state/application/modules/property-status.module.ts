@@ -15,6 +15,7 @@ import {
   PropertyStatusSchema,
   SchemaPropertyStatus,
 } from "@/real-state/infrastructure/persistence/schemas";
+import { PropertyStatusController } from "@/real-state/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -47,5 +48,6 @@ import { PropertyStatusQueryHandlers } from "../queries/handlers";
     ...PropertyStatusCommandHandlers,
     ...PropertyStatusEventHandlers,
   ],
+  controllers: [PropertyStatusController],
 })
 export class PropertyStatusModule {}

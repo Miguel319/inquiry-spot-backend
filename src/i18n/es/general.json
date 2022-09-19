@@ -56,5 +56,10 @@
     "create": "¡Tipo de inmueble creado satisfactoriamente!",
     "update": "¡Tipo de inmueble actualizado satisfactoriamente!",
     "delete": "¡Tipo de inmueble eliminado satisfactoriamente!"
+  },
+  "propertyStatus": {
+    "create": "¡Estado de inmueble creado satisfactoriamente!",
+    "update": "¡Estado de inmueble actualizado satisfactoriamente!",
+    "delete": "¡Estado de inmueble eliminado satisfactoriamente!"
   }
 }
