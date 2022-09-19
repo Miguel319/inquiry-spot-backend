@@ -1,4 +1,4 @@
-import { User } from "@/user/infrastructure/persistence/schemas/user.schema";
+import { User } from "@/user/infrastructure/persistence/schemas/user/user.schema";
 import { Response } from "express";
 import { I18nContext } from "nestjs-i18n";
 
