@@ -15,6 +15,7 @@ import {
   User,
   UserSchema,
 } from "@/user/infrastructure/persistence/schemas";
+import { RolesController } from "@/user/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -36,6 +37,7 @@ import { RolesQueryHandlers } from "../queries/handlers";
       },
     ]),
   ],
+  controllers: [RolesController],
   providers: [
     RoleEntityRepository,
     RoleSchemaFactory,

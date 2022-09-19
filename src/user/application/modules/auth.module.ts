@@ -5,7 +5,7 @@ import { JwtAuthGuard, JwtStrategy } from "@/user/infrastructure/guards";
 import { AuthService } from "../services/implementations";
 import { EmailsModule } from "@/email/application/modules";
 import { UsersModule } from "@/user/application/modules/users.module";
-import { AuthController } from "@/user/presentation/auth";
+import { AuthController } from "@/user/presentation/controllers/auth";
 
 const AuthUseCaseProvider: Provider = {
   provide: "IAuthService",

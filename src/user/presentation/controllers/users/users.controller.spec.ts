@@ -1,12 +1,12 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { UsersController } from "./users.controller";
 
-import { getUserStub } from "../../../../test/stubs";
+import { getUserStub } from "../../../../../test/stubs";
 import { Provider } from "@nestjs/common";
 
 import { UsersService as UserServiceType } from "@/user/application/services/implementations";
 
-import { UsersService } from "../../../../test/mocks";
+import { UsersService } from "../../../../../test/mocks";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
 

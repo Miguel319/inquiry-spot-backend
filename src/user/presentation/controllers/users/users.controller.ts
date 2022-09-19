@@ -1,4 +1,4 @@
-import { JwtAuthGuard } from "../../infrastructure/guards";
+import { JwtAuthGuard } from "../../../infrastructure/guards";
 import {
   Controller,
   Get,
