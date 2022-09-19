@@ -1,6 +1,6 @@
 import { BaseEntityRepository } from "@/common/infrastructure/persistence/repositories";
 import { VehicleType } from "@/vehicle-post/domain/entities";
-import { VehicleTypeSchemaFactory } from "@/vehicle-post/infrastructure/factories/vehicle-types";
+import { VehicleTypeSchemaFactory } from "@/vehicle-post/infrastructure/factories";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";

@@ -1,11 +1,11 @@
 import { getModelToken } from "@nestjs/mongoose";
 import { Test } from "@nestjs/testing";
 import { FilterQuery } from "mongoose";
-import { PropertyPostModel } from "../../../../../test/support";
+import { PropertyPostModel } from "../../../../../../test/support";
 import { PropertyPostsRepository } from "./property-posts.repository";
 
-import { getPropertyPostStub } from "../../../../../test/stubs";
-import { PropertyPost } from "../schemas";
+import { getPropertyPostStub } from "../../../../../../test/stubs";
+import { PropertyPost } from "../../schemas";
 
 describe("PropertyPostsRepository", () => {
   let propertyPostsRepository: PropertyPostsRepository;

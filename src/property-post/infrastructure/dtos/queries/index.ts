@@ -1,1 +1,2 @@
-export { PropertyPostPresenter } from "./property-post.presenter";
+export * from "./property-post";
+export * from "./property-type";

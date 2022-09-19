@@ -1,8 +1,8 @@
 import { Address, Price } from "@/common/domain/types/common";
 import { BuyingOption, PropertyStatus } from "@/property-post/domain";
 import { ApiProperty } from "@nestjs/swagger";
-import { Presenter } from "../../../../common/infrastructure/presenters/base-presenter";
-import { PropertyPost } from "../../persistence/schemas";
+import { Presenter } from "../../../../../common/infrastructure/presenters";
+import { PropertyPost } from "../../../persistence/schemas";
 
 export class PropertyPostPresenter extends Presenter {
   @ApiProperty({ required: true })
