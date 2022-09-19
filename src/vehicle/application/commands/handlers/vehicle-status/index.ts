@@ -6,7 +6,7 @@ import { CreateVehicleStatusCommandHandler } from "./create-vehicle-status-comma
 import { UpdateVehicleStatusCommandHandler } from "./update-vehicle-status-command.handler";
 import { DeleteVehicleStatusCommandHandler } from "./delete-vehicle-status-command.handler";
 
-export const VehicleStatussCommandHandlers = [
+export const VehicleStatusCommandHandlers = [
   CreateVehicleStatusCommandHandler,
   DeleteVehicleStatusCommandHandler,
   UpdateVehicleStatusCommandHandler,

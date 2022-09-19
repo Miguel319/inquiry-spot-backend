@@ -14,25 +14,13 @@ import {
   VehicleStatusDtoRepository,
   VehicleStatusEntityRepository,
 } from "@/vehicle/infrastructure/persistence/repositories";
+import { VehicleStatusController } from "@/vehicle/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
-import { VehicleStatussCommandHandlers } from "../commands/handlers";
-import { VehicleStatussEventHandlers } from "../events/handlers";
-import { VehicleStatussQueryHandlers } from "../queries/handlers";
-
-const providers = [
-  VehicleStatusEntityRepository,
-  VehicleStatusSchemaFactory,
-  EventPublisher,
-  VehicleStatusDtoRepository,
-  LoggerService,
-  VehicleStatusFactory,
-  VehiclePostsRepository,
-  ...VehicleStatussQueryHandlers,
-  ...VehicleStatussCommandHandlers,
-  ...VehicleStatussEventHandlers,
-];
+import { VehicleStatusCommandHandlers } from "../commands/handlers";
+import { VehicleStatusEventHandlers } from "../events/handlers";
+import { VehicleStatusQueryHandlers } from "../queries/handlers";
 
 @Module({
   imports: [
@@ -48,6 +36,18 @@ const providers = [
       },
     ]),
   ],
-  providers,
+  controllers: [VehicleStatusController],
+  providers: [
+    VehicleStatusEntityRepository,
+    VehicleStatusSchemaFactory,
+    EventPublisher,
+    VehicleStatusDtoRepository,
+    LoggerService,
+    VehicleStatusFactory,
+    VehiclePostsRepository,
+    ...VehicleStatusQueryHandlers,
+    ...VehicleStatusCommandHandlers,
+    ...VehicleStatusEventHandlers,
+  ],
 })
 export class VehicleStatusModule {}

@@ -11,7 +11,7 @@ export class VehicleStatusCreatedEventHandler
   async handle({ vehicleStatusId, name }: VehicleStatusCreatedEvent) {
     this._logger.log(
       "Vehicle status creation",
-      `✅ New vehicle status created successfully! ID = ${vehicleStatusId}. Name = ${name}`,
+      `✅ New vehicle status created successfully! ID = ${vehicleStatusId}. Name = ${name.en}`,
     );
   }
 }

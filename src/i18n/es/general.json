@@ -32,6 +32,11 @@
     "update": "¡Tipo de vehículo actualizado satisfactoriamente!",
     "delete": "¡Tipo de vehículo eliminado satisfactoriamente!"
   },
+  "vehicleStatus": {
+    "create": "¡Estado de vehículo creado satisfactoriamente!",
+    "update": "¡Estado de vehículo actualizado satisfactoriamente!",
+    "delete": "¡Estado de vehículo eliminado satisfactoriamente!"
+  },
   "vehicleMake": {
     "create": "¡Marca de vehículo creada satisfactoriamente!",
     "update": "¡Marca de vehículo actualizada satisfactoriamente!",

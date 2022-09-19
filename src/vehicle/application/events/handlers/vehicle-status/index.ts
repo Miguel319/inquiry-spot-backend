@@ -4,7 +4,7 @@ export { VehicleStatusUpdatedEventHandler } from "./vehicle-status-updated-event
 import { VehicleStatusCreatedEventHandler } from "./vehicle-status-created-event.handler";
 import { VehicleStatusUpdatedEventHandler } from "./vehicle-status-updated-event.handler";
 
-export const VehicleStatussEventHandlers = [
+export const VehicleStatusEventHandlers = [
   VehicleStatusCreatedEventHandler,
   VehicleStatusUpdatedEventHandler,
 ];

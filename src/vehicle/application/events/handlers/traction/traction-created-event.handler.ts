@@ -11,7 +11,7 @@ export class TractionCreatedEventHandler
   async handle({ tractionId, name }: TractionCreatedEvent) {
     this._logger.log(
       "Traction creation",
-      `✅ New traction created successfully! ID = ${tractionId}. Name = ${name}`,
+      `✅ New traction created successfully! ID = ${tractionId}. Name = ${name.en}`,
     );
   }
 }

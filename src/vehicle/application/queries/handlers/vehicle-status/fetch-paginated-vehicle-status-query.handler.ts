@@ -8,11 +8,11 @@ import { VehicleStatusDto } from "@/vehicle/infrastructure/dtos";
 import { VehicleStatusDtoRepository } from "@/vehicle/infrastructure/persistence/repositories";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { FetchPaginatedVehicleStatussQuery } from "../..";
+import { FetchPaginatedVehicleStatusQuery } from "../..";
 
-@QueryHandler(FetchPaginatedVehicleStatussQuery)
-export class FetchPaginatedVehicleStatussQueryHandler
-  implements IQueryHandler<FetchPaginatedVehicleStatussQuery>
+@QueryHandler(FetchPaginatedVehicleStatusQuery)
+export class FetchPaginatedVehicleStatusQueryHandler
+  implements IQueryHandler<FetchPaginatedVehicleStatusQuery>
 {
   constructor(
     private readonly _vehicleStatusDtoRepository: VehicleStatusDtoRepository,
@@ -32,7 +32,7 @@ export class FetchPaginatedVehicleStatussQueryHandler
   async execute({
     query,
     i18n,
-  }: FetchPaginatedVehicleStatussQuery): Promise<PaginatedQuery<VehicleStatusDto> | null> {
+  }: FetchPaginatedVehicleStatusQuery): Promise<PaginatedQuery<VehicleStatusDto> | null> {
     const queryToSend = this.getPaginationQueryOptions(query, i18n);
 
     return this._vehicleStatusDtoRepository.getPaginated({}, queryToSend);

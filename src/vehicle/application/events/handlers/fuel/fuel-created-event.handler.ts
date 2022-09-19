@@ -11,7 +11,7 @@ export class FuelCreatedEventHandler
   async handle({ fuelId, name }: FuelCreatedEvent) {
     this._logger.log(
       "Fuel creation",
-      `✅ New fuel type created successfully! ID = ${fuelId}. Name = ${name}`,
+      `✅ New fuel type created successfully! ID = ${fuelId}. Name = ${name.en}`,
     );
   }
 }
