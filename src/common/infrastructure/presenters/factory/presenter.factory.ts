@@ -7,14 +7,14 @@ import { VehiclePostPresenter } from "../../../../vehicle/infrastructure/dtos";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 import { BlogDocument } from "@/blog/infrastructure/persistence/schemas";
-import { PropertyPostPresenter } from "@/property/infrastructure/dtos";
+import { PropertyPostPresenter } from "@/real-state/infrastructure/dtos";
 import { Tag, TagDocument } from "@/tag/infrastructure/persistence/schemas";
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { VehiclePost, VehiclePostDocument } from "@/vehicle/domain";
 import {
   PropertyPost,
   PropertyPostDocument,
-} from "@/property/infrastructure/persistence/schemas";
+} from "@/real-state/infrastructure/persistence/schemas";
 export { Document } from "mongoose";
 
 type EntityType = "user" | "blog" | "tag" | "vehiclePost" | "propertyPost";

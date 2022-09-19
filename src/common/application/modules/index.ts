@@ -9,7 +9,7 @@ import { TagsModule } from "@/tag/application/modules";
 import { AuthModule, UsersModule } from "@/user/application/modules";
 import { EmailsModule } from "@/email/application/modules";
 import { VehiclesModule } from "@/vehicle/application/modules";
-import { PropertiesModule } from "@/property/application/modules";
+import { PropertiesModule } from "@/real-state/application/modules";
 
 @Module({
   imports: [
