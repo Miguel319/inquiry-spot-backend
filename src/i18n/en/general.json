@@ -18,9 +18,9 @@
     "delete": "Vehicle post deleted successfully!"
   },
   "propertyPost": {
-    "create": "Property post created successfully!",
-    "update": "Property post updated successfully!",
-    "delete": "Property post deleted successfully!"
+    "create": "Real state post created successfully!",
+    "update": "Real state post updated successfully!",
+    "delete": "Real state post deleted successfully!"
   },
   "blogPost": {
     "create": "Blog post created successfully!",
@@ -51,5 +51,10 @@
     "create": "Traction type created successfully!",
     "update": "Traction type updated successfully!",
     "delete": "Traction type deleted successfully!"
+  },
+  "propertyType": {
+    "create": "Real state type created successfully!",
+    "update": "Real state type updated successfully!",
+    "delete": "Real state type deleted successfully!"
   }
 }

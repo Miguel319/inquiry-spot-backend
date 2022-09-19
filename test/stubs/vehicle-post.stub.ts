@@ -1,12 +1,12 @@
 import { Color } from "@/common/domain/types";
-import { VehiclePost } from "@/vehicle-post/domain";
+import { VehiclePost } from "@/vehicle/domain";
 import {
   Fuel,
   Transmission,
   VehicleMake,
   VehicleStatus,
   VehicleType,
-} from "@/vehicle-post/domain/types";
+} from "@/vehicle/domain/types";
 
 export const getVehiclePostStub = (): VehiclePost =>
   ({

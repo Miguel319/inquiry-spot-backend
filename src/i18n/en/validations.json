@@ -76,6 +76,16 @@
     "notFound": "Traction type not found.",
     "forbiddenDeletion": "This traction type is being used in a vehicle post. Please delete the post before deleting the traction type."
   },
+  "propertyType": {
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
+    "notFound": "Real state type not found.",
+    "forbiddenDeletion": "This real state type is being used in a real state post. Please delete the post before deleting the real state type."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",
@@ -145,16 +155,16 @@
     "territoryNumber": "The territory (m²) provided is invalid.",
     "buyingOption": "The buying option (buy or rent) is mandatory.",
     "invalidBuyingOption": "The provided buying option is invalid.",
-    "propertyType": "The property type is mandatory.",
-    "invalidPropertyType": "The provided property type is invalid.",
-    "propertyStatus": "The property status is mandatory.",
-    "invalidPropertyStatus": "The provided property status is invalid.",
+    "propertyType": "The real state type is mandatory.",
+    "invalidPropertyType": "The provided real state type is invalid.",
+    "propertyStatus": "The real state status is mandatory.",
+    "invalidPropertyStatus": "The provided real state status is invalid.",
     "primaryImage": "The primary image is mandatory.",
     "secondaryImages": "The secondary image are mandatory.",
     "secondaryImagesArray": "The secondary images must be an array.",
     "additionalInfo": "The additional info is mandatory.",
     "additionalInfoArray": "The aditional info must be an array.",
-    "notFound": "Property post not found."
+    "notFound": "Real state post not found."
   },
   "email": {
     "subject": "The subject is mandatory.",

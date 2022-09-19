@@ -13,9 +13,9 @@
     "passwordReset": "¡Contraseña reestablecida satisfactoriamente!"
   },
   "vehiclePost": {
-    "create": "¡Vehículo creado satisfactoriamente!",
-    "update": "¡Vehículo actualizado satisfactoriamente!",
-    "delete": "¡Vehículo eliminado satisfactoriamente!"
+    "create": "¡Publicación creada satisfactoriamente!",
+    "update": "¡Publicación actualizada satisfactoriamente!",
+    "delete": "¡Publicación eliminada satisfactoriamente!"
   },
   "propertyPost": {
     "create": "¡Publicación creada satisfactoriamente!",
@@ -48,8 +48,13 @@
     "delete": "¡Tipo de combustible eliminado satisfactoriamente!"
   },
   "traction": {
-    "create": "¡Tipo de tracción creada satisfactoriamente!",
-    "update": "¡Tipo de tracción actualizada satisfactoriamente!",
-    "delete": "¡Tipo de tracción eliminada satisfactoriamente!"
+    "create": "¡Tipo de tracción creado satisfactoriamente!",
+    "update": "¡Tipo de tracción actualizado satisfactoriamente!",
+    "delete": "¡Tipo de tracción eliminado satisfactoriamente!"
+  },
+  "propertyType": {
+    "create": "¡Tipo de inmueble creado satisfactoriamente!",
+    "update": "¡Tipo de inmueble actualizado satisfactoriamente!",
+    "delete": "¡Tipo de inmueble eliminado satisfactoriamente!"
   }
 }
