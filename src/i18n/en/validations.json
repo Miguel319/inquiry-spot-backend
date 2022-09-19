@@ -38,6 +38,16 @@
     "notFound": "Vehicle type not found.",
     "forbiddenDeletion": "This vehicle type is being used in a vehicle post. Please delete the post before deleting the vehicle type."
   },
+  "vehicleStatus": {
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
+    "notFound": "Vehicle status not found.",
+    "forbiddenDeletion": "This vehicle status is being used in a vehicle post. Please delete the post before deleting the vehicle status."
+  },
   "vehicleMake": {
     "name": {
       "required": "The name is mandatory.",

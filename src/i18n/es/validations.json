@@ -38,6 +38,16 @@
     "notFound": "Tipo de vehículo no encontrado.",
     "forbiddenDeletion": "Este tipo de vehículo está siendo utilizado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de vehículo."
   },
+  "vehicleStatus": {
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
+    "notFound": "Estado de vehículo no encontrado.",
+    "forbiddenDeletion": "Este estado de vehículo está siendo utilizado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el estado de vehículo."
+  },
   "vehicleMake": {
     "name": {
       "required": "El nombre es obligatorio.",

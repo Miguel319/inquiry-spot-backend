@@ -4,3 +4,4 @@ export { VehicleMakeTranslations } from "./vehicle-make.translations";
 export { TransmissionTranslations } from "./transmission.translation";
 export { FuelTranslations } from "./fuel.translations";
 export { TractionTranslations } from "./traction.translations";
+export { VehicleStatusTranslations } from "./vehicle-status.translations";

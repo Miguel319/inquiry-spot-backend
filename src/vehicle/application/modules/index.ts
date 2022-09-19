@@ -6,6 +6,7 @@ import { VehicleMakeModule } from "./vehicle-make.module";
 import { TransmissionModule } from "./transmission.module";
 import { FuelModule } from "./fuel.module";
 import { TractionModule } from "./traction.module";
+import { VehicleStatusModule } from "./vehicle-status.module";
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { TractionModule } from "./traction.module";
     TransmissionModule,
     FuelModule,
     TractionModule,
+    VehicleStatusModule,
   ],
 })
 export class VehiclesModule {}
