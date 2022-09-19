@@ -1,2 +1,2 @@
-export { PropertyStatusEntityRepository } from "./property-buying-option-entity.repository";
-export { PropertyStatusDtoRepository } from "./property-buying-option-dto.repository";
+export { PropertyBuyingOptionEntityRepository } from "./property-buying-option-entity.repository";
+export { PropertyBuyingOptionDtoRepository } from "./property-buying-option-dto.repository";
