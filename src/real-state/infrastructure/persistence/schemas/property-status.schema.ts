@@ -8,7 +8,7 @@ import paginate from "mongoose-paginate-v2";
 
 export type PropertyStatusDocument = PropertyStatusSchema & Document;
 
-@Schema({ versionKey: false, timestamps: true, collection: "propertytypes" })
+@Schema({ versionKey: false, timestamps: true, collection: "propertystatuses" })
 export class PropertyStatusSchema extends BaseSchema {
   @Prop({
     type: {
