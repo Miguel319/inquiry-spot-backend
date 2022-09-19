@@ -1,2 +1,2 @@
-export { CreatePropertyPostDto } from "./create-property-post.dto";
-export { UpdatePropertyPostDto } from "./update-property-post.dto";
+export * from "./property-post";
+export * from "./property-type";

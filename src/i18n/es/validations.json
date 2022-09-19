@@ -76,6 +76,16 @@
     "notFound": "Tipo de tracción no encontrado.",
     "forbiddenDeletion": "Este tipo tracción está siendo usado por una publicación de vehículos. Por favor, elimine la publicación antes de eliminar el tipo de tracción."
   },
+  "propertyType": {
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
+    "notFound": "Tipo de propiedad no encontrado.",
+    "forbiddenDeletion": "Este tipo de propiedad está siendo usado por una publicación de propiedad. Por favor, elimine la publicación antes de eliminar el tipo de propiedad."
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",

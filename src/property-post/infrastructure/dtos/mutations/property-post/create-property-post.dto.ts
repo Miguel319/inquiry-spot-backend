@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "../../../../common/infrastructure/decorators";
+import { IsNotEmpty } from "../../../../../common/infrastructure/decorators";
 import {
   IsArray,
   IsDefined,
