@@ -56,5 +56,10 @@
     "create": "Real state type created successfully!",
     "update": "Real state type updated successfully!",
     "delete": "Real state type deleted successfully!"
+  },
+  "propertyStatus": {
+    "create": "Real state status created successfully!",
+    "update": "Real state status updated successfully!",
+    "delete": "Real state status deleted successfully!"
   }
 }

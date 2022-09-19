@@ -36,7 +36,7 @@
       "duplicateEn": "El nombre provisto en inglés ya existe."
     },
     "notFound": "Tipo de vehículo no encontrado.",
-    "forbiddenDeletion": "Este tipo de vehículo está siendo usado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de vehículo."
+    "forbiddenDeletion": "Este tipo de vehículo está siendo utilizado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de vehículo."
   },
   "vehicleMake": {
     "name": {
@@ -64,7 +64,7 @@
       "duplicateEn": "El nombre provisto en inglés ya existe."
     },
     "notFound": "Tipo de combustible no encontrado.",
-    "forbiddenDeletion": "Este tipo de combustible está siendo usado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de combustible."
+    "forbiddenDeletion": "Este tipo de combustible está siendo utilizado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de combustible."
   },
   "traction": {
     "name": {
@@ -74,7 +74,7 @@
       "duplicateEn": "El nombre provisto en inglés ya existe."
     },
     "notFound": "Tipo de tracción no encontrado.",
-    "forbiddenDeletion": "Este tipo tracción está siendo usado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de tracción."
+    "forbiddenDeletion": "Este tipo tracción está siendo utilizado por una publicación de vehículos. Por favor, elimine tal publicación antes de eliminar el tipo de tracción."
   },
   "propertyType": {
     "name": {
@@ -84,7 +84,17 @@
       "duplicateEn": "El nombre provisto en inglés ya existe."
     },
     "notFound": "Tipo de inmueble no encontrado.",
-    "forbiddenDeletion": "Este tipo de inmueble está siendo usado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el tipo de inmueble."
+    "forbiddenDeletion": "Este tipo de inmueble está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el tipo de inmueble."
+  },
+  "propertyStatus": {
+    "name": {
+      "required": "El nombre es obligatorio.",
+      "duplicate": "El nombre provisto ya existe.",
+      "duplicateEs": "El nombre provisto en español ya existe.",
+      "duplicateEn": "El nombre provisto en inglés ya existe."
+    },
+    "notFound": "Estado de inmueble no encontrado.",
+    "forbiddenDeletion": "Este estado de inmueble está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el estado de inmueble."
   },
   "user": {
     "name": "El nombre es obligatorio.",
