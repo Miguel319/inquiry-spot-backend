@@ -8,8 +8,8 @@ import { BlogsModule } from "@/blog/application/modules";
 import { TagsModule } from "@/tag/application/modules";
 import { AuthModule, UsersModule } from "@/user/application/modules";
 import { EmailsModule } from "@/email/application/modules";
-import { VehiclesModule } from "@/vehicle-post/application/modules";
-import { PropertiesModule } from "@/property-post/application/modules";
+import { VehiclesModule } from "@/vehicle/application/modules";
+import { PropertiesModule } from "@/property/application/modules";
 
 @Module({
   imports: [

@@ -3,8 +3,8 @@ import {
   BuyingOption,
   PropertyStatus,
   PropertyType,
-} from "@/property-post/domain";
-import { PropertyPost } from "@/property-post/infrastructure/persistence/schemas";
+} from "@/property/domain";
+import { PropertyPost } from "@/property/infrastructure/persistence/schemas";
 
 export const getPropertyPostStub = (): PropertyPost =>
   ({
