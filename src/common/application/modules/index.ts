@@ -7,9 +7,9 @@ import { SellersModule } from "./sellers.module";
 import { BlogsModule } from "@/blog/application/modules";
 import { TagsModule } from "@/tag/application/modules";
 import { AuthModule, UsersModule } from "@/user/application/modules";
-import { PropertyPostModule } from "@/property-post/application/modules";
 import { EmailsModule } from "@/email/application/modules";
 import { VehiclesModule } from "@/vehicle-post/application/modules";
+import { PropertiesModule } from "@/property-post/application/modules";
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { VehiclesModule } from "@/vehicle-post/application/modules";
     UsersModule,
     LoggerModule,
     InternationalizationModule,
-    PropertyPostModule,
+    PropertiesModule,
     SellersModule,
     AuthModule,
     EmailsModule,
