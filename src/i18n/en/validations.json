@@ -86,6 +86,16 @@
     "notFound": "Real state type not found.",
     "forbiddenDeletion": "This real state type is being used in a real state post. Please delete the post before deleting the real state type."
   },
+  "propertyStatus": {
+    "name": {
+      "required": "The name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided name in English already exists.",
+      "duplicateEn": "The provided name in Spanish already exists."
+    },
+    "notFound": "Real state status not found.",
+    "forbiddenDeletion": "This real state status is being used in a real state post. Please delete the post before deleting the real state status."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",
