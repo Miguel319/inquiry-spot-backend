@@ -1,4 +1,5 @@
 import {
+  Formatter,
   PaginatedQuery,
   PaginationOptions,
 } from "@/common/infrastructure/util";
@@ -20,11 +21,10 @@ export class VehicleTypeDtoRepository {
     entityFilterQuery: FilterQuery<VehicleTypeSchema>,
     options: PaginationOptions,
   ): Promise<PaginatedQuery<VehicleTypeDto>> {
+    const query = Formatter.formatQuery(entityFilterQuery);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (this.vehicleType as any).paginate(
-      { ...entityFilterQuery },
-      { options },
-    );
+    return (this.vehicleType as any).paginate({ ...query }, { ...options });
   }
 
   private createVehicleTypeDto(

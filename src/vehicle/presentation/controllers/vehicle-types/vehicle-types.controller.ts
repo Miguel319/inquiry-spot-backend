@@ -112,6 +112,8 @@ export class VehicleTypesController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
+    console.log(_id);
+
     await this.commandBus.execute<DeleteVehicleTypeCommand, boolean>(
       new DeleteVehicleTypeCommand(_id, i18n as I18nContext),
     );

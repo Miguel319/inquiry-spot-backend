@@ -30,7 +30,10 @@ export class FuelSchema extends BaseSchema {
       },
     },
     required: [true, FuelTranslations.NAME],
-    index: true,
+    index: {
+      unique: true,
+      collation: { strength: 2, locale: "en" },
+    },
     unique: true,
   })
   readonly name: NameType;

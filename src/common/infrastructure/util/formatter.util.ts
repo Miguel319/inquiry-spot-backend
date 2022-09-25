@@ -1,3 +1,4 @@
+import { FilterQuery } from "mongoose";
 import { I18nContext } from "nestjs-i18n";
 
 export class Formatter {
@@ -38,5 +39,17 @@ export class Formatter {
 
   public static stripHtmlTags(text: string): string {
     return text.replace(/(<([^>]+)>)/gi, "");
+  }
+
+  public static formatQuery(entityFilterQuery: FilterQuery<unknown>) {
+    const query = {} as Record<string, unknown>;
+
+    Object.keys(entityFilterQuery).forEach((key) => {
+      if (entityFilterQuery[key]) {
+        query[key] = entityFilterQuery[key];
+      }
+    });
+
+    return query;
   }
 }

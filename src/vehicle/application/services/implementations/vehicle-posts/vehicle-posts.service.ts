@@ -129,7 +129,7 @@ export class VehiclePostsService implements IVehiclePostsService {
 
     const vehiclePost = await this.findById(_id, i18n);
 
-    if (vehiclePost.seller !== user._id)
+    if (String(vehiclePost.seller) !== String(user._id))
       throw new UnauthorizedException(
         i18n
           ? i18n.t(SharedTranslations.UNAUTHORIZED)

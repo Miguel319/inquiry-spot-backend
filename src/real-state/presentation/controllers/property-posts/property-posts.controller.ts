@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -102,7 +103,7 @@ export class PropertyPostsController {
     });
   }
 
-  @Put(":_id")
+  @Delete(":_id")
   @UseGuards(JwtAuthGuard)
   @HasRoles(Role.MIXED, Role.SELLER)
   async delete(
