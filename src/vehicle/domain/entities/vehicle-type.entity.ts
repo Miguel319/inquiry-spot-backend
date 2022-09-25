@@ -34,6 +34,11 @@ export class VehicleType extends AggregateRoot {
         en: updatedType.name.en || this.vehicleType.name.en,
         es: updatedType.name.es || this.vehicleType.name.es,
       },
+      updatedAt:
+        updatedType.name.en !== this.vehicleType.name.en ||
+        updatedType.name.es !== this.vehicleType.name.es
+          ? new Date()
+          : this.vehicleType.updatedAt,
     };
   }
 }

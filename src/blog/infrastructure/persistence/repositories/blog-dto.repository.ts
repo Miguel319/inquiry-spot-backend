@@ -1,4 +1,5 @@
 import {
+  Formatter,
   PaginatedQuery,
   PaginationOptions,
 } from "@/common/infrastructure/util";
@@ -18,16 +19,10 @@ export class BlogDtoRepository {
     entityFilterQuery: FilterQuery<BlogSchema>,
     options: PaginationOptions,
   ): Promise<PaginatedQuery<BlogDto>> {
-    const query = {} as Record<string, unknown>;
-
-    Object.keys(entityFilterQuery).forEach((key) => {
-      if (entityFilterQuery[key]) {
-        query[key] = entityFilterQuery[key];
-      }
-    });
+    const query = Formatter.formatQuery(entityFilterQuery);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (this.blogModel as any).paginate({ ...query }, { options });
+    return (this.blogModel as any).paginate({ ...query }, { ...options });
   }
 
   private sanitizeBlog(blog: BlogDocument): BlogDto {
