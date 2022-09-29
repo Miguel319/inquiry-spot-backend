@@ -34,6 +34,11 @@ export class Traction extends AggregateRoot {
         en: updatedType.name.en || this.traction.name.en,
         es: updatedType.name.es || this.traction.name.es,
       },
+      updatedAt:
+        updatedType.name.en !== this.traction.name.en ||
+        updatedType.name.es !== this.traction.name.es
+          ? new Date()
+          : this.traction.updatedAt,
     };
   }
 }

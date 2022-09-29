@@ -30,6 +30,8 @@ export class VehicleMake extends AggregateRoot {
     this.make = {
       ...this.make,
       name: updatedType.name || this.make.name,
+      updatedAt:
+        updatedType.name !== this.make.name ? new Date() : this.make.updatedAt,
     };
   }
 }
