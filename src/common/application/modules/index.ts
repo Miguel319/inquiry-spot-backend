@@ -10,12 +10,14 @@ import { UsersGlobalModule } from "@/user/application/modules";
 import { EmailsModule } from "@/email/application/modules";
 import { VehiclesModule } from "@/vehicle/application/modules";
 import { PropertiesModule } from "@/real-state/application/modules";
+import { EventModule } from "./event.module";
 
 @Module({
   imports: [
     EnvModule,
     TagsModule,
     LoggerModule,
+    EventModule,
     InternationalizationModule,
     PropertiesModule,
     SellersModule,

@@ -38,11 +38,11 @@ export class DeletePropertyBuyingOptionCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    buyingOption: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._propertyPostRepository.findOne({
-      type,
+      buyingOption,
     });
 
     if (postFound)

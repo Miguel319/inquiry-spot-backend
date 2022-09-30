@@ -38,11 +38,11 @@ export class DeletePropertyStatusCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    status: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._propertyPostRepository.findOne({
-      type,
+      status,
     });
 
     if (postFound)

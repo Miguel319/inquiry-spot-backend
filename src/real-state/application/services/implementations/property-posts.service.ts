@@ -8,7 +8,7 @@ import {
 import { I18nContext, I18nService } from "nestjs-i18n";
 
 import { PropertyPostsTranslations } from "../../translations";
-import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories/property-posts";
+import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { IPropertyPostsService } from "../contracts";
 import { IUsersService } from "@/user/application/services/contracts";
 import {

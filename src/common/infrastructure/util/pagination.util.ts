@@ -31,13 +31,14 @@ export const getPaginationOptions = (
 ): PaginationOptions => {
   const { page, perPage } = paginationQuery;
 
-  if (perPage > 50)
+  if (perPage > 150)
     throw new UnauthorizedException(
       i18n.t(SharedTranslations.PAGINATION_LIMIT),
     );
 
   return {
     page: parseInt(String(page), 10) || 1,
-    limit: parseInt(String(perPage), 10) || 15,
+    limit: parseInt(String(perPage), 10) || 150,
+    sort: "-createdAt",
   };
 };

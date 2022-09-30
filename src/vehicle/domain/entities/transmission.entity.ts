@@ -34,6 +34,11 @@ export class Transmission extends AggregateRoot {
         en: updatedType.name.en || this.transmission.name.en,
         es: updatedType.name.es || this.transmission.name.es,
       },
+      updatedAt:
+        updatedType.name.en !== this.transmission.name.en ||
+        updatedType.name.es !== this.transmission.name.es
+          ? new Date()
+          : this.transmission.updatedAt,
     };
   }
 }

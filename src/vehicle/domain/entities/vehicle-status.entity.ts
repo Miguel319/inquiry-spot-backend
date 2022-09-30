@@ -3,34 +3,42 @@ import { IVehicleStatus } from "@/vehicle/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
 
 export class VehicleStatus extends AggregateRoot {
-  private make: IVehicleStatus;
+  private vehicleStatus: IVehicleStatus;
 
   constructor(vehicleMake: IVehicleStatus) {
     super();
 
-    this.make = vehicleMake;
+    this.vehicleStatus = vehicleMake;
   }
 
   public getId(): string {
-    return this.make._id;
+    return this.vehicleStatus._id;
   }
 
   public getName(): NameType {
-    return this.make.name;
+    return this.vehicleStatus.name;
   }
 
   public getCreatedAt(): Date {
-    return this.make.createdAt;
+    return this.vehicleStatus.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.make.updatedAt;
+    return this.vehicleStatus.updatedAt;
   }
 
-  public updateStatus(updatedType: IVehicleStatus): void {
-    this.make = {
-      ...this.make,
-      name: updatedType.name || this.make.name,
+  public updateVehicleStatus(updatedType: IVehicleStatus): void {
+    this.vehicleStatus = {
+      ...this.vehicleStatus,
+      name: {
+        en: updatedType.name.en || this.vehicleStatus.name.en,
+        es: updatedType.name.es || this.vehicleStatus.name.es,
+      },
+      updatedAt:
+        updatedType.name.en !== this.vehicleStatus.name.en ||
+        updatedType.name.es !== this.vehicleStatus.name.es
+          ? new Date()
+          : this.vehicleStatus.updatedAt,
     };
   }
 }

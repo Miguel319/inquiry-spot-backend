@@ -3,37 +3,42 @@ import { AggregateRoot } from "@nestjs/cqrs";
 import { IPropertyType } from "../types";
 
 export class PropertyType extends AggregateRoot {
-  private vehicleType: IPropertyType;
+  private propertyType: IPropertyType;
 
   constructor(newPropertyType: IPropertyType) {
     super();
 
-    this.vehicleType = newPropertyType;
+    this.propertyType = newPropertyType;
   }
 
   public getId(): string {
-    return this.vehicleType._id;
+    return this.propertyType._id;
   }
 
   public getName(): NameType {
-    return this.vehicleType.name;
+    return this.propertyType.name;
   }
 
   public getCreatedAt(): Date {
-    return this.vehicleType.createdAt;
+    return this.propertyType.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.vehicleType.updatedAt;
+    return this.propertyType.updatedAt;
   }
 
   public updatePropertyType(updatedType: IPropertyType): void {
-    this.vehicleType = {
-      ...this.vehicleType,
+    this.propertyType = {
+      ...this.propertyType,
       name: {
-        en: updatedType.name.en || this.vehicleType.name.en,
-        es: updatedType.name.es || this.vehicleType.name.es,
+        en: updatedType.name.en || this.propertyType.name.en,
+        es: updatedType.name.es || this.propertyType.name.es,
       },
+      updatedAt:
+        updatedType.name.en !== this.propertyType.name.en ||
+        updatedType.name.es !== this.propertyType.name.es
+          ? new Date()
+          : this.propertyType.updatedAt,
     };
   }
 }

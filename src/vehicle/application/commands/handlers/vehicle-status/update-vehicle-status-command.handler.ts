@@ -76,7 +76,7 @@ export class UpdateVehicleStatusCommandHandler
     const vehicleStatus =
       this.eventPublisher.mergeObjectContext(vehicleStatusFound);
 
-    vehicleStatus.updateStatus(
+    vehicleStatus.updateVehicleStatus(
       updateVehicleStatusDto as unknown as IVehicleStatus,
     );
 

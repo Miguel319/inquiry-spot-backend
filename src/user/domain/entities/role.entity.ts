@@ -3,37 +3,42 @@ import { AggregateRoot } from "@nestjs/cqrs";
 import { IRole } from "../types";
 
 export class Role extends AggregateRoot {
-  private vehicleType: IRole;
+  private role: IRole;
 
   constructor(newRole: IRole) {
     super();
 
-    this.vehicleType = newRole;
+    this.role = newRole;
   }
 
   public getId(): string {
-    return this.vehicleType._id;
+    return this.role._id;
   }
 
   public getName(): NameType {
-    return this.vehicleType.name;
+    return this.role.name;
   }
 
   public getCreatedAt(): Date {
-    return this.vehicleType.createdAt;
+    return this.role.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.vehicleType.updatedAt;
+    return this.role.updatedAt;
   }
 
   public updateRole(updatedType: IRole): void {
-    this.vehicleType = {
-      ...this.vehicleType,
+    this.role = {
+      ...this.role,
       name: {
-        en: updatedType.name.en || this.vehicleType.name.en,
-        es: updatedType.name.es || this.vehicleType.name.es,
+        en: updatedType.name.en || this.role.name.en,
+        es: updatedType.name.es || this.role.name.es,
       },
+      updatedAt:
+        updatedType.name.en !== this.role.name.en ||
+        updatedType.name.es !== this.role.name.es
+          ? new Date()
+          : this.role.updatedAt,
     };
   }
 }

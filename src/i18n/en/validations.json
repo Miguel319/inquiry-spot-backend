@@ -9,7 +9,7 @@
       "province": "The province is mandatory."
     },
     "unauthorized": "You are not authorized to perform this operation.",
-    "paginationLimit": "You cannot filter more than 50 items per page.",
+    "paginationLimit": "You cannot filter more than 150 items per page.",
     "name": {
       "en": "The name in English is mandatory.",
       "es": "The name in Spanish is mandatory."
