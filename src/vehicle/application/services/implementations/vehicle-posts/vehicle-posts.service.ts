@@ -54,6 +54,10 @@ export class VehiclePostsService implements IVehiclePostsService {
     )) as unknown as PaginatedQuery<VehiclePostDocument>;
   }
 
+  async findLastFiveVehicles(): Promise<VehiclePostDocument[]> {
+    return this._vehiclePostRepo.findLimited({}, 5);
+  }
+
   async findById(
     _id: string,
     i18n?: I18nContext,

@@ -11,6 +11,8 @@ export interface IVehiclePostsService
     i18n?: I18nContext,
   ): Promise<PaginatedQuery<VehiclePostDocument>>;
 
+  findLastFiveVehicles(): Promise<VehiclePostDocument[]>;
+
   findAllFromSeller(
     seller: string,
     paginationQuery: PaginationQuery,

@@ -36,11 +36,16 @@ export class VehiclePostsController {
   ) {}
 
   @Get()
-  findAll(
+  async findAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
   ) {
     return this._vehiclePostsService.findAll(paginationQuery, i18n);
+  }
+
+  @Get("query/last-five")
+  async findLastFive() {
+    return this._vehiclePostsService.findLastFiveVehicles();
   }
 
   @Get(":_id")
