@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import paginate from "mongoose-paginate-v2";
 import { Document, Types } from "mongoose";
 import { MunicipalityTranslations } from "@/common/application/translations";
+import { IDefaultName } from "@/common/domain/types";
 
 export type MunicipalityDocument = MunicipalitySchema & Document;
 
@@ -20,10 +21,15 @@ export class MunicipalitySchema extends BaseSchema {
   readonly name: string;
 
   @Prop({
-    ref: "provinces",
-    type: Types.ObjectId,
+    type: {
+      _id: {
+        ref: "provinces",
+        type: Types.ObjectId,
+      },
+      value: String,
+    },
   })
-  readonly province: Types.ObjectId;
+  readonly province: IDefaultName;
 }
 
 export const SchemaMunicipality =
