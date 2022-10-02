@@ -86,5 +86,10 @@
     "create": "¡Provincia creada satisfactoriamente!",
     "update": "¡Provincia actualizada satisfactoriamente!",
     "delete": "¡Provincia eliminada satisfactoriamente!"
+  },
+  "municipality": {
+    "create": "¡Municipio creado satisfactoriamente!",
+    "update": "¡Municipio actualizado satisfactoriamente!",
+    "delete": "¡Municipio eliminado satisfactoriamente!"
   }
 }
