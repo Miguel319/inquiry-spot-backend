@@ -139,6 +139,19 @@
       "property": "Este color está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el color."
     }
   },
+  "province": {
+    "name": {
+      "required": "El nombre de la provincia es obligatoria.",
+      "duplicate": "El nombre de la provincia provista ya existe.",
+      "duplicateEs": "El nombre de la provincia provista en español ya existe.",
+      "duplicateEn": "El nombre de la provincia provista en inglés ya existe."
+    },
+    "notFound": "Provincia no encontrada.",
+    "forbiddenDeletion": {
+      "vehicle": "Esta provincia está siendo utilizado por una publicación de vehículo. Por favor, elimine tal publicación antes de eliminar la provincia.",
+      "property": "Esta provincia está siendo utilizada por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar la provincia."
+    }
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",

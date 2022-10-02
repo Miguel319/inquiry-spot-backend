@@ -79,7 +79,12 @@
   },
   "color": {
     "create": "¡Color creado satisfactoriamente!",
-    "update": "¡Color creado satisfactoriamente!",
-    "delete": "¡Color creado satisfactoriamente!"
+    "update": "¡Color actualizado satisfactoriamente!",
+    "delete": "¡Color eliminado satisfactoriamente!"
+  },
+  "province": {
+    "create": "¡Provincia creada satisfactoriamente!",
+    "update": "¡Provincia actualizada satisfactoriamente!",
+    "delete": "¡Provincia eliminada satisfactoriamente!"
   }
 }

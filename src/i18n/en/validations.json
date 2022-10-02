@@ -139,6 +139,19 @@
       "property": "This color is being used in a real state post. Please delete the real state post before deleting the color."
     }
   },
+  "province": {
+    "name": {
+      "required": "The province name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided province name in English already exists.",
+      "duplicateEn": "The provided province name in Spanish already exists."
+    },
+    "notFound": "Province not found.",
+    "forbiddenDeletion": {
+      "vehicle": "This prvince is being used in a vehicle post. Please delete the vehicle post before deleting the province.",
+      "property": "This province is being used in a real state post. Please delete the real state post before deleting the province."
+    }
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",
