@@ -1,44 +1,39 @@
-import { NameType } from "@/common/domain/entities";
+import { IMunicipality } from "@/common/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IMunicipality } from "../../types";
 
 export class Municipality extends AggregateRoot {
-  private province: IMunicipality;
+  private municipality: IMunicipality;
 
   constructor(newMunicipality: IMunicipality) {
     super();
 
-    this.province = newMunicipality;
+    this.municipality = newMunicipality;
   }
 
   public getId(): string {
-    return this.province._id;
+    return this.municipality._id;
   }
 
-  public getName(): NameType {
-    return this.province.name;
+  public getName(): string {
+    return this.municipality.name;
   }
 
   public getCreatedAt(): Date {
-    return this.province.createdAt;
+    return this.municipality.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.province.updatedAt;
+    return this.municipality.updatedAt;
   }
 
   public updateMunicipality(updatedType: IMunicipality): void {
-    this.province = {
-      ...this.province,
-      name: {
-        en: updatedType.name.en || this.province.name.en,
-        es: updatedType.name.es || this.province.name.es,
-      },
+    this.municipality = {
+      ...this.municipality,
+      name: updatedType.name || this.municipality.name,
       updatedAt:
-        updatedType.name.en !== this.province.name.en ||
-        updatedType.name.es !== this.province.name.es
+        updatedType.name !== this.municipality.name
           ? new Date()
-          : this.province.updatedAt,
+          : this.municipality.updatedAt,
     };
   }
 }
