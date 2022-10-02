@@ -2,7 +2,7 @@ import { EntitySchemaFactory } from "@/common/infrastructure/persistence/factori
 import { Color } from "@/common/domain/entities";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
-import { ColorSchema } from "../../persistence/schemas";
+import { ColorSchema } from "../../schemas";
 
 @Injectable()
 export class ColorSchemaFactory

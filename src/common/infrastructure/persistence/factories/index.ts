@@ -1,3 +1,2 @@
-export { EntitySchemaFactory } from "./entity-schema.factory";
-export { EntityFactory } from "./entity.factory";
-export { ColorSchemaFactory } from "./color-schema.factory";
+export * from "./color";
+export * from "./entity";
