@@ -12,6 +12,7 @@ export class ProvinceSchemaFactory
     return {
       _id: new Types.ObjectId(province.getId()),
       name: province.getName(),
+      municipalities: province.getMunicipalities(),
       createdAt: province.getCreatedAt(),
       updatedAt: province.getUpdatedAt(),
     };

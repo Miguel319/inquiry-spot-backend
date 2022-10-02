@@ -1,5 +1,6 @@
 import { IProvince } from "@/common/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
+import { Types } from "mongoose";
 
 export class Province extends AggregateRoot {
   private province: IProvince;
@@ -16,6 +17,10 @@ export class Province extends AggregateRoot {
 
   public getName(): string {
     return this.province.name;
+  }
+
+  public getMunicipalities(): Types.ObjectId[] {
+    return this.province.municipalities;
   }
 
   public getCreatedAt(): Date {

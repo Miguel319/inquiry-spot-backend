@@ -1,4 +1,4 @@
-import { IMunicipality } from "@/common/domain/types";
+import { IDefaultName, IMunicipality } from "@/common/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
 
 export class Municipality extends AggregateRoot {
@@ -16,6 +16,10 @@ export class Municipality extends AggregateRoot {
 
   public getName(): string {
     return this.municipality.name;
+  }
+
+  public getProvince(): IDefaultName {
+    return this.municipality.province;
   }
 
   public getCreatedAt(): Date {
