@@ -1,6 +1,6 @@
 import { LoggerService } from "@/common/infrastructure/logger";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
-import { ColorCreatedEvent } from "../operations";
+import { ColorCreatedEvent } from "../../operations";
 
 @EventsHandler(ColorCreatedEvent)
 export class ColorCreatedEventHandler
