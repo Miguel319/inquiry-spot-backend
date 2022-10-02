@@ -1,14 +1,14 @@
 import { NameType } from "@/common/domain/entities";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IProvince } from "../../types";
+import { IMunicipality } from "../../types";
 
-export class Province extends AggregateRoot {
-  private province: IProvince;
+export class Municipality extends AggregateRoot {
+  private province: IMunicipality;
 
-  constructor(newProvince: IProvince) {
+  constructor(newMunicipality: IMunicipality) {
     super();
 
-    this.province = newProvince;
+    this.province = newMunicipality;
   }
 
   public getId(): string {
@@ -27,7 +27,7 @@ export class Province extends AggregateRoot {
     return this.province.updatedAt;
   }
 
-  public updateProvince(updatedType: IProvince): void {
+  public updateMunicipality(updatedType: IMunicipality): void {
     this.province = {
       ...this.province,
       name: {
