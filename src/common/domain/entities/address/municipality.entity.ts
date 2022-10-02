@@ -18,6 +18,10 @@ export class Municipality extends AggregateRoot {
     return this.municipality.name;
   }
 
+  public setProvince(province: IDefaultName): void {
+    this.municipality.province = province;
+  }
+
   public getProvince(): IDefaultName {
     return this.municipality.province;
   }
