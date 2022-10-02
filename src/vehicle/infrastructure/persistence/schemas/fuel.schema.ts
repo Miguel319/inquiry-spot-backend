@@ -34,7 +34,6 @@ export class FuelSchema extends BaseSchema {
       unique: true,
       collation: { strength: 2, locale: "en" },
     },
-    // unique: true,
   })
   readonly name: NameType;
 }

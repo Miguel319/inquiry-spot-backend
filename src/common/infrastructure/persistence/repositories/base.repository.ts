@@ -53,6 +53,26 @@ export abstract class BaseRepository<T extends Document>
     return this.entityModel.aggregate(pipeline, options);
   }
 
+  async findLimited(
+    entityFilterQuery: FilterQuery<T>,
+    limit: number,
+    select?: string,
+  ): Promise<T[]> {
+    if (select)
+      return this.entityModel
+        .find(entityFilterQuery, {
+          __v: 0,
+        })
+        .select(select)
+        .limit(limit);
+
+    return this.entityModel
+      .find(entityFilterQuery, {
+        __v: 0,
+      })
+      .limit(limit);
+  }
+
   async find(entityFilterQuery: FilterQuery<T>, select?: string): Promise<T[]> {
     if (select)
       return this.entityModel
