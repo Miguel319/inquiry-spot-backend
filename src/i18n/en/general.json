@@ -81,5 +81,10 @@
     "create": "Color created successfully!",
     "update": "Color updated successfully!",
     "delete": "Color deleted successfully!"
+  },
+  "province": {
+    "create": "Province created successfully!",
+    "update": "Province updated successfully!",
+    "delete": "Province deleted successfully!"
   }
 }
