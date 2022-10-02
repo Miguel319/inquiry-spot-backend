@@ -126,6 +126,16 @@
     "notFound": "Opción de compra de inmueble no encontrada.",
     "forbiddenDeletion": "Esta opción de compra de inmueble está siendo utilizada por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar la opción de compra de inmueble."
   },
+  "color": {
+    "name": {
+      "required": "El nombre del color es obligatorio.",
+      "duplicate": "El nombre del color provisto ya existe.",
+      "duplicateEs": "El nombre del color provisto en español ya existe.",
+      "duplicateEn": "El nombre del color provisto en inglés ya existe."
+    },
+    "notFound": "Color no encontrado.",
+    "forbiddenDeletion": "Este color está siendo utilizado por una publicación. Por favor, elimine tal publicación antes de eliminar el color."
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",

@@ -126,6 +126,16 @@
     "notFound": "Real state buying option not found.",
     "forbiddenDeletion": "This real state buying option is being used in a real state post. Please delete the post before deleting the real state buying option."
   },
+  "color": {
+    "name": {
+      "required": "The color name is mandatory.",
+      "duplicate": "The provided name already exists.",
+      "duplicateEs": "The provided color name in English already exists.",
+      "duplicateEn": "The provided color name in Spanish already exists."
+    },
+    "notFound": "Color not found.",
+    "forbiddenDeletion": "This color is being used in a post. Please delete the post before deleting the color."
+  },
   "user": {
     "name": "The name is mandatory.",
     "passwordName": "Password",

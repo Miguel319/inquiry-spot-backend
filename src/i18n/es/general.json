@@ -76,5 +76,10 @@
     "create": "¡Opción de compra de inmueble creada satisfactoriamente!",
     "update": "¡Opción de compra de inmueble actualizada satisfactoriamente!",
     "delete": "¡Opción de compra de inmueble eliminada satisfactoriamente!"
+  },
+  "color": {
+    "create": "¡Color creado satisfactoriamente!",
+    "update": "¡Color creado satisfactoriamente!",
+    "delete": "¡Color creado satisfactoriamente!"
   }
 }
