@@ -5,6 +5,7 @@ export enum MunicipalityTranslations {
   DELETE = "general.municipality.delete",
   // Validations
   NAME = "validations.municipality.name.required",
+  PROVINCE = "validations.municipality.province",
   NAME_DUPLICATE = "validations.municipality.name.duplicate",
   NOT_FOUND = "validations.municipality.notFound",
   FORBIDDEN_DELETION_VEHICLE = "validations.municipality.forbiddenDeletion.vehicle",
