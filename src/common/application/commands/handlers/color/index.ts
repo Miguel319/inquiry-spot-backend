@@ -6,7 +6,7 @@ export { CreateColorCommandHandler } from "./create-color-command.handler";
 export { UpdateColorCommandHandler } from "./update-color-command.handler";
 export { DeleteColorCommandHandler } from "./delete-color-command.handler";
 
-export const ColorCommandHandlers = [
+export const ColorsCommandHandlers = [
   CreateColorCommandHandler,
   UpdateColorCommandHandler,
   DeleteColorCommandHandler,

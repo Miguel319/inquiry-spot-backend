@@ -4,7 +4,7 @@ import { ColorUpdatedEventHandler } from "./color-updated-event.handler";
 export { ColorCreatedEventHandler } from "./color-created-event.handler";
 export { ColorUpdatedEventHandler } from "./color-updated-event.handler";
 
-export const ColorEventHandlers = [
+export const ColorsEventHandlers = [
   ColorCreatedEventHandler,
   ColorUpdatedEventHandler,
 ];

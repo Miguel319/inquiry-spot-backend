@@ -22,19 +22,6 @@ import { VehicleTypesCommandHandlers } from "../commands/handlers";
 import { VehicleTypesEventHandlers } from "../events/handlers";
 import { VehicleTypesQueryHandlers } from "../queries/handlers";
 
-const providers = [
-  VehicleTypeEntityRepository,
-  VehicleTypeSchemaFactory,
-  EventPublisher,
-  VehicleTypeDtoRepository,
-  LoggerService,
-  VehicleTypeFactory,
-  VehiclePostsRepository,
-  ...VehicleTypesQueryHandlers,
-  ...VehicleTypesCommandHandlers,
-  ...VehicleTypesEventHandlers,
-];
-
 @Module({
   imports: [
     CqrsModule,
@@ -49,7 +36,18 @@ const providers = [
       },
     ]),
   ],
-  providers,
+  providers: [
+    VehicleTypeEntityRepository,
+    VehicleTypeSchemaFactory,
+    EventPublisher,
+    VehicleTypeDtoRepository,
+    LoggerService,
+    VehicleTypeFactory,
+    VehiclePostsRepository,
+    ...VehicleTypesQueryHandlers,
+    ...VehicleTypesCommandHandlers,
+    ...VehicleTypesEventHandlers,
+  ],
   controllers: [VehicleTypesController],
 })
 export class VehicleTypeModule {}
