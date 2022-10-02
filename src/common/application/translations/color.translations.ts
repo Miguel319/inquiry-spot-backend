@@ -7,5 +7,6 @@ export enum ColorTranslations {
   NAME = "validations.color.name.required",
   NAME_DUPLICATE = "validations.color.name.duplicate",
   NOT_FOUND = "validations.color.notFound",
-  FORBIDDEN_DELETION = "validations.color.forbiddenDeletion",
+  FORBIDDEN_DELETION_VEHICLE = "validations.color.forbiddenDeletion.vehicle",
+  FORBIDDEN_DELETION_PROPERTY = "validations.color.forbiddenDeletion.property",
 }

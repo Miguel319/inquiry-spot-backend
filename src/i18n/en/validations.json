@@ -134,7 +134,10 @@
       "duplicateEn": "The provided color name in Spanish already exists."
     },
     "notFound": "Color not found.",
-    "forbiddenDeletion": "This color is being used in a post. Please delete the post before deleting the color."
+    "forbiddenDeletion": {
+      "vehicle": "This color is being used in a vehicle post. Please delete the vehicle post before deleting the color.",
+      "property": "This color is being used in a real state post. Please delete the real state post before deleting the color."
+    }
   },
   "user": {
     "name": "The name is mandatory.",

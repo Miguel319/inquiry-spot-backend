@@ -134,7 +134,10 @@
       "duplicateEn": "El nombre del color provisto en inglés ya existe."
     },
     "notFound": "Color no encontrado.",
-    "forbiddenDeletion": "Este color está siendo utilizado por una publicación. Por favor, elimine tal publicación antes de eliminar el color."
+    "forbiddenDeletion": {
+      "vehicle": "Este color está siendo utilizado por una publicación de vehículo. Por favor, elimine tal publicación antes de eliminar el color.",
+      "property": "Este color está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el color."
+    }
   },
   "user": {
     "name": "El nombre es obligatorio.",
