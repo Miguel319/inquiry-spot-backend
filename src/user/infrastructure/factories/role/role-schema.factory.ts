@@ -1,4 +1,4 @@
-import { EntitySchemaFactory } from "@/common/infrastructure/persistence/factories";
+import { EntitySchemaFactory } from "@/common/infrastructure/factories";
 import { Role } from "@/user/domain/entities";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";

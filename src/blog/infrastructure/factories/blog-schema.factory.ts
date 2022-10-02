@@ -1,5 +1,5 @@
 import { Blog } from "@/blog/domain/entities";
-import { EntitySchemaFactory } from "@/common/infrastructure/persistence/factories";
+import { EntitySchemaFactory } from "@/common/infrastructure/factories";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
 import { BlogSchema } from "../persistence/schemas";

@@ -76,5 +76,10 @@
     "create": "Real state buying option created successfully!",
     "update": "Real state buying option updated successfully!",
     "delete": "Real state buying option deleted successfully!"
+  },
+  "color": {
+    "create": "Color created successfully!",
+    "update": "Color updated successfully!",
+    "delete": "Color deleted successfully!"
   }
 }

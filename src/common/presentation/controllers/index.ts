@@ -1,1 +1,2 @@
-export { SellersController } from "./sellers/sellers.controller";
+export * from "./colors";
+export * from "./sellers";

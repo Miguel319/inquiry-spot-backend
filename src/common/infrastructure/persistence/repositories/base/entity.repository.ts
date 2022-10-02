@@ -1,7 +1,7 @@
 import { AggregateRoot } from "@nestjs/cqrs";
 import { FilterQuery, HydratedDocument, Model } from "mongoose";
-import { EntitySchemaFactory } from "../factories/entity-schema.factory";
-import { BaseSchema } from "../schemas";
+import { EntitySchemaFactory } from "../../../factories";
+import { BaseSchema } from "../../schemas";
 
 export abstract class EntityRepository<
   TSchema extends BaseSchema,

@@ -1,6 +1,6 @@
 import { LoggerService } from "@/common/infrastructure/logger";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
-import { VehicleTypeUpdatedEvent } from "../../operations/vehicle-type";
+import { VehicleTypeUpdatedEvent } from "../../operations";
 
 @EventsHandler(VehicleTypeUpdatedEvent)
 export class VehicleTypeUpdatedEventHandler

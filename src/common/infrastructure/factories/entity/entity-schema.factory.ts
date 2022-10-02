@@ -1,5 +1,5 @@
 import { AggregateRoot } from "@nestjs/cqrs";
-import { BaseSchema } from "../schemas";
+import { BaseSchema } from "../../persistence/schemas";
 
 export interface EntitySchemaFactory<
   TSchema extends BaseSchema,

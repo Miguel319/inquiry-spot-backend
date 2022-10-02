@@ -1,4 +1,4 @@
-import { EntityFactory } from "@/common/infrastructure/persistence/factories";
+import { EntityFactory } from "@/common/infrastructure/factories";
 import { RoleCreatedEvent } from "@/user/application/events";
 import { Role } from "@/user/domain/entities";
 import { Injectable } from "@nestjs/common";

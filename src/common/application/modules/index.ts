@@ -11,6 +11,7 @@ import { EmailsModule } from "@/email/application/modules";
 import { VehiclesModule } from "@/vehicle/application/modules";
 import { PropertiesModule } from "@/real-state/application/modules";
 import { EventModule } from "./event.module";
+import { ColorModule } from "./color.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EventModule } from "./event.module";
     LoggerModule,
     EventModule,
     InternationalizationModule,
+    ColorModule,
     PropertiesModule,
     SellersModule,
     UsersGlobalModule,

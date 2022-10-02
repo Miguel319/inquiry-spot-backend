@@ -1,6 +1,6 @@
 import { AggregateRoot } from "@nestjs/cqrs";
 import { FilterQuery, Types } from "mongoose";
-import { BaseSchema } from "../schemas";
+import { BaseSchema } from "../../schemas";
 import { EntityRepository } from "./entity.repository";
 
 export abstract class BaseEntityRepository<

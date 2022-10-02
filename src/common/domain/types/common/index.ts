@@ -5,3 +5,4 @@ export * from "../../../application/translations";
 export * from "./image-data";
 export * from "./price";
 export * from "./base.entity";
+export * from "./i-color";
