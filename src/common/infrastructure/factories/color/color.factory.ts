@@ -1,10 +1,10 @@
-import { EntityFactory } from "@/common/infrastructure/persistence/factories";
+import { EntityFactory } from "@/common/infrastructure/factories";
 import { ColorCreatedEvent } from "@/common/application/events";
 import { Color } from "@/common/domain/entities";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
-import { ColorSchema } from "../../../persistence/schemas";
+import { ColorSchema } from "../../persistence/schemas";
 
 @Injectable()
 export class ColorFactory implements EntityFactory<Color> {

@@ -1,4 +1,4 @@
-import { EntityFactory } from "@/common/infrastructure/persistence/factories";
+import { EntityFactory } from "@/common/infrastructure/factories";
 import { TransmissionCreatedEvent } from "@/vehicle/application/events";
 import { Transmission } from "@/vehicle/domain/entities";
 import { Injectable } from "@nestjs/common";

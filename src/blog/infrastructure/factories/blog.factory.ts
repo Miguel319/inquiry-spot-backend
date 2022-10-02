@@ -1,6 +1,6 @@
 import { BlogCreatedEvent } from "@/blog/application/events";
 import { Blog } from "@/blog/domain/entities";
-import { EntityFactory } from "@/common/infrastructure/persistence/factories";
+import { EntityFactory } from "@/common/infrastructure/factories";
 import { UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";

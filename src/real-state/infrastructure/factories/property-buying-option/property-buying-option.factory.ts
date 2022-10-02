@@ -1,4 +1,4 @@
-import { EntityFactory } from "@/common/infrastructure/persistence/factories";
+import { EntityFactory } from "@/common/infrastructure/factories";
 import { PropertyBuyingOptionCreatedEvent } from "@/real-state/application/events";
 import { PropertyBuyingOption } from "@/real-state/domain/entities";
 import { Injectable } from "@nestjs/common";
