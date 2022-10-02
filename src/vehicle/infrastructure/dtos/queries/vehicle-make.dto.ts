@@ -6,14 +6,14 @@ export class VehicleMakeDto extends Presenter {
   @ApiProperty({ required: true })
   readonly name: string;
 
-  private constructor(vehicleType: VehicleMake) {
-    super(vehicleType);
+  private constructor(vehicleMake: VehicleMake) {
+    super(vehicleMake);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.name = (vehicleType as any).name || vehicleType?.getName();
+    this.name = (vehicleMake as any).name || vehicleMake?.getName();
   }
 
-  public static create(vehicleType: VehicleMake) {
-    return new VehicleMakeDto(vehicleType);
+  public static create(vehicleMake: VehicleMake) {
+    return new VehicleMakeDto(vehicleMake);
   }
 }

@@ -1,4 +1,2 @@
-export { BaseDto } from "./base-dto";
-export { AddressValidationDto } from "./address-validation.dto";
-export { BaseValidationDto } from "./base-validation.dto";
-export { NameTypeValidationDto } from "./name-type-validation.dto";
+export * from "./mutations";
+export * from "./queries";
