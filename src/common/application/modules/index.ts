@@ -12,12 +12,14 @@ import { VehiclesModule } from "@/vehicle/application/modules";
 import { PropertiesModule } from "@/real-state/application/modules";
 import { EventModule } from "./event.module";
 import { ColorModule } from "./color.module";
+import { AddressModule } from "./address";
 
 @Module({
   imports: [
     EnvModule,
     TagsModule,
     LoggerModule,
+    AddressModule,
     EventModule,
     InternationalizationModule,
     ColorModule,
