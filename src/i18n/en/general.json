@@ -86,5 +86,10 @@
     "create": "Province created successfully!",
     "update": "Province updated successfully!",
     "delete": "Province deleted successfully!"
+  },
+  "municipality": {
+    "create": "Municipality created successfully!",
+    "update": "Municipality updated successfully!",
+    "delete": "Municipality deleted successfully!"
   }
 }

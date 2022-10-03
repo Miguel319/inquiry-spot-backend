@@ -26,6 +26,20 @@ import { ProvincesEventHandlers } from "../../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { ProvincesController } from "@/common/presentation/controllers";
 
+const providers = [
+  ProvinceEntityRepository,
+  ProvinceSchemaFactory,
+  EventPublisher,
+  ProvinceDtoRepository,
+  LoggerService,
+  ProvinceFactory,
+  VehiclePostsRepository,
+  PropertyPostsRepository,
+  ...ProvincesQueryHandlers,
+  ...ProvincesCommandHandlers,
+  ...ProvincesEventHandlers,
+];
+
 @Module({
   imports: [
     CqrsModule,
@@ -44,19 +58,8 @@ import { ProvincesController } from "@/common/presentation/controllers";
       },
     ]),
   ],
-  providers: [
-    ProvinceEntityRepository,
-    ProvinceSchemaFactory,
-    EventPublisher,
-    ProvinceDtoRepository,
-    LoggerService,
-    ProvinceFactory,
-    VehiclePostsRepository,
-    PropertyPostsRepository,
-    ...ProvincesQueryHandlers,
-    ...ProvincesCommandHandlers,
-    ...ProvincesEventHandlers,
-  ],
+  providers,
   controllers: [ProvincesController],
+  exports: providers,
 })
 export class ProvinceModule {}

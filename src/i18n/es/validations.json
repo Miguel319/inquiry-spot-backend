@@ -141,7 +141,7 @@
   },
   "province": {
     "name": {
-      "required": "El nombre de la provincia es obligatoria.",
+      "required": "El nombre de la provincia es obligatorio.",
       "duplicate": "El nombre de la provincia provista ya existe.",
       "duplicateEs": "El nombre de la provincia provista en español ya existe.",
       "duplicateEn": "El nombre de la provincia provista en inglés ya existe."
@@ -150,6 +150,20 @@
     "forbiddenDeletion": {
       "vehicle": "Esta provincia está siendo utilizado por una publicación de vehículo. Por favor, elimine tal publicación antes de eliminar la provincia.",
       "property": "Esta provincia está siendo utilizada por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar la provincia."
+    }
+  },
+  "municipality": {
+    "name": {
+      "required": "El nombre del municipio es obligatorio.",
+      "duplicate": "El nombre del municipio provista ya existe.",
+      "duplicateEs": "El nombre del municipio provista en español ya existe.",
+      "duplicateEn": "El nombre del municipio provista en inglés ya existe."
+    },
+    "province": "La provincia es obligatoria.",
+    "notFound": "Municipio no encontrado.",
+    "forbiddenDeletion": {
+      "vehicle": "Este municipio está siendo utilizado por una publicación de vehículo. Por favor, elimine tal publicación antes de eliminar el municipio.",
+      "property": "Este municipio está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el municipio."
     }
   },
   "user": {

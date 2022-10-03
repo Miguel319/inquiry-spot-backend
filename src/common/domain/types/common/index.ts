@@ -7,3 +7,5 @@ export * from "./price";
 export * from "./base.entity";
 export * from "./i-color";
 export * from "./i-province";
+export * from "./i-municipality";
+export * from "./i-default-name";

@@ -15,8 +15,11 @@ import {
   ValidationFilter,
 } from "@/common/infrastructure/filters";
 import { LoggingInterceptor } from "@/common/infrastructure/interceptors";
+import { LoggerService } from "../infrastructure/logger";
 
 export class AppSetup {
+  constructor(private readonly _logger: LoggerService) {}
+
   async run(): Promise<void> {
     try {
       const app: NestExpressApplication =
@@ -92,7 +95,7 @@ export class AppSetup {
 
   private setupGlobalFilters(app: NestExpressApplication): void {
     app.useGlobalFilters(
-      new FallbackExpectionFilter(),
+      new FallbackExpectionFilter(this._logger),
       new HttpExceptionFilter(new Logger()),
       new ValidationFilter(),
     );
@@ -116,6 +119,6 @@ export class AppSetup {
   }
 
   static create(): AppSetup {
-    return new AppSetup();
+    return new AppSetup(new LoggerService());
   }
 }

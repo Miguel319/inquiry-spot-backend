@@ -1,10 +1,8 @@
-import { NameType } from "@/common/domain/entities";
 import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import paginate from "mongoose-paginate-v2";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 import { ProvinceTranslations } from "@/common/application/translations";
-import { SharedTranslations } from "@/common/application/translations";
 
 export type ProvinceDocument = ProvinceSchema & Document;
 
@@ -15,27 +13,19 @@ export type ProvinceDocument = ProvinceSchema & Document;
 })
 export class ProvinceSchema extends BaseSchema {
   @Prop({
-    type: {
-      es: {
-        type: String,
-        required: [true, SharedTranslations.NAME_ES],
-        index: true,
-        unique: true,
-      },
-      en: {
-        type: String,
-        required: [true, SharedTranslations.NAME_EN],
-        index: true,
-        unique: true,
-      },
-    },
     required: [true, ProvinceTranslations.NAME],
-    index: {
-      unique: true,
-      collation: { strength: 2, locale: "en" },
-    },
+    unique: true,
   })
-  readonly name: NameType;
+  readonly name: string;
+
+  @Prop([
+    {
+      type: Types.ObjectId,
+      ref: "municipalities",
+      default: [],
+    },
+  ])
+  readonly municipalities: Types.ObjectId[];
 }
 
 export const SchemaProvince = SchemaFactory.createForClass(ProvinceSchema);

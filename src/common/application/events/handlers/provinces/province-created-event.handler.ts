@@ -11,7 +11,7 @@ export class ProvinceCreatedEventHandler
   async handle({ provinceId, name }: ProvinceCreatedEvent) {
     this._logger.log(
       "Province creation",
-      `✅ New province type created successfully! ID = ${provinceId}. Name = ${name.en}`,
+      `✅ New province type created successfully! ID = ${provinceId}. Name = ${name}`,
     );
   }
 }

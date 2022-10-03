@@ -1,44 +1,47 @@
-import { NameType } from "@/common/domain/entities";
+import { IProvince } from "@/common/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IProvince } from "../../types";
+import { Types } from "mongoose";
 
 export class Province extends AggregateRoot {
-  private color: IProvince;
+  private province: IProvince;
 
   constructor(newProvince: IProvince) {
     super();
 
-    this.color = newProvince;
+    this.province = newProvince;
   }
 
   public getId(): string {
-    return this.color._id;
+    return this.province._id;
   }
 
-  public getName(): NameType {
-    return this.color.name;
+  public getName(): string {
+    return this.province.name;
+  }
+
+  public getMunicipalities(): Types.ObjectId[] {
+    return this.province.municipalities;
   }
 
   public getCreatedAt(): Date {
-    return this.color.createdAt;
+    return this.province.createdAt;
   }
 
   public getUpdatedAt(): Date {
-    return this.color.updatedAt;
+    return this.province.updatedAt;
   }
 
   public updateProvince(updatedType: IProvince): void {
-    this.color = {
-      ...this.color,
-      name: {
-        en: updatedType.name.en || this.color.name.en,
-        es: updatedType.name.es || this.color.name.es,
-      },
-      updatedAt:
-        updatedType.name.en !== this.color.name.en ||
-        updatedType.name.es !== this.color.name.es
-          ? new Date()
-          : this.color.updatedAt,
+    const shouldUpdateDate =
+      updatedType.name !== this.province.name ||
+      updatedType.municipalities !== this.province.municipalities;
+
+    this.province = {
+      ...this.province,
+      name: updatedType.name || this.province.name,
+      municipalities:
+        updatedType.municipalities || this.province.municipalities,
+      updatedAt: shouldUpdateDate ? new Date() : this.province.updatedAt,
     };
   }
 }

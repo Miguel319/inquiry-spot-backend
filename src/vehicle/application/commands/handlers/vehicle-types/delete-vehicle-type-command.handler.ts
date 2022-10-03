@@ -56,8 +56,6 @@ export class DeleteVehicleTypeCommandHandler
   }
 
   async execute({ _id, i18n }: DeleteVehicleTypeCommand): Promise<boolean> {
-    console.log("hello world id", _id);
-
     const vehicleTypeFound = await this.getVehicleType(_id, i18n);
 
     await this.handleAuthorization(vehicleTypeFound.getId(), i18n);

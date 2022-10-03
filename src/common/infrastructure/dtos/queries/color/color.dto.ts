@@ -1,10 +1,10 @@
 import { Presenter } from "@/common/infrastructure/presenters";
-import { Color } from "@/common/domain/entities";
+import { Color, NameType } from "@/common/domain/entities";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class ColorDto extends Presenter {
   @ApiProperty({ required: true })
-  readonly name: string;
+  readonly name: NameType;
 
   private constructor(color: Color) {
     super(color);

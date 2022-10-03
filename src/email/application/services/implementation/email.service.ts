@@ -1,3 +1,4 @@
+import { LoggerService } from "@/common/infrastructure/logger";
 import { EmailsRepository } from "@/email/infrastructure/persistence/repositories";
 import {
   SendgridEmail,
@@ -22,6 +23,7 @@ export class EmailsService implements IEmailsService {
   constructor(
     @Inject("IUsersService") private readonly _usersService: IUsersService,
     private readonly _emailRepo: EmailsRepository,
+    private readonly _logger: LoggerService,
   ) {
     this.sendGrid = require("@sendgrid/mail");
     this.sendGrid.setApiKey(process.env["SENDGRID_API_KEY"]);
@@ -136,8 +138,15 @@ export class EmailsService implements IEmailsService {
 
     this.sendGrid
       .send(emailBody)
-      .then(() => console.log("Email sent"))
-      .catch((error: unknown) => console.log("error", error));
+      .then(() =>
+        this._logger.log("Email", `Email sent. Subject = ${emailBody.subject}`),
+      )
+      .catch((error: unknown) =>
+        this._logger.error(
+          "Email",
+          `Could not send email. ${JSON.stringify(error)}`,
+        ),
+      );
 
     await this._emailRepo.create({
       ...emailBody,

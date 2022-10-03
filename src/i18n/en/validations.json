@@ -148,8 +148,22 @@
     },
     "notFound": "Province not found.",
     "forbiddenDeletion": {
-      "vehicle": "This prvince is being used in a vehicle post. Please delete the vehicle post before deleting the province.",
+      "vehicle": "This province is being used in a vehicle post. Please delete the vehicle post before deleting the province.",
       "property": "This province is being used in a real state post. Please delete the real state post before deleting the province."
+    }
+  },
+  "municipality": {
+    "name": {
+      "required": "The municipality name is mandatory.",
+      "duplicate": "The provided municipality name already exists.",
+      "duplicateEs": "The provided municipality name in English already exists.",
+      "duplicateEn": "The provided municipality name in Spanish already exists."
+    },
+    "province": "The province is mandatory.",
+    "notFound": "Municipality not found.",
+    "forbiddenDeletion": {
+      "vehicle": "This municipality is being used in a vehicle post. Please delete the vehicle post before deleting the municipality.",
+      "property": "This municipality is being used in a real state post. Please delete the real state post before deleting the municipality."
     }
   },
   "user": {
