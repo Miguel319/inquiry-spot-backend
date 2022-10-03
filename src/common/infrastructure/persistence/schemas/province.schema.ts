@@ -14,7 +14,6 @@ export type ProvinceDocument = ProvinceSchema & Document;
 export class ProvinceSchema extends BaseSchema {
   @Prop({
     required: [true, ProvinceTranslations.NAME],
-    index: true,
     unique: true,
   })
   readonly name: string;

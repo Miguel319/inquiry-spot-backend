@@ -110,8 +110,6 @@ export class ProvincesController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
-    console.log(_id);
-
     await this.commandBus.execute<DeleteProvinceCommand, boolean>(
       new DeleteProvinceCommand(_id, i18n as I18nContext),
     );

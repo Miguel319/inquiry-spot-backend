@@ -61,7 +61,7 @@ export class UpdateMunicipalityCommandHandler
       );
 
     municipality.setProvince({
-      _id: province._id as unknown as Types.ObjectId,
+      _id: provinceId,
       value: province.name,
     });
   }
@@ -97,11 +97,12 @@ export class UpdateMunicipalityCommandHandler
     const municipality =
       this.eventPublisher.mergeObjectContext(municipalityFound);
 
-    await this.mapProvince(
-      updateMunicipalityDto.province._id,
-      municipality,
-      i18n,
-    );
+    if (updateMunicipalityDto.province)
+      await this.mapProvince(
+        new Types.ObjectId(updateMunicipalityDto.province),
+        municipality,
+        i18n,
+      );
 
     municipality.updateMunicipality(
       updateMunicipalityDto as unknown as IMunicipality,

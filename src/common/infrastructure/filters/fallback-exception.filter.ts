@@ -3,16 +3,19 @@ import {
   ExceptionFilter,
   ArgumentsHost,
   HttpStatus,
+  Logger,
 } from "@nestjs/common";
 import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 import { getI18nContextFromArgumentsHost } from "nestjs-i18n";
 
 @Catch()
 export class FallbackExpectionFilter implements ExceptionFilter {
+  constructor(private readonly _logger: Logger) {}
+
   catch(exception: { message: string }, host: ArgumentsHost) {
-    console.log(
-      "fallback exception handler triggered",
-      JSON.stringify(exception),
+    this._logger.error(
+      "Exception Filter",
+      `fallback exception handler triggered. Exception = ${exception.message}`,
     );
 
     const ctx: HttpArgumentsHost = host.switchToHttp();

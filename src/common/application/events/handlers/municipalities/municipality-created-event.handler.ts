@@ -11,7 +11,9 @@ export class MunicipalityCreatedEventHandler
   async handle({ municipalityId, name }: MunicipalityCreatedEvent) {
     this._logger.log(
       "Municipality creation",
-      `✅ New municipality type created successfully! ID = ${municipalityId}. Name = ${name}`,
+      `✅ New municipality type created successfully! ID = ${String(
+        municipalityId,
+      )}. Name = ${name}`,
     );
   }
 }

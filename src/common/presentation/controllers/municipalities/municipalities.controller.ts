@@ -115,8 +115,6 @@ export class MunicipalitiesController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
-    console.log(_id);
-
     await this.commandBus.execute<DeleteMunicipalityCommand, boolean>(
       new DeleteMunicipalityCommand(_id, i18n as I18nContext),
     );

@@ -110,8 +110,6 @@ export class ColorsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
-    console.log(_id);
-
     await this.commandBus.execute<DeleteColorCommand, boolean>(
       new DeleteColorCommand(_id, i18n as I18nContext),
     );
