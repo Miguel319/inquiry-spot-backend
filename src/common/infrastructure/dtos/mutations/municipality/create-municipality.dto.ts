@@ -1,5 +1,4 @@
 import { IsNotEmpty } from "@/common/infrastructure/decorators";
-import { BaseValidationDto } from "@/common/infrastructure/dtos";
 import {
   MunicipalityTranslations,
   SharedTranslations,
@@ -8,7 +7,7 @@ import { IsDefined, IsMongoId } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { Types } from "mongoose";
 
-export class CreateMunicipalityDto extends BaseValidationDto {
+export class CreateMunicipalityDto {
   @IsNotEmpty({ message: i18nValidationMessage(MunicipalityTranslations.NAME) })
   @IsDefined({ message: i18nValidationMessage(MunicipalityTranslations.NAME) })
   readonly name: string;

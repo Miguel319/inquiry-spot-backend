@@ -1,18 +1,21 @@
 import { LoggerService } from "@/common/infrastructure/logger";
 import {
-  ProvinceFactory,
-  ProvinceSchemaFactory,
+  MunicipalityFactory,
+  MunicipalitySchemaFactory,
 } from "@/common/infrastructure/factories";
 import {
-  ProvinceDtoRepository,
+  MunicipalityDtoRepository,
+  MunicipalityEntityRepository,
   ProvinceEntityRepository,
 } from "@/common/infrastructure/persistence/repositories";
 import { Module } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
-import { ProvincesQueryHandlers } from "../../queries/handlers";
+import { MunicipalitiesQueryHandlers } from "../../queries/handlers";
 import {
+  MunicipalitySchema,
   ProvinceSchema,
+  SchemaMunicipality,
   SchemaProvince,
 } from "@/common/infrastructure/persistence/schemas";
 import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
@@ -21,32 +24,19 @@ import {
   PropertyPostSchema,
 } from "@/real-state/infrastructure/persistence/schemas";
 import { VehiclePostsRepository } from "@/vehicle/infrastructure/persistence/repositories";
-import { ProvincesCommandHandlers } from "../../commands/handlers";
-import { ProvincesEventHandlers } from "../../events/handlers";
+import { MunicipalitiesCommandHandlers } from "../../commands/handlers";
+import { MunicipalitiesEventHandlers } from "../../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
-import { ProvincesController } from "@/common/presentation/controllers";
-
-const providers = [
-  ProvinceEntityRepository,
-  ProvinceSchemaFactory,
-  EventPublisher,
-  ProvinceDtoRepository,
-  LoggerService,
-  ProvinceFactory,
-  VehiclePostsRepository,
-  PropertyPostsRepository,
-  ...ProvincesQueryHandlers,
-  ...ProvincesCommandHandlers,
-  ...ProvincesEventHandlers,
-];
+import { ProvinceModule } from "./province.module";
 
 @Module({
   imports: [
+    ProvinceModule,
     CqrsModule,
     MongooseModule.forFeature([
       {
-        name: ProvinceSchema.name,
-        schema: SchemaProvince,
+        name: MunicipalitySchema.name,
+        schema: SchemaMunicipality,
       },
       {
         name: PropertyPost.name,
@@ -56,10 +46,26 @@ const providers = [
         name: VehiclePost.name,
         schema: VehiclePostSchema,
       },
+      {
+        name: ProvinceSchema.name,
+        schema: SchemaProvince,
+      },
     ]),
   ],
-  providers,
-  controllers: [ProvincesController],
-  exports: providers,
+  providers: [
+    MunicipalityEntityRepository,
+    MunicipalitySchemaFactory,
+    EventPublisher,
+    MunicipalityDtoRepository,
+    LoggerService,
+    MunicipalityFactory,
+    ProvinceEntityRepository,
+    VehiclePostsRepository,
+    PropertyPostsRepository,
+    ...MunicipalitiesQueryHandlers,
+    ...MunicipalitiesCommandHandlers,
+    ...MunicipalitiesEventHandlers,
+  ],
+  //   controllers: [MunicipalitiesController],
 })
-export class ProvinceModule {}
+export class MunicipalityModule {}

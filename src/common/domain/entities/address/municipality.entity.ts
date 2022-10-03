@@ -38,8 +38,10 @@ export class Municipality extends AggregateRoot {
     this.municipality = {
       ...this.municipality,
       name: updatedType.name || this.municipality.name,
+      province: updatedType.province || this.municipality.province,
       updatedAt:
-        updatedType.name !== this.municipality.name
+        updatedType.name !== this.municipality.name ||
+        updatedType.province !== this.municipality.province
           ? new Date()
           : this.municipality.updatedAt,
     };

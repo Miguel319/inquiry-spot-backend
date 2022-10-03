@@ -32,13 +32,16 @@ export class Province extends AggregateRoot {
   }
 
   public updateProvince(updatedType: IProvince): void {
+    const shouldUpdateDate =
+      updatedType.name !== this.province.name ||
+      updatedType.municipalities !== this.province.municipalities;
+
     this.province = {
       ...this.province,
       name: updatedType.name || this.province.name,
-      updatedAt:
-        updatedType.name !== this.province.name
-          ? new Date()
-          : this.province.updatedAt,
+      municipalities:
+        updatedType.municipalities || this.province.municipalities,
+      updatedAt: shouldUpdateDate ? new Date() : this.province.updatedAt,
     };
   }
 }

@@ -1,11 +1,18 @@
 import { MunicipalityUpdatedEvent } from "@/common/application/events";
-import { MunicipalityTranslations } from "@/common/application/translations";
+import {
+  MunicipalityTranslations,
+  ProvinceTranslations,
+} from "@/common/application/translations";
 import { Municipality } from "@/common/domain/entities";
 import { IMunicipality } from "@/common/domain/types";
 import { UpdateMunicipalityDto } from "@/common/infrastructure/dtos";
-import { MunicipalityEntityRepository } from "@/common/infrastructure/persistence/repositories";
+import {
+  MunicipalityEntityRepository,
+  ProvinceDtoRepository,
+} from "@/common/infrastructure/persistence/repositories";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
+import { Types } from "mongoose";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { UpdateMunicipalityCommand } from "../../operations";
 
@@ -15,6 +22,7 @@ export class UpdateMunicipalityCommandHandler
 {
   constructor(
     private readonly _municipalityRepository: MunicipalityEntityRepository,
+    private readonly _provinceRepository: ProvinceDtoRepository,
     private readonly eventPublisher: EventPublisher,
     private readonly _i18n: I18nService,
   ) {}
@@ -36,6 +44,26 @@ export class UpdateMunicipalityCommandHandler
       );
 
     return municipality;
+  }
+
+  private async mapProvince(
+    provinceId: Types.ObjectId,
+    municipality: Municipality,
+    i18n: I18nContext,
+  ): Promise<void> {
+    const province = await this._provinceRepository.getById(String(provinceId));
+
+    if (!province)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(ProvinceTranslations.NOT_FOUND)
+          : this._i18n.t(ProvinceTranslations.NOT_FOUND),
+      );
+
+    municipality.setProvince({
+      _id: province._id as unknown as Types.ObjectId,
+      value: province.name,
+    });
   }
 
   private async checkDuplicates(
@@ -68,6 +96,12 @@ export class UpdateMunicipalityCommandHandler
 
     const municipality =
       this.eventPublisher.mergeObjectContext(municipalityFound);
+
+    await this.mapProvince(
+      updateMunicipalityDto.province._id,
+      municipality,
+      i18n,
+    );
 
     municipality.updateMunicipality(
       updateMunicipalityDto as unknown as IMunicipality,

@@ -9,8 +9,8 @@ export type MunicipalityDocument = MunicipalitySchema & Document;
 
 @Schema({
   versionKey: false,
-  timestamps: true,
   collection: "municipalities",
+  timestamps: true,
 })
 export class MunicipalitySchema extends BaseSchema {
   @Prop({
@@ -26,7 +26,9 @@ export class MunicipalitySchema extends BaseSchema {
         ref: "provinces",
         type: Types.ObjectId,
       },
-      value: String,
+      value: {
+        type: String,
+      },
     },
   })
   readonly province: IDefaultName;

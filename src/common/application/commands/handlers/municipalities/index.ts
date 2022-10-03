@@ -6,7 +6,7 @@ export { CreateMunicipalityCommandHandler } from "./create-municipality-command.
 export { UpdateMunicipalityCommandHandler } from "./update-municipality-command.handler";
 export { DeleteMunicipalityCommandHandler } from "./delete-municipality-command.handler";
 
-export const MunicipalitysCommandHandlers = [
+export const MunicipalitiesCommandHandlers = [
   CreateMunicipalityCommandHandler,
   UpdateMunicipalityCommandHandler,
   DeleteMunicipalityCommandHandler,

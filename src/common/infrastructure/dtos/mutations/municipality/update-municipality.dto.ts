@@ -1,5 +1,6 @@
-import { BaseValidationDto } from "@/common/infrastructure/dtos";
+import { Types } from "mongoose";
 
-export class UpdateMunicipalityDto extends BaseValidationDto {
+export class UpdateMunicipalityDto {
   readonly name: string;
+  readonly province: Types.ObjectId;
 }
