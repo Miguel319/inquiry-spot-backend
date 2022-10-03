@@ -28,6 +28,7 @@ import { MunicipalitiesCommandHandlers } from "../../commands/handlers";
 import { MunicipalitiesEventHandlers } from "../../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { ProvinceModule } from "./province.module";
+import { MunicipalitiesController } from "@/common/presentation/controllers/municipalities";
 
 @Module({
   imports: [
@@ -66,6 +67,6 @@ import { ProvinceModule } from "./province.module";
     ...MunicipalitiesCommandHandlers,
     ...MunicipalitiesEventHandlers,
   ],
-  //   controllers: [MunicipalitiesController],
+  controllers: [MunicipalitiesController],
 })
 export class MunicipalityModule {}
