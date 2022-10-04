@@ -25,7 +25,7 @@ export class FetchPaginatedProvincesQueryHandler
   ): PaginationOptions {
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
-      select: "_id name createdAt updatedAt",
+      select: "_id name municipalities createdAt updatedAt",
     };
   }
 
