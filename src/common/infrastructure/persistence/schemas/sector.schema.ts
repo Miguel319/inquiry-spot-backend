@@ -36,7 +36,7 @@ export class SectorSchema extends BaseSchema {
       },
     },
   })
-  readonly minucipality: IDefaultName;
+  readonly municipality: IDefaultName;
 }
 
 export const SchemaSector = SchemaFactory.createForClass(SectorSchema);

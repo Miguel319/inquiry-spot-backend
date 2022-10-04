@@ -1,18 +1,17 @@
 import { EntityFactory } from "@/common/infrastructure/factories";
-import { Municipality } from "@/common/domain/entities";
+import { Sector } from "@/common/domain/entities";
 import { Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
-// import { I18nService } from "nestjs-i18n";
 
 @Injectable()
-export class MunicipalityFactory implements EntityFactory<Municipality> {
+export class SectorFactory implements EntityFactory<Sector> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async create(...args: any[]): Promise<Municipality> {
-    const municipality = new Municipality({
+  async create(...args: any[]): Promise<Sector> {
+    const sector = new Sector({
       ...args[0],
       _id: new Types.ObjectId().toHexString(),
     });
 
-    return municipality;
+    return sector;
   }
 }

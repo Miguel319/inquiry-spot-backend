@@ -43,7 +43,7 @@ export class CreateMunicipalityCommandHandler
 
     await this._municipalityRepository.create(municipality);
 
-    await this._municipalityService.mapProvinceToMinucipality(
+    await this._municipalityService.mapProvinceToMunicipality(
       province,
       municipality,
     );

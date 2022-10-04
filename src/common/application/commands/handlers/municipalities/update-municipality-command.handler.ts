@@ -89,7 +89,7 @@ export class UpdateMunicipalityCommandHandler
       : null;
 
     if (province)
-      await this._municipalityService.mapProvinceToMinucipality(
+      await this._municipalityService.mapProvinceToMunicipality(
         province,
         municipality,
       );

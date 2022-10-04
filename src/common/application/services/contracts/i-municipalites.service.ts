@@ -8,7 +8,7 @@ export interface IMunicipalitiesService {
     municipality: Municipality,
     isUpdate?: boolean,
   ): Promise<void>;
-  mapProvinceToMinucipality(
+  mapProvinceToMunicipality(
     province: Province,
     municipality: Municipality,
   ): Promise<void>;

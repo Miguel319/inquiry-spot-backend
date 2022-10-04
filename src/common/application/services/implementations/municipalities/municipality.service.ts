@@ -51,7 +51,7 @@ export class MunicipalitiesService implements IMunicipalitiesService {
       );
   }
 
-  public async mapProvinceToMinucipality(
+  public async mapProvinceToMunicipality(
     province: Province,
     municipality: Municipality,
   ): Promise<void> {
