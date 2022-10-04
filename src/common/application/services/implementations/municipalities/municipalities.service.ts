@@ -1,5 +1,5 @@
 import { MunicipalityTranslations } from "@/common/application/translations";
-import { Municipality, Province } from "@/common/domain/entities";
+import { Municipality, Province, Sector } from "@/common/domain/entities";
 import {
   MunicipalityEntityRepository,
   ProvinceEntityRepository,
@@ -17,7 +17,10 @@ export class MunicipalitiesService implements IMunicipalitiesService {
     private readonly _i18n: I18nService,
   ) {}
 
-  public async findById(_id: string, i18n: I18nContext): Promise<Municipality> {
+  public async findById(
+    _id: Types.ObjectId | string,
+    i18n: I18nContext,
+  ): Promise<Municipality> {
     const municipality = await this._municipalityRepository.findByValue(
       _id,
       "_id",
@@ -49,6 +52,21 @@ export class MunicipalitiesService implements IMunicipalitiesService {
         "_id",
         municipality,
       );
+  }
+
+  public async removeSector(sector: Sector, i18n: I18nContext): Promise<void> {
+    const municipality = await this.findById(
+      sector.getMunicipality()._id,
+      i18n,
+    );
+
+    municipality.removeSector(new Types.ObjectId(municipality.getId()));
+
+    await this._municipalityRepository.findOneAndReplaceByValue(
+      municipality.getId(),
+      "_id",
+      municipality,
+    );
   }
 
   public async mapProvinceToMunicipality(

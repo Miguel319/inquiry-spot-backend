@@ -17,7 +17,10 @@ export class SectorsService implements ISectorsService {
     private readonly _i18n: I18nService,
   ) {}
 
-  public async findById(_id: string, i18n: I18nContext): Promise<Sector> {
+  public async findById(
+    _id: Types.ObjectId | string,
+    i18n: I18nContext,
+  ): Promise<Sector> {
     const sector = await this._sectorRepository.findByValue(_id, "_id");
 
     if (!sector)
@@ -31,7 +34,7 @@ export class SectorsService implements ISectorsService {
   }
 
   public async mapSectorToMunicipality(
-    municipality: Sector,
+    municipality: Municipality,
     sector: Sector,
     isUpdate?: boolean | undefined,
   ): Promise<void> {

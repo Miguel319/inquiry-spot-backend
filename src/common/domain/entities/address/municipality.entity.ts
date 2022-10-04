@@ -27,12 +27,6 @@ export class Municipality extends AggregateRoot {
     return this.municipality.sectors;
   }
 
-  public pushNewSector(sectorId: Types.ObjectId): void {
-    if (!this.municipality.sectors) this.municipality.sectors = [];
-
-    this.municipality.sectors.push(sectorId);
-  }
-
   public getProvince(): IDefaultName {
     return this.municipality.province;
   }
@@ -43,6 +37,18 @@ export class Municipality extends AggregateRoot {
 
   public getUpdatedAt(): Date {
     return this.municipality.updatedAt;
+  }
+
+  public removeSector(sectorId: Types.ObjectId): void {
+    this.municipality.sectors = this.municipality.sectors.filter(
+      (v) => String(v) !== String(sectorId),
+    );
+  }
+
+  public pushNewSector(sectorId: Types.ObjectId): void {
+    if (!this.municipality.sectors) this.municipality.sectors = [];
+
+    this.municipality.sectors.push(sectorId);
   }
 
   public updateMunicipality(updatedType: IMunicipality): void {
