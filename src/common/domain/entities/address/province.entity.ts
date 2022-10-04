@@ -23,13 +23,13 @@ export class Province extends AggregateRoot {
     return this.province.municipalities;
   }
 
-  public removeMunicipality(municipalityId: Types.ObjectId) {
+  public removeMunicipality(municipalityId: Types.ObjectId): void {
     this.province.municipalities = this.province.municipalities.filter(
       (v) => String(v) !== String(municipalityId),
     );
   }
 
-  public pushNewMunicipality(municipalityId: Types.ObjectId) {
+  public pushNewMunicipality(municipalityId: Types.ObjectId): void {
     if (!this.province.municipalities) this.province.municipalities = [];
 
     this.province.municipalities.push(municipalityId);

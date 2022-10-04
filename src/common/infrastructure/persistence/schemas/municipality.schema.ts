@@ -1,13 +1,9 @@
 import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import paginate from "mongoose-paginate-v2";
-import { Document, Schema as SchemaAlt } from "mongoose";
+import { Document, Types } from "mongoose";
 import { MunicipalityTranslations } from "@/common/application/translations";
 import { IDefaultName } from "@/common/domain/types";
-
-const {
-  Types: { ObjectId },
-} = SchemaAlt;
 
 export type MunicipalityDocument = MunicipalitySchema & Document;
 
@@ -28,7 +24,7 @@ export class MunicipalitySchema extends BaseSchema {
     type: {
       _id: {
         ref: "provinces",
-        type: ObjectId,
+        type: Types.ObjectId,
         unique: false,
       },
       value: {
@@ -37,6 +33,16 @@ export class MunicipalitySchema extends BaseSchema {
     },
   })
   readonly province: IDefaultName;
+
+  @Prop([
+    {
+      type: Types.ObjectId,
+      unique: true,
+      ref: "sectors",
+      default: [],
+    },
+  ])
+  readonly sectors: Types.ObjectId[];
 }
 
 export const SchemaMunicipality =

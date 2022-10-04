@@ -1,1 +1,1 @@
-export * from "./municipality.service";
+export * from "./municipalities.service";

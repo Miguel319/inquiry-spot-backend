@@ -1,5 +1,6 @@
 import { IDefaultName, IMunicipality } from "@/common/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
+import { Types } from "mongoose";
 
 export class Municipality extends AggregateRoot {
   private municipality: IMunicipality;
@@ -20,6 +21,16 @@ export class Municipality extends AggregateRoot {
 
   public setProvince(province: IDefaultName): void {
     this.municipality.province = province;
+  }
+
+  public getSectors(): Types.ObjectId[] {
+    return this.municipality.sectors;
+  }
+
+  public pushNewSector(sectorId: Types.ObjectId): void {
+    if (!this.municipality.sectors) this.municipality.sectors = [];
+
+    this.municipality.sectors.push(sectorId);
   }
 
   public getProvince(): IDefaultName {
