@@ -21,6 +21,7 @@ export class ProvinceSchema extends BaseSchema {
   @Prop([
     {
       type: Types.ObjectId,
+      unique: true,
       ref: "municipalities",
       default: [],
     },
