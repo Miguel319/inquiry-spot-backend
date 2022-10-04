@@ -1,9 +1,11 @@
 import { LoggerService } from "@/common/infrastructure/logger";
 import {
+  MunicipalitySchemaFactory,
   ProvinceFactory,
   ProvinceSchemaFactory,
 } from "@/common/infrastructure/factories";
 import {
+  MunicipalityEntityRepository,
   ProvinceDtoRepository,
   ProvinceEntityRepository,
 } from "@/common/infrastructure/persistence/repositories";
@@ -12,7 +14,9 @@ import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ProvincesQueryHandlers } from "../../queries/handlers";
 import {
+  MunicipalitySchema,
   ProvinceSchema,
+  SchemaMunicipality,
   SchemaProvince,
 } from "@/common/infrastructure/persistence/schemas";
 import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
@@ -34,6 +38,8 @@ const providers = [
   LoggerService,
   ProvinceFactory,
   VehiclePostsRepository,
+  MunicipalitySchemaFactory,
+  MunicipalityEntityRepository,
   PropertyPostsRepository,
   ...ProvincesQueryHandlers,
   ...ProvincesCommandHandlers,
@@ -55,6 +61,10 @@ const providers = [
       {
         name: VehiclePost.name,
         schema: VehiclePostSchema,
+      },
+      {
+        name: MunicipalitySchema.name,
+        schema: SchemaMunicipality,
       },
     ]),
   ],

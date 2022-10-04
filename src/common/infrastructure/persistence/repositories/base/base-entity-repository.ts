@@ -33,6 +33,13 @@ export abstract class BaseEntityRepository<
     );
   }
 
+  async findAndReplace(
+    entityFilterQuery: FilterQuery<TSchema>,
+    entity: TEntity[],
+  ): Promise<void> {
+    this.findManyAndReplace(entityFilterQuery, entity);
+  }
+
   async delete(value: string, queryBy: "slug" | "_id") {
     const query = {
       [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
@@ -44,7 +51,7 @@ export abstract class BaseEntityRepository<
     return deletedEntity.deletedCount > 0;
   }
 
-  async findAll(): Promise<TEntity[]> {
-    return this.find({}) as unknown as TEntity[];
+  async findAll(entityFilterQuery?: FilterQuery<TSchema>): Promise<TEntity[]> {
+    return this.find(entityFilterQuery) as unknown as TEntity[];
   }
 }
