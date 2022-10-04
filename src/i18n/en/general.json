@@ -91,5 +91,10 @@
     "create": "Municipality created successfully!",
     "update": "Municipality updated successfully!",
     "delete": "Municipality deleted successfully!"
+  },
+  "sector": {
+    "create": "Sector created successfully!",
+    "update": "Sector updated successfully!",
+    "delete": "Sector deleted successfully!"
   }
 }
