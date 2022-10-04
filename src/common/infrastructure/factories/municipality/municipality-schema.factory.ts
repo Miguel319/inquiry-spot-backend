@@ -13,6 +13,7 @@ export class MunicipalitySchemaFactory
       _id: new Types.ObjectId(municipality.getId()),
       name: municipality.getName(),
       province: municipality.getProvince(),
+      sectors: municipality.getSectors(),
       createdAt: municipality.getCreatedAt(),
       updatedAt: municipality.getUpdatedAt(),
     };

@@ -42,6 +42,15 @@ const ProvinceServiceProvider: Provider = {
   useClass: ProvincesService,
 };
 
+const SharedProviders = [
+  MunicipalityFactory,
+  ProvinceEntityRepository,
+  MunicipalityEntityRepository,
+  MunicipalityDtoRepository,
+  MunicipalityServiceProvider,
+  MunicipalitySchemaFactory,
+];
+
 @Module({
   imports: [
     ProvinceModule,
@@ -66,21 +75,17 @@ const ProvinceServiceProvider: Provider = {
     ]),
   ],
   providers: [
-    MunicipalityEntityRepository,
-    MunicipalitySchemaFactory,
     EventPublisher,
-    MunicipalityDtoRepository,
-    MunicipalityServiceProvider,
     ProvinceServiceProvider,
-    LoggerService,
-    MunicipalityFactory,
-    ProvinceEntityRepository,
     VehiclePostsRepository,
+    LoggerService,
     PropertyPostsRepository,
+    ...SharedProviders,
     ...MunicipalitiesQueryHandlers,
     ...MunicipalitiesCommandHandlers,
     ...MunicipalitiesEventHandlers,
   ],
   controllers: [MunicipalitiesController],
+  exports: [...SharedProviders],
 })
 export class MunicipalityModule {}
