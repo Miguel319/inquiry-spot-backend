@@ -8,7 +8,7 @@ import {
   MunicipalityEntityRepository,
   ProvinceEntityRepository,
 } from "@/common/infrastructure/persistence/repositories";
-import { Module } from "@nestjs/common";
+import { Module, Provider } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { MunicipalitiesQueryHandlers } from "../../queries/handlers";
@@ -29,6 +29,18 @@ import { MunicipalitiesEventHandlers } from "../../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { ProvinceModule } from "./province.module";
 import { MunicipalitiesController } from "@/common/presentation/controllers/municipalities";
+import { MunicipalitiesService } from "../../services/implementations";
+import { ProvincesService } from "../../services/implementations/provinces";
+
+const MunicipalityServiceProvider: Provider = {
+  provide: "IMunicipalitiesService",
+  useClass: MunicipalitiesService,
+};
+
+const ProvinceServiceProvider: Provider = {
+  provide: "IProvincesService",
+  useClass: ProvincesService,
+};
 
 @Module({
   imports: [
@@ -58,6 +70,8 @@ import { MunicipalitiesController } from "@/common/presentation/controllers/muni
     MunicipalitySchemaFactory,
     EventPublisher,
     MunicipalityDtoRepository,
+    MunicipalityServiceProvider,
+    ProvinceServiceProvider,
     LoggerService,
     MunicipalityFactory,
     ProvinceEntityRepository,

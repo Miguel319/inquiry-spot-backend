@@ -1,1 +1,3 @@
-export { SellersService } from "./sellers/sellers.service";
+export * from "./sellers";
+export * from "./municipalities";
+export * from "./provinces";

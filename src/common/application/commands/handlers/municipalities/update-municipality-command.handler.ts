@@ -1,18 +1,15 @@
 import { MunicipalityUpdatedEvent } from "@/common/application/events";
 import {
-  MunicipalityTranslations,
-  ProvinceTranslations,
-} from "@/common/application/translations";
-import { Municipality } from "@/common/domain/entities";
+  IMunicipalitiesService,
+  IProvincesService,
+} from "@/common/application/services/contracts";
+import { MunicipalityTranslations } from "@/common/application/translations";
+import { Municipality, Province } from "@/common/domain/entities";
 import { IMunicipality } from "@/common/domain/types";
 import { UpdateMunicipalityDto } from "@/common/infrastructure/dtos";
-import {
-  MunicipalityEntityRepository,
-  ProvinceDtoRepository,
-} from "@/common/infrastructure/persistence/repositories";
-import { BadRequestException, NotFoundException } from "@nestjs/common";
+import { MunicipalityEntityRepository } from "@/common/infrastructure/persistence/repositories";
+import { BadRequestException, Inject } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
-import { Types } from "mongoose";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { UpdateMunicipalityCommand } from "../../operations";
 
@@ -22,49 +19,13 @@ export class UpdateMunicipalityCommandHandler
 {
   constructor(
     private readonly _municipalityRepository: MunicipalityEntityRepository,
-    private readonly _provinceRepository: ProvinceDtoRepository,
+    @Inject("IMunicipalitiesService")
+    private readonly _municipalityService: IMunicipalitiesService,
+    @Inject("IProvincesService")
+    private readonly _provincesService: IProvincesService,
     private readonly eventPublisher: EventPublisher,
     private readonly _i18n: I18nService,
   ) {}
-
-  private async getMunicipality(
-    _id: string,
-    i18n: I18nContext,
-  ): Promise<Municipality> {
-    const municipality = await this._municipalityRepository.findByValue(
-      _id,
-      "_id",
-    );
-
-    if (!municipality)
-      throw new NotFoundException(
-        i18n
-          ? i18n.t(MunicipalityTranslations.NOT_FOUND)
-          : this._i18n.t(MunicipalityTranslations.NOT_FOUND),
-      );
-
-    return municipality;
-  }
-
-  private async mapProvince(
-    provinceId: Types.ObjectId,
-    municipality: Municipality,
-    i18n: I18nContext,
-  ): Promise<void> {
-    const province = await this._provinceRepository.getById(String(provinceId));
-
-    if (!province)
-      throw new NotFoundException(
-        i18n
-          ? i18n.t(ProvinceTranslations.NOT_FOUND)
-          : this._i18n.t(ProvinceTranslations.NOT_FOUND),
-      );
-
-    municipality.setProvince({
-      _id: provinceId,
-      value: province.name,
-    });
-  }
 
   private async checkDuplicates(
     municipality: Municipality,
@@ -85,27 +46,60 @@ export class UpdateMunicipalityCommandHandler
       );
   }
 
+  async getRelatedProvince(
+    municipality: Municipality,
+    dto: UpdateMunicipalityDto,
+    i18n: I18nContext,
+  ): Promise<Province> {
+    const province = await this._provincesService.findById(dto.province, i18n);
+
+    await this._municipalityService.mapMunicipalityToProvince(
+      province,
+      municipality,
+      true,
+    );
+
+    return province;
+  }
+
   async execute({
     _id,
-    updateMunicipalityDto,
+    updateMunicipalityDto: dto,
     i18n,
   }: UpdateMunicipalityCommand): Promise<void> {
-    const municipalityFound = await this.getMunicipality(_id, i18n);
+    const municipalityFound = await this._municipalityService.findById(
+      _id,
+      i18n,
+    );
 
-    await this.checkDuplicates(municipalityFound, updateMunicipalityDto, i18n);
+    if (municipalityFound.getName() !== dto.name)
+      await this.checkDuplicates(municipalityFound, dto, i18n);
 
     const municipality =
       this.eventPublisher.mergeObjectContext(municipalityFound);
 
-    if (updateMunicipalityDto.province)
-      await this.mapProvince(
-        new Types.ObjectId(updateMunicipalityDto.province),
+    const shouldUpdateReferences =
+      String(dto?.province) !== String(municipality.getProvince()._id);
+
+    if (shouldUpdateReferences)
+      await this._provincesService.removeMunicipality(municipality, i18n);
+
+    const province = shouldUpdateReferences
+      ? await this.getRelatedProvince(municipality, dto, i18n)
+      : null;
+
+    if (province)
+      await this._municipalityService.mapProvinceToMinucipality(
+        province,
         municipality,
-        i18n,
       );
 
-    municipality.updateMunicipality(
-      updateMunicipalityDto as unknown as IMunicipality,
+    municipality.updateMunicipality(dto as unknown as IMunicipality);
+
+    await this._municipalityRepository.findOneAndReplaceByValue(
+      _id,
+      "_id",
+      municipality,
     );
 
     municipality.apply(
@@ -113,12 +107,6 @@ export class UpdateMunicipalityCommandHandler
         municipality.getId(),
         municipality.getName(),
       ),
-    );
-
-    await this._municipalityRepository.findOneAndReplaceByValue(
-      _id,
-      "_id",
-      municipality,
     );
 
     municipality.commit();

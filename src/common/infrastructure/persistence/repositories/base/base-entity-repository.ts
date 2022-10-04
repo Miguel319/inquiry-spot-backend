@@ -8,7 +8,7 @@ export abstract class BaseEntityRepository<
   TEntity extends AggregateRoot,
 > extends EntityRepository<TSchema, TEntity> {
   async findByValue(
-    value: string,
+    value: string | Types.ObjectId,
     queryBy: "slug" | "_id",
   ): Promise<TEntity | null> {
     return this.findOne({
