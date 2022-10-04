@@ -5,7 +5,7 @@ export enum SectorTranslations {
   DELETE = "general.sector.delete",
   // Validations
   NAME = "validations.sector.name.required",
-  PROVINCE = "validations.sector.province",
+  MUNICIPALITY = "validations.sector.municipality",
   NAME_DUPLICATE = "validations.sector.name.duplicate",
   NOT_FOUND = "validations.sector.notFound",
   FORBIDDEN_DELETION_VEHICLE = "validations.sector.forbiddenDeletion.vehicle",

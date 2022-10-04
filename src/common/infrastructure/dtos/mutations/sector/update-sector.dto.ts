@@ -3,9 +3,9 @@ import { IsMongoId } from "class-validator";
 import { Types } from "mongoose";
 import { i18nValidationMessage } from "nestjs-i18n";
 
-export class UpdateMunicipalityDto {
+export class UpdateSectorDto {
   readonly name: string;
 
   @IsMongoId({ message: i18nValidationMessage(SharedTranslations.MONGO_ID) })
-  readonly province: Types.ObjectId;
+  readonly municipality: Types.ObjectId;
 }
