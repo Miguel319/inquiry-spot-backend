@@ -12,6 +12,7 @@ export class EmailsController {
     @Inject("IEmailsService")
     private readonly _emailService: IEmailsService,
   ) {}
+
   @Post("contact-details")
   async sendContactDetails(
     @Body() { name, message }: ContactEmailDto,
