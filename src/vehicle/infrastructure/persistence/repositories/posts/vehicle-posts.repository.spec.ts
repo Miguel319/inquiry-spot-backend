@@ -5,21 +5,21 @@ import { VehiclePostModel } from "../../../../../../test/support";
 
 import { getVehiclePostStub } from "../../../../../../test/stubs";
 import { VehiclePostsRepository } from "./vehicle-post.repository";
-import { VehiclePost } from "../../schemas";
+import { VehiclePostSchema } from "../../schemas";
 
 describe("VehiclePostsRepository", () => {
   let vehiclePostsRepository: VehiclePostsRepository;
 
   describe("find operations", () => {
     let vehiclePostModel: VehiclePostModel;
-    let vehiclePostFilterQuery: FilterQuery<VehiclePost>;
+    let vehiclePostFilterQuery: FilterQuery<VehiclePostSchema>;
 
     beforeEach(async () => {
       const moduleRef = await Test.createTestingModule({
         providers: [
           VehiclePostsRepository,
           {
-            provide: getModelToken(VehiclePost.name),
+            provide: getModelToken(VehiclePostSchema.name),
             useClass: VehiclePostModel,
           },
         ],
@@ -29,7 +29,7 @@ describe("VehiclePostsRepository", () => {
         VehiclePostsRepository,
       );
       vehiclePostModel = moduleRef.get<VehiclePostModel>(
-        getModelToken(VehiclePost.name),
+        getModelToken(VehiclePostSchema.name),
       );
 
       vehiclePostFilterQuery = {
@@ -41,7 +41,7 @@ describe("VehiclePostsRepository", () => {
 
     describe("findOne", () => {
       describe("when findOne is called", () => {
-        let vehiclePost: VehiclePost | null;
+        let vehiclePost: VehiclePostSchema | null;
 
         beforeEach(async () => {
           jest.spyOn(vehiclePostModel, "findOne");
@@ -68,7 +68,7 @@ describe("VehiclePostsRepository", () => {
 
     describe("find", () => {
       describe("when find is called", () => {
-        let vehiclePosts: Array<VehiclePost>;
+        let vehiclePosts: Array<VehiclePostSchema>;
 
         beforeEach(async () => {
           jest.spyOn(vehiclePostModel, "find");
@@ -91,7 +91,7 @@ describe("VehiclePostsRepository", () => {
 
     describe("findOneAndUpdate", () => {
       describe("when findOneAndUpdate is called", () => {
-        let vehiclePost: VehiclePost | null;
+        let vehiclePost: VehiclePostSchema | null;
 
         beforeEach(async () => {
           jest.spyOn(vehiclePostModel, "findOneAndUpdate");
@@ -171,7 +171,7 @@ describe("VehiclePostsRepository", () => {
         providers: [
           VehiclePostsRepository,
           {
-            provide: getModelToken(VehiclePost.name),
+            provide: getModelToken(VehiclePostSchema.name),
             useValue: VehiclePostModel,
           },
         ],
@@ -184,7 +184,7 @@ describe("VehiclePostsRepository", () => {
 
     describe("create", () => {
       describe("when create is called", () => {
-        let vehiclePost: VehiclePost;
+        let vehiclePost: VehiclePostSchema;
         let saveSpy: jest.SpyInstance;
         let constructorSpy: jest.SpyInstance;
 
