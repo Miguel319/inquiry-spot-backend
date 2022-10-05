@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 
-import { VehiclePostModule } from "./vehicle-post.module";
+// import { VehiclePostModule } from "./vehicle-post.module";
 import { VehicleTypeModule } from "./vehicle-type.module";
 import { VehicleMakeModule } from "./vehicle-make.module";
 import { TransmissionModule } from "./transmission.module";
@@ -10,7 +10,7 @@ import { VehicleStatusModule } from "./vehicle-status.module";
 
 @Module({
   imports: [
-    VehiclePostModule,
+    // VehiclePostModule,
     VehicleTypeModule,
     VehicleMakeModule,
     TransmissionModule,

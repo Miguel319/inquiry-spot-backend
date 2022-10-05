@@ -9,10 +9,10 @@ import { ElectricValues } from "./electric-values";
 
 export interface IVehiclePost extends IBaseEntity {
   readonly description: string;
-  readonly make: IDefaultName;
+  make: IDefaultName;
   readonly model: string;
   type: IDefaultI18nName;
-  readonly transmission: IDefaultI18nName;
+  transmission: IDefaultI18nName;
   readonly price: Price;
   readonly doorCount: number;
   exteriorColor: IDefaultI18nName;
@@ -28,7 +28,7 @@ export interface IVehiclePost extends IBaseEntity {
     informal?: string;
   };
   readonly cylinders: number;
-  readonly seller: IDefaultName;
+  seller: IDefaultName;
   readonly electric: ElectricValues;
   readonly primaryImage: string;
   readonly secondaryImages: string[];

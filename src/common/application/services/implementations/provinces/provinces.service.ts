@@ -14,7 +14,7 @@ export class ProvincesService implements IProvincesService {
   ) {}
 
   public async findById(
-    _id: Types.ObjectId,
+    _id: Types.ObjectId | string,
     i18n: I18nContext,
   ): Promise<Province> {
     const province = await this._provinceRepository.findByValue(_id, "_id");

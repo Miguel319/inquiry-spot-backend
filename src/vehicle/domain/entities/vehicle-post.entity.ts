@@ -111,4 +111,40 @@ export class VehiclePost extends AggregateRoot {
   public getUpdatedAt(): Date {
     return this.post.updatedAt;
   }
+
+  public setMake(make: IDefaultName): void {
+    this.post.make = make;
+  }
+
+  public setStatus(status: IDefaultI18nName): void {
+    this.post.status = status;
+  }
+
+  public setFuelType(fuel: IDefaultI18nName): void {
+    this.post.fuelType = fuel;
+  }
+
+  public setInteriorColor(color: IDefaultI18nName): void {
+    this.post.interiorColor = color;
+  }
+
+  public setExteriorColor(color: IDefaultI18nName): void {
+    this.post.exteriorColor = color;
+  }
+
+  public setTransmission(transmission: IDefaultI18nName): void {
+    this.post.transmission = transmission;
+  }
+
+  public setTraction(traction: IDefaultI18nName): void {
+    this.post.traction = traction;
+  }
+
+  public setFormalAddress(address: IAddress): void {
+    this.post.address.formal = address;
+  }
+
+  public setInformalAddress(address: string): void {
+    this.post.address.informal = address;
+  }
 }
