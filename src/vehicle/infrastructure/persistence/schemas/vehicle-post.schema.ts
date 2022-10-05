@@ -1,36 +1,39 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Schema as SchemaAlt } from "mongoose";
+import { Document, Types } from "mongoose";
 
 import paginate from "mongoose-paginate-v2";
 import { BaseEntity } from "@/common/domain/entities";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
+import { ElectricValues } from "@/vehicle/domain/types";
 import {
-  ElectricValues,
-  Fuel,
-  Traction,
-  Transmission,
-  VehicleMake,
-  VehicleStatus,
-  VehicleType,
-} from "@/vehicle/domain/types";
-import { Color, Currency, Price } from "@/common/domain/types/common";
-
-const {
-  Types: { ObjectId },
-} = SchemaAlt;
+  Currency,
+  IAddress,
+  IDefaultI18nName,
+  IDefaultName,
+  Price,
+} from "@/common/domain/types/common";
 
 export type VehiclePostDocument = VehiclePost & Document;
 
-@Schema({ timestamps: true })
+@Schema({ versionKey: false, timestamps: true, collection: "vehicleposts" })
 export class VehiclePost extends BaseEntity {
   @Prop({ required: [true, VehiclePostTranslations.DESCRIPTION] })
-  description: string;
+  readonly description: string;
 
   @Prop({
+    type: {
+      _id: {
+        ref: "vehiclemakes",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: String,
+      },
+    },
     required: [true, VehiclePostTranslations.MAKE],
-    enum: VehicleMake,
   })
-  make: VehicleMake;
+  readonly make: IDefaultName;
 
   @Prop({
     required: [true, VehiclePostTranslations.MODEL],
@@ -38,18 +41,40 @@ export class VehiclePost extends BaseEntity {
   model: string;
 
   @Prop({
+    type: {
+      _id: {
+        ref: "vehicletypes",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, VehiclePostTranslations.TYPE],
-    enum: VehicleType,
-    type: String,
   })
-  type: VehicleType;
+  type: IDefaultI18nName;
 
   @Prop({
-    type: String,
-    enum: Transmission,
+    type: {
+      _id: {
+        ref: "transmissions",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, VehiclePostTranslations.TRANSMISSION],
   })
-  transmission: Transmission;
+  readonly transmission: IDefaultI18nName;
 
   @Prop({
     type: {
@@ -63,60 +88,179 @@ export class VehiclePost extends BaseEntity {
     },
     required: [true, VehiclePostTranslations.PRICE],
   })
-  price: Price;
+  readonly price: Price;
 
   @Prop({
+    type: Number,
     required: [true, VehiclePostTranslations.DOOR_COUNT],
     isInteger: [true, VehiclePostTranslations.DOOR_COUNT_INT],
   })
-  doorCount: number;
+  readonly doorCount: number;
 
   @Prop({
+    type: {
+      _id: {
+        ref: "colors",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, VehiclePostTranslations.EXTERIOR_COLOR],
-    enum: Color,
-    type: String,
   })
-  exteriorColor: Color;
+  readonly exteriorColor: IDefaultI18nName;
 
   @Prop({
+    type: {
+      _id: {
+        ref: "colors",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, VehiclePostTranslations.INTERIOR_COLOR],
-    enum: Color,
-    type: String,
   })
-  interiorColor: Color;
-
-  @Prop()
-  traction: Traction;
-
-  @Prop()
-  topSpeed: string;
+  readonly interiorColor: IDefaultI18nName;
 
   @Prop({
+    type: {
+      _id: {
+        ref: "tractions",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
+  })
+  readonly traction: IDefaultI18nName;
+
+  @Prop()
+  readonly topSpeed: string;
+
+  @Prop({
+    type: {
+      _id: {
+        ref: "fuels",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, VehiclePostTranslations.FUEL_TYPE],
-    enum: Fuel,
-    type: String,
   })
-  fuelType: Fuel;
+  readonly fuelType: IDefaultI18nName;
 
   @Prop({
+    type: {
+      _id: {
+        ref: "vehiclestatus",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, VehiclePostTranslations.STATUS],
-    enum: VehicleStatus,
-    type: String,
   })
-  status: VehicleStatus;
+  readonly status: IDefaultI18nName;
 
   @Prop()
-  use: string;
+  readonly use?: string;
 
-  @Prop({ required: [true, VehiclePostTranslations.ACCESSORIES] })
-  accessories: string[];
+  @Prop([
+    { type: String, required: [true, VehiclePostTranslations.ACCESSORIES] },
+  ])
+  readonly accessories: string[];
 
   @Prop({
-    type: ObjectId,
-    ref: "User",
+    type: {
+      formal: {
+        addressLine1: String,
+        municipality: {
+          _id: {
+            ref: "municipalities",
+            type: Types.ObjectId,
+            unique: false,
+          },
+          value: {
+            type: String,
+          },
+        },
+        province: {
+          _id: {
+            ref: "provinces",
+            type: Types.ObjectId,
+            unique: false,
+          },
+          value: {
+            type: String,
+          },
+        },
+        sector: {
+          _id: {
+            ref: "sectors",
+            type: Types.ObjectId,
+            unique: false,
+          },
+          value: {
+            type: String,
+          },
+        },
+      },
+      informal: String,
+    },
+    required: [true, VehiclePostTranslations.ADDRESS],
+  })
+  readonly address: {
+    formal?: IAddress;
+    informal?: string;
+  };
+
+  @Prop({
+    type: Number,
+    default: 0,
+  })
+  readonly cylinders: number;
+
+  @Prop({
+    type: {
+      _id: {
+        ref: "users",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: String,
+      },
+    },
     required: [true, VehiclePostTranslations.SELLER],
   })
-  seller: string;
+  readonly seller: IDefaultName;
 
   @Prop({
     type: {
@@ -124,13 +268,13 @@ export class VehiclePost extends BaseEntity {
       chargingTime: String,
     },
   })
-  electric: ElectricValues;
+  readonly electric: ElectricValues;
 
   @Prop({
     type: String,
     required: [true, VehiclePostTranslations.PRIMARY_IMAGE],
   })
-  primaryImage: string;
+  readonly primaryImage: string;
 
   @Prop([
     {
@@ -138,7 +282,7 @@ export class VehiclePost extends BaseEntity {
       required: [true, VehiclePostTranslations.SECONDARY_IMAGES],
     },
   ])
-  secondaryImages: string[];
+  readonly secondaryImages: string[];
 }
 
 export const VehiclePostSchema = SchemaFactory.createForClass(VehiclePost);
