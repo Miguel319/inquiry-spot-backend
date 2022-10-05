@@ -420,7 +420,7 @@ export class EmailsService implements IEmailsService {
 </html>
 `;
     const subject = `Contact from ${name}`;
-    const to = "thaisc0098@gmail.com";
+    const to = String(process.env["RECEIVE_EMAIL"]);
     await this.send({ html, subject, to });
   }
 
