@@ -1,10 +1,5 @@
 import { LoggerService } from "@/common/infrastructure/logger";
-import {
-  SchemaVehicleType,
-  VehiclePost,
-  VehiclePostSchema,
-  VehicleTypeSchema,
-} from "@/vehicle/domain";
+
 import {
   VehicleTypeFactory,
   VehicleTypeSchemaFactory,
@@ -14,6 +9,12 @@ import {
   VehicleTypeDtoRepository,
   VehicleTypeEntityRepository,
 } from "@/vehicle/infrastructure/persistence/repositories";
+import {
+  SchemaVehiclePosts,
+  SchemaVehicleType,
+  VehiclePostSchema,
+  VehicleTypeSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
 import { VehicleTypesController } from "@/vehicle/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
@@ -21,6 +22,8 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { VehicleTypesCommandHandlers } from "../commands/handlers";
 import { VehicleTypesEventHandlers } from "../events/handlers";
 import { VehicleTypesQueryHandlers } from "../queries/handlers";
+
+const SharedProviders = [VehicleTypeEntityRepository, VehicleTypeSchemaFactory];
 
 @Module({
   imports: [
@@ -31,23 +34,23 @@ import { VehicleTypesQueryHandlers } from "../queries/handlers";
         schema: SchemaVehicleType,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
     ]),
   ],
   providers: [
-    VehicleTypeEntityRepository,
-    VehicleTypeSchemaFactory,
     EventPublisher,
     VehicleTypeDtoRepository,
     LoggerService,
     VehicleTypeFactory,
     VehiclePostsRepository,
+    ...SharedProviders,
     ...VehicleTypesQueryHandlers,
     ...VehicleTypesCommandHandlers,
     ...VehicleTypesEventHandlers,
   ],
   controllers: [VehicleTypesController],
+  exports: [...SharedProviders],
 })
 export class VehicleTypeModule {}

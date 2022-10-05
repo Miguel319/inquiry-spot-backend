@@ -8,10 +8,10 @@ export class VehiclePostCreatedEventHandler
 {
   constructor(private readonly _logger: LoggerService) {}
 
-  async handle({ vehiclePostId, name }: VehiclePostCreatedEvent) {
+  async handle({ vehiclePostId }: VehiclePostCreatedEvent) {
     this._logger.log(
       "Vehicle post creation",
-      `✅ New vehicle post created successfully! ID = ${vehiclePostId}. Name = ${name.en}`,
+      `✅ New vehicle post created successfully! ID = ${vehiclePostId}.`,
     );
   }
 }

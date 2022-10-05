@@ -1,28 +1,80 @@
-import { Module, Provider } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
-import { UsersModule } from "../../../user/application/modules";
+import { MunicipalityModule } from "@/common/application/modules/address/municipality.module";
+import { ProvinceModule } from "@/common/application/modules/address/province.module";
+import { SectorModule } from "@/common/application/modules/address/sector.module";
+import { ColorModule } from "@/common/application/modules/color.module";
+import { LoggerService } from "@/common/infrastructure/logger";
+
+import {
+  VehiclePostFactory,
+  VehiclePostSchemaFactory,
+} from "@/vehicle/infrastructure/factories";
+import {
+  VehiclePostsRepository,
+  VehiclePostDtoRepository,
+  VehiclePostEntityRepository,
+} from "@/vehicle/infrastructure/persistence/repositories";
+import {
+  SchemaVehiclePosts,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
 import { VehiclePostsController } from "@/vehicle/presentation/controllers";
-import { VehiclePostsRepository } from "@/vehicle/infrastructure/persistence/repositories";
+import { Module, Provider } from "@nestjs/common";
+import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
+import { MongooseModule } from "@nestjs/mongoose";
+import { VehiclePostCommandHandlers } from "../commands/handlers";
+import { VehiclePostEventHandlers } from "../events/handlers";
+import { VehiclePostsQueryHandlers } from "../queries/handlers";
 import { VehiclePostsService } from "../services/implementations";
-import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
+import { FuelModule } from "./fuel.module";
+import { TractionModule } from "./traction.module";
+import { TransmissionModule } from "./transmission.module";
+import { VehicleMakeModule } from "./vehicle-make.module";
+import { VehicleStatusModule } from "./vehicle-status.module";
+import { VehicleTypeModule } from "./vehicle-type.module";
 
 const VehiclePostProvider: Provider = {
   provide: "IVehiclePostsService",
   useClass: VehiclePostsService,
 };
 
+const SharedProviders = [
+  VehiclePostEntityRepository,
+  VehiclePostProvider,
+  VehiclePostSchemaFactory,
+];
+
 @Module({
   imports: [
-    UsersModule,
+    CqrsModule,
+    VehicleTypeModule,
+    ColorModule,
+    SectorModule,
+    MunicipalityModule,
+    ProvinceModule,
+    VehicleMakeModule,
+    TransmissionModule,
+    FuelModule,
+    TractionModule,
+    VehicleStatusModule,
     MongooseModule.forFeature([
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
     ]),
   ],
+  providers: [
+    EventPublisher,
+    VehiclePostDtoRepository,
+    LoggerService,
+    VehiclePostFactory,
+    VehiclePostsRepository,
+    ...SharedProviders,
+    ...VehiclePostsQueryHandlers,
+    ...VehiclePostCommandHandlers,
+    ...VehiclePostEventHandlers,
+  ],
   controllers: [VehiclePostsController],
-  providers: [VehiclePostsRepository, VehiclePostProvider],
-  exports: [VehiclePostsRepository, VehiclePostProvider],
+  exports: [...SharedProviders],
 })
 export class VehiclePostModule {}

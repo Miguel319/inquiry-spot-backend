@@ -147,4 +147,21 @@ export class VehiclePost extends AggregateRoot {
   public setInformalAddress(address: string): void {
     this.post.address.informal = address;
   }
+
+  public updateVehiclePost(updatedPost: IVehiclePost): void {
+    this.post = {
+      ...this.post,
+      accessories: updatedPost?.accessories || this.post.accessories,
+      doorCount: updatedPost.doorCount || this.post.doorCount,
+      cylinders: updatedPost.cylinders || this.post.cylinders,
+      electric: updatedPost.electric || this.post.electric,
+      model: updatedPost.model || this.post.model,
+      price: updatedPost.price || this.post.price,
+      primaryImage: updatedPost.primaryImage || this.post.primaryImage,
+      secondaryImages: updatedPost.secondaryImages || this.post.secondaryImages,
+      topSpeed: updatedPost.topSpeed || this.post.topSpeed,
+      use: updatedPost.use || this.post.use,
+      updatedAt: new Date(),
+    };
+  }
 }

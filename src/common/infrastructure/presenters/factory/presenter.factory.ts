@@ -3,14 +3,12 @@ import { BlogsPresenter } from "../blogs.presenter";
 import { TagsPresenter } from "../../../../tag/infrastructure/dtos/queries/tags.presenter";
 import { UserPresenter } from "../users.presenter";
 import { Document } from "mongoose";
-import { VehiclePostPresenter } from "../../../../vehicle/infrastructure/dtos";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 import { BlogDocument } from "@/blog/infrastructure/persistence/schemas";
 import { PropertyPostPresenter } from "@/real-state/infrastructure/dtos";
 import { Tag, TagDocument } from "@/tag/infrastructure/persistence/schemas";
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
-import { VehiclePost, VehiclePostDocument } from "@/vehicle/domain";
 import {
   PropertyPost,
   PropertyPostDocument,
@@ -29,9 +27,6 @@ export class PresenterFactory {
     if (type === "blog") return BlogsPresenter.create(value as BlogDocument);
 
     if (type === "tag") return TagsPresenter.create(value as Tag);
-
-    if (type === "vehiclePost")
-      return VehiclePostPresenter.create(value as VehiclePost);
 
     if (type === "propertyPost")
       return PropertyPostPresenter.create(value as PropertyPost);
@@ -56,10 +51,6 @@ export class PresenterFactory {
         case "tag":
           return (values as TagDocument[]).map((tag) =>
             TagsPresenter.create(tag),
-          );
-        case "vehiclePost":
-          return (values as VehiclePostDocument[]).map((tag) =>
-            VehiclePostPresenter.create(tag),
           );
         case "propertyPost":
           return (values as PropertyPostDocument[]).map((tag) =>

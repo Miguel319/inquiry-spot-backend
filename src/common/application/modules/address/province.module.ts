@@ -9,7 +9,7 @@ import {
   ProvinceDtoRepository,
   ProvinceEntityRepository,
 } from "@/common/infrastructure/persistence/repositories";
-import { Module } from "@nestjs/common";
+import { Module, Provider } from "@nestjs/common";
 import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ProvincesQueryHandlers } from "../../queries/handlers";
@@ -19,7 +19,6 @@ import {
   SchemaMunicipality,
   SchemaProvince,
 } from "@/common/infrastructure/persistence/schemas";
-import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
 import {
   PropertyPost,
   PropertyPostSchema,
@@ -29,21 +28,21 @@ import { ProvincesCommandHandlers } from "../../commands/handlers";
 import { ProvincesEventHandlers } from "../../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { ProvincesController } from "@/common/presentation/controllers";
+import {
+  SchemaVehiclePosts,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
+import { ProvincesService } from "../../services/implementations";
 
-const providers = [
+const ProvinceServiceProvider: Provider = {
+  provide: "IProvincesService",
+  useClass: ProvincesService,
+};
+
+const SharedProviders = [
   ProvinceEntityRepository,
   ProvinceSchemaFactory,
-  EventPublisher,
-  ProvinceDtoRepository,
-  LoggerService,
-  ProvinceFactory,
-  VehiclePostsRepository,
-  MunicipalitySchemaFactory,
-  MunicipalityEntityRepository,
-  PropertyPostsRepository,
-  ...ProvincesQueryHandlers,
-  ...ProvincesCommandHandlers,
-  ...ProvincesEventHandlers,
+  ProvinceServiceProvider,
 ];
 
 @Module({
@@ -59,8 +58,8 @@ const providers = [
         schema: PropertyPostSchema,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
       {
         name: MunicipalitySchema.name,
@@ -68,8 +67,21 @@ const providers = [
       },
     ]),
   ],
-  providers,
+  providers: [
+    EventPublisher,
+    ProvinceDtoRepository,
+    LoggerService,
+    ProvinceFactory,
+    VehiclePostsRepository,
+    MunicipalitySchemaFactory,
+    MunicipalityEntityRepository,
+    PropertyPostsRepository,
+    ...SharedProviders,
+    ...ProvincesQueryHandlers,
+    ...ProvincesCommandHandlers,
+    ...ProvincesEventHandlers,
+  ],
   controllers: [ProvincesController],
-  exports: providers,
+  exports: [...SharedProviders],
 })
 export class ProvinceModule {}

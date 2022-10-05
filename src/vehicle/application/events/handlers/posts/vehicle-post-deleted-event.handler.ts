@@ -8,10 +8,10 @@ export class VehiclePostDeletedEventHandler
 {
   constructor(private readonly _logger: LoggerService) {}
 
-  async handle({ vehiclePostId, newName }: VehiclePostDeletedEvent) {
+  async handle({ vehiclePostId }: VehiclePostDeletedEvent) {
     this._logger.log(
       "Vehicle post deletion",
-      `✅ New vehicle post deleted successfully! ID = ${vehiclePostId}. Name = ${newName.en} `,
+      `✅ New vehicle post deleted successfully! ID = ${vehiclePostId}.  `,
     );
   }
 }
