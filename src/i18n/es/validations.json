@@ -166,6 +166,20 @@
       "property": "Este municipio está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el municipio."
     }
   },
+  "sector": {
+    "name": {
+      "required": "El nombre del sector es obligatorio.",
+      "duplicate": "El nombre del sector provista ya existe.",
+      "duplicateEs": "El nombre del sector provista en español ya existe.",
+      "duplicateEn": "El nombre del sector provista en inglés ya existe."
+    },
+    "sector": "El sector es obligatorio.",
+    "notFound": "Sector no encontrado.",
+    "forbiddenDeletion": {
+      "vehicle": "Este sector está siendo utilizado por una publicación de vehículo. Por favor, elimine tal publicación antes de eliminar el sector.",
+      "property": "Este sector está siendo utilizado por una publicación de inmueble. Por favor, elimine tal publicación antes de eliminar el sector."
+    }
+  },
   "user": {
     "name": "El nombre es obligatorio.",
     "passwordName": "Contraseña",

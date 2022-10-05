@@ -4,3 +4,4 @@ export { ExceptionTranslations } from "./exceptions.translations";
 export { ColorTranslations } from "./color.translations";
 export { ProvinceTranslations } from "./province.translations";
 export { MunicipalityTranslations } from "./municipality.translations";
+export { SectorTranslations } from "./sector.translations";

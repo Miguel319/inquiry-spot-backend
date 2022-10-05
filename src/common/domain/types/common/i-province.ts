@@ -3,5 +3,5 @@ import { Types } from "mongoose";
 
 export interface IProvince extends IBaseEntity {
   readonly name: string;
-  readonly municipalities: Types.ObjectId[];
+  municipalities: Types.ObjectId[];
 }

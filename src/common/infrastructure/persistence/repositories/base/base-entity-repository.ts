@@ -8,7 +8,7 @@ export abstract class BaseEntityRepository<
   TEntity extends AggregateRoot,
 > extends EntityRepository<TSchema, TEntity> {
   async findByValue(
-    value: string,
+    value: string | Types.ObjectId,
     queryBy: "slug" | "_id",
   ): Promise<TEntity | null> {
     return this.findOne({
@@ -25,12 +25,19 @@ export abstract class BaseEntityRepository<
     queryBy: "slug" | "_id",
     entity: TEntity,
   ): Promise<void> {
-    this.findOneAndReplace(
+    await this.findOneAndReplace(
       {
         [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
       } as FilterQuery<TSchema>,
       entity,
     );
+  }
+
+  async findAndReplace(
+    entityFilterQuery: FilterQuery<TSchema>,
+    entity: TEntity[],
+  ): Promise<void> {
+    await this.findManyAndReplace(entityFilterQuery, entity);
   }
 
   async delete(value: string, queryBy: "slug" | "_id") {
@@ -44,7 +51,7 @@ export abstract class BaseEntityRepository<
     return deletedEntity.deletedCount > 0;
   }
 
-  async findAll(): Promise<TEntity[]> {
-    return this.find({}) as unknown as TEntity[];
+  async findAll(entityFilterQuery?: FilterQuery<TSchema>): Promise<TEntity[]> {
+    return this.find(entityFilterQuery) as unknown as TEntity[];
   }
 }

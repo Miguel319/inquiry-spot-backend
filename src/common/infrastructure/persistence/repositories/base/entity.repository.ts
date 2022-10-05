@@ -67,4 +67,15 @@ export abstract class EntityRepository<
       },
     );
   }
+
+  protected async findManyAndReplace(
+    entityFilterQuery: FilterQuery<TSchema>,
+    entity: TEntity[],
+  ) {
+    return this.entityModel.updateMany(entityFilterQuery, ...entity, {
+      new: true,
+      useFindAndModify: false,
+      lean: true,
+    });
+  }
 }

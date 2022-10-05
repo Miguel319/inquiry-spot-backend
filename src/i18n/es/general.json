@@ -91,5 +91,10 @@
     "create": "¡Municipio creado satisfactoriamente!",
     "update": "¡Municipio actualizado satisfactoriamente!",
     "delete": "¡Municipio eliminado satisfactoriamente!"
+  },
+  "sector": {
+    "create": "¡Sector creado satisfactoriamente!",
+    "update": "¡Sector actualizado satisfactoriamente!",
+    "delete": "¡Sector eliminado satisfactoriamente!"
   }
 }
