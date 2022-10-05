@@ -19,6 +19,7 @@ export enum VehiclePostTranslations {
   SELLER_MONGO_ID = "validations.vehiclePost.sellerMongoId",
   INTERIOR_COLOR = "validations.vehiclePost.interiorColor",
   INVALID_INTERIOR_COLOR = "validations.vehiclePost.invalidInteriorColor",
+  ADDRESS = "validations.vehiclePost.address",
   FUEL_TYPE = "validations.vehiclePost.fuelType",
   INVALID_FUEL_TYPE = "validations.vehiclePost.invalidFuelType",
   STATUS = "validations.vehiclePost.status",
