@@ -6,4 +6,5 @@ export enum EmailTranslations {
   INVALID_FROM_EMAIL = "validations.email.invalidFromEmail",
   RECIPIENT_EMAIL_ADDRESS = "validations.email.recipientEmailAddress",
   INVALID_RECIPIENT_EMAIL_ADDRESS = "validations.email.recipientEmailAddress",
+  SEND_CONTACT_DETAIL = "general.email.sendContactDetail",
 }

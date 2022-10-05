@@ -15,6 +15,7 @@ import {
 import crypto from "crypto";
 import { Request } from "express";
 import { IEmailsService } from "../contracts";
+import { EmailHtml } from "./email.html";
 
 @Injectable()
 export class EmailsService implements IEmailsService {
@@ -29,23 +30,11 @@ export class EmailsService implements IEmailsService {
     this.sendGrid.setApiKey(process.env["SENDGRID_API_KEY"]);
   }
 
-  async sendContactDetails(
-    { name }: { name: string; sender: string },
-    message: string,
-  ): Promise<void> {
-    const receiver = String(process.env.SENDGRID_API_KEY);
-
-    const html = `
-      <div>Hi, there. ${name} wants to contact you!</div>
-
-      <p>${message}</p>
-    `;
-
-    await this.send({
-      html,
-      subject: "Contact",
-      to: receiver,
-    });
+  async sendContactDetails(name: string, message: string): Promise<void> {
+    const subject = `Contact from ${name}`;
+    const to = String(process.env["RECEIVE_EMAIL"]);
+    const html = EmailHtml.getEmailHtml(name, message);
+    await this.send({ html, subject, to });
   }
 
   private buildEmail({
