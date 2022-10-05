@@ -8,7 +8,7 @@ import {
   CreateVehicleMakeCommand,
   DeleteVehicleMakeCommand,
   UpdateVehicleMakeCommand,
-} from "@/vehicle/application/commands/operations/vehicle-makes";
+} from "@/vehicle/application/commands/operations/makes";
 import {
   FetchPaginatedVehicleMakesQuery,
   FetchVehicleMakeByIdQuery,
