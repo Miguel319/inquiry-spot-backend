@@ -25,7 +25,7 @@ export abstract class BaseEntityRepository<
     queryBy: "slug" | "_id",
     entity: TEntity,
   ): Promise<void> {
-    this.findOneAndReplace(
+    await this.findOneAndReplace(
       {
         [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
       } as FilterQuery<TSchema>,
@@ -37,7 +37,7 @@ export abstract class BaseEntityRepository<
     entityFilterQuery: FilterQuery<TSchema>,
     entity: TEntity[],
   ): Promise<void> {
-    this.findManyAndReplace(entityFilterQuery, entity);
+    await this.findManyAndReplace(entityFilterQuery, entity);
   }
 
   async delete(value: string, queryBy: "slug" | "_id") {

@@ -94,7 +94,11 @@ export class UpdateMunicipalityCommandHandler
         municipality,
       );
 
-    municipality.updateMunicipality(dto as unknown as IMunicipality);
+    municipality.updateMunicipality({
+      name: dto.name,
+      province: municipality.getProvince(),
+      sectors: municipality.getSectors(),
+    } as unknown as IMunicipality);
 
     await this._municipalityRepository.findOneAndReplaceByValue(
       _id,

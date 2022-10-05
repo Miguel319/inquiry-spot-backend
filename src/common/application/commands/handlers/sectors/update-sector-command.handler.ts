@@ -11,7 +11,7 @@ import { SectorEntityRepository } from "@/common/infrastructure/persistence/repo
 import { BadRequestException, Inject } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { UpdateSectorCommand } from "../../operations";
+import { UpdateSectorCommand } from "../..";
 
 @CommandHandler(UpdateSectorCommand)
 export class UpdateSectorCommandHandler
@@ -46,7 +46,7 @@ export class UpdateSectorCommandHandler
       );
   }
 
-  async getRelatedMunicipality(
+  private async getRelatedMunicipality(
     sector: Sector,
     dto: UpdateSectorDto,
     i18n: I18nContext,
@@ -90,7 +90,10 @@ export class UpdateSectorCommandHandler
     if (municipality)
       await this._sectorService.mapMunicipalityToSector(municipality, sector);
 
-    sector.updateSector(dto as unknown as ISector);
+    sector.updateSector({
+      name: dto.name,
+      municipality: sector.getMunicipality(),
+    } as unknown as ISector);
 
     await this._sectorRepository.findOneAndReplaceByValue(_id, "_id", sector);
 

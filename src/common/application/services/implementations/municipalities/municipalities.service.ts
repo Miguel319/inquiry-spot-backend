@@ -60,7 +60,7 @@ export class MunicipalitiesService implements IMunicipalitiesService {
       i18n,
     );
 
-    municipality.removeSector(new Types.ObjectId(municipality.getId()));
+    municipality.removeSector(new Types.ObjectId(sector.getId()));
 
     await this._municipalityRepository.findOneAndReplaceByValue(
       municipality.getId(),

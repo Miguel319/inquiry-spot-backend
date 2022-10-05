@@ -11,7 +11,7 @@ export class SectorUpdatedEventHandler
   async handle({ sectorId, newName }: SectorUpdatedEvent) {
     this._logger.log(
       "Sector update",
-      `✅ New sector updated successfully! ID = ${sectorId}. Name = ${newName} `,
+      `✅ Sector updated successfully! ID = ${sectorId}. Name = ${newName} `,
     );
   }
 }

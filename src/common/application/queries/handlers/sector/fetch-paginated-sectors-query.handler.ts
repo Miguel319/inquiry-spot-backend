@@ -25,7 +25,7 @@ export class FetchPaginatedSectorsQueryHandler
   ): PaginationOptions {
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
-      select: "_id name sector createdAt updatedAt",
+      select: "_id name municipality createdAt updatedAt",
     };
   }
 

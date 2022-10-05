@@ -28,6 +28,7 @@ import { SectorsEventHandlers } from "../../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { MunicipalityModule } from "./municipality.module";
 import { SectorsService } from "../../services/implementations";
+import { SectorsController } from "@/common/presentation/controllers";
 
 const SectorServiceProvider: Provider = {
   provide: "ISectorsService",
@@ -71,6 +72,6 @@ const SectorServiceProvider: Provider = {
     ...SectorsCommandHandlers,
     ...SectorsEventHandlers,
   ],
-  //   controllers: [SectorsController],
+  controllers: [SectorsController],
 })
 export class SectorModule {}
