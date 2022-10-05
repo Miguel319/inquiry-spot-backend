@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Types } from "mongoose";
 
 import paginate from "mongoose-paginate-v2";
-import { BaseEntity } from "@/common/domain/entities";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
 import { ElectricValues } from "@/vehicle/domain/types";
 import {
@@ -12,11 +11,12 @@ import {
   IDefaultName,
   Price,
 } from "@/common/domain/types/common";
+import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
 
-export type VehiclePostDocument = VehiclePost & Document;
+export type VehiclePostDocument = VehiclePostSchema & Document;
 
 @Schema({ versionKey: false, timestamps: true, collection: "vehicleposts" })
-export class VehiclePost extends BaseEntity {
+export class VehiclePostSchema extends BaseSchema {
   @Prop({ required: [true, VehiclePostTranslations.DESCRIPTION] })
   readonly description: string;
 
@@ -285,6 +285,7 @@ export class VehiclePost extends BaseEntity {
   readonly secondaryImages: string[];
 }
 
-export const VehiclePostSchema = SchemaFactory.createForClass(VehiclePost);
+export const SchemaVehiclePosts =
+  SchemaFactory.createForClass(VehiclePostSchema);
 
-VehiclePostSchema.plugin(paginate);
+SchemaVehiclePosts.plugin(paginate);

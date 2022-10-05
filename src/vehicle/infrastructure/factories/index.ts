@@ -4,3 +4,4 @@ export * from "./transmissions";
 export * from "./fuels";
 export * from "./tractions";
 export * from "./status";
+export * from "./posts";

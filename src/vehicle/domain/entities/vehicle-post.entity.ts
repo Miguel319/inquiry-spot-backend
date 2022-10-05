@@ -103,4 +103,12 @@ export class VehiclePost extends AggregateRoot {
   public getSecondaryImages(): string[] {
     return this.post.secondaryImages;
   }
+
+  public getCreatedAt(): Date {
+    return this.post.createdAt;
+  }
+
+  public getUpdatedAt(): Date {
+    return this.post.updatedAt;
+  }
 }
