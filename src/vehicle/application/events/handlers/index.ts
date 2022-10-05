@@ -4,3 +4,4 @@ export * from "./transmission";
 export * from "./fuel";
 export * from "./traction";
 export * from "./vehicle-status";
+export * from "./posts";
