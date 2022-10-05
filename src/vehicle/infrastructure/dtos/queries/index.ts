@@ -1,4 +1,4 @@
-export { VehiclePostPresenter } from "./vehicle-post.presenter";
+export { VehiclePostDto } from "./vehicle-post.dto";
 export { VehicleTypeDto } from "./vehicle-type.dto";
 export { VehicleMakeDto } from "./vehicle-make.dto";
 export { TransmissionDto } from "./transmission.dto";
