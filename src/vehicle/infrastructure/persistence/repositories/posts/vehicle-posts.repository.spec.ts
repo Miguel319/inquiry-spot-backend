@@ -1,213 +1,213 @@
-import { getModelToken } from "@nestjs/mongoose";
-import { Test } from "@nestjs/testing";
-import { FilterQuery } from "mongoose";
-import { VehiclePostModel } from "../../../../../../test/support";
+// import { getModelToken } from "@nestjs/mongoose";
+// import { Test } from "@nestjs/testing";
+// import { FilterQuery } from "mongoose";
+// import { VehiclePostModel } from "../../../../../../test/support";
 
-import { getVehiclePostStub } from "../../../../../../test/stubs";
-import { VehiclePostsRepository } from "./vehicle-post.repository";
-import { VehiclePostSchema } from "../../schemas";
+// import { getVehiclePostStub } from "../../../../../../test/stubs";
+// import { VehiclePostsRepository } from "./vehicle-post.repository";
+// import { VehiclePostSchema } from "../../schemas";
 
-describe("VehiclePostsRepository", () => {
-  let vehiclePostsRepository: VehiclePostsRepository;
+// describe("VehiclePostsRepository", () => {
+//   let vehiclePostsRepository: VehiclePostsRepository;
 
-  describe("find operations", () => {
-    let vehiclePostModel: VehiclePostModel;
-    let vehiclePostFilterQuery: FilterQuery<VehiclePostSchema>;
+//   describe("find operations", () => {
+//     let vehiclePostModel: VehiclePostModel;
+//     let vehiclePostFilterQuery: FilterQuery<VehiclePostSchema>;
 
-    beforeEach(async () => {
-      const moduleRef = await Test.createTestingModule({
-        providers: [
-          VehiclePostsRepository,
-          {
-            provide: getModelToken(VehiclePostSchema.name),
-            useClass: VehiclePostModel,
-          },
-        ],
-      }).compile();
+//     beforeEach(async () => {
+//       const moduleRef = await Test.createTestingModule({
+//         providers: [
+//           VehiclePostsRepository,
+//           {
+//             provide: getModelToken(VehiclePostSchema.name),
+//             useClass: VehiclePostModel,
+//           },
+//         ],
+//       }).compile();
 
-      vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(
-        VehiclePostsRepository,
-      );
-      vehiclePostModel = moduleRef.get<VehiclePostModel>(
-        getModelToken(VehiclePostSchema.name),
-      );
+//       vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(
+//         VehiclePostsRepository,
+//       );
+//       vehiclePostModel = moduleRef.get<VehiclePostModel>(
+//         getModelToken(VehiclePostSchema.name),
+//       );
 
-      vehiclePostFilterQuery = {
-        _id: getVehiclePostStub()._id,
-      };
+//       vehiclePostFilterQuery = {
+//         _id: getVehiclePostStub()._id,
+//       };
 
-      jest.clearAllMocks();
-    });
+//       jest.clearAllMocks();
+//     });
 
-    describe("findOne", () => {
-      describe("when findOne is called", () => {
-        let vehiclePost: VehiclePostSchema | null;
+//     describe("findOne", () => {
+//       describe("when findOne is called", () => {
+//         let vehiclePost: VehiclePostSchema | null;
 
-        beforeEach(async () => {
-          jest.spyOn(vehiclePostModel, "findOne");
+//         beforeEach(async () => {
+//           jest.spyOn(vehiclePostModel, "findOne");
 
-          vehiclePost = await vehiclePostsRepository.findOne(
-            vehiclePostFilterQuery,
-          );
-        });
+//           vehiclePost = await vehiclePostsRepository.findOne(
+//             vehiclePostFilterQuery,
+//           );
+//         });
 
-        test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.findOne).toHaveBeenCalledWith(
-            vehiclePostFilterQuery,
-            {
-              __v: 0,
-            },
-          );
-        });
+//         test("then it should call the vehiclePostModel", () => {
+//           expect(vehiclePostModel.findOne).toHaveBeenCalledWith(
+//             vehiclePostFilterQuery,
+//             {
+//               __v: 0,
+//             },
+//           );
+//         });
 
-        test("then it should return a vehiclePost", () => {
-          expect(vehiclePost).toEqual(getVehiclePostStub());
-        });
-      });
-    });
+//         test("then it should return a vehiclePost", () => {
+//           expect(vehiclePost).toEqual(getVehiclePostStub());
+//         });
+//       });
+//     });
 
-    describe("find", () => {
-      describe("when find is called", () => {
-        let vehiclePosts: Array<VehiclePostSchema>;
+//     describe("find", () => {
+//       describe("when find is called", () => {
+//         let vehiclePosts: Array<VehiclePostSchema>;
 
-        beforeEach(async () => {
-          jest.spyOn(vehiclePostModel, "find");
+//         beforeEach(async () => {
+//           jest.spyOn(vehiclePostModel, "find");
 
-          vehiclePosts = await vehiclePostsRepository.find({});
-        });
+//           vehiclePosts = await vehiclePostsRepository.find({});
+//         });
 
-        test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.find).toHaveBeenCalledWith({}, { __v: 0 });
-        });
+//         test("then it should call the vehiclePostModel", () => {
+//           expect(vehiclePostModel.find).toHaveBeenCalledWith({}, { __v: 0 });
+//         });
 
-        test("then it should return a vehiclePost", () => {
-          expect(vehiclePosts).toEqual([
-            getVehiclePostStub(),
-            getVehiclePostStub(),
-          ]);
-        });
-      });
-    });
+//         test("then it should return a vehiclePost", () => {
+//           expect(vehiclePosts).toEqual([
+//             getVehiclePostStub(),
+//             getVehiclePostStub(),
+//           ]);
+//         });
+//       });
+//     });
 
-    describe("findOneAndUpdate", () => {
-      describe("when findOneAndUpdate is called", () => {
-        let vehiclePost: VehiclePostSchema | null;
+//     describe("findOneAndUpdate", () => {
+//       describe("when findOneAndUpdate is called", () => {
+//         let vehiclePost: VehiclePostSchema | null;
 
-        beforeEach(async () => {
-          jest.spyOn(vehiclePostModel, "findOneAndUpdate");
+//         beforeEach(async () => {
+//           jest.spyOn(vehiclePostModel, "findOneAndUpdate");
 
-          vehiclePost = await vehiclePostsRepository.findOneAndUpdate(
-            vehiclePostFilterQuery,
-            getVehiclePostStub(),
-          );
-        });
+//           vehiclePost = await vehiclePostsRepository.findOneAndUpdate(
+//             vehiclePostFilterQuery,
+//             getVehiclePostStub(),
+//           );
+//         });
 
-        test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.findOneAndUpdate).toHaveBeenCalledWith(
-            vehiclePostFilterQuery,
-            getVehiclePostStub(),
-            { new: true },
-          );
-        });
+//         test("then it should call the vehiclePostModel", () => {
+//           expect(vehiclePostModel.findOneAndUpdate).toHaveBeenCalledWith(
+//             vehiclePostFilterQuery,
+//             getVehiclePostStub(),
+//             { new: true },
+//           );
+//         });
 
-        test("then it should return a vehiclePost", () => {
-          expect(vehiclePost).toEqual(getVehiclePostStub());
-        });
-      });
-    });
+//         test("then it should return a vehiclePost", () => {
+//           expect(vehiclePost).toEqual(getVehiclePostStub());
+//         });
+//       });
+//     });
 
-    describe("deleteOne", () => {
-      describe("when deleteOne is called", () => {
-        let result = true;
+//     describe("deleteOne", () => {
+//       describe("when deleteOne is called", () => {
+//         let result = true;
 
-        beforeEach(async () => {
-          jest.spyOn(vehiclePostModel, "deleteOne");
+//         beforeEach(async () => {
+//           jest.spyOn(vehiclePostModel, "deleteOne");
 
-          result = await vehiclePostsRepository.deleteOne(
-            vehiclePostFilterQuery,
-          );
-        });
+//           result = await vehiclePostsRepository.deleteOne(
+//             vehiclePostFilterQuery,
+//           );
+//         });
 
-        test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.deleteOne).toHaveBeenCalledWith(
-            vehiclePostFilterQuery,
-          );
-        });
+//         test("then it should call the vehiclePostModel", () => {
+//           expect(vehiclePostModel.deleteOne).toHaveBeenCalledWith(
+//             vehiclePostFilterQuery,
+//           );
+//         });
 
-        test("then it should return false", () => {
-          expect(result).toEqual(false);
-        });
-      });
-    });
+//         test("then it should return false", () => {
+//           expect(result).toEqual(false);
+//         });
+//       });
+//     });
 
-    describe("deleteMany", () => {
-      describe("when deleteMany is called", () => {
-        let result = true;
+//     describe("deleteMany", () => {
+//       describe("when deleteMany is called", () => {
+//         let result = true;
 
-        beforeEach(async () => {
-          jest.spyOn(vehiclePostModel, "deleteMany");
+//         beforeEach(async () => {
+//           jest.spyOn(vehiclePostModel, "deleteMany");
 
-          result = await vehiclePostsRepository.deleteMany(
-            vehiclePostFilterQuery,
-          );
-        });
+//           result = await vehiclePostsRepository.deleteMany(
+//             vehiclePostFilterQuery,
+//           );
+//         });
 
-        test("then it should call the vehiclePostModel", () => {
-          expect(vehiclePostModel.deleteMany).toHaveBeenCalledWith(
-            vehiclePostFilterQuery,
-          );
-        });
+//         test("then it should call the vehiclePostModel", () => {
+//           expect(vehiclePostModel.deleteMany).toHaveBeenCalledWith(
+//             vehiclePostFilterQuery,
+//           );
+//         });
 
-        test("then it should return false", () => {
-          expect(result).toEqual(false);
-        });
-      });
-    });
-  });
+//         test("then it should return false", () => {
+//           expect(result).toEqual(false);
+//         });
+//       });
+//     });
+//   });
 
-  describe("create operations", () => {
-    beforeEach(async () => {
-      const moduleRef = await Test.createTestingModule({
-        providers: [
-          VehiclePostsRepository,
-          {
-            provide: getModelToken(VehiclePostSchema.name),
-            useValue: VehiclePostModel,
-          },
-        ],
-      }).compile();
+//   describe("create operations", () => {
+//     beforeEach(async () => {
+//       const moduleRef = await Test.createTestingModule({
+//         providers: [
+//           VehiclePostsRepository,
+//           {
+//             provide: getModelToken(VehiclePostSchema.name),
+//             useValue: VehiclePostModel,
+//           },
+//         ],
+//       }).compile();
 
-      vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(
-        VehiclePostsRepository,
-      );
-    });
+//       vehiclePostsRepository = moduleRef.get<VehiclePostsRepository>(
+//         VehiclePostsRepository,
+//       );
+//     });
 
-    describe("create", () => {
-      describe("when create is called", () => {
-        let vehiclePost: VehiclePostSchema;
-        let saveSpy: jest.SpyInstance;
-        let constructorSpy: jest.SpyInstance;
+//     describe("create", () => {
+//       describe("when create is called", () => {
+//         let vehiclePost: VehiclePostSchema;
+//         let saveSpy: jest.SpyInstance;
+//         let constructorSpy: jest.SpyInstance;
 
-        beforeEach(async () => {
-          saveSpy = jest.spyOn(VehiclePostModel.prototype, "save");
-          constructorSpy = jest.spyOn(
-            VehiclePostModel.prototype,
-            "constructorSpy",
-          );
-          vehiclePost = await vehiclePostsRepository.create(
-            getVehiclePostStub(),
-          );
-        });
+//         beforeEach(async () => {
+//           saveSpy = jest.spyOn(VehiclePostModel.prototype, "save");
+//           constructorSpy = jest.spyOn(
+//             VehiclePostModel.prototype,
+//             "constructorSpy",
+//           );
+//           vehiclePost = await vehiclePostsRepository.create(
+//             getVehiclePostStub(),
+//           );
+//         });
 
-        test("then it should call the vehiclePostModel", () => {
-          expect(saveSpy).toHaveBeenCalled();
-          expect(constructorSpy).toHaveBeenCalledWith(getVehiclePostStub());
-        });
+//         test("then it should call the vehiclePostModel", () => {
+//           expect(saveSpy).toHaveBeenCalled();
+//           expect(constructorSpy).toHaveBeenCalledWith(getVehiclePostStub());
+//         });
 
-        test("then it should return a vehiclePost", () => {
-          expect(vehiclePost).toEqual(getVehiclePostStub());
-        });
-      });
-    });
-  });
-});
+//         test("then it should return a vehiclePost", () => {
+//           expect(vehiclePost).toEqual(getVehiclePostStub());
+//         });
+//       });
+//     });
+//   });
+// });
