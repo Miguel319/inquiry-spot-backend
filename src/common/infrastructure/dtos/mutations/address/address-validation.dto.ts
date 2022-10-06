@@ -5,7 +5,6 @@ import { SharedTranslations } from "@/common/domain/types";
 import { Types } from "mongoose";
 
 export class AddressValidationDto {
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(SharedTranslations.ADDRESS__ADDRESS_LINE_1),
   })

@@ -92,6 +92,13 @@ export class VehiclePostSchema extends BaseSchema {
 
   @Prop({
     type: Number,
+    required: [true, VehiclePostTranslations.YEAR],
+    isInteger: true,
+  })
+  readonly year: number;
+
+  @Prop({
+    type: Number,
     required: [true, VehiclePostTranslations.DOOR_COUNT],
     isInteger: [true, VehiclePostTranslations.DOOR_COUNT_INT],
   })

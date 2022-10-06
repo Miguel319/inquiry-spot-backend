@@ -10,6 +10,7 @@ export enum VehiclePostTranslations {
   MODEL = "validations.vehiclePost.model",
   TYPE = "validations.vehiclePost.type",
   INVALID_TYPE = "validations.vehiclePost.invalidType",
+  YEAR = "validations.vehiclePost.year",
   PRICE = "validations.vehiclePost.price",
   DOOR_COUNT = "validations.vehiclePost.doorCount",
   DOOR_COUNT_INT = "validations.vehiclePost.doorCountInt",

@@ -210,6 +210,7 @@
     "price": "The price is mandatory.",
     "doorCount": "The door count is mandatory.",
     "address": "The address is mandatory.",
+    "year": "The year is mandatory.",
     "isFormalAddress": "The is formal address field is mandatory.",
     "formalAddress": "The formal address is mandatory.",
     "informalAddress": "The informal address is mandatory.",

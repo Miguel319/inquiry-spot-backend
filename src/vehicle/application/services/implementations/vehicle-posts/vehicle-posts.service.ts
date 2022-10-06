@@ -279,7 +279,7 @@ export class VehiclePostsService implements IVehiclePostsService {
 
     const municipalityId = dto?.formalAddress
       ? dto.formalAddress.municipality._id
-      : (post.getAddress().formal?.municipality as unknown as string);
+      : (post.getAddress().formal?.municipality._id as unknown as string);
 
     const municipality = await this._municipalyService.findById(
       municipalityId,
@@ -288,7 +288,7 @@ export class VehiclePostsService implements IVehiclePostsService {
 
     const provinceId = dto?.formalAddress
       ? dto.formalAddress.province._id
-      : (post.getAddress().formal?.province._id as unknown as string);
+      : (post.getAddress?.().formal?.province._id as unknown as string);
 
     const province = await this._provincesService.findById(provinceId, i18n);
 

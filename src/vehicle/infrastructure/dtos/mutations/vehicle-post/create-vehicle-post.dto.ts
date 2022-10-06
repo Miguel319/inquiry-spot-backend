@@ -36,6 +36,14 @@ export class CreateVehiclePostDto {
   readonly make: Types.ObjectId;
 
   @IsNotEmpty({
+    message: i18nValidationMessage(VehiclePostTranslations.YEAR),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(VehiclePostTranslations.YEAR),
+  })
+  readonly year: number;
+
+  @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.MODEL),
   })
   @IsDefined({

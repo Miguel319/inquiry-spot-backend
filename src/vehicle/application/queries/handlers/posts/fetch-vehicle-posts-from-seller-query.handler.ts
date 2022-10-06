@@ -8,11 +8,11 @@ import { VehiclePostDto } from "@/vehicle/infrastructure/dtos";
 import { VehiclePostDtoRepository } from "@/vehicle/infrastructure/persistence/repositories";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
-import { FetchPaginatedVehiclePostsQuery } from "../..";
+import { FetchVehiclePostsFromSellerQuery } from "../..";
 
-@QueryHandler(FetchPaginatedVehiclePostsQuery)
-export class FetchPaginatedVehiclePostsQueryHandler
-  implements IQueryHandler<FetchPaginatedVehiclePostsQuery>
+@QueryHandler(FetchVehiclePostsFromSellerQuery)
+export class FetchVehiclePostsFromSellerQueryHandler
+  implements IQueryHandler<FetchVehiclePostsFromSellerQuery>
 {
   constructor(
     private readonly _vehiclePostDtoRepository: VehiclePostDtoRepository,
@@ -33,9 +33,13 @@ export class FetchPaginatedVehiclePostsQueryHandler
   async execute({
     query,
     i18n,
-  }: FetchPaginatedVehiclePostsQuery): Promise<PaginatedQuery<VehiclePostDto> | null> {
+    seller,
+  }: FetchVehiclePostsFromSellerQuery): Promise<PaginatedQuery<VehiclePostDto> | null> {
     const queryToSend = this.getPaginationQueryOptions(query, i18n);
 
-    return this._vehiclePostDtoRepository.getPaginated({}, queryToSend);
+    return this._vehiclePostDtoRepository.getPaginated(
+      { "seller._id": seller },
+      queryToSend,
+    );
   }
 }

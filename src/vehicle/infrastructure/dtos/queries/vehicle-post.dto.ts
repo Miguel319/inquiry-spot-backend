@@ -23,6 +23,7 @@ export class VehiclePostDto extends Presenter {
   readonly topSpeed: string;
   fuelType: IDefaultI18nName;
   status: IDefaultI18nName;
+  readonly year: number;
   readonly use?: string;
   readonly accessories: string[];
   readonly address: {

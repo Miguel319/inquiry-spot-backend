@@ -19,6 +19,7 @@ export class UpdateVehiclePostDto {
   @IsMongoId({ message: SharedTranslations.MONGO_ID })
   readonly transmission: Types.ObjectId;
   readonly price: Price;
+  readonly year: number;
 
   @IsMongoId({ message: SharedTranslations.MONGO_ID })
   readonly exteriorColor: Types.ObjectId;

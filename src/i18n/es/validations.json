@@ -210,6 +210,7 @@
     "price": "El precio es obligatorio.",
     "doorCount": "El número de puertas es obligatorio.",
     "address": "La dirección es obligatoria.",
+    "year": "El año es obligatorio.",
     "isFormalAddress": "Debe especificar si la dirección es formal.",
     "formalAddress": "La dirección formal es obligatoria.",
     "informalAddress": "La dirección informal es obligatoria.",

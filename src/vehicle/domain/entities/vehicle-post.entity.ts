@@ -36,6 +36,10 @@ export class VehiclePost extends AggregateRoot {
     return this.post.type;
   }
 
+  public getYear(): number {
+    return this.post.year;
+  }
+
   public getTransmission(): IDefaultI18nName {
     return this.post.transmission;
   }

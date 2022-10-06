@@ -17,6 +17,7 @@ export class VehiclePostSchemaFactory
       description: vehiclePost.getDescription(),
       doorCount: vehiclePost.getDoorCount(),
       electric: vehiclePost.getElectric(),
+      year: vehiclePost.getYear(),
       exteriorColor: vehiclePost.getExteriorColor(),
       fuelType: vehiclePost.getFuelType(),
       interiorColor: vehiclePost.getInteriorColor(),
