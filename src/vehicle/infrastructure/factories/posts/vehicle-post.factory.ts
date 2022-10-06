@@ -88,8 +88,6 @@ export class VehiclePostFactory implements EntityFactory<VehiclePost> {
       "create",
     );
 
-    console.log("make", vehiclePost.getMake().value);
-
     await this._vehiclePostModel.create(
       this._vehiclePostFactory.create(vehiclePost),
     );
