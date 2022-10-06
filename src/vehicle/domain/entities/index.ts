@@ -4,3 +4,4 @@ export { Transmission } from "./transmission.entity";
 export { Fuel } from "./fuel.entity";
 export { Traction } from "./traction.entity";
 export { VehicleStatus } from "./vehicle-status.entity";
+export { VehiclePost } from "./vehicle-post.entity";

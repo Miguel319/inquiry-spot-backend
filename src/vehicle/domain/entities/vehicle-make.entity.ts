@@ -26,6 +26,10 @@ export class VehicleMake extends AggregateRoot {
     return this.make.updatedAt;
   }
 
+  public isDifferent(key: keyof IVehicleMake, value: unknown) {
+    String(this.make[key]) !== value;
+  }
+
   public updateMake(updatedType: IVehicleMake): void {
     this.make = {
       ...this.make,

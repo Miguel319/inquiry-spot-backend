@@ -5,8 +5,9 @@
     "mongoId": "El valor provisto para '{field}' es inválido.",
     "address": {
       "addressLine1": "La línea 1 (calle y número) es obligatoria.",
-      "city": "La ciudad es obligatoria.",
-      "province": "La provincia es obligatoria."
+      "municipality": "El municipio es obligatorio.",
+      "province": "La provincia es obligatoria.",
+      "sector": "El sector es obligatorio."
     },
     "unauthorized": "No está autorizado(a) a realizar esta operación.",
     "paginationLimit": "No puede filtrar más de 150 elementos a la vez (por página).",
@@ -208,6 +209,11 @@
     "invalidType": "El tipo de vehículo provisto es inválido.",
     "price": "El precio es obligatorio.",
     "doorCount": "El número de puertas es obligatorio.",
+    "address": "La dirección es obligatoria.",
+    "year": "El año es obligatorio.",
+    "isFormalAddress": "Debe especificar si la dirección es formal.",
+    "formalAddress": "La dirección formal es obligatoria.",
+    "informalAddress": "La dirección informal es obligatoria.",
     "doorCountInt": "El número de puertas debe ser un valor numérico.",
     "exteriorColor": "El color exterior es obligatorio.",
     "seller": "El vendedor es obligatorio.",

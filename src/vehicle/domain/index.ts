@@ -1,1 +1,1 @@
-export * from "../infrastructure/persistence/schemas";
+export * from "./entities";

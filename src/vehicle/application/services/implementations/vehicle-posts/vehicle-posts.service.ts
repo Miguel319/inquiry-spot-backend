@@ -1,158 +1,356 @@
 import {
-  Inject,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from "@nestjs/common";
-import { I18nContext, I18nService } from "nestjs-i18n";
+  IMunicipalitiesService,
+  IProvincesService,
+  ISectorsService,
+} from "@/common/application/services/contracts";
+import { ColorTranslations } from "@/common/application/translations";
+import { ColorEntityRepository } from "@/common/infrastructure/persistence/repositories";
 import {
-  getPaginationOptions,
-  PaginatedQuery,
-  PaginationOptions,
-} from "@/common/infrastructure/util";
-import { VehiclePostsRepository } from "@/vehicle/infrastructure/persistence/repositories";
-import { IUsersService } from "@/user/application/services/contracts";
-import { UserTranslations } from "@/user/application/translations";
-import { VehiclePost, VehiclePostDocument } from "@/vehicle/domain";
-import { UserDocument } from "@/user/infrastructure/persistence/schemas";
-import { PaginationQuery, SharedTranslations } from "@/common/domain/types";
+  FuelTranslations,
+  TractionTranslations,
+  TransmissionTranslations,
+  VehicleMakeTranslations,
+  VehiclePostTranslations,
+  VehicleStatusTranslations,
+  VehicleTypeTranslations,
+} from "@/vehicle/application/translations";
+import { VehiclePost } from "@/vehicle/domain/entities";
+import { UpdateVehiclePostDto } from "@/vehicle/infrastructure/dtos";
+import {
+  FuelEntityRepository,
+  TractionEntityRepository,
+  TransmissionEntityRepository,
+  VehicleMakesEntityRepository,
+  VehiclePostEntityRepository,
+  VehicleStatusEntityRepository,
+  VehicleTypeEntityRepository,
+} from "@/vehicle/infrastructure/persistence/repositories";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { Types } from "mongoose";
+import { I18nContext, I18nService } from "nestjs-i18n";
 import { IVehiclePostsService } from "../../contracts";
-import { VehiclePostTranslations } from "@/vehicle/application/translations";
 
 @Injectable()
 export class VehiclePostsService implements IVehiclePostsService {
   constructor(
-    private readonly _vehiclePostRepo: VehiclePostsRepository,
+    private readonly _vehiclePostEntityRepository: VehiclePostEntityRepository,
+    private readonly _makeRepository: VehicleMakesEntityRepository,
+    private readonly _transmissionRepository: TransmissionEntityRepository,
+    private readonly _tractionRepository: TractionEntityRepository,
+    private readonly _statusRepository: VehicleStatusEntityRepository,
+    private readonly _colorRepository: ColorEntityRepository,
+    private readonly _fuelRepository: FuelEntityRepository,
+    private readonly _vehicleTypeRepository: VehicleTypeEntityRepository,
+    @Inject("ISectorsService") private readonly _sectorService: ISectorsService,
+    @Inject("IProvincesService")
+    private readonly _provincesService: IProvincesService,
+    @Inject("IMunicipalitiesService")
+    private readonly _municipalyService: IMunicipalitiesService,
     private readonly _i18n: I18nService,
-    @Inject("IUsersService") private readonly _usersService: IUsersService,
   ) {}
 
-  private getVehiclePostPaginationOptions(
-    paginationQuery: PaginationQuery,
-    i18n?: I18nContext,
-  ): PaginationOptions {
-    return {
-      ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
-      select:
-        "_id make model price type transmission use status seller primaryImage createdAt",
-      sort: "-createdAt",
-    };
+  async mapToEntities(
+    vehiclePost: VehiclePost,
+    i18n: I18nContext,
+    operation: "create" | "edit",
+    dto?: UpdateVehiclePostDto | undefined,
+  ): Promise<void> {
+    if (operation === "create") await this.mapToCreation(vehiclePost, i18n);
+    else await this.mapToUpdate(vehiclePost, i18n, dto);
   }
 
-  async findAll(
-    paginationQuery: PaginationQuery,
-    i18n?: I18nContext,
-  ): Promise<PaginatedQuery<VehiclePostDocument>> {
-    const options: PaginationOptions = this.getVehiclePostPaginationOptions(
-      paginationQuery,
-      i18n as I18nContext,
+  private async mapToCreation(
+    vehiclePost: VehiclePost,
+    i18n: I18nContext,
+  ): Promise<void> {
+    await this.mapToAddress(vehiclePost, i18n);
+    await this.mapToExteriorColor(vehiclePost, i18n);
+    await this.mapToInteriorColor(vehiclePost, i18n);
+    await this.mapToFuelType(vehiclePost, i18n);
+    await this.mapToType(vehiclePost, i18n);
+    await this.mapToMake(vehiclePost, i18n);
+    await this.mapToStatus(vehiclePost, i18n);
+    await this.mapToTraction(vehiclePost, i18n);
+    await this.mapToTransmission(vehiclePost, i18n);
+  }
+
+  private async mapToUpdate(
+    vehiclePost: VehiclePost,
+    i18n: I18nContext,
+    dto: UpdateVehiclePostDto | undefined,
+  ): Promise<void> {
+    if (dto?.make) await this.mapToMake(vehiclePost, i18n, dto);
+    if (dto?.formalAddress || dto?.informalAddress)
+      await this.mapToAddress(vehiclePost, i18n, dto);
+
+    if (dto?.exteriorColor)
+      await this.mapToExteriorColor(vehiclePost, i18n, dto);
+
+    if (dto?.status) await this.mapToStatus(vehiclePost, i18n, dto);
+    if (dto?.interiorColor)
+      await this.mapToInteriorColor(vehiclePost, i18n, dto);
+
+    if (dto?.type) await this.mapToType(vehiclePost, i18n);
+
+    if (dto?.fuelType) await this.mapToFuelType(vehiclePost, i18n, dto);
+
+    if (dto?.traction) await this.mapToTraction(vehiclePost, i18n, dto);
+
+    if (dto?.transmission) await this.mapToTransmission(vehiclePost, i18n, dto);
+  }
+
+  async findById(_id: string, i18n: I18nContext): Promise<VehiclePost> {
+    const post = await this._vehiclePostEntityRepository.findByValue(
+      _id,
+      "_id",
     );
 
-    return (await this._vehiclePostRepo.paginate(
-      {},
-      options,
-    )) as unknown as PaginatedQuery<VehiclePostDocument>;
-  }
-
-  async findLastFiveVehicles(): Promise<VehiclePostDocument[]> {
-    return this._vehiclePostRepo.findLimited({}, 5);
-  }
-
-  async findById(
-    _id: string,
-    i18n?: I18nContext,
-  ): Promise<VehiclePostDocument> {
-    const vehiclePost: VehiclePost | null = await this._vehiclePostRepo.findOne(
-      { _id },
-    );
-
-    if (!vehiclePost)
+    if (!post)
       throw new NotFoundException(
         i18n
           ? i18n.t(VehiclePostTranslations.NOT_FOUND)
           : this._i18n.t(VehiclePostTranslations.NOT_FOUND),
       );
 
-    return vehiclePost as VehiclePostDocument;
+    return post;
   }
 
-  private async findCurrentUser(i18n: I18nContext): Promise<UserDocument> {
-    const user = (await this._usersService.findCurrent(i18n)) as UserDocument;
+  private async mapToMake(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.make ? dto.make : post.getMake()._id;
 
-    if (!user)
+    const make = await this._makeRepository.findByValue(id, "_id");
+
+    if (!make)
       throw new NotFoundException(
         i18n
-          ? i18n.t(UserTranslations.NOT_FOUND)
-          : this._i18n.t(UserTranslations.NOT_FOUND),
+          ? i18n.t(VehicleMakeTranslations.NOT_FOUND)
+          : this._i18n.t(VehicleMakeTranslations.NOT_FOUND),
       );
 
-    return user;
-  }
-
-  async create(
-    vehiclePost: VehiclePost,
-    i18n?: I18nContext,
-  ): Promise<VehiclePostDocument> {
-    const user = await this.findCurrentUser(i18n as I18nContext);
-
-    if (!user.vehiclePostsPublished) user.vehiclePostsPublished = [];
-
-    const newVehiclePost = await this._vehiclePostRepo.create({
-      ...vehiclePost,
-      seller: user._id,
+    post.setMake({
+      _id: new Types.ObjectId(make.getId()),
+      value: make.getName(),
     });
-
-    user.vehiclePostsPublished.push(newVehiclePost._id);
-
-    await user.save();
-
-    return newVehiclePost;
   }
 
-  async update(
-    _id: string,
-    vehiclePost: VehiclePost,
-    i18n?: I18nContext,
-  ): Promise<VehiclePostDocument | null> {
-    const user = await this.findCurrentUser(i18n as I18nContext);
+  private async mapToType(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.type ? dto.type : post.getType()._id;
 
-    const vehiclePostFound = await this.findById(_id, i18n);
+    const type = await this._vehicleTypeRepository.findByValue(id, "_id");
 
-    if (vehiclePostFound.seller !== user._id)
-      throw new UnauthorizedException(
+    if (!type)
+      throw new NotFoundException(
         i18n
-          ? i18n.t(SharedTranslations.UNAUTHORIZED)
-          : this._i18n.t(SharedTranslations.UNAUTHORIZED),
+          ? i18n.t(VehicleTypeTranslations.NOT_FOUND)
+          : this._i18n.t(VehicleTypeTranslations.NOT_FOUND),
       );
 
-    return this._vehiclePostRepo.findOneAndUpdate({ _id }, vehiclePost);
+    post.setType({
+      _id: new Types.ObjectId(type.getId()),
+      value: type.getName(),
+    });
   }
 
-  async delete(_id: string, i18n?: I18nContext): Promise<boolean> {
-    const user = await this.findCurrentUser(i18n as I18nContext);
+  private async mapToTransmission(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.transmission || post.getTransmission()._id;
 
-    const vehiclePost = await this.findById(_id, i18n);
-
-    if (String(vehiclePost.seller) !== String(user._id))
-      throw new UnauthorizedException(
-        i18n
-          ? i18n.t(SharedTranslations.UNAUTHORIZED)
-          : this._i18n.t(SharedTranslations.UNAUTHORIZED),
-      );
-
-    return this._vehiclePostRepo.deleteOne({ _id });
-  }
-
-  async findAllFromSeller(
-    seller: string,
-    paginationQuery: PaginationQuery,
-    i18n?: I18nContext,
-  ): Promise<VehiclePost[]> {
-    const options: PaginationOptions = this.getVehiclePostPaginationOptions(
-      paginationQuery,
-      i18n as I18nContext,
+    const transmission = await this._transmissionRepository.findByValue(
+      id,
+      "_id",
     );
 
-    return this._vehiclePostRepo.paginate({ seller }, options);
+    if (!transmission)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(TransmissionTranslations.NOT_FOUND)
+          : this._i18n.t(TransmissionTranslations.NOT_FOUND),
+      );
+
+    post.setTransmission({
+      _id: new Types.ObjectId(transmission.getId()),
+      value: transmission.getName(),
+    });
+  }
+
+  private async mapToFuelType(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.fuelType || post.getFuelType()._id;
+
+    const fuel = await this._fuelRepository.findByValue(id, "_id");
+
+    if (!fuel)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(FuelTranslations.NOT_FOUND)
+          : this._i18n.t(FuelTranslations.NOT_FOUND),
+      );
+
+    post.setFuelType({
+      _id: new Types.ObjectId(fuel.getId()),
+      value: fuel.getName(),
+    });
+  }
+
+  private async mapToTraction(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.traction || post.getTraction()._id;
+
+    const traction = await this._tractionRepository.findByValue(id, "_id");
+
+    if (!traction)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(TractionTranslations.NOT_FOUND)
+          : this._i18n.t(TractionTranslations.NOT_FOUND),
+      );
+
+    post.setTraction({
+      _id: new Types.ObjectId(traction.getId()),
+      value: traction.getName(),
+    });
+  }
+
+  private async mapToStatus(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.status || post.getStatus()._id;
+
+    const status = await this._statusRepository.findByValue(id, "_id");
+
+    if (!status)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(VehicleStatusTranslations.NOT_FOUND)
+          : this._i18n.t(VehicleStatusTranslations.NOT_FOUND),
+      );
+
+    post.setStatus({
+      _id: new Types.ObjectId(status.getId()),
+      value: status.getName(),
+    });
+  }
+
+  private async mapToExteriorColor(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.exteriorColor || post.getExteriorColor()._id;
+
+    const color = await this._colorRepository.findByValue(id, "_id");
+
+    if (!color)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(ColorTranslations.NOT_FOUND)
+          : this._i18n.t(ColorTranslations.NOT_FOUND),
+      );
+
+    post.setExteriorColor({
+      _id: new Types.ObjectId(color.getId()),
+      value: color.getName(),
+    });
+  }
+
+  private async mapToInteriorColor(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.interiorColor || post.getInteriorColor()._id;
+
+    const color = await this._colorRepository.findByValue(id, "_id");
+
+    if (!color)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(ColorTranslations.NOT_FOUND)
+          : this._i18n.t(ColorTranslations.NOT_FOUND),
+      );
+
+    post.setInteriorColor({
+      _id: new Types.ObjectId(color.getId()),
+      value: color.getName(),
+    });
+  }
+
+  private async mapToFormalAddress(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const sectorId = dto?.formalAddress
+      ? dto.formalAddress.sector._id
+      : (post.getAddress().formal?.sector._id as unknown as string);
+
+    const sector = await this._sectorService.findById(sectorId, i18n);
+
+    const municipalityId = dto?.formalAddress
+      ? dto.formalAddress.municipality._id
+      : (post.getAddress().formal?.municipality._id as unknown as string);
+
+    const municipality = await this._municipalyService.findById(
+      municipalityId,
+      i18n,
+    );
+
+    const provinceId = dto?.formalAddress
+      ? dto.formalAddress.province._id
+      : (post.getAddress?.().formal?.province._id as unknown as string);
+
+    const province = await this._provincesService.findById(provinceId, i18n);
+
+    post.setFormalAddress({
+      addressLine1: post.getAddress().formal?.addressLine1 as unknown as string,
+      municipality: {
+        _id: new Types.ObjectId(municipality.getId()),
+        value: municipality.getName(),
+      },
+      province: {
+        _id: new Types.ObjectId(province.getId()),
+        value: province.getName(),
+      },
+      sector: {
+        _id: new Types.ObjectId(sector.getId()),
+        value: sector.getName(),
+      },
+    });
+  }
+
+  private async mapToAddress(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const isFormalAddress =
+      dto?.isFormalAddress || Boolean(post.getAddress().formal);
+
+    if (isFormalAddress) {
+      await this.mapToFormalAddress(post, i18n, dto);
+
+      return;
+    }
+
+    post.setInformalAddress(post.getAddress().informal as string);
   }
 }

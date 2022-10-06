@@ -17,7 +17,6 @@ import {
   MunicipalitySchema,
   SchemaMunicipality,
 } from "@/common/infrastructure/persistence/schemas";
-import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
 import {
   PropertyPost,
   PropertyPostSchema,
@@ -29,11 +28,21 @@ import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence
 import { MunicipalityModule } from "./municipality.module";
 import { SectorsService } from "../../services/implementations";
 import { SectorsController } from "@/common/presentation/controllers";
+import {
+  SchemaVehiclePosts,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
 
 const SectorServiceProvider: Provider = {
   provide: "ISectorsService",
   useClass: SectorsService,
 };
+
+const SharedProviders = [
+  SectorServiceProvider,
+  SectorEntityRepository,
+  SectorSchemaFactory,
+];
 
 @Module({
   imports: [
@@ -49,8 +58,8 @@ const SectorServiceProvider: Provider = {
         schema: PropertyPostSchema,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
       {
         name: MunicipalitySchema.name,
@@ -59,19 +68,18 @@ const SectorServiceProvider: Provider = {
     ]),
   ],
   providers: [
-    SectorEntityRepository,
-    SectorSchemaFactory,
     EventPublisher,
     SectorDtoRepository,
-    SectorServiceProvider,
     LoggerService,
     SectorFactory,
     VehiclePostsRepository,
     PropertyPostsRepository,
+    ...SharedProviders,
     ...SectorsQueryHandlers,
     ...SectorsCommandHandlers,
     ...SectorsEventHandlers,
   ],
   controllers: [SectorsController],
+  exports: [...SharedProviders],
 })
 export class SectorModule {}

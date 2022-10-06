@@ -1,10 +1,5 @@
 import { LoggerService } from "@/common/infrastructure/logger";
-import {
-  SchemaTransmission,
-  TransmissionSchema,
-  VehiclePost,
-  VehiclePostSchema,
-} from "@/vehicle/domain";
+
 import {
   TransmissionFactory,
   TransmissionSchemaFactory,
@@ -14,6 +9,12 @@ import {
   TransmissionDtoRepository,
   TransmissionEntityRepository,
 } from "@/vehicle/infrastructure/persistence/repositories";
+import {
+  SchemaTransmission,
+  SchemaVehiclePosts,
+  TransmissionSchema,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
 import { TransmissionController } from "@/vehicle/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
@@ -21,6 +22,11 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { TransmissionCommandHandlers } from "../commands/handlers";
 import { TransmissionEventHandlers } from "../events/handlers";
 import { TransmissionQueryHandlers } from "../queries/handlers";
+
+const SharedProviders = [
+  TransmissionEntityRepository,
+  TransmissionSchemaFactory,
+];
 
 @Module({
   imports: [
@@ -31,22 +37,22 @@ import { TransmissionQueryHandlers } from "../queries/handlers";
         schema: SchemaTransmission,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
     ]),
   ],
   providers: [
-    TransmissionEntityRepository,
-    TransmissionSchemaFactory,
     TransmissionDtoRepository,
     VehiclePostsRepository,
     TransmissionFactory,
     LoggerService,
+    ...SharedProviders,
     ...TransmissionCommandHandlers,
     ...TransmissionEventHandlers,
     ...TransmissionQueryHandlers,
   ],
   controllers: [TransmissionController],
+  exports: [...SharedProviders],
 })
 export class TransmissionModule {}

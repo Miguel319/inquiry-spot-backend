@@ -1,7 +1,8 @@
 import { IsNotEmpty } from "../../../decorators";
-import { IsDefined } from "class-validator";
+import { IsDefined, IsMongoId } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { SharedTranslations } from "@/common/domain/types";
+import { Types } from "mongoose";
 
 export class AddressValidationDto {
   @IsNotEmpty({
@@ -10,21 +11,32 @@ export class AddressValidationDto {
   @IsDefined({
     message: i18nValidationMessage(SharedTranslations.ADDRESS__ADDRESS_LINE_1),
   })
-  readonly addressLine1: string;
+  readonly addressLine1: Types.ObjectId;
 
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
-    message: i18nValidationMessage(SharedTranslations.ADDRESS__CITY),
+    message: i18nValidationMessage(SharedTranslations.ADDRESS__MUNICIPALITY),
   })
   @IsDefined({
-    message: i18nValidationMessage(SharedTranslations.ADDRESS__CITY),
+    message: i18nValidationMessage(SharedTranslations.ADDRESS__MUNICIPALITY),
   })
-  readonly city: string;
+  readonly municipality: Types.ObjectId;
 
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(SharedTranslations.ADDRESS__PROVINCE),
   })
   @IsDefined({
     message: i18nValidationMessage(SharedTranslations.ADDRESS__PROVINCE),
   })
-  readonly province: string;
+  readonly province: Types.ObjectId;
+
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  @IsNotEmpty({
+    message: i18nValidationMessage(SharedTranslations.ADDRESS__SECTOR),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(SharedTranslations.ADDRESS__SECTOR),
+  })
+  readonly sector: Types.ObjectId;
 }

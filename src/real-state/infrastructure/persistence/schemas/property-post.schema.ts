@@ -122,7 +122,7 @@ export class PropertyPost extends BaseEntity {
       },
       city: {
         type: String,
-        required: [true, SharedTranslations.ADDRESS__CITY],
+        required: [true],
       },
       province: {
         type: String,

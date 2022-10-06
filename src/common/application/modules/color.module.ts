@@ -15,7 +15,6 @@ import {
   ColorSchema,
   SchemaColor,
 } from "@/common/infrastructure/persistence/schemas";
-import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
 import {
   PropertyPost,
   PropertyPostSchema,
@@ -25,6 +24,12 @@ import { ColorsCommandHandlers } from "../commands/handlers";
 import { ColorsEventHandlers } from "../events/handlers";
 import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { ColorsController } from "@/common/presentation/controllers";
+import {
+  SchemaVehiclePosts,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
+
+const SharedProviders = [ColorEntityRepository, ColorSchemaFactory];
 
 @Module({
   imports: [
@@ -39,24 +44,24 @@ import { ColorsController } from "@/common/presentation/controllers";
         schema: PropertyPostSchema,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
     ]),
   ],
   providers: [
-    ColorEntityRepository,
-    ColorSchemaFactory,
     EventPublisher,
     ColorDtoRepository,
     LoggerService,
     ColorFactory,
     VehiclePostsRepository,
     PropertyPostsRepository,
+    ...SharedProviders,
     ...ColorsQueryHandlers,
     ...ColorsCommandHandlers,
     ...ColorsEventHandlers,
   ],
   controllers: [ColorsController],
+  exports: [...SharedProviders],
 })
 export class ColorModule {}

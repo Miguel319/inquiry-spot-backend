@@ -18,7 +18,6 @@ import {
   SchemaMunicipality,
   SchemaProvince,
 } from "@/common/infrastructure/persistence/schemas";
-import { VehiclePost, VehiclePostSchema } from "@/vehicle/domain";
 import {
   PropertyPost,
   PropertyPostSchema,
@@ -30,16 +29,14 @@ import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence
 import { ProvinceModule } from "./province.module";
 import { MunicipalitiesController } from "@/common/presentation/controllers/municipalities";
 import { MunicipalitiesService } from "../../services/implementations";
-import { ProvincesService } from "../../services/implementations/provinces";
+import {
+  SchemaVehiclePosts,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
 
 const MunicipalityServiceProvider: Provider = {
   provide: "IMunicipalitiesService",
   useClass: MunicipalitiesService,
-};
-
-const ProvinceServiceProvider: Provider = {
-  provide: "IProvincesService",
-  useClass: ProvincesService,
 };
 
 const SharedProviders = [
@@ -65,8 +62,8 @@ const SharedProviders = [
         schema: PropertyPostSchema,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
       {
         name: ProvinceSchema.name,
@@ -76,7 +73,6 @@ const SharedProviders = [
   ],
   providers: [
     EventPublisher,
-    ProvinceServiceProvider,
     VehiclePostsRepository,
     LoggerService,
     PropertyPostsRepository,

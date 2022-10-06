@@ -1,88 +1,65 @@
-import { Color } from "@/common/domain/types";
+import { IAddress, Price, SharedTranslations } from "@/common/domain/types";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
-import {
-  Fuel,
-  Transmission,
-  VehicleMake,
-  VehicleStatus,
-  VehicleType,
-} from "@/vehicle/domain/types";
-import { IsArray, IsEnum, ValidateIf, ValidateNested } from "class-validator";
+import { VehicleStatus } from "@/vehicle/domain/types";
+import { IsArray, IsMongoId } from "class-validator";
+import { Types } from "mongoose";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { ElectricVehicleDto } from "./electric-vehicle.dto";
 
 export class UpdateVehiclePostDto {
   readonly description: string;
 
-  @IsEnum(VehicleMake, {
-    message: i18nValidationMessage(VehiclePostTranslations.INVALID_MAKE),
-  })
-  readonly make: VehicleMake;
-
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly make: Types.ObjectId;
   readonly model: string;
 
-  @IsEnum(VehicleType, {
-    message: i18nValidationMessage(VehiclePostTranslations.INVALID_TYPE),
-  })
-  readonly type: VehicleType;
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly type: Types.ObjectId;
 
-  @IsEnum(Transmission, {
-    message: i18nValidationMessage(
-      VehiclePostTranslations.INVALID_TRANSMISSION,
-    ),
-  })
-  readonly transmission: Transmission;
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly transmission: Types.ObjectId;
+  readonly price: Price;
+  readonly year: number;
 
-  readonly price: string;
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly exteriorColor: Types.ObjectId;
 
-  @IsEnum(Color, {
-    message: i18nValidationMessage(
-      VehiclePostTranslations.INVALID_EXTERIOR_COLOR,
-    ),
-  })
-  readonly exteriorColor: Color;
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly interiorColor: Types.ObjectId;
 
-  @IsEnum(Color, {
-    message: i18nValidationMessage(
-      VehiclePostTranslations.INVALID_INTERIOR_COLOR,
-    ),
-  })
-  readonly interiorColor: Color;
-
-  readonly traction: string;
-
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly traction: Types.ObjectId;
   readonly topSpeed: string;
 
-  @IsEnum(Fuel, {
-    message: i18nValidationMessage(VehiclePostTranslations.INVALID_FUEL_TYPE),
-  })
-  readonly fuelType: Fuel;
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
+  readonly fuelType: Types.ObjectId;
 
-  @IsEnum(VehicleStatus, {
-    message: i18nValidationMessage(VehiclePostTranslations.INVALID_STATUS),
-  })
+  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   readonly status: VehicleStatus;
-
-  @ValidateNested()
-  @ValidateIf((prop) => prop.fuelType === Fuel.ELECTRIC)
   readonly electric: ElectricVehicleDto;
 
-  @ValidateIf((prop) => prop.status === VehicleStatus.USED)
   readonly use: string;
+
+  seller: {
+    _id: Types.ObjectId;
+    value: string;
+  };
+
+  readonly cylinders: number;
 
   @IsArray({
     message: i18nValidationMessage(VehiclePostTranslations.ACCESSORIES_ARRAY),
   })
   readonly accessories: string[];
-
+  readonly isFormalAddress: boolean;
+  readonly formalAddress: IAddress;
+  readonly informalAddress: string;
   readonly primaryImage: string;
-
   @IsArray({
     message: i18nValidationMessage(
       VehiclePostTranslations.SECONDARY_IMAGES_ARRAY,
     ),
   })
   readonly secondaryImages: string[];
-
   readonly isOptional: boolean;
 }

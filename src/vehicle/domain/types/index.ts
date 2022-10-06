@@ -11,3 +11,4 @@ export { ITransmission } from "./i-transmission";
 export { IFuel } from "./i-fuel";
 export { ITraction } from "./i-traction";
 export { IVehicleStatus } from "./i-vehicle-status";
+export { IVehiclePost } from "./i-vehicle-post";

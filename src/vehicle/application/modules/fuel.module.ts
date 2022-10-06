@@ -1,10 +1,5 @@
 import { LoggerService } from "@/common/infrastructure/logger";
-import {
-  FuelSchema,
-  SchemaFuel,
-  VehiclePost,
-  VehiclePostSchema,
-} from "@/vehicle/domain";
+
 import {
   FuelFactory,
   FuelSchemaFactory,
@@ -14,6 +9,12 @@ import {
   FuelDtoRepository,
   FuelEntityRepository,
 } from "@/vehicle/infrastructure/persistence/repositories";
+import {
+  FuelSchema,
+  SchemaFuel,
+  SchemaVehiclePosts,
+  VehiclePostSchema,
+} from "@/vehicle/infrastructure/persistence/schemas";
 import { FuelsController } from "@/vehicle/presentation/controllers";
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
@@ -21,6 +22,8 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { FuelCommandHandlers } from "../commands/handlers";
 import { FuelEventHandlers } from "../events/handlers";
 import { FuelQueryHandlers } from "../queries/handlers";
+
+const SharedProviders = [FuelEntityRepository, FuelSchemaFactory];
 
 @Module({
   imports: [
@@ -31,22 +34,22 @@ import { FuelQueryHandlers } from "../queries/handlers";
         schema: SchemaFuel,
       },
       {
-        name: VehiclePost.name,
-        schema: VehiclePostSchema,
+        name: VehiclePostSchema.name,
+        schema: SchemaVehiclePosts,
       },
     ]),
   ],
   providers: [
-    FuelEntityRepository,
-    FuelSchemaFactory,
     FuelDtoRepository,
     VehiclePostsRepository,
     FuelFactory,
     LoggerService,
+    ...SharedProviders,
     ...FuelCommandHandlers,
     ...FuelQueryHandlers,
     ...FuelEventHandlers,
   ],
   controllers: [FuelsController],
+  exports: [...SharedProviders],
 })
 export class FuelModule {}

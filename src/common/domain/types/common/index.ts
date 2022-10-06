@@ -10,3 +10,4 @@ export * from "./i-province";
 export * from "./i-municipality";
 export * from "./i-default-name";
 export * from "./i-sector";
+export * from "./i-address";
