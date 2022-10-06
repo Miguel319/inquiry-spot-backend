@@ -39,6 +39,12 @@ export class UpdateVehiclePostDto {
   readonly electric: ElectricVehicleDto;
 
   readonly use: string;
+
+  seller: {
+    _id: Types.ObjectId;
+    value: string;
+  };
+
   readonly cylinders: number;
 
   @IsArray({

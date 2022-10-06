@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import { Document, Types, Schema as SchemaAlt } from "mongoose";
 
 import paginate from "mongoose-paginate-v2";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
@@ -11,7 +11,14 @@ import {
   IDefaultName,
   Price,
 } from "@/common/domain/types/common";
-import { BaseSchema } from "@/common/infrastructure/persistence/schemas";
+import {
+  BaseSchema,
+  ColorSchema,
+} from "@/common/infrastructure/persistence/schemas";
+
+const {
+  Types: { ObjectId },
+} = SchemaAlt;
 
 export type VehiclePostDocument = VehiclePostSchema & Document;
 
@@ -25,11 +32,8 @@ export class VehiclePostSchema extends BaseSchema {
       _id: {
         ref: "vehiclemakes",
         type: Types.ObjectId,
-        unique: false,
       },
-      value: {
-        type: String,
-      },
+      value: String,
     },
     required: [true, VehiclePostTranslations.MAKE],
   })
@@ -45,13 +49,10 @@ export class VehiclePostSchema extends BaseSchema {
       _id: {
         ref: "vehicletypes",
         type: Types.ObjectId,
-        unique: false,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, VehiclePostTranslations.TYPE],
@@ -63,13 +64,10 @@ export class VehiclePostSchema extends BaseSchema {
       _id: {
         ref: "transmissions",
         type: Types.ObjectId,
-        unique: false,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, VehiclePostTranslations.TRANSMISSION],
@@ -107,15 +105,12 @@ export class VehiclePostSchema extends BaseSchema {
   @Prop({
     type: {
       _id: {
-        ref: "colors",
-        type: Types.ObjectId,
-        unique: false,
+        ref: ColorSchema.name,
+        type: ObjectId,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, VehiclePostTranslations.EXTERIOR_COLOR],
@@ -125,15 +120,12 @@ export class VehiclePostSchema extends BaseSchema {
   @Prop({
     type: {
       _id: {
-        ref: "colors",
-        type: Types.ObjectId,
-        unique: false,
+        ref: ColorSchema.name,
+        type: ObjectId,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, VehiclePostTranslations.INTERIOR_COLOR],
@@ -145,13 +137,10 @@ export class VehiclePostSchema extends BaseSchema {
       _id: {
         ref: "tractions",
         type: Types.ObjectId,
-        unique: false,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
   })
@@ -165,13 +154,10 @@ export class VehiclePostSchema extends BaseSchema {
       _id: {
         ref: "fuels",
         type: Types.ObjectId,
-        unique: false,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, VehiclePostTranslations.FUEL_TYPE],
@@ -183,7 +169,6 @@ export class VehiclePostSchema extends BaseSchema {
       _id: {
         ref: "vehiclestatus",
         type: Types.ObjectId,
-        unique: false,
       },
       value: {
         type: {
@@ -212,7 +197,6 @@ export class VehiclePostSchema extends BaseSchema {
           _id: {
             ref: "municipalities",
             type: Types.ObjectId,
-            unique: false,
           },
           value: {
             type: String,
@@ -222,7 +206,6 @@ export class VehiclePostSchema extends BaseSchema {
           _id: {
             ref: "provinces",
             type: Types.ObjectId,
-            unique: false,
           },
           value: {
             type: String,
@@ -232,14 +215,15 @@ export class VehiclePostSchema extends BaseSchema {
           _id: {
             ref: "sectors",
             type: Types.ObjectId,
-            unique: false,
           },
           value: {
             type: String,
           },
         },
       },
-      informal: String,
+      informal: {
+        type: String,
+      },
     },
     required: [true, VehiclePostTranslations.ADDRESS],
   })

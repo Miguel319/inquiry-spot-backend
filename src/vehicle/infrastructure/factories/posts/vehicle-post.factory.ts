@@ -7,6 +7,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { CreateVehiclePostDto } from "../../dtos";
 import { VehiclePostSchema } from "../../persistence/schemas";
+import { VehiclePostSchemaFactory } from "./vehicle-post-schema.factory";
 
 @Injectable()
 export class VehiclePostFactory implements EntityFactory<VehiclePost> {
@@ -15,6 +16,7 @@ export class VehiclePostFactory implements EntityFactory<VehiclePost> {
     private readonly _vehiclePostModel: Model<VehiclePostSchema>,
     @Inject("IVehiclePostsService")
     private readonly _vehiclePostsService: IVehiclePostsService,
+    private readonly _vehiclePostFactory: VehiclePostSchemaFactory,
   ) {}
 
   private buildAddress(dto: CreateVehiclePostDto) {
@@ -63,6 +65,9 @@ export class VehiclePostFactory implements EntityFactory<VehiclePost> {
       status: {
         _id: dto.status,
       },
+      type: {
+        _id: dto.type,
+      },
     };
   }
 
@@ -83,7 +88,11 @@ export class VehiclePostFactory implements EntityFactory<VehiclePost> {
       "create",
     );
 
-    await this._vehiclePostModel.create(args[0]);
+    console.log("make", vehiclePost.getMake().value);
+
+    await this._vehiclePostModel.create(
+      this._vehiclePostFactory.create(vehiclePost),
+    );
 
     vehiclePost.apply(new VehiclePostCreatedEvent(vehiclePost.getId()));
 

@@ -3,6 +3,7 @@ import { ProvinceModule } from "@/common/application/modules/address/province.mo
 import { SectorModule } from "@/common/application/modules/address/sector.module";
 import { ColorModule } from "@/common/application/modules/color.module";
 import { LoggerService } from "@/common/infrastructure/logger";
+import { UsersModule } from "@/user/application/modules";
 
 import {
   VehiclePostFactory,
@@ -54,6 +55,7 @@ const SharedProviders = [
     VehicleMakeModule,
     TransmissionModule,
     FuelModule,
+    UsersModule,
     TractionModule,
     VehicleStatusModule,
     MongooseModule.forFeature([

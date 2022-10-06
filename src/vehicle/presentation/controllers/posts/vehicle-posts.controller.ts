@@ -25,6 +25,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Post,
   Put,
@@ -36,6 +37,8 @@ import {
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
 import { Response } from "express";
+import { IUsersService } from "@/user/application/services/contracts";
+import { Types } from "mongoose";
 
 @Controller("vehicle-posts")
 @UseFilters(new I18nValidationExceptionFilter())
@@ -43,6 +46,7 @@ export class VehiclePostsController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
+    @Inject("IUsersService") private readonly _usersService: IUsersService,
   ) {}
 
   @Get()
@@ -95,6 +99,13 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
+    const currentUser = await this._usersService.findCurrent(i18n);
+
+    createVehiclePostDto.seller = {
+      _id: new Types.ObjectId(currentUser?._id),
+      value: currentUser?.name as string,
+    };
+
     await this.commandBus.execute<CreateVehiclePostCommand, void>(
       new CreateVehiclePostCommand(createVehiclePostDto, i18n as I18nContext),
     );
@@ -114,6 +125,13 @@ export class VehiclePostsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
+    const currentUser = await this._usersService.findCurrent(i18n);
+
+    updateVehicleDto.seller = {
+      _id: new Types.ObjectId(currentUser?._id),
+      value: currentUser?.name as string,
+    };
+
     await this.commandBus.execute<UpdateVehiclePostCommand, void>(
       new UpdateVehiclePostCommand(_id, updateVehicleDto, i18n as I18nContext),
     );

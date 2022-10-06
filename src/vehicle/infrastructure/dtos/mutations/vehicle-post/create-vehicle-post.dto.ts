@@ -122,6 +122,11 @@ export class CreateVehiclePostDto {
   @ValidateIf((prop) => prop.fuelType === Fuel.ELECTRIC)
   readonly electric: ElectricVehicleDto;
 
+  seller: {
+    _id: Types.ObjectId;
+    value: string;
+  };
+
   @IsDefined({
     message: i18nValidationMessage(VehiclePostTranslations.USE),
   })

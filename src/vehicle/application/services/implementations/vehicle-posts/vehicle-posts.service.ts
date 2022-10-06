@@ -12,6 +12,7 @@ import {
   VehicleMakeTranslations,
   VehiclePostTranslations,
   VehicleStatusTranslations,
+  VehicleTypeTranslations,
 } from "@/vehicle/application/translations";
 import { VehiclePost } from "@/vehicle/domain/entities";
 import { UpdateVehiclePostDto } from "@/vehicle/infrastructure/dtos";
@@ -22,6 +23,7 @@ import {
   VehicleMakesEntityRepository,
   VehiclePostEntityRepository,
   VehicleStatusEntityRepository,
+  VehicleTypeEntityRepository,
 } from "@/vehicle/infrastructure/persistence/repositories";
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Types } from "mongoose";
@@ -38,6 +40,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     private readonly _statusRepository: VehicleStatusEntityRepository,
     private readonly _colorRepository: ColorEntityRepository,
     private readonly _fuelRepository: FuelEntityRepository,
+    private readonly _vehicleTypeRepository: VehicleTypeEntityRepository,
     @Inject("ISectorsService") private readonly _sectorService: ISectorsService,
     @Inject("IProvincesService")
     private readonly _provincesService: IProvincesService,
@@ -64,6 +67,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     await this.mapToExteriorColor(vehiclePost, i18n);
     await this.mapToInteriorColor(vehiclePost, i18n);
     await this.mapToFuelType(vehiclePost, i18n);
+    await this.mapToType(vehiclePost, i18n);
     await this.mapToMake(vehiclePost, i18n);
     await this.mapToStatus(vehiclePost, i18n);
     await this.mapToTraction(vehiclePost, i18n);
@@ -85,6 +89,8 @@ export class VehiclePostsService implements IVehiclePostsService {
     if (dto?.status) await this.mapToStatus(vehiclePost, i18n, dto);
     if (dto?.interiorColor)
       await this.mapToInteriorColor(vehiclePost, i18n, dto);
+
+    if (dto?.type) await this.mapToType(vehiclePost, i18n);
 
     if (dto?.fuelType) await this.mapToFuelType(vehiclePost, i18n, dto);
 
@@ -128,6 +134,28 @@ export class VehiclePostsService implements IVehiclePostsService {
     post.setMake({
       _id: new Types.ObjectId(make.getId()),
       value: make.getName(),
+    });
+  }
+
+  private async mapToType(
+    post: VehiclePost,
+    i18n: I18nContext,
+    dto?: UpdateVehiclePostDto,
+  ) {
+    const id = dto?.type ? dto.type : post.getType()._id;
+
+    const type = await this._vehicleTypeRepository.findByValue(id, "_id");
+
+    if (!type)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(VehicleTypeTranslations.NOT_FOUND)
+          : this._i18n.t(VehicleTypeTranslations.NOT_FOUND),
+      );
+
+    post.setType({
+      _id: new Types.ObjectId(type.getId()),
+      value: type.getName(),
     });
   }
 

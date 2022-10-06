@@ -132,6 +132,10 @@ export class VehiclePost extends AggregateRoot {
     this.post.interiorColor = color;
   }
 
+  public setType(type: IDefaultI18nName): void {
+    this.post.type = type;
+  }
+
   public setExteriorColor(color: IDefaultI18nName): void {
     this.post.exteriorColor = color;
   }
