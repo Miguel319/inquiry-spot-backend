@@ -96,7 +96,7 @@ export class VehiclePost extends AggregateRoot {
     return this.post.seller;
   }
 
-  public getElectric(): ElectricValues {
+  public getElectric(): ElectricValues | null {
     return this.post.electric;
   }
 

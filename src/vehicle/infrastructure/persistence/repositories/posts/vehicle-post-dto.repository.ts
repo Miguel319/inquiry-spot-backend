@@ -3,7 +3,11 @@ import {
   PaginationOptions,
 } from "@/common/infrastructure/util";
 import { VehiclePost } from "@/vehicle/domain/entities";
-import { VehiclePostDto } from "@/vehicle/infrastructure/dtos";
+import { IVehiclePost } from "@/vehicle/domain/types";
+import {
+  AllVehiclePostsDto,
+  VehiclePostDto,
+} from "@/vehicle/infrastructure/dtos";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { FilterQuery, Model, Types } from "mongoose";
@@ -19,12 +23,16 @@ export class VehiclePostDtoRepository {
   async getPaginated(
     entityFilterQuery: FilterQuery<VehiclePostSchema>,
     options: PaginationOptions,
-  ): Promise<PaginatedQuery<VehiclePostDto>> {
+  ): Promise<PaginatedQuery<AllVehiclePostsDto>> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (this.vehiclePost as any).paginate(
+    const posts = (await (this.vehiclePost as any).paginate(
       { ...entityFilterQuery },
       { options },
-    );
+    )) as PaginatedQuery<IVehiclePost>;
+
+    const postList = { ...posts }.docs.map((v) => AllVehiclePostsDto.create(v));
+
+    return { ...posts, docs: postList };
   }
 
   private createVehiclePostDto(
@@ -45,9 +53,13 @@ export class VehiclePostDtoRepository {
     return this.createVehiclePostDto(vehiclePost);
   }
 
-  async getAll(): Promise<VehiclePostDto[]> {
-    return (await this.vehiclePost.find({}, {}, { lean: true })).map(
-      (v) => v as unknown as VehiclePostDto,
-    );
+  async getAll(limit?: number): Promise<AllVehiclePostsDto[]> {
+    const abc = (
+      await this.vehiclePost.find({}, {}, { lean: true, limit })
+    ).map((v) => AllVehiclePostsDto.create(v as unknown as IVehiclePost));
+
+    console.log(abc);
+
+    return abc;
   }
 }
