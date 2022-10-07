@@ -30,7 +30,7 @@ export interface IVehiclePost extends IBaseEntity {
   };
   readonly cylinders: number;
   seller: IDefaultName;
-  readonly electric: ElectricValues;
+  readonly electric: ElectricValues | null;
   readonly primaryImage: string;
   readonly secondaryImages: string[];
 }

@@ -10,12 +10,14 @@ import {
   UpdateVehiclePostCommand,
 } from "@/vehicle/application/commands";
 import {
+  FetchLastFiveVehiclePostsQuery,
   FetchPaginatedVehiclePostsQuery,
   FetchVehiclePostByIdQuery,
   FetchVehiclePostsFromSellerQuery,
 } from "@/vehicle/application/queries";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
 import {
+  AllVehiclePostsDto,
   CreateVehiclePostDto,
   UpdateVehiclePostDto,
   VehiclePostDto,
@@ -53,13 +55,21 @@ export class VehiclePostsController {
   async getAll(
     @Query() paginationQuery: PaginationQuery,
     @I18n() i18n?: I18nContext,
-  ): Promise<PaginatedQuery<VehiclePostDto>> {
+  ): Promise<PaginatedQuery<AllVehiclePostsDto>> {
     return this.queryBus.execute<
       FetchPaginatedVehiclePostsQuery,
-      PaginatedQuery<VehiclePostDto>
+      PaginatedQuery<AllVehiclePostsDto>
     >(
       new FetchPaginatedVehiclePostsQuery(paginationQuery, i18n as I18nContext),
     );
+  }
+
+  @Get("query/last-five")
+  async queryLastFive(): Promise<AllVehiclePostsDto> {
+    return this.queryBus.execute<
+      FetchLastFiveVehiclePostsQuery,
+      AllVehiclePostsDto
+    >(new FetchLastFiveVehiclePostsQuery());
   }
 
   @Get("seller/many/:seller")
@@ -68,10 +78,10 @@ export class VehiclePostsController {
     @Query() paginationQuery: PaginationQuery,
     @Param("seller") seller: string,
     @I18n() i18n?: I18nContext,
-  ): Promise<PaginatedQuery<VehiclePostDto>> {
+  ): Promise<PaginatedQuery<AllVehiclePostsDto>> {
     return this.queryBus.execute<
       FetchVehiclePostsFromSellerQuery,
-      PaginatedQuery<VehiclePostDto>
+      PaginatedQuery<AllVehiclePostsDto>
     >(
       new FetchVehiclePostsFromSellerQuery(
         seller,
