@@ -14,6 +14,7 @@ export enum VehiclePostTranslations {
   PRICE = "validations.vehiclePost.price",
   DOOR_COUNT = "validations.vehiclePost.doorCount",
   DOOR_COUNT_INT = "validations.vehiclePost.doorCountInt",
+  DOOR_COUNT_MIN = "validations.vehiclePost.doorCountMin",
   IS_FORMAL_ADDRESS = "validations.vehiclePost.isFormalAddress",
   FORMAL_ADDRESS = "validations.vehiclePost.formalAddress",
   INFORMAL_ADDRESS = "validations.vehiclePost.informalAddress",

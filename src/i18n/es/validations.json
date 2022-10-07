@@ -215,6 +215,7 @@
     "formalAddress": "La dirección formal es obligatoria.",
     "informalAddress": "La dirección informal es obligatoria.",
     "doorCountInt": "El número de puertas debe ser un valor numérico.",
+    "doorCountMin": "El número de puertas debe ser al menos 1.",
     "exteriorColor": "El color exterior es obligatorio.",
     "seller": "El vendedor es obligatorio.",
     "sellerMongoId": "El vendedor provisto es inválido.",

@@ -12,6 +12,7 @@ export class ColorSchemaFactory
     return {
       _id: new Types.ObjectId(color.getId()),
       name: color.getName(),
+      hexValue: color.getHexValue(),
       createdAt: color.getCreatedAt(),
       updatedAt: color.getUpdatedAt(),
     };

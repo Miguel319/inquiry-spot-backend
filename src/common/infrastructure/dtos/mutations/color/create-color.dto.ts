@@ -14,4 +14,10 @@ export class CreateColorDto {
   @ValidateNested()
   @Type(() => NameTypeValidationDto)
   readonly name: NameTypeValidationDto;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(ColorTranslations.HEX_VALUE),
+  })
+  @IsDefined({ message: i18nValidationMessage(ColorTranslations.HEX_VALUE) })
+  readonly hexValue: string;
 }

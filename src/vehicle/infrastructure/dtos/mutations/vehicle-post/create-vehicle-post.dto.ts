@@ -8,6 +8,7 @@ import {
   IsDefined,
   IsMongoId,
   IsNumber,
+  Min,
   ValidateIf,
   ValidateNested,
 } from "class-validator";
@@ -116,9 +117,10 @@ export class CreateVehiclePostDto {
   @IsDefined({
     message: i18nValidationMessage(VehiclePostTranslations.STATUS),
   })
-  readonly status: VehicleStatus;
+  readonly status: Types.ObjectId;
 
   @ValidateNested()
+  @Type(() => ElectricVehicleDto)
   @ValidateIf((prop) => prop.fuelType === Fuel.ELECTRIC)
   readonly electric: ElectricVehicleDto;
 
@@ -138,6 +140,18 @@ export class CreateVehiclePostDto {
 
   @IsNumber({}, { message: i18nValidationMessage(SharedTranslations.NUMBER) })
   readonly cylinders: number;
+
+  @Min(1, {
+    message: i18nValidationMessage(VehiclePostTranslations.DOOR_COUNT_MIN),
+  })
+  @IsNumber({}, { message: i18nValidationMessage(SharedTranslations.NUMBER) })
+  @IsNotEmpty({
+    message: i18nValidationMessage(VehiclePostTranslations.DOOR_COUNT),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(VehiclePostTranslations.DOOR_COUNT),
+  })
+  readonly doorCount: number;
 
   @MinLengthArray(1, { message: VehiclePostTranslations.ACCESSORIES_LENGTH })
   @IsArray({
