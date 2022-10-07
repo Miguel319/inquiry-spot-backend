@@ -40,37 +40,37 @@ export class VehiclePostDto extends Presenter {
     super(vehiclePost);
 
     this.accessories =
-      (vehiclePost as any)?.accessories || vehiclePost.getAccessories?.();
+      (vehiclePost as any)?.accessories || vehiclePost?.getAccessories?.();
     this.description =
-      (vehiclePost as any)?.description || vehiclePost.getDescription?.();
+      (vehiclePost as any)?.description || vehiclePost?.getDescription?.();
     this.doorCount =
-      (vehiclePost as any)?.doorCount || vehiclePost.getDoorCount?.();
+      (vehiclePost as any)?.doorCount || vehiclePost?.getDoorCount?.();
     this.electric =
-      (vehiclePost as any)?.electric || vehiclePost.getElectric?.();
+      (vehiclePost as any)?.electric || vehiclePost?.getElectric?.();
     this.exteriorColor =
-      (vehiclePost as any)?.exteriorColor || vehiclePost.getExteriorColor?.();
+      (vehiclePost as any)?.exteriorColor || vehiclePost?.getExteriorColor?.();
     this.fuelType =
-      (vehiclePost as any)?.fuelType || vehiclePost.getFuelType?.();
+      (vehiclePost as any)?.fuelType || vehiclePost?.getFuelType?.();
     this.interiorColor =
-      (vehiclePost as any)?.interiorColor || vehiclePost.getInteriorColor?.();
-    this.make = (vehiclePost as any)?.make || vehiclePost.getMake?.();
-    this.address = (vehiclePost as any)?.address || vehiclePost.getAddress?.();
-    this.model = (vehiclePost as any)?.model || vehiclePost.getModel?.();
-    this.price = (vehiclePost as any)?.price || vehiclePost.getPrice?.();
+      (vehiclePost as any)?.interiorColor || vehiclePost?.getInteriorColor?.();
+    this.make = (vehiclePost as any)?.make || vehiclePost?.getMake?.();
+    this.address = (vehiclePost as any)?.address || vehiclePost?.getAddress?.();
+    this.model = (vehiclePost as any)?.model || vehiclePost?.getModel?.();
+    this.price = (vehiclePost as any)?.price || vehiclePost?.getPrice?.();
     this.primaryImage =
-      (vehiclePost as any)?.primaryImage || vehiclePost.getPrimaryImage?.();
+      (vehiclePost as any)?.primaryImage || vehiclePost?.getPrimaryImage?.();
     this.secondaryImages =
       (vehiclePost as any)?.secondaryImages ||
-      vehiclePost.getSecondaryImages?.();
-    this.seller = (vehiclePost as any)?.seller || vehiclePost.getSeller?.();
-    this.status = (vehiclePost as any)?.status || vehiclePost.getStatus?.();
+      vehiclePost?.getSecondaryImages?.();
+    this.seller = (vehiclePost as any)?.seller || vehiclePost?.getSeller?.();
+    this.status = (vehiclePost as any)?.status || vehiclePost?.getStatus?.();
     this.topSpeed =
-      (vehiclePost as any)?.topSpeed || vehiclePost.getTopSpeed?.();
+      (vehiclePost as any)?.topSpeed || vehiclePost?.getTopSpeed?.();
     this.traction =
-      (vehiclePost as any)?.traction || vehiclePost.getTraction?.();
+      (vehiclePost as any)?.traction || vehiclePost?.getTraction?.();
     this.transmission =
-      (vehiclePost as any)?.transmission || vehiclePost.getTransmission?.();
-    this.type = (vehiclePost as any)?.type || vehiclePost.getType?.();
+      (vehiclePost as any)?.transmission || vehiclePost?.getTransmission?.();
+    this.type = (vehiclePost as any)?.type || vehiclePost?.getType?.();
   }
 
   public static create(vehiclePost: VehiclePost): VehiclePostDto {

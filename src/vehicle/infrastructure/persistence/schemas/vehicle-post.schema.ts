@@ -259,7 +259,7 @@ export class VehiclePostSchema extends BaseSchema {
       chargingTime: String,
     },
   })
-  readonly electric: ElectricValues;
+  readonly electric: ElectricValues | null;
 
   @Prop({
     type: String,
