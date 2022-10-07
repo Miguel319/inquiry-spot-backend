@@ -1,6 +1,6 @@
 export enum Currency {
-  USD = "USD $",
-  DOP = "DOP $",
+  USD = "USD",
+  DOP = "DOP",
 }
 
 export interface Price {
