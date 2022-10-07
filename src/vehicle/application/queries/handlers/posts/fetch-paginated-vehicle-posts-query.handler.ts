@@ -4,7 +4,7 @@ import {
   PaginatedQuery,
   PaginationOptions,
 } from "@/common/infrastructure/util";
-import { VehiclePostDto } from "@/vehicle/infrastructure/dtos";
+import { AllVehiclePostsDto } from "@/vehicle/infrastructure/dtos";
 import { VehiclePostDtoRepository } from "@/vehicle/infrastructure/persistence/repositories";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { I18nContext, I18nService } from "nestjs-i18n";
@@ -26,14 +26,16 @@ export class FetchPaginatedVehiclePostsQueryHandler
     return {
       ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
       select:
-        "_id make model price type year transmission use status seller primaryImage createdAt",
+        "_id make model price type year transmission fuelType use status seller primaryImage createdAt",
     };
   }
 
   async execute({
     query,
     i18n,
-  }: FetchPaginatedVehiclePostsQuery): Promise<PaginatedQuery<VehiclePostDto> | null> {
+  }: FetchPaginatedVehiclePostsQuery): Promise<
+    PaginatedQuery<AllVehiclePostsDto>
+  > {
     const queryToSend = this.getPaginationQueryOptions(query, i18n);
 
     return this._vehiclePostDtoRepository.getPaginated({}, queryToSend);
