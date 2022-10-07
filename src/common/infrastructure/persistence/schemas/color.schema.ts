@@ -36,6 +36,12 @@ export class ColorSchema extends BaseSchema {
     },
   })
   readonly name: NameType;
+
+  @Prop({
+    required: [true, ColorTranslations.HEX_VALUE],
+    type: String,
+  })
+  readonly hexValue: string;
 }
 
 export const SchemaColor = SchemaFactory.createForClass(ColorSchema);

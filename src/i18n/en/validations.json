@@ -134,6 +134,7 @@
       "duplicateEs": "The provided color name in English already exists.",
       "duplicateEn": "The provided color name in Spanish already exists."
     },
+    "hexValue": "The hex value is mandatory.",
     "notFound": "Color not found.",
     "forbiddenDeletion": {
       "vehicle": "This color is being used in a vehicle post. Please delete the vehicle post before deleting the color.",
@@ -214,7 +215,8 @@
     "isFormalAddress": "The is formal address field is mandatory.",
     "formalAddress": "The formal address is mandatory.",
     "informalAddress": "The informal address is mandatory.",
-    "doorCountInt": "the door count must be an integer.",
+    "doorCountInt": "The door count must be an integer.",
+    "doorCountMin": "The door count must be at least 1.",
     "exteriorColor": "The exterior color is mandatory.",
     "seller": "The seller is mandatory.",
     "sellerMongoId": "The provided seller is invalid.",

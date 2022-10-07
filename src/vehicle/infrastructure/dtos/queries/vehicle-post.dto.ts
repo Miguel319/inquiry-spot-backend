@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   IAddress,
   IDefaultI18nName,
@@ -6,23 +5,23 @@ import {
   Price,
 } from "@/common/domain/types/common";
 import { VehiclePost } from "@/vehicle/domain/entities";
-import { ElectricValues } from "@/vehicle/domain/types";
+import { ElectricValues, IVehiclePost } from "@/vehicle/domain/types";
 import { Presenter } from "../../../../common/infrastructure/presenters";
 
 export class VehiclePostDto extends Presenter {
   readonly description: string;
   readonly make: IDefaultName;
   readonly model: string;
-  type: IDefaultI18nName;
+  readonly type: IDefaultI18nName;
   readonly transmission: IDefaultI18nName;
   readonly price: Price;
   readonly doorCount: number;
-  exteriorColor: IDefaultI18nName;
-  interiorColor: IDefaultI18nName;
-  traction: IDefaultI18nName;
+  readonly exteriorColor: IDefaultI18nName;
+  readonly interiorColor: IDefaultI18nName;
+  readonly traction: IDefaultI18nName;
   readonly topSpeed: string;
-  fuelType: IDefaultI18nName;
-  status: IDefaultI18nName;
+  readonly fuelType: IDefaultI18nName;
+  readonly status: IDefaultI18nName;
   readonly year: number;
   readonly use?: string;
   readonly accessories: string[];
@@ -32,45 +31,75 @@ export class VehiclePostDto extends Presenter {
   };
   readonly cylinders: number;
   readonly seller: IDefaultName;
-  readonly electric: ElectricValues;
+  readonly electric: ElectricValues | null;
   readonly primaryImage: string;
   readonly secondaryImages: string[];
 
-  private constructor(vehiclePost: VehiclePost) {
+  private constructor(vehiclePost: VehiclePost | IVehiclePost) {
     super(vehiclePost);
 
     this.accessories =
-      (vehiclePost as any)?.accessories || vehiclePost?.getAccessories?.();
+      (vehiclePost as IVehiclePost)?.accessories ||
+      (vehiclePost as VehiclePost)?.getAccessories?.();
     this.description =
-      (vehiclePost as any)?.description || vehiclePost?.getDescription?.();
+      (vehiclePost as IVehiclePost)?.description ||
+      (vehiclePost as VehiclePost)?.getDescription?.();
     this.doorCount =
-      (vehiclePost as any)?.doorCount || vehiclePost?.getDoorCount?.();
+      (vehiclePost as IVehiclePost)?.doorCount ||
+      (vehiclePost as VehiclePost)?.getDoorCount?.();
     this.electric =
-      (vehiclePost as any)?.electric || vehiclePost?.getElectric?.();
+      (vehiclePost as IVehiclePost)?.electric ||
+      (vehiclePost as VehiclePost)?.getElectric?.();
     this.exteriorColor =
-      (vehiclePost as any)?.exteriorColor || vehiclePost?.getExteriorColor?.();
+      (vehiclePost as IVehiclePost)?.exteriorColor ||
+      (vehiclePost as VehiclePost)?.getExteriorColor?.();
     this.fuelType =
-      (vehiclePost as any)?.fuelType || vehiclePost?.getFuelType?.();
+      (vehiclePost as IVehiclePost)?.fuelType ||
+      (vehiclePost as VehiclePost)?.getFuelType?.();
     this.interiorColor =
-      (vehiclePost as any)?.interiorColor || vehiclePost?.getInteriorColor?.();
-    this.make = (vehiclePost as any)?.make || vehiclePost?.getMake?.();
-    this.address = (vehiclePost as any)?.address || vehiclePost?.getAddress?.();
-    this.model = (vehiclePost as any)?.model || vehiclePost?.getModel?.();
-    this.price = (vehiclePost as any)?.price || vehiclePost?.getPrice?.();
+      (vehiclePost as IVehiclePost)?.interiorColor ||
+      (vehiclePost as VehiclePost)?.getInteriorColor?.();
+    this.make =
+      (vehiclePost as IVehiclePost)?.make ||
+      (vehiclePost as VehiclePost)?.getMake?.();
+    this.address =
+      (vehiclePost as IVehiclePost)?.address ||
+      (vehiclePost as VehiclePost)?.getAddress?.();
+    this.model =
+      (vehiclePost as IVehiclePost)?.model ||
+      (vehiclePost as VehiclePost)?.getModel?.();
+    this.price =
+      (vehiclePost as IVehiclePost)?.price ||
+      (vehiclePost as VehiclePost)?.getPrice?.();
+
+    this.year =
+      (vehiclePost as IVehiclePost)?.year ||
+      (vehiclePost as VehiclePost)?.getYear?.();
+
     this.primaryImage =
-      (vehiclePost as any)?.primaryImage || vehiclePost?.getPrimaryImage?.();
+      (vehiclePost as IVehiclePost)?.primaryImage ||
+      (vehiclePost as VehiclePost)?.getPrimaryImage?.();
     this.secondaryImages =
-      (vehiclePost as any)?.secondaryImages ||
-      vehiclePost?.getSecondaryImages?.();
-    this.seller = (vehiclePost as any)?.seller || vehiclePost?.getSeller?.();
-    this.status = (vehiclePost as any)?.status || vehiclePost?.getStatus?.();
+      (vehiclePost as IVehiclePost)?.secondaryImages ||
+      (vehiclePost as VehiclePost)?.getSecondaryImages?.();
+    this.seller =
+      (vehiclePost as IVehiclePost)?.seller ||
+      (vehiclePost as VehiclePost)?.getSeller?.();
+    this.status =
+      (vehiclePost as IVehiclePost)?.status ||
+      (vehiclePost as VehiclePost)?.getStatus?.();
     this.topSpeed =
-      (vehiclePost as any)?.topSpeed || vehiclePost?.getTopSpeed?.();
+      (vehiclePost as IVehiclePost)?.topSpeed ||
+      (vehiclePost as VehiclePost)?.getTopSpeed?.();
     this.traction =
-      (vehiclePost as any)?.traction || vehiclePost?.getTraction?.();
+      (vehiclePost as IVehiclePost)?.traction ||
+      (vehiclePost as VehiclePost)?.getTraction?.();
     this.transmission =
-      (vehiclePost as any)?.transmission || vehiclePost?.getTransmission?.();
-    this.type = (vehiclePost as any)?.type || vehiclePost?.getType?.();
+      (vehiclePost as IVehiclePost)?.transmission ||
+      (vehiclePost as VehiclePost)?.getTransmission?.();
+    this.type =
+      (vehiclePost as IVehiclePost)?.type ||
+      (vehiclePost as VehiclePost)?.getType?.();
   }
 
   public static create(vehiclePost: VehiclePost): VehiclePostDto {

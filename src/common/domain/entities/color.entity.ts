@@ -19,6 +19,10 @@ export class Color extends AggregateRoot {
     return this.color.name;
   }
 
+  public getHexValue(): string {
+    return this.color.hexValue;
+  }
+
   public getCreatedAt(): Date {
     return this.color.createdAt;
   }
@@ -31,14 +35,15 @@ export class Color extends AggregateRoot {
     this.color = {
       ...this.color,
       name: {
-        en: updatedType.name.en || this.color.name.en,
-        es: updatedType.name.es || this.color.name.es,
+        en: updatedType?.name?.en || this.color.name.en,
+        es: updatedType?.name?.es || this.color.name.es,
       },
+      hexValue: updatedType?.hexValue || this.color?.hexValue,
       updatedAt:
-        updatedType.name.en !== this.color.name.en ||
-        updatedType.name.es !== this.color.name.es
+        updatedType?.name?.en !== this.color?.name?.en ||
+        updatedType?.name?.es !== this.color?.name?.es
           ? new Date()
-          : this.color.updatedAt,
+          : this.color?.updatedAt,
     };
   }
 }

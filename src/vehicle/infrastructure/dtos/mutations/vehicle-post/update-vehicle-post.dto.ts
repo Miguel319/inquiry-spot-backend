@@ -1,7 +1,6 @@
 import { IAddress, Price, SharedTranslations } from "@/common/domain/types";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
-import { VehicleStatus } from "@/vehicle/domain/types";
-import { IsArray, IsMongoId } from "class-validator";
+import { IsArray, IsMongoId, IsNumber, Min } from "class-validator";
 import { Types } from "mongoose";
 import { i18nValidationMessage } from "nestjs-i18n";
 import { ElectricVehicleDto } from "./electric-vehicle.dto";
@@ -35,7 +34,7 @@ export class UpdateVehiclePostDto {
   readonly fuelType: Types.ObjectId;
 
   @IsMongoId({ message: SharedTranslations.MONGO_ID })
-  readonly status: VehicleStatus;
+  readonly status: Types.ObjectId;
   readonly electric: ElectricVehicleDto;
 
   readonly use: string;
@@ -46,6 +45,12 @@ export class UpdateVehiclePostDto {
   };
 
   readonly cylinders: number;
+
+  @Min(1, {
+    message: i18nValidationMessage(VehiclePostTranslations.DOOR_COUNT_MIN),
+  })
+  @IsNumber({}, { message: i18nValidationMessage(SharedTranslations.NUMBER) })
+  readonly doorCount: number;
 
   @IsArray({
     message: i18nValidationMessage(VehiclePostTranslations.ACCESSORIES_ARRAY),

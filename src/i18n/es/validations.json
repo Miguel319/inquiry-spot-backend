@@ -134,6 +134,7 @@
       "duplicateEs": "El nombre del color provisto en español ya existe.",
       "duplicateEn": "El nombre del color provisto en inglés ya existe."
     },
+    "hexValue": "El valor del color en hexadecimal es obligatorio.",
     "notFound": "Color no encontrado.",
     "forbiddenDeletion": {
       "vehicle": "Este color está siendo utilizado por una publicación de vehículo. Por favor, elimine tal publicación antes de eliminar el color.",
@@ -215,6 +216,7 @@
     "formalAddress": "La dirección formal es obligatoria.",
     "informalAddress": "La dirección informal es obligatoria.",
     "doorCountInt": "El número de puertas debe ser un valor numérico.",
+    "doorCountMin": "El número de puertas debe ser al menos 1.",
     "exteriorColor": "El color exterior es obligatorio.",
     "seller": "El vendedor es obligatorio.",
     "sellerMongoId": "El vendedor provisto es inválido.",
