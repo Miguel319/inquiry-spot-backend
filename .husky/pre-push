@@ -32,15 +32,15 @@ npm run check-lint ||
 #     false;
 # );
 
-# echo 'Checking type issues...';
-# npm run check-types || (
-#     echo '❌👷🔨❌ There are some type issues. Please, solve them, and try again.'
-#     false;
-# );
+echo 'Checking type issues...';
+npm run check-types || (
+    echo '❌👷🔨❌ There are some type issues. Please, solve them, and try again.'
+    false;
+);
 
-# echo 'Building project...';
-# npm run build || (
-#     echo '❌👷🔨❌  The build failed. ❌👷🔨❌. Please, solve the issues, and try again.'
-# );
+echo 'Building project...';
+npm run build || (
+    echo '❌👷🔨❌  The build failed. ❌👷🔨❌. Please, solve the issues, and try again.'
+);
 
 echo '✅ Looks good to me. ✅';
