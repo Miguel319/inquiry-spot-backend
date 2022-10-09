@@ -14,6 +14,6 @@ export interface IAuthService {
     password: string,
     i18n?: I18nContext,
   ): Promise<IAuthResult>;
-  resetPassword(token: string): Promise<IAuthResult>;
+  resetPassword(token: string, password: string): Promise<IAuthResult>;
   signOut(res: Response): void;
 }
