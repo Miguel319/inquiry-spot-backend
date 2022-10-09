@@ -91,9 +91,6 @@ export class AuthController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
-    console.log("token", token);
-    console.log("password", password);
-
     const authResult: IAuthResult = await this._authService.resetPassword(
       token,
       password,
