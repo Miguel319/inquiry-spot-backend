@@ -78,7 +78,7 @@ export class AuthService implements IAuthService {
     return authResult;
   }
 
-  async resetPassword(token: string): Promise<IAuthResult> {
+  async resetPassword(token: string, password: string): Promise<IAuthResult> {
     const resetPasswordToken = crypto
       .createHash("sha256")
       .update(token)
@@ -88,8 +88,7 @@ export class AuthService implements IAuthService {
       resetPasswordToken,
     )) as UserDocument;
 
-    user.password = await this.hashPassword(user.password);
-    user.resetPasswordToken = undefined;
+    user.password = await this.hashPassword(password);
     user.resetPasswordToken = undefined;
 
     await user.save();

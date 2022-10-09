@@ -13,7 +13,6 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import crypto from "crypto";
-import { Request } from "express";
 import { IEmailsService } from "../contracts";
 import { EmailHtml } from "./email.html";
 
@@ -74,35 +73,23 @@ export class EmailsService implements IEmailsService {
 
   private async buildResetPasswordEmail(
     user: UserDocument,
-    req: Request,
+    host: string,
   ): Promise<string> {
     const resetToken: string = await this.getResetPasswordToken(user);
+    console.log(host);
+    const resetUrl = `${host}/auth/reset-password/${resetToken}`;
 
-    const resetUrl = `${req.protocol}://${req.get(
-      "host",
-    )}/auth/reset-password/${resetToken}`;
-
-    return `
-        <h1>Reset Password</h1>
-    
-        <p>Hi, ${user.name}!</p>
-        
-        <p>
-          You receiving this email because you requested a password reset. Please, go to the next link to reset your password:
-        </p>   
-    
-        <p><${resetUrl}/p>
-     `;
+    return EmailHtml.getEmailResetPasswordHtml(user.name, resetUrl);
   }
 
-  async sendResetPasswordEmail(email: string, req: Request): Promise<User> {
+  async sendResetPasswordEmail(email: string, host: string): Promise<User> {
     const user: UserDocument = (await this._usersService.findByEmail(
       email,
     )) as UserDocument;
 
     if (!user) throw new NotFoundException("User not found.");
 
-    const message: string = await this.buildResetPasswordEmail(user, req);
+    const message: string = await this.buildResetPasswordEmail(user, host);
 
     try {
       await this.send({

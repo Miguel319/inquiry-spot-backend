@@ -5,13 +5,11 @@ import {
   Inject,
   Param,
   Post,
-  Put,
-  Req,
   Res,
   UseFilters,
 } from "@nestjs/common";
 import { I18n, I18nContext, I18nValidationExceptionFilter } from "nestjs-i18n";
-import { Response, Request } from "express";
+import { Response } from "express";
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
 import { ApiResponse } from "@/common/infrastructure/api";
 import { AuthTranslations } from "@/user/application/translations";
@@ -25,6 +23,7 @@ import {
   PresenterFactory,
   UserPresenter,
 } from "@/common/infrastructure/presenters";
+import { ForgotEmailDto } from "@/user/infrastructure/dtos/mutations/email/email-dto";
 
 @Controller("auth")
 export class AuthController {
@@ -80,19 +79,21 @@ export class AuthController {
     });
   }
 
-  @Put("forgot-password/")
-  forgotPassword(@Body("email") email: string, @Req() req: Request) {
-    return this._emailsService.sendResetPasswordEmail(email, req);
+  @Post("forgot-password")
+  async forgotPassword(@Body() { email, host }: ForgotEmailDto) {
+    return this._emailsService.sendResetPasswordEmail(email, host);
   }
 
-  @Put("reset-password/:token")
+  @Post("reset-password/:token")
   async resetPassword(
     @Param("token") token: string,
+    @Body("password") password: string,
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
     const authResult: IAuthResult = await this._authService.resetPassword(
       token,
+      password,
     );
 
     const user: UserPresenter = PresenterFactory.getInstance(
