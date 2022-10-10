@@ -252,6 +252,7 @@
     "parkingLotCount": "The parking lot count is mandatory.",
     "parkingLotCountInt": "The parking lot count must be an integer.",
     "yearOfConstructionInt": "The year of construction must be an integer.",
+    "address": "The address is mandatory.",
     "price": "The price is mandatory.",
     "seller": "The seller is mandatory.",
     "interiorColor": "The interior color is mandatory.",

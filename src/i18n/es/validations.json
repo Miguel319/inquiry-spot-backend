@@ -252,6 +252,7 @@
     "parkingLotCount": "El número de parqueos es obligatorio.",
     "parkingLotCountInt": "El número de parqueos debe ser un valor numérico entero.",
     "yearOfConstructionInt": "El año de construcción debe ser un entero.",
+    "address": "La dirección es obligatoria.",
     "price": "El precio es obligatorio.",
     "seller": "El vendedor es obligatorio.",
     "interiorColor": "El color interior es obligatorio.",
