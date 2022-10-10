@@ -58,7 +58,6 @@ export class VehiclePostDtoRepository {
       await this.vehiclePost.find({}, {}, { lean: true, limit })
     ).map((v) => AllVehiclePostsDto.create(v as unknown as IVehiclePost));
 
-    console.log(abc);
 
     return abc;
   }

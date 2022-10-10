@@ -137,13 +137,23 @@ export class VehiclePostsController {
   ) {
     const currentUser = await this._usersService.findCurrent(i18n);
 
+    const hasCommas = _id.includes(",");
+
+    const formattedId = hasCommas ? _id.replace(",", "") : _id;
+
+    if ((updateVehicleDto as any)?._id) delete (updateVehicleDto as any)?._id;
+
     updateVehicleDto.seller = {
       _id: new Types.ObjectId(currentUser?._id),
       value: currentUser?.name as string,
     };
 
     await this.commandBus.execute<UpdateVehiclePostCommand, void>(
-      new UpdateVehiclePostCommand(_id, updateVehicleDto, i18n as I18nContext),
+      new UpdateVehiclePostCommand(
+        formattedId,
+        updateVehicleDto,
+        i18n as I18nContext,
+      ),
     );
 
     return ApiResponse.update({

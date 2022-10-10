@@ -85,8 +85,8 @@ export class AppSetup {
 
     app.use(
       rateLimit({
-        windowMs: 1000 * 60 * 60,
-        max: 1000,
+        windowMs: 2000 * 60 * 60,
+        max: 2000,
         message:
           "⚠️  Too many simultaneous requests. Please, try again after an hour.",
       }),
