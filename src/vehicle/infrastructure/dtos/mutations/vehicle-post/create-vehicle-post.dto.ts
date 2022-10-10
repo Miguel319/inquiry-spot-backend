@@ -6,7 +6,6 @@ import { i18nValidationMessage } from "nestjs-i18n";
 import {
   IsArray,
   IsDefined,
-  IsMongoId,
   IsNumber,
   Min,
   ValidateIf,
@@ -29,7 +28,6 @@ export class CreateVehiclePostDto {
   })
   readonly description: string;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.MAKE),
   })
@@ -52,7 +50,6 @@ export class CreateVehiclePostDto {
   })
   readonly model: string;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.TYPE),
   })
@@ -61,7 +58,6 @@ export class CreateVehiclePostDto {
   })
   readonly type: Types.ObjectId;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.TRANSMISSION),
   })
@@ -78,7 +74,6 @@ export class CreateVehiclePostDto {
   })
   readonly price: Price;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.EXTERIOR_COLOR),
   })
@@ -87,7 +82,6 @@ export class CreateVehiclePostDto {
   })
   readonly exteriorColor: Types.ObjectId;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.INTERIOR_COLOR),
   })
@@ -96,12 +90,10 @@ export class CreateVehiclePostDto {
   })
   readonly interiorColor: Types.ObjectId;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   readonly traction: Types.ObjectId;
 
   readonly topSpeed: string;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.FUEL_TYPE),
   })
@@ -110,7 +102,6 @@ export class CreateVehiclePostDto {
   })
   readonly fuelType: Types.ObjectId;
 
-  @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.STATUS),
   })
@@ -165,29 +156,17 @@ export class CreateVehiclePostDto {
   })
   readonly accessories: string[];
 
-  @IsNotEmpty({
-    message: i18nValidationMessage(VehiclePostTranslations.IS_FORMAL_ADDRESS),
-  })
-  @IsDefined({
-    message: i18nValidationMessage(VehiclePostTranslations.IS_FORMAL_ADDRESS),
-  })
   readonly isFormalAddress: boolean;
 
+  @ValidateNested()
+  @Type(() => AddressValidationDto)
   @IsNotEmpty({
     message: i18nValidationMessage(VehiclePostTranslations.FORMAL_ADDRESS),
   })
-  @IsDefined({
-    message: i18nValidationMessage(VehiclePostTranslations.FORMAL_ADDRESS),
-  })
-  @ValidateNested()
-  @Type(() => AddressValidationDto)
   @ValidateIf((prop) => prop.isFormalAddress)
   readonly formalAddress: IAddress;
 
   @IsNotEmpty({
-    message: i18nValidationMessage(VehiclePostTranslations.FORMAL_ADDRESS),
-  })
-  @IsDefined({
     message: i18nValidationMessage(VehiclePostTranslations.FORMAL_ADDRESS),
   })
   @ValidateIf((prop) => !prop.isFormalAddress)
