@@ -18,6 +18,7 @@ export class FetchColorByIdQueryHandler
   async execute({ _id, i18n }: FetchColorByIdQuery): Promise<ColorDto> {
     const color = await this._colorDtoRepository.getById(_id);
 
+    console.log(color);
     if (!color)
       throw new NotFoundException(
         i18n

@@ -92,6 +92,7 @@ export class ColorsController {
     @Res() res: Response,
     @I18n() i18n?: I18nContext,
   ) {
+    console.log("updateVehicleDto", updateVehicleDto);
     await this.commandBus.execute<UpdateColorCommand, void>(
       new UpdateColorCommand(_id, updateVehicleDto, i18n as I18nContext),
     );
