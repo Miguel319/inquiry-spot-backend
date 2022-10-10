@@ -1,28 +1,24 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Schema as SchemaAlt } from "mongoose";
+import { Document, Types } from "mongoose";
 
 import paginate from "mongoose-paginate-v2";
-import {
-  BuyingOption,
-  PropertyStatus,
-  PropertyType,
-} from "@/real-state/domain";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
 import {
   Address,
   Currency,
+  IDefaultI18nName,
+  IDefaultName,
   Price,
   SharedTranslations,
 } from "@/common/domain/types/common";
 import { BaseEntity } from "@/common/domain/entities";
+import { PropertyBuyingOptionSchema } from "./property-buying-option.schema";
+import { PropertyTypeSchema } from "./property-type.schema";
+import { PropertyStatusSchema } from "./property-status.schema";
 
 export type PropertyPostDocument = PropertyPost & Document;
 
-const {
-  Types: { ObjectId },
-} = SchemaAlt;
-
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, versionKey: false, collection: "propertyposts" })
 export class PropertyPost extends BaseEntity {
   @Prop({ required: [true, PropertyPostsTranslations.DESCRIPTION] })
   readonly description: string;
@@ -49,6 +45,17 @@ export class PropertyPost extends BaseEntity {
   readonly parkingLotCount: number;
 
   @Prop({
+    type: Number,
+    isInteger: [true, PropertyPostsTranslations.YEAR_OF_CONSTRUCTION_INT],
+  })
+  readonly yearOfConstruction: number;
+
+  @Prop({
+    type: String,
+  })
+  readonly landSize: string;
+
+  @Prop({
     type: {
       value: {
         type: Number,
@@ -61,36 +68,72 @@ export class PropertyPost extends BaseEntity {
     required: [true, PropertyPostsTranslations.PRICE],
   })
   readonly price: Price;
+
   @Prop({
-    type: ObjectId,
-    ref: "User",
+    type: {
+      _id: {
+        ref: "users",
+        type: Types.ObjectId,
+        unique: false,
+      },
+      value: {
+        type: String,
+      },
+    },
     required: [true, PropertyPostsTranslations.SELLER],
   })
-  readonly seller: string;
-
-  @Prop({ type: Number })
-  readonly territory: number;
+  readonly seller: IDefaultName;
 
   @Prop({
+    type: {
+      _id: {
+        ref: PropertyBuyingOptionSchema.name,
+        type: Types.ObjectId,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, PropertyPostsTranslations.BUYING_OPTION],
-    enum: BuyingOption,
-    type: String,
   })
-  readonly buyingOption: BuyingOption;
+  readonly buyingOption: IDefaultI18nName;
 
   @Prop({
+    type: {
+      _id: {
+        ref: PropertyTypeSchema.name,
+        type: Types.ObjectId,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, PropertyPostsTranslations.PROPERTY_TYPE],
-    enum: PropertyType,
-    type: String,
   })
-  readonly propertyType: PropertyType;
+  readonly type: IDefaultI18nName;
 
   @Prop({
+    type: {
+      _id: {
+        ref: PropertyStatusSchema.name,
+        type: Types.ObjectId,
+      },
+      value: {
+        type: {
+          en: String,
+          es: String,
+        },
+      },
+    },
     required: [true, PropertyPostsTranslations.PROPERTY_STATUS],
-    type: String,
-    enum: PropertyStatus,
   })
-  readonly propertyStatus: PropertyStatus;
+  readonly status: IDefaultI18nName;
 
   @Prop({
     type: String,
@@ -109,7 +152,6 @@ export class PropertyPost extends BaseEntity {
   @Prop([
     {
       type: String,
-      required: [true, PropertyPostsTranslations.ADDITIONAL_INFO],
     },
   ])
   readonly additionalInfo: string[];

@@ -11,6 +11,7 @@ export enum PropertyPostsTranslations {
   BEDROOM_COUNT_INT = "validations.propertyPost.bedroomCountInt",
   PARKING_LOT_COUNT = "validations.propertyPost.parkingLotCount",
   PARKING_LOT_COUNT_INT = "validations.propertyPost.parkingLotCountInt",
+  YEAR_OF_CONSTRUCTION_INT = "validations.propertyPost.yearOfConstructionInt",
   PRICE = "validations.propertyPost.price",
   SELLER = "validations.propertyPost.seller",
   SELLER_MONGO_ID = "validations.propertyPost.sellerMongoId",
