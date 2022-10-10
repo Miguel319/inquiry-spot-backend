@@ -7,6 +7,7 @@ import {
 } from "@/common/domain/types";
 
 export interface IPropertyPost extends BaseEntity {
+  readonly name: string;
   readonly description: string;
   readonly bathroomCount: number;
   readonly bedroomCount: number;

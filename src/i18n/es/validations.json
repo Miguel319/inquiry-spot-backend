@@ -244,6 +244,7 @@
     }
   },
   "propertyPost": {
+    "name": "El nombre es obligatorio.",
     "description": "La descripción es obligatoria.",
     "bathroomCount": "El número baños es obligatorio.",
     "bathroomCountInt": "El número baños debe ser un valor numérico entero.",

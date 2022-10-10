@@ -18,8 +18,6 @@ export class PropertyPostDto extends Presenter {
   readonly price: Price;
   readonly seller: IDefaultName;
   readonly status: IDefaultI18nName;
-  readonly interiorColor: IDefaultI18nName;
-  readonly exteriorColor: IDefaultI18nName;
   readonly buyingOption: IDefaultI18nName;
   readonly type: IDefaultI18nName;
   readonly primaryImage: string;
@@ -84,14 +82,6 @@ export class PropertyPostDto extends Presenter {
 
     this.type =
       (post as IPropertyPost)?.type || (post as PropertyPost)?.getType?.();
-
-    this.exteriorColor =
-      (post as IPropertyPost)?.exteriorColor ||
-      (post as PropertyPost)?.getExteriorColor?.();
-
-    this.interiorColor =
-      (post as IPropertyPost)?.interiorColor ||
-      (post as PropertyPost)?.getInteriorColor?.();
 
     this.landSize =
       (post as IPropertyPost)?.landSize ||

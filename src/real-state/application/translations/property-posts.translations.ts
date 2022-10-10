@@ -4,6 +4,7 @@ export enum PropertyPostsTranslations {
   UPDATE = "general.propertyPost.update",
   DELETE = "general.propertyPost.delete",
   // Validations
+  NAME = "validations.propertyPost.name",
   DESCRIPTION = "validations.propertyPost.description",
   BATHROOM_COUNT = "validations.propertyPost.bathroomCount",
   BATHROOM_COUNT_INT = "validations.propertyPost.bathroomCountInt",

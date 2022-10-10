@@ -22,6 +22,9 @@ export type PropertyPostDocument = PropertyPostSchema & Document;
 
 @Schema({ timestamps: true, versionKey: false, collection: "propertyposts" })
 export class PropertyPostSchema extends BaseSchema {
+  @Prop({ required: [true, PropertyPostsTranslations.NAME] })
+  readonly name: string;
+
   @Prop({ required: [true, PropertyPostsTranslations.DESCRIPTION] })
   readonly description: string;
 

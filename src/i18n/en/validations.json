@@ -202,6 +202,7 @@
     "duplicateEmail": "The provided email is already taken."
   },
   "vehiclePost": {
+    "name": "The name is mandatory.",
     "description": "The description is mandatory.",
     "make": "The make is mandatory.",
     "invalidMake": "The provided make is invalid.",

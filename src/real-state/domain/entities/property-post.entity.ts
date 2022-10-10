@@ -20,6 +20,10 @@ export class PropertyPost extends AggregateRoot {
     return this.post._id;
   }
 
+  public getName(): string {
+    return this.post.name;
+  }
+
   public getDescription(): string {
     return this.post.description;
   }
@@ -119,6 +123,7 @@ export class PropertyPost extends AggregateRoot {
   public updatePropertyPost(updatePost: IPropertyPost): void {
     this.post = {
       ...this.post,
+      name: updatePost.name || this.post.name,
       additionalInfo: updatePost.additionalInfo || this.post.additionalInfo,
       bathroomCount: updatePost.bathroomCount || this.post.bathroomCount,
       bedroomCount: updatePost.bedroomCount || this.post.bedroomCount,

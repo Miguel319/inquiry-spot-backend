@@ -1,3 +1,4 @@
-export * from "./property-types";
-export * from "./property-status";
-export * from "./property-buying-option";
+export * from "./types";
+export * from "./status";
+export * from "./buying-option";
+export * from "./posts";
