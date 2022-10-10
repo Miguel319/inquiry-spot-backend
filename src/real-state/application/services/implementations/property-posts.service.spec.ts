@@ -4,7 +4,7 @@ import {
   PropertyPostsService as PropertyPostServiceType,
   PropertyPostsService,
 } from "./property-posts.service";
-import { PropertyPostsRepository as PropertyPostsRepositoryType } from "@/real-state/infrastructure/persistence/repositories/property-posts";
+import { PropertyPostsRepository as PropertyPostsRepositoryType } from "@/real-state/infrastructure/persistence/repositories/posts";
 import { UsersRepository as UsersRepositoryType } from "@/user/infrastructure/persistence/repositories/user";
 
 import {

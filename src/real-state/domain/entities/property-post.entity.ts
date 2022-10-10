@@ -5,7 +5,7 @@ import {
   Price,
 } from "@/common/domain/types";
 import { AggregateRoot } from "@nestjs/cqrs";
-import { IPropertyPost } from "../types/i-property-post";
+import { IPropertyPost } from "../types";
 
 export class PropertyPost extends AggregateRoot {
   post: IPropertyPost;
