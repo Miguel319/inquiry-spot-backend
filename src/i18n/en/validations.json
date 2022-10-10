@@ -250,6 +250,8 @@
     "bedroomCount": "The bedroom count is mandatory.",
     "bedroomCountInt": "The bedroom count must be an integer.",
     "parkingLotCount": "The parking lot count is mandatory.",
+    "parkingLotCountInt": "The parking lot count must be an integer.",
+    "yearOfConstructionInt": "The year of construction must be an integer.",
     "price": "The price is mandatory.",
     "seller": "The seller is mandatory.",
     "sellerMongoId": "The provided seller is invalid.",
