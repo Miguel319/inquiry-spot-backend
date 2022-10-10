@@ -254,6 +254,8 @@
     "yearOfConstructionInt": "El año de construcción debe ser un entero.",
     "price": "El precio es obligatorio.",
     "seller": "El vendedor es obligatorio.",
+    "interiorColor": "El color interior es obligatorio.",
+    "exteriorColor": "El color exterior es obligatorio.",
     "sellerMongoId": "El vendedor provisto es inválido.",
     "territory": "El territorio (mt²) es obligatorio.",
     "territoryNumber": "El territorio (mt²) debe ser un valor numérico.",

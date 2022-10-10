@@ -15,6 +15,7 @@ import { BaseEntity } from "@/common/domain/entities";
 import { PropertyBuyingOptionSchema } from "./property-buying-option.schema";
 import { PropertyTypeSchema } from "./property-type.schema";
 import { PropertyStatusSchema } from "./property-status.schema";
+import { ColorSchema } from "@/common/infrastructure/persistence/schemas";
 
 export type PropertyPostDocument = PropertyPost & Document;
 
@@ -83,6 +84,36 @@ export class PropertyPost extends BaseEntity {
     required: [true, PropertyPostsTranslations.SELLER],
   })
   readonly seller: IDefaultName;
+
+  @Prop({
+    type: {
+      _id: {
+        ref: ColorSchema.name,
+        type: Types.ObjectId,
+      },
+      value: {
+        en: String,
+        es: String,
+      },
+    },
+    required: [true, PropertyPostsTranslations.EXTERIOR_COLOR],
+  })
+  readonly exteriorColor: IDefaultI18nName;
+
+  @Prop({
+    type: {
+      _id: {
+        ref: ColorSchema.name,
+        type: Types.ObjectId,
+      },
+      value: {
+        en: String,
+        es: String,
+      },
+    },
+    required: [true, PropertyPostsTranslations.INTERIOR_COLOR],
+  })
+  readonly interiorColor: IDefaultI18nName;
 
   @Prop({
     type: {

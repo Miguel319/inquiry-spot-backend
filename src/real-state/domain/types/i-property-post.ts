@@ -14,9 +14,11 @@ export interface IPropertyPost extends BaseEntity {
   readonly yearOfConstruction: number;
   readonly landSize: string;
   readonly price: Price;
-  readonly seller: IDefaultName;
-  readonly buyingOption: IDefaultI18nName;
-  readonly type: IDefaultI18nName;
+  seller: IDefaultName;
+  interiorColor: IDefaultI18nName;
+  exteriorColor: IDefaultI18nName;
+  buyingOption: IDefaultI18nName;
+  type: IDefaultI18nName;
   readonly primaryImage: string;
   readonly secondaryImages: string[];
   readonly additionalInfo: string[];
