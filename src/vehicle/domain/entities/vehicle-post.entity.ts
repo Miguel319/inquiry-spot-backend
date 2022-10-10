@@ -169,6 +169,8 @@ export class VehiclePost extends AggregateRoot {
       secondaryImages: updatedPost.secondaryImages || this.post.secondaryImages,
       topSpeed: updatedPost.topSpeed || this.post.topSpeed,
       use: updatedPost.use || this.post.use,
+      year: updatedPost.year || this.post.year,
+      description: updatedPost.description || this.getDescription(),
       updatedAt: new Date(),
     };
   }

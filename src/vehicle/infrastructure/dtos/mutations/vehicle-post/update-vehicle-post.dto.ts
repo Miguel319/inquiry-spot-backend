@@ -1,4 +1,4 @@
-import { IAddress, Price, SharedTranslations } from "@/common/domain/types";
+import { Price, SharedTranslations } from "@/common/domain/types";
 import { VehiclePostTranslations } from "@/vehicle/application/translations";
 import { IsArray, IsNumber, Min } from "class-validator";
 import { Types } from "mongoose";
@@ -49,7 +49,12 @@ export class UpdateVehiclePostDto {
   })
   readonly accessories: string[];
   readonly isFormalAddress: boolean;
-  readonly formalAddress: IAddress;
+  readonly formalAddress: {
+    addressLine1: string;
+    municipality: string;
+    province: string;
+    sector: string;
+  };
   readonly informalAddress: string;
   readonly primaryImage: string;
   @IsArray({

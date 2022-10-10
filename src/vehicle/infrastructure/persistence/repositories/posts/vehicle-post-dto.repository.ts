@@ -54,12 +54,8 @@ export class VehiclePostDtoRepository {
   }
 
   async getAll(limit?: number): Promise<AllVehiclePostsDto[]> {
-    const abc = (
-      await this.vehiclePost.find({}, {}, { lean: true, limit })
-    ).map((v) => AllVehiclePostsDto.create(v as unknown as IVehiclePost));
-
-    console.log(abc);
-
-    return abc;
+    return (await this.vehiclePost.find({}, {}, { lean: true, limit })).map(
+      (v) => AllVehiclePostsDto.create(v as unknown as IVehiclePost),
+    );
   }
 }

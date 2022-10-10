@@ -11,7 +11,7 @@ export abstract class BaseEntityRepository<
     value: string | Types.ObjectId,
     queryBy: "slug" | "_id",
   ): Promise<TEntity | null> {
-    return this.findOne({
+    return await this.findOne({
       [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
     } as FilterQuery<TSchema>);
   }
@@ -25,9 +25,16 @@ export abstract class BaseEntityRepository<
     queryBy: "slug" | "_id",
     entity: TEntity,
   ): Promise<void> {
+    const hasCommas = typeof value === "string" && value.includes(",");
+
+    const formattedValue = hasCommas ? value.replace(",", "") : value;
+
     await this.findOneAndReplace(
       {
-        [queryBy]: queryBy === "_id" ? new Types.ObjectId(value) : value,
+        [queryBy]:
+          queryBy === "_id"
+            ? new Types.ObjectId(formattedValue)
+            : formattedValue,
       } as FilterQuery<TSchema>,
       entity,
     );

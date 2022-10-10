@@ -299,14 +299,14 @@ export class VehiclePostsService implements IVehiclePostsService {
     i18n: I18nContext,
     dto?: UpdateVehiclePostDto,
   ) {
-    const sectorId = dto?.formalAddress
-      ? dto.formalAddress.sector._id
+    const sectorId = dto?.isFormalAddress
+      ? dto.formalAddress.sector
       : (post.getAddress().formal?.sector._id as unknown as string);
 
     const sector = await this._sectorService.findById(sectorId, i18n);
 
     const municipalityId = dto?.formalAddress
-      ? dto.formalAddress.municipality._id
+      ? dto.formalAddress.municipality
       : (post.getAddress().formal?.municipality._id as unknown as string);
 
     const municipality = await this._municipalyService.findById(
@@ -314,14 +314,16 @@ export class VehiclePostsService implements IVehiclePostsService {
       i18n,
     );
 
-    const provinceId = dto?.formalAddress
-      ? dto.formalAddress.province._id
+    const provinceId = dto?.isFormalAddress
+      ? dto.formalAddress.province
       : (post.getAddress?.().formal?.province._id as unknown as string);
 
     const province = await this._provincesService.findById(provinceId, i18n);
 
     post.setFormalAddress({
-      addressLine1: post.getAddress().formal?.addressLine1 as unknown as string,
+      addressLine1: dto?.isFormalAddress
+        ? dto.formalAddress.addressLine1
+        : (post.getAddress().formal?.addressLine1 as unknown as string),
       municipality: {
         _id: new Types.ObjectId(municipality.getId()),
         value: municipality.getName(),

@@ -24,8 +24,10 @@ export class UpdateVehiclePostCommandHandler
     _id: string,
     i18n: I18nContext,
   ): Promise<VehiclePost> {
+    const cleanId = _id.replace(",", "");
+
     const vehiclePost = await this._vehiclePostRepository.findByValue(
-      _id,
+      cleanId,
       "_id",
     );
 
@@ -41,7 +43,7 @@ export class UpdateVehiclePostCommandHandler
 
   async execute({
     _id,
-    updateVehiclePostDto,
+    updateVehiclePostDto: dto,
     i18n,
   }: UpdateVehiclePostCommand): Promise<void> {
     const vehiclePostFound = await this.getVehiclePost(_id, i18n);
@@ -49,11 +51,14 @@ export class UpdateVehiclePostCommandHandler
     const vehiclePost =
       this.eventPublisher.mergeObjectContext(vehiclePostFound);
 
-    await this._vehiclePostsService.mapToEntities(vehiclePost, i18n, "edit");
-
-    vehiclePost.updateVehiclePost(
-      updateVehiclePostDto as unknown as IVehiclePost,
+    await this._vehiclePostsService.mapToEntities(
+      vehiclePost,
+      i18n,
+      "edit",
+      dto,
     );
+
+    vehiclePost.updateVehiclePost(dto as unknown as IVehiclePost);
 
     await this._vehiclePostRepository.findOneAndReplaceByValue(
       _id,
