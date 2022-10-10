@@ -17,7 +17,6 @@ export enum PropertyPostsTranslations {
   SELLER_MONGO_ID = "validations.propertyPost.sellerMongoId",
   TERRITORY = "validations.propertyPost.territory",
   ADDRESS = "validations.propertyPost.address",
-  TERRITORY_NUMBER = "validations.propertyPost.territoryNumber",
   EXTERIOR_COLOR = "validations.propertyPost.exteriorColor",
   INTERIOR_COLOR = "validations.propertyPost.interiorColor",
   BUYING_OPTION = "validations.propertyPost.buyingOption",

@@ -199,6 +199,4 @@ export class CreateVehiclePostDto {
   })
   @ValidateIf((prop) => !prop.isOptional)
   readonly secondaryImages: string[];
-
-  readonly isOptional: boolean;
 }

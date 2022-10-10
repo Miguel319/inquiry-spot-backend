@@ -1,17 +1,8 @@
+import { Price } from "@/common/domain/types";
 import { AddressValidationDto } from "@/common/infrastructure/dtos";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
-import {
-  BuyingOption,
-  PropertyStatus,
-  PropertyType,
-} from "@/real-state/domain";
-import {
-  IsArray,
-  IsEnum,
-  IsInt,
-  IsNumber,
-  ValidateNested,
-} from "class-validator";
+import { IsArray, IsInt, ValidateNested } from "class-validator";
+import { Types } from "mongoose";
 import { i18nValidationMessage } from "nestjs-i18n";
 
 export class UpdatePropertyPostDto {
@@ -35,41 +26,19 @@ export class UpdatePropertyPostDto {
     ),
   })
   readonly parkingLotCount: number;
-
-  readonly price: number;
-
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage(
-        PropertyPostsTranslations.TERRITORY_NUMBER,
-      ),
-    },
-  )
-  readonly territory: number;
-
-  @IsEnum(BuyingOption, {
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.INVALID_BUYING_OPTION,
-    ),
-  })
-  readonly buyingOption: BuyingOption;
-
-  @IsEnum(PropertyType, {
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.INVALID_PROPERTY_TYPE,
-    ),
-  })
-  readonly propertyType: PropertyType;
-
-  @IsEnum(PropertyStatus, {
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.INVALID_PROPERTY_STATUS,
-    ),
-  })
-  readonly propertyStatus: PropertyStatus;
-
+  readonly price: Price;
+  readonly landSize: string;
+  readonly buyingOption: Types.ObjectId;
+  readonly propertyType: Types.ObjectId;
+  readonly propertyStatus: Types.ObjectId;
   readonly primaryImage: string;
+
+  @IsInt({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.YEAR_OF_CONSTRUCTION_INT,
+    ),
+  })
+  readonly yearOfConstruction: number;
 
   @IsArray({
     message: i18nValidationMessage(
@@ -77,6 +46,8 @@ export class UpdatePropertyPostDto {
     ),
   })
   readonly secondaryImages: string[];
+  readonly exteriorColor: Types.ObjectId;
+  readonly interiorColor: Types.ObjectId;
 
   @IsArray({
     message: i18nValidationMessage(

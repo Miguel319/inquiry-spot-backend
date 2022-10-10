@@ -258,8 +258,6 @@
     "interiorColor": "The interior color is mandatory.",
     "exteriorColor": "The exterior color is mandatory.",
     "sellerMongoId": "The provided seller is invalid.",
-    "territory": "The territory (m²) is mandatory.",
-    "territoryNumber": "The territory (m²) provided is invalid.",
     "buyingOption": "The buying option (buy or rent) is mandatory.",
     "invalidBuyingOption": "The provided buying option is invalid.",
     "propertyType": "The real state type is mandatory.",

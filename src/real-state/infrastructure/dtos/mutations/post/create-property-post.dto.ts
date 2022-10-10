@@ -1,21 +1,10 @@
 import { IsNotEmpty } from "../../../../../common/infrastructure/decorators";
-import {
-  IsArray,
-  IsDefined,
-  IsEnum,
-  IsInt,
-  IsNumber,
-  ValidateNested,
-} from "class-validator";
+import { IsArray, IsDefined, IsInt, ValidateNested } from "class-validator";
 import { i18nValidationMessage } from "nestjs-i18n";
-import {
-  BuyingOption,
-  PropertyStatus,
-  PropertyType,
-} from "@/real-state/domain";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
 import { Price } from "@/common/domain/types/common";
 import { AddressValidationDto } from "@/common/infrastructure/dtos";
+import { Types } from "mongoose";
 
 export class CreatePropertyPostDto {
   @IsNotEmpty({
@@ -71,54 +60,31 @@ export class CreatePropertyPostDto {
   })
   readonly price: Price;
 
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage(
-        PropertyPostsTranslations.TERRITORY_NUMBER,
-      ),
-    },
-  )
-  readonly territory: number;
+  readonly landSize: string;
 
-  @IsEnum(BuyingOption, {
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.INVALID_BUYING_OPTION,
-    ),
-  })
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.BUYING_OPTION),
   })
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.BUYING_OPTION),
   })
-  readonly buyingOption: BuyingOption;
+  readonly buyingOption: Types.ObjectId;
 
-  @IsEnum(PropertyType, {
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.INVALID_PROPERTY_TYPE,
-    ),
-  })
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_TYPE),
   })
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_TYPE),
   })
-  readonly propertyType: PropertyType;
+  readonly propertyType: Types.ObjectId;
 
-  @IsEnum(PropertyStatus, {
-    message: i18nValidationMessage(
-      PropertyPostsTranslations.INVALID_PROPERTY_STATUS,
-    ),
-  })
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_STATUS),
   })
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_STATUS),
   })
-  readonly propertyStatus: PropertyStatus;
+  readonly propertyStatus: Types.ObjectId;
 
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.PRIMARY_IMAGE),
@@ -127,6 +93,13 @@ export class CreatePropertyPostDto {
     message: i18nValidationMessage(PropertyPostsTranslations.PRIMARY_IMAGE),
   })
   readonly primaryImage: string;
+
+  @IsInt({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.YEAR_OF_CONSTRUCTION_INT,
+    ),
+  })
+  readonly yearOfConstruction: number;
 
   @IsArray({
     message: i18nValidationMessage(
@@ -140,6 +113,22 @@ export class CreatePropertyPostDto {
     message: i18nValidationMessage(PropertyPostsTranslations.SECONDARY_IMAGES),
   })
   readonly secondaryImages: string[];
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.EXTERIOR_COLOR),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.EXTERIOR_COLOR),
+  })
+  readonly exteriorColor: Types.ObjectId;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.INTERIOR_COLOR),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.INTERIOR_COLOR),
+  })
+  readonly interiorColor: Types.ObjectId;
 
   @IsArray({
     message: i18nValidationMessage(
@@ -156,6 +145,4 @@ export class CreatePropertyPostDto {
 
   @ValidateNested()
   readonly address: AddressValidationDto;
-
-  readonly isOptional: boolean;
 }
