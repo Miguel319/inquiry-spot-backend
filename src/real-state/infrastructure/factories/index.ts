@@ -1,3 +1,3 @@
-export * from "./property-type";
-export * from "./property-status";
-export * from "./property-buying-option";
+export * from "./type";
+export * from "./status";
+export * from "./buying-option";
