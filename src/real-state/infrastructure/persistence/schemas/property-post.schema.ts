@@ -4,23 +4,24 @@ import { Document, Types } from "mongoose";
 import paginate from "mongoose-paginate-v2";
 import { PropertyPostsTranslations } from "@/real-state/application/translations";
 import {
-  Address,
   Currency,
+  IAddress,
   IDefaultI18nName,
   IDefaultName,
   Price,
-  SharedTranslations,
 } from "@/common/domain/types/common";
-import { BaseEntity } from "@/common/domain/entities";
 import { PropertyBuyingOptionSchema } from "./property-buying-option.schema";
 import { PropertyTypeSchema } from "./property-type.schema";
 import { PropertyStatusSchema } from "./property-status.schema";
-import { ColorSchema } from "@/common/infrastructure/persistence/schemas";
+import {
+  BaseSchema,
+  ColorSchema,
+} from "@/common/infrastructure/persistence/schemas";
 
-export type PropertyPostDocument = PropertyPost & Document;
+export type PropertyPostDocument = PropertyPostSchema & Document;
 
 @Schema({ timestamps: true, versionKey: false, collection: "propertyposts" })
-export class PropertyPost extends BaseEntity {
+export class PropertyPostSchema extends BaseSchema {
   @Prop({ required: [true, PropertyPostsTranslations.DESCRIPTION] })
   readonly description: string;
 
@@ -189,23 +190,49 @@ export class PropertyPost extends BaseEntity {
 
   @Prop({
     type: {
-      addressLine1: {
-        type: String,
-        required: [true, SharedTranslations.ADDRESS__ADDRESS_LINE_1],
+      formal: {
+        addressLine1: String,
+        municipality: {
+          _id: {
+            ref: "municipalities",
+            type: Types.ObjectId,
+          },
+          value: {
+            type: String,
+          },
+        },
+        province: {
+          _id: {
+            ref: "provinces",
+            type: Types.ObjectId,
+          },
+          value: {
+            type: String,
+          },
+        },
+        sector: {
+          _id: {
+            ref: "sectors",
+            type: Types.ObjectId,
+          },
+          value: {
+            type: String,
+          },
+        },
       },
-      city: {
+      informal: {
         type: String,
-        required: [true],
-      },
-      province: {
-        type: String,
-        required: [true, SharedTranslations.ADDRESS__PROVINCE],
       },
     },
+    required: [true, PropertyPostsTranslations.ADDRESS],
   })
-  readonly address: Address;
+  readonly address: {
+    formal?: IAddress;
+    informal?: string;
+  };
 }
 
-export const PropertyPostSchema = SchemaFactory.createForClass(PropertyPost);
+export const SchemaPropertyPost =
+  SchemaFactory.createForClass(PropertyPostSchema);
 
-PropertyPostSchema.plugin(paginate);
+SchemaPropertyPost.plugin(paginate);
