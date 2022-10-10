@@ -68,8 +68,16 @@ export class PropertyPost extends AggregateRoot {
     return this.post.seller;
   }
 
+  public getStatus(): IDefaultI18nName {
+    return this.post.status;
+  }
+
   public getPrimaryImage(): string {
     return this.post.primaryImage;
+  }
+
+  public getBuyingOption(): IDefaultI18nName {
+    return this.post.buyingOption;
   }
 
   public getSecondaryImages(): string[] {
@@ -94,6 +102,10 @@ export class PropertyPost extends AggregateRoot {
 
   public setType(type: IDefaultI18nName): void {
     this.post.type = type;
+  }
+
+  public setStatus(status: IDefaultI18nName): void {
+    this.post.status = status;
   }
 
   public getCreatedAt(): Date {
