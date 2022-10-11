@@ -112,6 +112,14 @@ export class PropertyPost extends AggregateRoot {
     this.post.status = status;
   }
 
+  public setFormalAddress(address: IAddress): void {
+    this.post.address.formal = address;
+  }
+
+  public setInformalAddress(address: string): void {
+    this.post.address.informal = address;
+  }
+
   public getCreatedAt(): Date {
     return this.post.createdAt;
   }

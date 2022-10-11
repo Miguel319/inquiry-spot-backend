@@ -10,9 +10,9 @@ import {
   PropertyStatusEntityRepository,
 } from "@/real-state/infrastructure/persistence/repositories";
 import {
-  PropertyPost,
   PropertyPostSchema,
   PropertyStatusSchema,
+  SchemaPropertyPost,
   SchemaPropertyStatus,
 } from "@/real-state/infrastructure/persistence/schemas";
 import { PropertyStatusController } from "@/real-state/presentation/controllers";
@@ -23,6 +23,11 @@ import { PropertyStatusCommandHandlers } from "../commands/handlers";
 import { PropertyStatusEventHandlers } from "../events/handlers";
 import { PropertyStatusQueryHandlers } from "../queries/handlers";
 
+const SharedProviders = [
+  PropertyStatusEntityRepository,
+  PropertyStatusSchemaFactory,
+];
+
 @Module({
   imports: [
     CqrsModule,
@@ -32,14 +37,13 @@ import { PropertyStatusQueryHandlers } from "../queries/handlers";
         schema: SchemaPropertyStatus,
       },
       {
-        name: PropertyPost.name,
-        schema: PropertyPostSchema,
+        name: PropertyPostSchema.name,
+        schema: SchemaPropertyPost,
       },
     ]),
   ],
   providers: [
-    PropertyStatusEntityRepository,
-    PropertyStatusSchemaFactory,
+    ...SharedProviders,
     PropertyStatusDtoRepository,
     LoggerService,
     PropertyStatusFactory,
@@ -49,5 +53,6 @@ import { PropertyStatusQueryHandlers } from "../queries/handlers";
     ...PropertyStatusEventHandlers,
   ],
   controllers: [PropertyStatusController],
+  exports: [...SharedProviders],
 })
 export class PropertyStatusModule {}

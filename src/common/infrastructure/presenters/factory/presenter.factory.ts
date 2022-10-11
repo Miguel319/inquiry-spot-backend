@@ -6,13 +6,8 @@ import { Document } from "mongoose";
 import { PaginatedQuery } from "@/common/infrastructure/util";
 import { PaginatedQueryPresenter } from "../pagination-query.presenter";
 import { BlogDocument } from "@/blog/infrastructure/persistence/schemas";
-import { PropertyPostPresenter } from "@/real-state/infrastructure/dtos";
 import { Tag, TagDocument } from "@/tag/infrastructure/persistence/schemas";
 import { User, UserDocument } from "@/user/infrastructure/persistence/schemas";
-import {
-  PropertyPost,
-  PropertyPostDocument,
-} from "@/real-state/infrastructure/persistence/schemas";
 export { Document } from "mongoose";
 
 type EntityType = "user" | "blog" | "tag" | "vehiclePost" | "propertyPost";
@@ -27,9 +22,6 @@ export class PresenterFactory {
     if (type === "blog") return BlogsPresenter.create(value as BlogDocument);
 
     if (type === "tag") return TagsPresenter.create(value as Tag);
-
-    if (type === "propertyPost")
-      return PropertyPostPresenter.create(value as PropertyPost);
 
     return null;
   }
@@ -51,10 +43,6 @@ export class PresenterFactory {
         case "tag":
           return (values as TagDocument[]).map((tag) =>
             TagsPresenter.create(tag),
-          );
-        case "propertyPost":
-          return (values as PropertyPostDocument[]).map((tag) =>
-            PropertyPostPresenter.create(tag),
           );
       }
     }

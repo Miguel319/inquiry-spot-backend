@@ -90,7 +90,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     if (dto?.interiorColor)
       await this.mapToInteriorColor(vehiclePost, i18n, dto);
 
-    if (dto?.type) await this.mapToType(vehiclePost, i18n);
+    if (dto?.type) await this.mapToType(vehiclePost, i18n, dto);
 
     if (dto?.fuelType) await this.mapToFuelType(vehiclePost, i18n, dto);
 
@@ -100,8 +100,10 @@ export class VehiclePostsService implements IVehiclePostsService {
   }
 
   async findById(_id: string, i18n: I18nContext): Promise<VehiclePost> {
+    const cleanId = _id.replace(",", "");
+
     const post = await this._vehiclePostEntityRepository.findByValue(
-      _id,
+      cleanId,
       "_id",
     );
 

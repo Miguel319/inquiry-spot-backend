@@ -76,7 +76,7 @@ export class CreatePropertyPostDto {
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_TYPE),
   })
-  readonly propertyType: Types.ObjectId;
+  readonly type: Types.ObjectId;
 
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_STATUS),
@@ -84,7 +84,7 @@ export class CreatePropertyPostDto {
   @IsDefined({
     message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_STATUS),
   })
-  readonly propertyStatus: Types.ObjectId;
+  readonly status: Types.ObjectId;
 
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.PRIMARY_IMAGE),
@@ -113,6 +113,13 @@ export class CreatePropertyPostDto {
     message: i18nValidationMessage(PropertyPostsTranslations.SECONDARY_IMAGES),
   })
   readonly secondaryImages: string[];
+
+  readonly isFormalAddress: boolean;
+
+  seller: {
+    _id: Types.ObjectId;
+    value: string;
+  };
 
   @IsNotEmpty({
     message: i18nValidationMessage(PropertyPostsTranslations.EXTERIOR_COLOR),
@@ -144,5 +151,7 @@ export class CreatePropertyPostDto {
   readonly additionalInfo: string[];
 
   @ValidateNested()
-  readonly address: AddressValidationDto;
+  readonly formalAddress: AddressValidationDto;
+
+  readonly informalAddress: string;
 }

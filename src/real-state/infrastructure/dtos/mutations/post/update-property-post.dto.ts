@@ -29,8 +29,8 @@ export class UpdatePropertyPostDto {
   readonly price: Price;
   readonly landSize: string;
   readonly buyingOption: Types.ObjectId;
-  readonly propertyType: Types.ObjectId;
-  readonly propertyStatus: Types.ObjectId;
+  readonly type: Types.ObjectId;
+  readonly status: Types.ObjectId;
   readonly primaryImage: string;
 
   @IsInt({
@@ -56,6 +56,15 @@ export class UpdatePropertyPostDto {
   })
   readonly additionalInfo: string[];
 
+  readonly isFormalAddress: boolean;
+
+  seller: {
+    _id: Types.ObjectId;
+    value: string;
+  };
+
   @ValidateNested()
-  readonly address: AddressValidationDto;
+  readonly formalAddress: AddressValidationDto;
+
+  readonly informalAddress: string;
 }

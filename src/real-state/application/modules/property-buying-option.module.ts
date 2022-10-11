@@ -10,10 +10,10 @@ import {
   PropertyBuyingOptionEntityRepository,
 } from "@/real-state/infrastructure/persistence/repositories";
 import {
-  PropertyPost,
   PropertyPostSchema,
   PropertyBuyingOptionSchema,
   SchemaPropertyBuyingOption,
+  SchemaPropertyPost,
 } from "@/real-state/infrastructure/persistence/schemas";
 import { PropertyBuyingOptionController } from "@/real-state/presentation/controllers";
 import { Module } from "@nestjs/common";
@@ -22,6 +22,11 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { PropertyBuyingOptionCommandHandlers } from "../commands/handlers";
 import { PropertyBuyingOptionEventHandlers } from "../events/handlers";
 import { PropertyBuyingOptionQueryHandlers } from "../queries/handlers";
+
+const SharedProviders = [
+  PropertyBuyingOptionEntityRepository,
+  PropertyBuyingOptionSchemaFactory,
+];
 
 @Module({
   imports: [
@@ -32,14 +37,13 @@ import { PropertyBuyingOptionQueryHandlers } from "../queries/handlers";
         schema: SchemaPropertyBuyingOption,
       },
       {
-        name: PropertyPost.name,
-        schema: PropertyPostSchema,
+        name: PropertyPostSchema.name,
+        schema: SchemaPropertyPost,
       },
     ]),
   ],
   providers: [
-    PropertyBuyingOptionEntityRepository,
-    PropertyBuyingOptionSchemaFactory,
+    ...SharedProviders,
     PropertyBuyingOptionDtoRepository,
     LoggerService,
     PropertyBuyingOptionFactory,
@@ -49,5 +53,6 @@ import { PropertyBuyingOptionQueryHandlers } from "../queries/handlers";
     ...PropertyBuyingOptionEventHandlers,
   ],
   controllers: [PropertyBuyingOptionController],
+  exports: [...SharedProviders],
 })
 export class PropertyBuyingOptionModule {}

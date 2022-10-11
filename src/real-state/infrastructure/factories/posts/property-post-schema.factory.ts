@@ -11,6 +11,7 @@ export class PropertyPostSchemaFactory
   public create(propertyPost: PropertyPost): PropertyPostSchema {
     return {
       _id: new Types.ObjectId(propertyPost.getId()),
+      name: propertyPost.getName(),
       address: propertyPost.getAddress(),
       bathroomCount: propertyPost.getBathroomCount(),
       bedroomCount: propertyPost.getBedroomCount(),
