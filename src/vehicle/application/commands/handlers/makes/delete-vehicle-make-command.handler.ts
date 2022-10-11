@@ -40,11 +40,11 @@ export class DeleteVehicleMakeCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    make: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._vehiclePostRepository.findOne({
-      type,
+      "make._id": make,
     });
 
     if (postFound)
