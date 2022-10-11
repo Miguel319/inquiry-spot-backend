@@ -42,7 +42,7 @@ export class DeletePropertyStatusCommandHandler
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._propertyPostRepository.findOne({
-      status,
+      "status._id": status,
     });
 
     if (postFound)

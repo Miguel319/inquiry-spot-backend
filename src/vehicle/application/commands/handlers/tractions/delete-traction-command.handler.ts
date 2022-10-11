@@ -37,11 +37,11 @@ export class DeleteTractionCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    traction: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._vehiclePostRepository.findOne({
-      type,
+      "traction._id": traction,
     });
 
     if (postFound)

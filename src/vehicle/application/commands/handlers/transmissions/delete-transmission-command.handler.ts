@@ -40,11 +40,11 @@ export class DeleteTransmissionCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    transmission: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._vehiclePostRepository.findOne({
-      type,
+      "transmission._id": transmission,
     });
 
     if (postFound)
