@@ -78,7 +78,8 @@ export class UpdateSectorCommandHandler
     const sector = this.eventPublisher.mergeObjectContext(sectorFound);
 
     const shouldUpdateReferences =
-      String(dto?.municipality) !== String(sector.getMunicipality()._id);
+      dto?.municipality &&
+      String(dto.municipality) !== String(sector.getMunicipality()._id);
 
     if (shouldUpdateReferences)
       await this._municipalityService.removeSector(sector, i18n);

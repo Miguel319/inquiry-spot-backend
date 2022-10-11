@@ -79,7 +79,8 @@ export class UpdateMunicipalityCommandHandler
       this.eventPublisher.mergeObjectContext(municipalityFound);
 
     const shouldUpdateReferences =
-      String(dto?.province) !== String(municipality.getProvince()._id);
+      dto?.province &&
+      String(dto.province) !== String(municipality.getProvince()._id);
 
     if (shouldUpdateReferences)
       await this._provincesService.removeMunicipality(municipality, i18n);
