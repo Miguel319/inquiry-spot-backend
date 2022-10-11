@@ -1,160 +1,276 @@
 import {
-  Inject,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from "@nestjs/common";
-
+  IMunicipalitiesService,
+  IProvincesService,
+  ISectorsService,
+} from "@/common/application/services/contracts";
+import { ColorTranslations } from "@/common/application/translations";
+import { ColorEntityRepository } from "@/common/infrastructure/persistence/repositories";
+import {
+  PropertyStatusTranslations,
+  PropertyTypeTranslations,
+  PropertyBuyingOptionTranslations,
+} from "@/real-state/application/translations";
+import { PropertyPost } from "@/real-state/domain/entities";
+import { UpdatePropertyPostDto } from "@/real-state/infrastructure/dtos";
+import {
+  PropertyPostEntityRepository,
+  PropertyStatusEntityRepository,
+  PropertyTypeEntityRepository,
+  PropertyBuyingOptionEntityRepository,
+} from "@/real-state/infrastructure/persistence/repositories";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { Types } from "mongoose";
 import { I18nContext, I18nService } from "nestjs-i18n";
-
-import { PropertyPostsTranslations } from "../../translations";
-import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories";
 import { IPropertyPostsService } from "../contracts";
-import { IUsersService } from "@/user/application/services/contracts";
-import {
-  getPaginationOptions,
-  PaginatedQuery,
-  PaginationOptions,
-} from "@/common/infrastructure/util";
-import {
-  PropertyPost,
-  PropertyPostDocument,
-} from "@/real-state/infrastructure/persistence/schemas";
-import { UserTranslations } from "@/user/application/translations";
-import { UserDocument } from "@/user/infrastructure/persistence/schemas";
-import {
-  PaginationQuery,
-  SharedTranslations,
-} from "@/common/domain/types/common";
 
 @Injectable()
 export class PropertyPostsService implements IPropertyPostsService {
   constructor(
-    private readonly _propertyPostRepo: PropertyPostsRepository,
+    private readonly propertyPostEntityRepository: PropertyPostEntityRepository,
+    private readonly _statusRepository: PropertyStatusEntityRepository,
+    private readonly _colorRepository: ColorEntityRepository,
+    private readonly _buyingOptionRepository: PropertyBuyingOptionEntityRepository,
+    private readonly propertyTypeRepository: PropertyTypeEntityRepository,
+    @Inject("ISectorsService") private readonly _sectorService: ISectorsService,
+    @Inject("IProvincesService")
+    private readonly _provincesService: IProvincesService,
+    @Inject("IMunicipalitiesService")
+    private readonly _municipalyService: IMunicipalitiesService,
     private readonly _i18n: I18nService,
-    @Inject("IUsersService") private readonly _usersService: IUsersService,
   ) {}
 
-  private getPaginationOptions(
-    paginationQuery: PaginationQuery,
+  async mapToEntities(
+    vehiclePost: PropertyPost,
     i18n: I18nContext,
-  ): PaginationOptions {
-    return {
-      ...getPaginationOptions({ ...paginationQuery }, i18n || this._i18n),
-      select:
-        "_id description buyingOption territory type address propertyStatus price bedroomCoupnt bathroomCount parkingLotCount seller primaryImage createdAt",
-      sort: "-createdAt",
-    };
+    operation: "create" | "edit",
+    dto?: UpdatePropertyPostDto | undefined,
+  ): Promise<void> {
+    if (operation === "create") await this.mapToCreation(vehiclePost, i18n);
+    else await this.mapToUpdate(vehiclePost, i18n, dto);
   }
 
-  async findAll(
-    paginationQuery: PaginationQuery,
-    i18n?: I18nContext,
-  ): Promise<PaginatedQuery<PropertyPostDocument>> {
-    const options: PaginationOptions = this.getPaginationOptions(
-      paginationQuery,
-      i18n as I18nContext,
+  private async mapToCreation(
+    vehiclePost: PropertyPost,
+    i18n: I18nContext,
+  ): Promise<void> {
+    await this.mapToAddress(vehiclePost, i18n);
+    await this.mapToExteriorColor(vehiclePost, i18n);
+    await this.mapToInteriorColor(vehiclePost, i18n);
+    await this.mapToType(vehiclePost, i18n);
+    await this.mapToStatus(vehiclePost, i18n);
+    await this.mapToBuyingOption(vehiclePost, i18n);
+  }
+
+  private async mapToUpdate(
+    vehiclePost: PropertyPost,
+    i18n: I18nContext,
+    dto: UpdatePropertyPostDto | undefined,
+  ): Promise<void> {
+    if (dto?.formalAddress || dto?.informalAddress)
+      await this.mapToAddress(vehiclePost, i18n, dto);
+
+    if (dto?.exteriorColor)
+      await this.mapToExteriorColor(vehiclePost, i18n, dto);
+
+    if (dto?.status) await this.mapToStatus(vehiclePost, i18n, dto);
+    if (dto?.interiorColor)
+      await this.mapToInteriorColor(vehiclePost, i18n, dto);
+
+    if (dto?.type) await this.mapToType(vehiclePost, i18n, dto);
+
+    if (dto?.buyingOption) await this.mapToBuyingOption(vehiclePost, i18n, dto);
+  }
+
+  async findById(_id: string, i18n: I18nContext): Promise<PropertyPost> {
+    const cleanId = _id.replace(",", "");
+
+    const post = await this.propertyPostEntityRepository.findByValue(
+      cleanId,
+      "_id",
     );
-    return (await this._propertyPostRepo.paginate(
-      {},
-      options,
-    )) as unknown as PaginatedQuery<PropertyPostDocument>;
-  }
 
-  async findById(
-    _id: string,
-    i18n?: I18nContext,
-  ): Promise<PropertyPostDocument> {
-    const propertyPost: PropertyPost | null =
-      await this._propertyPostRepo.findOne({ _id });
-
-    if (!propertyPost) {
+    if (!post)
       throw new NotFoundException(
         i18n
-          ? i18n.t(PropertyPostsTranslations.NOT_FOUND)
-          : this._i18n.t(PropertyPostsTranslations.NOT_FOUND),
+          ? i18n.t(PropertyStatusTranslations.NOT_FOUND)
+          : this._i18n.t(PropertyStatusTranslations.NOT_FOUND),
       );
-    }
-    return propertyPost as PropertyPostDocument;
+
+    return post;
   }
 
-  private async findCurrentUser(i18n: I18nContext): Promise<UserDocument> {
-    const user = (await this._usersService.findCurrent(i18n)) as UserDocument;
+  private async mapToType(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const id = dto?.type ? dto.type : post.getType()._id;
 
-    if (!user)
+    const type = await this.propertyTypeRepository.findByValue(id, "_id");
+
+    if (!type)
       throw new NotFoundException(
         i18n
-          ? i18n.t(UserTranslations.NOT_FOUND)
-          : this._i18n.t(UserTranslations.NOT_FOUND),
+          ? i18n.t(PropertyTypeTranslations.NOT_FOUND)
+          : this._i18n.t(PropertyTypeTranslations.NOT_FOUND),
       );
 
-    return user;
-  }
-
-  async create(
-    propertyPost: PropertyPost,
-    i18n?: I18nContext,
-  ): Promise<PropertyPostDocument> {
-    const user = await this.findCurrentUser(i18n as I18nContext);
-
-    if (!user.propertyPostsPublished) user.propertyPostsPublished = [];
-
-    const newPropertyPost = await this._propertyPostRepo.create({
-      ...propertyPost,
-      seller: user._id,
+    post.setType({
+      _id: new Types.ObjectId(type.getId()),
+      value: type.getName(),
     });
-
-    user.propertyPostsPublished.push(newPropertyPost._id);
-
-    await user.save();
-
-    return newPropertyPost;
   }
 
-  async update(
-    _id: string,
-    propertyPost: PropertyPost,
-    i18n?: I18nContext,
-  ): Promise<PropertyPostDocument | null> {
-    const user = await this.findCurrentUser(i18n as I18nContext);
+  private async mapToBuyingOption(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const id = dto?.buyingOption || post.getBuyingOption()._id;
 
-    const propertyPostFound = await this.findById(_id, i18n);
-
-    if (propertyPostFound.seller !== user._id)
-      throw new UnauthorizedException(
-        i18n
-          ? i18n.t(SharedTranslations.UNAUTHORIZED)
-          : this._i18n.t(SharedTranslations.UNAUTHORIZED),
-      );
-
-    return this._propertyPostRepo.findOneAndUpdate({ _id }, propertyPost);
-  }
-
-  async delete(_id: string, i18n?: I18nContext): Promise<boolean> {
-    const user = await this.findCurrentUser(i18n as I18nContext);
-
-    const propertyPost = await this.findById(_id);
-
-    if (String(propertyPost.seller) !== String(user._id))
-      throw new UnauthorizedException(
-        i18n
-          ? i18n.t(SharedTranslations.UNAUTHORIZED)
-          : this._i18n.t(SharedTranslations.UNAUTHORIZED),
-      );
-
-    return this._propertyPostRepo.deleteOne({ _id });
-  }
-
-  async findAllFromSeller(
-    seller: string,
-    paginationQuery: PaginationQuery,
-    i18n?: I18nContext,
-  ): Promise<PropertyPost[]> {
-    const options: PaginationOptions = this.getPaginationOptions(
-      paginationQuery,
-      i18n as I18nContext,
+    const buyingOption = await this._buyingOptionRepository.findByValue(
+      id,
+      "_id",
     );
 
-    return this._propertyPostRepo.paginate({ seller }, options);
+    if (!buyingOption)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(PropertyBuyingOptionTranslations.NOT_FOUND)
+          : this._i18n.t(PropertyBuyingOptionTranslations.NOT_FOUND),
+      );
+
+    post.setBuyingOption({
+      _id: new Types.ObjectId(buyingOption.getId()),
+      value: buyingOption.getName(),
+    });
+  }
+
+  private async mapToStatus(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const id = dto?.status || post.getStatus()._id;
+
+    const status = await this._statusRepository.findByValue(id, "_id");
+
+    if (!status)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(PropertyStatusTranslations.NOT_FOUND)
+          : this._i18n.t(PropertyStatusTranslations.NOT_FOUND),
+      );
+
+    post.setStatus({
+      _id: new Types.ObjectId(status.getId()),
+      value: status.getName(),
+    });
+  }
+
+  private async mapToExteriorColor(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const id = dto?.exteriorColor || post.getExteriorColor()._id;
+
+    const color = await this._colorRepository.findByValue(id, "_id");
+
+    if (!color)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(ColorTranslations.NOT_FOUND)
+          : this._i18n.t(ColorTranslations.NOT_FOUND),
+      );
+
+    post.setExteriorColor({
+      _id: new Types.ObjectId(color.getId()),
+      value: color.getName(),
+    });
+  }
+
+  private async mapToInteriorColor(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const id = dto?.interiorColor || post.getInteriorColor()._id;
+
+    const color = await this._colorRepository.findByValue(id, "_id");
+
+    if (!color)
+      throw new NotFoundException(
+        i18n
+          ? i18n.t(ColorTranslations.NOT_FOUND)
+          : this._i18n.t(ColorTranslations.NOT_FOUND),
+      );
+
+    post.setInteriorColor({
+      _id: new Types.ObjectId(color.getId()),
+      value: color.getName(),
+    });
+  }
+
+  private async mapToFormalAddress(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const sectorId = dto?.isFormalAddress
+      ? dto.formalAddress.sector
+      : (post.getAddress().formal?.sector._id as unknown as string);
+
+    const sector = await this._sectorService.findById(sectorId, i18n);
+
+    const municipalityId = dto?.formalAddress
+      ? dto.formalAddress.municipality
+      : (post.getAddress().formal?.municipality._id as unknown as string);
+
+    const municipality = await this._municipalyService.findById(
+      municipalityId,
+      i18n,
+    );
+
+    const provinceId = dto?.isFormalAddress
+      ? dto.formalAddress.province
+      : (post.getAddress?.().formal?.province._id as unknown as string);
+
+    const province = await this._provincesService.findById(provinceId, i18n);
+
+    post.setFormalAddress({
+      addressLine1: dto?.isFormalAddress
+        ? dto.formalAddress.addressLine1
+        : (post.getAddress().formal?.addressLine1 as unknown as string),
+      municipality: {
+        _id: new Types.ObjectId(municipality.getId()),
+        value: municipality.getName(),
+      },
+      province: {
+        _id: new Types.ObjectId(province.getId()),
+        value: province.getName(),
+      },
+      sector: {
+        _id: new Types.ObjectId(sector.getId()),
+        value: sector.getName(),
+      },
+    });
+  }
+
+  private async mapToAddress(
+    post: PropertyPost,
+    i18n: I18nContext,
+    dto?: UpdatePropertyPostDto,
+  ) {
+    const isFormalAddress =
+      dto?.isFormalAddress || Boolean(post.getAddress().formal);
+
+    if (isFormalAddress) {
+      await this.mapToFormalAddress(post, i18n, dto);
+
+      return;
+    }
+
+    post.setInformalAddress(post.getAddress().informal as string);
   }
 }
