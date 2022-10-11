@@ -44,7 +44,7 @@ export class DeleteVehicleTypeCommandHandler
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._vehiclePostRepository.findOne({
-      type,
+      "type._id": type,
     });
 
     if (postFound)

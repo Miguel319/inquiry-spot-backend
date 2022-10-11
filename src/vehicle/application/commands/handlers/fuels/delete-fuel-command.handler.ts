@@ -34,11 +34,11 @@ export class DeleteFuelCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    fuel: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._vehiclePostRepository.findOne({
-      type,
+      "fuel._id": fuel,
     });
 
     if (postFound)

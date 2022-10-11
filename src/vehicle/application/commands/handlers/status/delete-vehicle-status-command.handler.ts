@@ -6,6 +6,7 @@ import {
 } from "@/vehicle/infrastructure/persistence/repositories";
 import { ForbiddenException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
+import { Types } from "mongoose";
 import { I18nContext, I18nService } from "nestjs-i18n";
 import { DeleteVehicleStatusCommand } from "../..";
 
@@ -25,7 +26,7 @@ export class DeleteVehicleStatusCommandHandler
     i18n: I18nContext,
   ): Promise<VehicleStatus> {
     const vehicleStatus = await this._vehicleStatusEntityRepository.findByValue(
-      _id,
+      new Types.ObjectId(_id),
       "_id",
     );
 
@@ -40,11 +41,11 @@ export class DeleteVehicleStatusCommandHandler
   }
 
   private async handleAuthorization(
-    type: string,
+    status: string,
     i18n: I18nContext,
   ): Promise<never | void> {
     const postFound = await this._vehiclePostRepository.findOne({
-      type,
+      "status._id": status,
     });
 
     if (postFound)
