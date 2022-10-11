@@ -1,6 +1,4 @@
-import { MunicipalityModule } from "@/common/application/modules/address/municipality.module";
-import { ProvinceModule } from "@/common/application/modules/address/province.module";
-import { SectorModule } from "@/common/application/modules/address/sector.module";
+import { AddressModule } from "@/common/application/modules/address";
 import { ColorModule } from "@/common/application/modules/color.module";
 import { LoggerService } from "@/common/infrastructure/logger";
 import { UsersModule } from "@/user/application/modules";
@@ -49,9 +47,7 @@ const SharedProviders = [
     CqrsModule,
     VehicleTypeModule,
     ColorModule,
-    SectorModule,
-    MunicipalityModule,
-    ProvinceModule,
+    AddressModule,
     VehicleMakeModule,
     TransmissionModule,
     FuelModule,

@@ -5,5 +5,6 @@ import { SectorModule } from "./sector.module";
 
 @Module({
   imports: [ProvinceModule, MunicipalityModule, SectorModule],
+  exports: [ProvinceModule, MunicipalityModule, SectorModule],
 })
 export class AddressModule {}

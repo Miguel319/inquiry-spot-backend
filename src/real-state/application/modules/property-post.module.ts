@@ -1,6 +1,3 @@
-import { MunicipalityModule } from "@/common/application/modules/address/municipality.module";
-import { ProvinceModule } from "@/common/application/modules/address/province.module";
-import { SectorModule } from "@/common/application/modules/address/sector.module";
 import { ColorModule } from "@/common/application/modules/color.module";
 import { LoggerService } from "@/common/infrastructure/logger";
 import { UsersModule } from "@/user/application/modules";
@@ -30,6 +27,7 @@ import { PropertyBuyingOptionModule } from "./property-buying-option.module";
 import { TractionModule } from "@/vehicle/application/modules/traction.module";
 import { PropertyStatusModule } from "./property-status.module";
 import { PropertyTypeModule } from "./property-type.module";
+import { AddressModule } from "@/common/application/modules/address";
 
 const PropertyPostProvider: Provider = {
   provide: "IPropertyPostsService",
@@ -47,9 +45,7 @@ const SharedProviders = [
     CqrsModule,
     VehicleTypeModule,
     ColorModule,
-    SectorModule,
-    MunicipalityModule,
-    ProvinceModule,
+    AddressModule,
     PropertyBuyingOptionModule,
     PropertyTypeModule,
     UsersModule,
