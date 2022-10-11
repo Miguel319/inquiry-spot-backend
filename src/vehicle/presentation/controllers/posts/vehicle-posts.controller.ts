@@ -141,7 +141,7 @@ export class VehiclePostsController {
 
     const formattedId = hasCommas ? _id.replace(",", "") : _id;
 
-    if ((updateVehicleDto as any)?._id) delete (updateVehicleDto as any)?._id;
+    if (updateVehicleDto?._id) delete updateVehicleDto._id;
 
     updateVehicleDto.seller = {
       _id: new Types.ObjectId(currentUser?._id),

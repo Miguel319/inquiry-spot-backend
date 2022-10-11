@@ -11,7 +11,7 @@ export class AddressValidationDto {
   @IsDefined({
     message: i18nValidationMessage(SharedTranslations.ADDRESS__ADDRESS_LINE_1),
   })
-  readonly addressLine1: Types.ObjectId;
+  readonly addressLine1: string;
 
   @IsMongoId({ message: SharedTranslations.MONGO_ID })
   @IsNotEmpty({

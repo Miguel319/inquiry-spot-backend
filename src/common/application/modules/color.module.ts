@@ -16,8 +16,8 @@ import {
   SchemaColor,
 } from "@/common/infrastructure/persistence/schemas";
 import {
-  PropertyPost,
   PropertyPostSchema,
+  SchemaPropertyPost,
 } from "@/real-state/infrastructure/persistence/schemas";
 import { VehiclePostsRepository } from "@/vehicle/infrastructure/persistence/repositories";
 import { ColorsCommandHandlers } from "../commands/handlers";
@@ -40,8 +40,8 @@ const SharedProviders = [ColorEntityRepository, ColorSchemaFactory];
         schema: SchemaColor,
       },
       {
-        name: PropertyPost.name,
-        schema: PropertyPostSchema,
+        name: PropertyPostSchema.name,
+        schema: SchemaPropertyPost,
       },
       {
         name: VehiclePostSchema.name,

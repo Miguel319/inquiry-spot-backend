@@ -1,31 +1,79 @@
-import { Module, Provider } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
-import { UsersModule } from "../../../user/application/modules/users.module";
-import { PropertyPostsController } from "@/real-state/presentation/controllers/property-posts";
-import { PropertyPostsRepository } from "@/real-state/infrastructure/persistence/repositories/property-posts";
-import { PropertyPostsService } from "../services/implementations/property-posts.service";
+import { MunicipalityModule } from "@/common/application/modules/address/municipality.module";
+import { ProvinceModule } from "@/common/application/modules/address/province.module";
+import { SectorModule } from "@/common/application/modules/address/sector.module";
+import { ColorModule } from "@/common/application/modules/color.module";
+import { LoggerService } from "@/common/infrastructure/logger";
+import { UsersModule } from "@/user/application/modules";
+
 import {
-  PropertyPost,
+  PropertyPostFactory,
+  PropertyPostSchemaFactory,
+} from "@/real-state/infrastructure/factories";
+import {
+  PropertyPostsRepository,
+  PropertyPostDtoRepository,
+  PropertyPostEntityRepository,
+} from "@/real-state/infrastructure/persistence/repositories";
+import {
   PropertyPostSchema,
+  SchemaPropertyPost,
 } from "@/real-state/infrastructure/persistence/schemas";
+import { PropertyPostsController } from "@/real-state/presentation/controllers";
+import { Module, Provider } from "@nestjs/common";
+import { CqrsModule, EventPublisher } from "@nestjs/cqrs";
+import { MongooseModule } from "@nestjs/mongoose";
+import { PropertyPostEventHandlers } from "../events/handlers";
+import { PropertyPostsQueryHandlers } from "../queries/handlers";
+import { PropertyPostsService } from "../services/implementations";
+import { VehicleTypeModule } from "@/vehicle/application/modules/vehicle-type.module";
+import { PropertyBuyingOptionModule } from "./property-buying-option.module";
+import { TractionModule } from "@/vehicle/application/modules/traction.module";
+import { PropertyStatusModule } from "./property-status.module";
+import { PropertyTypeModule } from "./property-type.module";
 
 const PropertyPostProvider: Provider = {
   provide: "IPropertyPostsService",
   useClass: PropertyPostsService,
 };
 
+const SharedProviders = [
+  PropertyPostEntityRepository,
+  PropertyPostProvider,
+  PropertyPostSchemaFactory,
+];
+
 @Module({
   imports: [
+    CqrsModule,
+    VehicleTypeModule,
+    ColorModule,
+    SectorModule,
+    MunicipalityModule,
+    ProvinceModule,
+    PropertyBuyingOptionModule,
+    PropertyTypeModule,
     UsersModule,
+    TractionModule,
+    PropertyStatusModule,
     MongooseModule.forFeature([
       {
-        name: PropertyPost.name,
-        schema: PropertyPostSchema,
+        name: PropertyPostSchema.name,
+        schema: SchemaPropertyPost,
       },
     ]),
   ],
+  providers: [
+    EventPublisher,
+    PropertyPostDtoRepository,
+    LoggerService,
+    PropertyPostFactory,
+    PropertyPostsRepository,
+    ...SharedProviders,
+    ...PropertyPostsQueryHandlers,
+    ...PropertyPostEventHandlers,
+    ...PropertyPostEventHandlers,
+  ],
   controllers: [PropertyPostsController],
-  providers: [PropertyPostsRepository, PropertyPostProvider],
-  exports: [PropertyPostsRepository, PropertyPostProvider],
+  exports: [...SharedProviders],
 })
 export class PropertyPostModule {}

@@ -1,0 +1,157 @@
+import { IsNotEmpty } from "../../../../../common/infrastructure/decorators";
+import { IsArray, IsDefined, IsInt, ValidateNested } from "class-validator";
+import { i18nValidationMessage } from "nestjs-i18n";
+import { PropertyPostsTranslations } from "@/real-state/application/translations";
+import { Price } from "@/common/domain/types/common";
+import { AddressValidationDto } from "@/common/infrastructure/dtos";
+import { Types } from "mongoose";
+
+export class CreatePropertyPostDto {
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.DESCRIPTION),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.DESCRIPTION),
+  })
+  readonly description: string;
+
+  @IsInt({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.BATHROOM_COUNT_INT,
+    ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.BATHROOM_COUNT),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.BATHROOM_COUNT),
+  })
+  readonly bathroomCount: number;
+
+  @IsInt({
+    message: i18nValidationMessage(PropertyPostsTranslations.BEDROOM_COUNT_INT),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.BEDROOM_COUNT),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.BEDROOM_COUNT),
+  })
+  readonly bedroomCount: number;
+
+  @IsInt({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.PARKING_LOT_COUNT_INT,
+    ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.PARKING_LOT_COUNT),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.PARKING_LOT_COUNT),
+  })
+  readonly parkingLotCount: number;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.PRICE),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.PRICE),
+  })
+  readonly price: Price;
+
+  readonly landSize: string;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.BUYING_OPTION),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.BUYING_OPTION),
+  })
+  readonly buyingOption: Types.ObjectId;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_TYPE),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_TYPE),
+  })
+  readonly type: Types.ObjectId;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_STATUS),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.PROPERTY_STATUS),
+  })
+  readonly status: Types.ObjectId;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.PRIMARY_IMAGE),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.PRIMARY_IMAGE),
+  })
+  readonly primaryImage: string;
+
+  @IsInt({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.YEAR_OF_CONSTRUCTION_INT,
+    ),
+  })
+  readonly yearOfConstruction: number;
+
+  @IsArray({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.SECONDARY_IMAGES_ARRAY,
+    ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.SECONDARY_IMAGES),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.SECONDARY_IMAGES),
+  })
+  readonly secondaryImages: string[];
+
+  readonly isFormalAddress: boolean;
+
+  seller: {
+    _id: Types.ObjectId;
+    value: string;
+  };
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.EXTERIOR_COLOR),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.EXTERIOR_COLOR),
+  })
+  readonly exteriorColor: Types.ObjectId;
+
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.INTERIOR_COLOR),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.INTERIOR_COLOR),
+  })
+  readonly interiorColor: Types.ObjectId;
+
+  @IsArray({
+    message: i18nValidationMessage(
+      PropertyPostsTranslations.ADDITIONAL_INFO_ARRAY,
+    ),
+  })
+  @IsNotEmpty({
+    message: i18nValidationMessage(PropertyPostsTranslations.ADDITIONAL_INFO),
+  })
+  @IsDefined({
+    message: i18nValidationMessage(PropertyPostsTranslations.ADDITIONAL_INFO),
+  })
+  readonly additionalInfo: string[];
+
+  @ValidateNested()
+  readonly formalAddress: AddressValidationDto;
+
+  readonly informalAddress: string;
+}

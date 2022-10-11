@@ -10,9 +10,9 @@ import {
   PropertyTypeEntityRepository,
 } from "@/real-state/infrastructure/persistence/repositories";
 import {
-  PropertyPost,
   PropertyPostSchema,
   PropertyTypeSchema,
+  SchemaPropertyPost,
   SchemaPropertyType,
 } from "@/real-state/infrastructure/persistence/schemas";
 import { PropertyTypesController } from "@/real-state/presentation/controllers";
@@ -23,6 +23,11 @@ import { PropertyTypesCommandHandlers } from "../commands/handlers";
 import { PropertyTypeEventHandlers } from "../events/handlers";
 import { PropertyTypesQueryHandlers } from "../queries/handlers";
 
+const SharedProviders = [
+  PropertyTypeEntityRepository,
+  PropertyTypeSchemaFactory,
+];
+
 @Module({
   imports: [
     CqrsModule,
@@ -32,14 +37,13 @@ import { PropertyTypesQueryHandlers } from "../queries/handlers";
         schema: SchemaPropertyType,
       },
       {
-        name: PropertyPost.name,
-        schema: PropertyPostSchema,
+        name: PropertyPostSchema.name,
+        schema: SchemaPropertyPost,
       },
     ]),
   ],
   providers: [
-    PropertyTypeEntityRepository,
-    PropertyTypeSchemaFactory,
+    ...SharedProviders,
     PropertyTypeDtoRepository,
     LoggerService,
     PropertyTypeFactory,
@@ -49,5 +53,6 @@ import { PropertyTypesQueryHandlers } from "../queries/handlers";
     ...PropertyTypeEventHandlers,
   ],
   controllers: [PropertyTypesController],
+  exports: [...SharedProviders],
 })
 export class PropertyTypeModule {}

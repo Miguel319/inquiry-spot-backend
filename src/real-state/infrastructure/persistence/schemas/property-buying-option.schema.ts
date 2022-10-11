@@ -12,7 +12,7 @@ export type PropertyBuyingOptionDocument = PropertyBuyingOptionSchema &
 @Schema({
   versionKey: false,
   timestamps: true,
-  collection: "propertybuyingoption",
+  collection: "propertybuyingoptions",
 })
 export class PropertyBuyingOptionSchema extends BaseSchema {
   @Prop({

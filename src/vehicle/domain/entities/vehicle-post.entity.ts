@@ -128,12 +128,12 @@ export class VehiclePost extends AggregateRoot {
     this.post.fuelType = fuel;
   }
 
-  public setInteriorColor(color: IDefaultI18nName): void {
-    this.post.interiorColor = color;
-  }
-
   public setType(type: IDefaultI18nName): void {
     this.post.type = type;
+  }
+
+  public setInteriorColor(color: IDefaultI18nName): void {
+    this.post.interiorColor = color;
   }
 
   public setExteriorColor(color: IDefaultI18nName): void {
@@ -170,7 +170,7 @@ export class VehiclePost extends AggregateRoot {
       topSpeed: updatedPost.topSpeed || this.post.topSpeed,
       use: updatedPost.use || this.post.use,
       year: updatedPost.year || this.post.year,
-      description: updatedPost.description || this.getDescription(),
+      description: updatedPost.description || this.post.description,
       updatedAt: new Date(),
     };
   }
