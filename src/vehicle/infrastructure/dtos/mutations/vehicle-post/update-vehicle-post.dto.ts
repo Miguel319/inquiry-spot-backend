@@ -6,6 +6,7 @@ import { i18nValidationMessage } from "nestjs-i18n";
 import { ElectricVehicleDto } from "./electric-vehicle.dto";
 
 export class UpdateVehiclePostDto {
+  _id?: string;
   readonly description: string;
 
   readonly make: Types.ObjectId;
