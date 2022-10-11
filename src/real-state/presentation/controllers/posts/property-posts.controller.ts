@@ -143,6 +143,7 @@ export class PropertyPostsController {
 
     const formattedId = hasCommas ? _id.replace(",", "") : _id;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((updatePropertyDto as any)?._id) delete (updatePropertyDto as any)?._id;
 
     updatePropertyDto.seller = {
