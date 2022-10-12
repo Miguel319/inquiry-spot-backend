@@ -115,7 +115,7 @@ export class VehiclePostSchema extends BaseSchema {
     },
     required: [true, VehiclePostTranslations.EXTERIOR_COLOR],
   })
-  readonly exteriorColor: IDefaultI18nName;
+  readonly exteriorColor: IDefaultI18nName & { hexValue: string };
 
   @Prop({
     type: {
@@ -127,10 +127,11 @@ export class VehiclePostSchema extends BaseSchema {
         en: String,
         es: String,
       },
+      hexValue: String,
     },
     required: [true, VehiclePostTranslations.INTERIOR_COLOR],
   })
-  readonly interiorColor: IDefaultI18nName;
+  readonly interiorColor: IDefaultI18nName & { hexValue: string };
 
   @Prop({
     type: {
@@ -142,6 +143,7 @@ export class VehiclePostSchema extends BaseSchema {
         en: String,
         es: String,
       },
+      hexValue: String,
     },
   })
   readonly traction: IDefaultI18nName;

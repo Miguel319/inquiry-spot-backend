@@ -187,6 +187,7 @@ export class PropertyPostsService implements IPropertyPostsService {
     post.setExteriorColor({
       _id: new Types.ObjectId(color.getId()),
       value: color.getName(),
+      hexValue: color.getHexValue(),
     });
   }
 
@@ -209,6 +210,7 @@ export class PropertyPostsService implements IPropertyPostsService {
     post.setInteriorColor({
       _id: new Types.ObjectId(color.getId()),
       value: color.getName(),
+      hexValue: color.getHexValue(),
     });
   }
 

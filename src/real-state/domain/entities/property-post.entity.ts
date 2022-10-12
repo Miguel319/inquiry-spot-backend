@@ -56,11 +56,11 @@ export class PropertyPost extends AggregateRoot {
     return this.post.type;
   }
 
-  public getExteriorColor(): IDefaultI18nName {
+  public getExteriorColor(): IDefaultI18nName & { hexValue: string } {
     return this.post.exteriorColor;
   }
 
-  public getInteriorColor(): IDefaultI18nName {
+  public getInteriorColor(): IDefaultI18nName & { hexValue: string } {
     return this.post.interiorColor;
   }
 
@@ -92,11 +92,15 @@ export class PropertyPost extends AggregateRoot {
     return this.post.additionalInfo;
   }
 
-  public setInteriorColor(color: IDefaultI18nName): void {
+  public setInteriorColor(
+    color: IDefaultI18nName & { hexValue: string },
+  ): void {
     this.post.interiorColor = color;
   }
 
-  public setExteriorColor(color: IDefaultI18nName): void {
+  public setExteriorColor(
+    color: IDefaultI18nName & { hexValue: string },
+  ): void {
     this.post.exteriorColor = color;
   }
 

@@ -17,8 +17,8 @@ export interface IPropertyPost extends BaseEntity {
   readonly price: Price;
   seller: IDefaultName;
   status: IDefaultI18nName;
-  interiorColor: IDefaultI18nName;
-  exteriorColor: IDefaultI18nName;
+  interiorColor: IDefaultI18nName & { hexValue: string };
+  exteriorColor: IDefaultI18nName & { hexValue: string };
   buyingOption: IDefaultI18nName;
   type: IDefaultI18nName;
   readonly primaryImage: string;
