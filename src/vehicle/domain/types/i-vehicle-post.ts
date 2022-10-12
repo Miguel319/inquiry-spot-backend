@@ -16,8 +16,8 @@ export interface IVehiclePost extends IBaseEntity {
   readonly price: Price;
   readonly doorCount: number;
   readonly year: number;
-  exteriorColor: IDefaultI18nName;
-  interiorColor: IDefaultI18nName;
+  exteriorColor: IDefaultI18nName & { hexValue: string };
+  interiorColor: IDefaultI18nName & { hexValue: string };
   traction: IDefaultI18nName;
   readonly topSpeed: string;
   fuelType: IDefaultI18nName;

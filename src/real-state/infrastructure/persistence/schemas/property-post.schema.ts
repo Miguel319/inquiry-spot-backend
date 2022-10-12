@@ -102,7 +102,7 @@ export class PropertyPostSchema extends BaseSchema {
     },
     required: [true, PropertyPostsTranslations.EXTERIOR_COLOR],
   })
-  readonly exteriorColor: IDefaultI18nName;
+  readonly exteriorColor: IDefaultI18nName & { hexValue: string };
 
   @Prop({
     type: {
@@ -114,10 +114,11 @@ export class PropertyPostSchema extends BaseSchema {
         en: String,
         es: String,
       },
+      hexValue: String,
     },
     required: [true, PropertyPostsTranslations.INTERIOR_COLOR],
   })
-  readonly interiorColor: IDefaultI18nName;
+  readonly interiorColor: IDefaultI18nName & { hexValue: string };
 
   @Prop({
     type: {
@@ -126,11 +127,10 @@ export class PropertyPostSchema extends BaseSchema {
         type: Types.ObjectId,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
+      hexValue: String,
     },
     required: [true, PropertyPostsTranslations.BUYING_OPTION],
   })
@@ -143,10 +143,8 @@ export class PropertyPostSchema extends BaseSchema {
         type: Types.ObjectId,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, PropertyPostsTranslations.PROPERTY_TYPE],
@@ -160,10 +158,8 @@ export class PropertyPostSchema extends BaseSchema {
         type: Types.ObjectId,
       },
       value: {
-        type: {
-          en: String,
-          es: String,
-        },
+        en: String,
+        es: String,
       },
     },
     required: [true, PropertyPostsTranslations.PROPERTY_STATUS],

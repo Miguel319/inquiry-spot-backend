@@ -271,6 +271,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     post.setExteriorColor({
       _id: new Types.ObjectId(color.getId()),
       value: color.getName(),
+      hexValue: color.getHexValue(),
     });
   }
 
@@ -293,6 +294,7 @@ export class VehiclePostsService implements IVehiclePostsService {
     post.setInteriorColor({
       _id: new Types.ObjectId(color.getId()),
       value: color.getName(),
+      hexValue: color.getHexValue(),
     });
   }
 
